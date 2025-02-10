@@ -1,0 +1,3 @@
+- let the user mark a habit as complete on another date if he forgot it on the current date
+- will lead to the possibility that he marks the date wrong
+- need to implement the option to delete completions

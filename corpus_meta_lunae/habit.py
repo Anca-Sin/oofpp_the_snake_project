@@ -43,3 +43,39 @@ class Habit:
     def creation_date(self):
         """Sets the creation date of the habit to the current date."""
         self.creation = datetime.now().date()
+
+    def check_off_habit(self):
+        """
+        Marks a habit as complete for the current day
+        and checks if it has already been completed in the assigned time frequency.
+        Returns: False if already completed, True if marked complete.
+        """
+        current_date = datetime.now()
+
+        if self.frequency == "daily":
+            # Check if habit was already completed today
+            if current_date.date() in self.completions:
+                print(f"'{self.name.title()}' already completed today!")
+                return False
+
+            # Add today's date to completions
+            self.completions.append(current_date.date())
+            print(f"'{self.name.title()}' checked off successfully!")
+            return True
+
+        elif self.frequency == "weekly":
+            # Calculate start of the current week (Monday)
+            week_start = current_date - timedelta(days=current_date.weekday())
+            this_week = []
+
+            for date in self.completions:
+                if date >= week_start.date():
+                    this_week.append(date)
+
+            if this_week:
+                print(f"'{self.name.title()}' already completed this week!")
+                return False
+
+            self.completions.append(current_date.date())
+            print(f"'{self.name.title()}' checked off successfully!")
+            return True

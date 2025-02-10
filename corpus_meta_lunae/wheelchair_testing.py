@@ -1,7 +1,11 @@
 from habit import Habit
 
 habit = Habit()
-habit.habit_name()
-habit.habit_frequency()
-habit.creation_date()
-print(f">>> Created {habit.frequency} habit: {habit.name} at {habit.creation}")
+habit.name = "Stretching"
+habit.frequency = "weekly"
+
+success = habit.check_off_habit()
+assert success == True
+
+success = habit.check_off_habit()
+assert success == False
