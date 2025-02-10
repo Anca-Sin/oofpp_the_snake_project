@@ -12,7 +12,18 @@ class Habit:
         self.longest_streak = 0 # Longest streak counter
 
     def habit_name(self):
-        """Prompts the user if they want to create a daily or a weekly habit."""
+        """Prompts the user to name their new habit."""
         print("What new habit do you want to register?:")
         self.name = input()
 
+    def habit_frequency(self):
+        """Prompts the user to assign their habit's frequency."""
+        while True:
+            print("Please type in 'Daily' or 'Weekly' to assign your habit's frequency:")
+            new_habit_frequency = input().lower()
+
+            if new_habit_frequency in ["daily", "weekly"]:
+                self.frequency = new_habit_frequency
+                break
+            else:   # Deals with incorrect input
+                print("Please enter either 'Daily' or 'Weekly'!")
