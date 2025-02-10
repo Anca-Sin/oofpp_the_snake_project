@@ -5,21 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c616fd42-f0e1-480b-874e-850f1a6b95b5" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/TheSnakeProject.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/corpus_meta_lunae/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/corpus_meta_lunae/data_visualization.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/corpus_meta_lunae/database.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/corpus_meta_lunae/fitness_habit_tracker.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/corpus_meta_lunae/habit.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/corpus_meta_lunae/streaks.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/corpus_meta_lunae/user.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/corpus_meta_lunae/wheelchair_testing.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/testing/test_unit_1.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/corpus_meta_lunae/habit.py" beforeDir="false" afterPath="$PROJECT_DIR$/corpus_meta_lunae/habit.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -34,6 +21,11 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="fixes-tutor-feedback" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectColorInfo"><![CDATA[{
@@ -50,8 +42,9 @@
     "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "master",
-    "ignore.virus.scanning.warn.message": "true"
+    "git-widget-placeholder": "dev",
+    "ignore.virus.scanning.warn.message": "true",
+    "last_opened_file_path": "C:/Users/User/Desktop/OOP Portfolio"
   }
 }]]></component>
   <component name="SharedIndexes">
