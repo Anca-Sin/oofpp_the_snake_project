@@ -10,3 +10,9 @@ class Habit:
         self.completions = []   # Completion dates when the user checks-off a habit
         self.current_streak = 0 # Current streak counter
         self.longest_streak = 0 # Longest streak counter
+
+    def habit_name(self):
+        """Prompts the user if they want to create a daily or a weekly habit."""
+        print("What new habit do you want to register?:")
+        self.name = input()
+
