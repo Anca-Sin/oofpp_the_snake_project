@@ -1,3 +1,5 @@
+from datetime import datetime, timedelta
+
 class Habit:
     """
     Allows users to create their own habit
@@ -37,3 +39,7 @@ class Habit:
                 break
             else:   # Deals with incorrect input
                 print("Please enter either 'Daily' or 'Weekly'!")
+
+    def creation_date(self):
+        """Sets the creation date of the habit to the current date."""
+        self.creation = datetime.now().date()
