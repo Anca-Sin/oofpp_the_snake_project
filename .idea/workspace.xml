@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c616fd42-f0e1-480b-874e-850f1a6b95b5" name="Changes" comment="Implement habit_name() method in Habit class">
+    <list default="true" id="c616fd42-f0e1-480b-874e-850f1a6b95b5" name="Changes" comment="Implement habit_frequency() method in Habit class">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/corpus_meta_lunae/habit.py" beforeDir="false" afterPath="$PROJECT_DIR$/corpus_meta_lunae/habit.py" afterDir="false" />
     </list>
@@ -40,6 +40,7 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "Python.wheelchair_testing.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "git-widget-placeholder": "dev",
@@ -79,7 +80,39 @@
       <option name="project" value="LOCAL" />
       <updated>1739224488314</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Implement habit_name() method in Habit class">
+      <option name="closed" value="true" />
+      <created>1739225104796</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1739225104796</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Implement habit_name() method in Habit class">
+      <option name="closed" value="true" />
+      <created>1739225119113</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1739225119113</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Implement habit_frequency() method in Habit class">
+      <option name="closed" value="true" />
+      <created>1739225257260</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1739225257260</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Implement habit_frequency() method in Habit class">
+      <option name="closed" value="true" />
+      <created>1739225510562</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1739225510562</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -96,6 +129,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Add Habit class with required attributes" />
     <MESSAGE value="Implement habit_name() method in Habit class" />
-    <option name="LAST_COMMIT_MESSAGE" value="Implement habit_name() method in Habit class" />
+    <MESSAGE value="Implement habit_frequency() method in Habit class" />
+    <option name="LAST_COMMIT_MESSAGE" value="Implement habit_frequency() method in Habit class" />
   </component>
 </project>

@@ -12,9 +12,19 @@ class Habit:
         self.longest_streak = 0 # Longest streak counter
 
     def habit_name(self):
-        """Prompts the user to name their new habit."""
-        print("What new habit do you want to register?:")
-        self.name = input()
+        """Prompts the user to name their new habit and confirm it."""
+        while True:
+            print("What new habit do you want to register?:")
+            self.name = input().title()
+
+            # Fail-safe for mistyping
+            print(f"You entered '{self.name.title()}'. Is this correct? (yes/no):")
+            name_confirmation = input().lower()
+
+            if name_confirmation == "yes":
+                break
+            elif name_confirmation == "no":
+                print("Let's try again!")
 
     def habit_frequency(self):
         """Prompts the user to assign their habit's frequency."""
