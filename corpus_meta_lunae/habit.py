@@ -1,4 +1,5 @@
 from datetime import datetime, timedelta
+from streaks import Streaks
 
 class Habit:
     """
@@ -10,8 +11,7 @@ class Habit:
         self.frequency = None   # Stores either daily, weekly, or later custom
         self.creation = None    # Stores the creation date of the habit
         self.completions = []   # Completion dates when the user checks-off a habit
-        self.current_streak = 0 # Current streak counter
-        self.longest_streak = 0 # Longest streak counter
+        self.streaks = Streaks()
 
     def habit_name(self):
         """Prompts the user to name their new habit and confirm it."""
@@ -61,6 +61,7 @@ class Habit:
             # Add today's date to completions
             self.completions.append(current_date.date())
             print(f"'{self.name.title()}' checked off successfully!")
+            self.streaks.calculate_current_streak(self.frequency, self.completions)
             return True
 
         elif self.frequency == "weekly":
@@ -78,4 +79,5 @@ class Habit:
 
             self.completions.append(current_date.date())
             print(f"'{self.name.title()}' checked off successfully!")
+            self.streaks.calculate_current_streak(self.frequency, self.completions)
             return True
