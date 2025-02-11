@@ -2,22 +2,21 @@ from datetime import datetime, timedelta
 # from habit import Habit
 from corpus_meta_lunae.streaks import Streaks
 
-def test_weekly_streak():
+
+def test_longest_streak():
     streaks = Streaks()
     today = datetime.now().date()
 
-    # Test consecutive weeks (completed on different days within weeks)
-    completions = [
-        today - timedelta(days=14),  # 2 weeks ago
-        today - timedelta(days=7),   # last week
-        today                        # this week
-    ]
-    assert streaks.calculate_current_streak("weekly", completions) == 3
+    # Create a 2-day longest streak
+    completions = [today - timedelta(days=1), today]
+    streaks.calculate_current_streak("daily", completions)
+    assert streaks.get_longest_streak() == 2
 
-    # Test broken weekly streak
-    broken_completions = [
-        today - timedelta(days=21),  # 3 weeks ago
-        today - timedelta(days=7),   # last week
-        today                        # this week
+    # Create a 3-day streak
+    completions = [
+        today - timedelta(days=2),
+        today - timedelta(days=1),
+        today
     ]
-    assert streaks.calculate_current_streak("weekly", broken_completions) == 2
+    streaks.calculate_current_streak("daily", completions)
+    assert streaks.get_longest_streak() == 3

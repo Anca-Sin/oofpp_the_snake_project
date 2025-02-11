@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c616fd42-f0e1-480b-874e-850f1a6b95b5" name="Changes" comment="Implement calculate_current_streak() in Streaks class">
+    <list default="true" id="c616fd42-f0e1-480b-874e-850f1a6b95b5" name="Changes" comment="Update calculate_current_streak() to handle Monday-based weeks">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/corpus_meta_lunae/streaks.py" beforeDir="false" afterPath="$PROJECT_DIR$/corpus_meta_lunae/streaks.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/corpus_meta_lunae/wheelchair_testing.py" beforeDir="false" afterPath="$PROJECT_DIR$/corpus_meta_lunae/wheelchair_testing.py" afterDir="false" />
@@ -195,7 +195,15 @@
       <option name="project" value="LOCAL" />
       <updated>1739309945539</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="Update calculate_current_streak() to handle Monday-based weeks">
+      <option name="closed" value="true" />
+      <created>1739311630781</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1739311630781</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -213,13 +221,15 @@
     <MESSAGE value="Add Habit class with required attributes" />
     <MESSAGE value="Implement habit_name() method in Habit class" />
     <MESSAGE value="Implement habit_frequency() method in Habit class" />
-    <MESSAGE value="Updated habit_name() to handle user mistyping and ask for confirmation" />
+    <MESSAGE value="Update habit_name() to handle user mistyping and ask for confirmation" />
     <MESSAGE value="Implement set_creation_date() method in Habit class" />
     <MESSAGE value="Implement check_off_habit() method in Habit class" />
     <MESSAGE value="Add call to calculate_current_streak in check_off_habit() of Habit class. Temporarily using placeholder.py to sort code" />
     <MESSAGE value="Add Streaks class with initial attributes" />
     <MESSAGE value="Implement _sorted_completions() in Streaks class" />
     <MESSAGE value="Implement calculate_current_streak() in Streaks class" />
-    <option name="LAST_COMMIT_MESSAGE" value="Implement calculate_current_streak() in Streaks class" />
+    <MESSAGE value="Update calculate_current_streak() to handle Monday-based weeks" />
+    <MESSAGE value="Update habit_name() to handle user mistyping and ask for confirmation" />
+    <option name="LAST_COMMIT_MESSAGE" value="Update habit_name() to handle user mistyping and ask for confirmation" />
   </component>
 </project>

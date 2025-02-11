@@ -54,5 +54,9 @@ class Streaks:
                     break
 
         self.current = streak
+        self.longest = max(self.longest, self.current)
         return self.current
 
+    def get_longest_streak(self):
+        """Returns the longest streak achieved for this habit."""
+        return self.longest
