@@ -1,8 +1,5 @@
 
 
-    def _sort_completions(self, completions):
-        """Sorting completion dates externally to be used across all methods."""
-        return sorted(completions)
 
 def _is_streak_broken(self, frequency, completions):
     """
