@@ -39,7 +39,16 @@ class Streaks:
                     break
 
             elif frequency == "weekly":
-                if (current_date - previous_date).days == 7:
+                # Find days since Monday
+                days_since_monday = current_date.weekday()
+                days_since_last_monday = previous_date.weekday()
+
+                # Get the Mondat of current_date's week
+                current_monday = current_date - timedelta(days=days_since_monday)
+                previous_monday = previous_date - timedelta(days=days_since_last_monday)
+
+                # Check if Mondays are one week apart
+                if (current_monday - previous_monday).days == 7:
                     streak += 1
                 else:
                     break
