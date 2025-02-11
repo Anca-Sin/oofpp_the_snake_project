@@ -14,6 +14,17 @@ class Streaks:
         """
         return sorted(completions)
 
+    def _is_streak_broken(self, frequency, latest_completion):
+        """Helper method to reset streak counter to 0 if streak is broken."""
+        today = datetime.now().date()
+
+        if frequency == "daily" and (today - latest_completion).days > 1:
+            return True
+        elif frequency == "weekly" and (today - latest_completion).days > 7:
+            return True
+
+        return False    # Streak is not broken
+
     def calculate_current_streak(self, frequency, completions):
         """
         Calculates current streak based on habit frequency and completion dates.
@@ -23,7 +34,14 @@ class Streaks:
             return self.current
 
         sorted_completions = self._sort_completions(completions)
-        streak = 1 # Start with first completion
+
+        # Check if streak is broken by passing frequency and latest completion date,
+        # and if broken, immediately exit.
+        if self._is_streak_broken(frequency, sorted_completions[-1]):
+            return self.current
+
+        # If no streak was broken start with first completion
+        self.current = 1
 
         # Compare consecutive dates
         # Iterate backwards to compare each date with the previous date
@@ -34,9 +52,9 @@ class Streaks:
             if frequency == "daily":
                 # Check if dates are consecutive
                 if (current_date - previous_date).days == 1:
-                    streak += 1
+                    self.current += 1
                 else:
-                    break
+                    break   # Streak is broken
 
             elif frequency == "weekly":
                 # Find days since Monday
@@ -49,11 +67,10 @@ class Streaks:
 
                 # Check if Mondays are one week apart
                 if (current_monday - previous_monday).days == 7:
-                    streak += 1
+                    self.current += 1
                 else:
-                    break
+                    break   # Streak is broken
 
-        self.current = streak
         self.longest = max(self.longest, self.current)
         return self.current
 

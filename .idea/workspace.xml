@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c616fd42-f0e1-480b-874e-850f1a6b95b5" name="Changes" comment="Update calculate_current_streak() to handle Monday-based weeks">
+    <list default="true" id="c616fd42-f0e1-480b-874e-850f1a6b95b5" name="Changes" comment="Implemented get_longest_streak() in Streaks class">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/corpus_meta_lunae/streaks.py" beforeDir="false" afterPath="$PROJECT_DIR$/corpus_meta_lunae/streaks.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/corpus_meta_lunae/wheelchair_testing.py" beforeDir="false" afterPath="$PROJECT_DIR$/corpus_meta_lunae/wheelchair_testing.py" afterDir="false" />
@@ -203,7 +203,23 @@
       <option name="project" value="LOCAL" />
       <updated>1739311630781</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="Implemented get_longest_streak() in Streaks class">
+      <option name="closed" value="true" />
+      <created>1739312517684</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1739312517684</updated>
+    </task>
+    <task id="LOCAL-00019" summary="Implemented get_longest_streak() in Streaks class">
+      <option name="closed" value="true" />
+      <created>1739312603191</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1739312603191</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -230,6 +246,7 @@
     <MESSAGE value="Implement calculate_current_streak() in Streaks class" />
     <MESSAGE value="Update calculate_current_streak() to handle Monday-based weeks" />
     <MESSAGE value="Update habit_name() to handle user mistyping and ask for confirmation" />
-    <option name="LAST_COMMIT_MESSAGE" value="Update habit_name() to handle user mistyping and ask for confirmation" />
+    <MESSAGE value="Implemented get_longest_streak() in Streaks class" />
+    <option name="LAST_COMMIT_MESSAGE" value="Implemented get_longest_streak() in Streaks class" />
   </component>
 </project>
