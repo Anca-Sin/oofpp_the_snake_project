@@ -21,11 +21,12 @@ class Habit:
 
             # Fail-safe for mistyping
             print(f"You entered '{self.name.title()}'. Is this correct? (yes/no):")
-            name_confirmation = input().lower()
+            confirmation = input().lower()
 
-            if name_confirmation == "yes":
+            if confirmation == "yes":
+                print(f"You've successfully stored {self.name.title()} as a new habit!")
                 break
-            elif name_confirmation == "no":
+            elif confirmation == "no":
                 print("Let's try again!")
 
     def habit_frequency(self):
@@ -36,6 +37,7 @@ class Habit:
 
             if new_habit_frequency in ["daily", "weekly"]:
                 self.frequency = new_habit_frequency
+                print(f"You've successfully stored {self.frequency} as frequency for {self.name}!")
                 break
             else:   # Deals with incorrect input
                 print("Please enter either 'Daily' or 'Weekly'!")
