@@ -1,5 +1,6 @@
 from datetime import datetime, timedelta
 from streaks import Streaks
+from helper_functions import confirm_input
 
 class Habit:
     """
@@ -18,29 +19,14 @@ class Habit:
         while True:
             print("What new habit do you want to register?:")
             self.name = input().title()
-
-            # Fail-safe for mistyping
-            print(f"You entered '{self.name.title()}'. Is this correct? (yes/no):")
-            confirmation = input().lower()
-
-            if confirmation == "yes":
-                print(f"You've successfully stored {self.name.title()} as a new habit!")
-                break
-            elif confirmation == "no":
-                print("Let's try again!")
+            self.name = confirm_input("name", self.name)
 
     def habit_frequency(self):
         """Prompts the user to assign their habit's frequency."""
         while True:
             print("Please type in 'Daily' or 'Weekly' to assign your habit's frequency:")
-            new_habit_frequency = input().lower()
-
-            if new_habit_frequency in ["daily", "weekly"]:
-                self.frequency = new_habit_frequency
-                print(f"You've successfully stored {self.frequency} as frequency for {self.name}!")
-                break
-            else:   # Deals with incorrect input
-                print("Please enter either 'Daily' or 'Weekly'!")
+            self.frequency = input().lower()
+            self.frequency = confirm_input("frequency", self.frequency)
 
     def creation_date(self):
         """Sets the creation date of the habit to the current date."""
