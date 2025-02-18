@@ -4,10 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c616fd42-f0e1-480b-874e-850f1a6b95b5" name="Changes" comment="Implement user_gender() in User class">
+    <list default="true" id="c616fd42-f0e1-480b-874e-850f1a6b95b5" name="Changes" comment="Remove user_gender() and self.gender in User class">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/corpus_meta_lunae/female_user.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/corpus_meta_lunae/female_user_phases.py" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -276,7 +274,23 @@
       <option name="project" value="LOCAL" />
       <updated>1739380537450</updated>
     </task>
-    <option name="localTasksCounter" value="27" />
+    <task id="LOCAL-00027" summary="Remove female_user_phases.py and female_user.py - stick to core functionality for the project">
+      <option name="closed" value="true" />
+      <created>1739462839646</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1739462839646</updated>
+    </task>
+    <task id="LOCAL-00028" summary="Remove user_gender() and self.gender in User class">
+      <option name="closed" value="true" />
+      <created>1739462923954</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1739462923954</updated>
+    </task>
+    <option name="localTasksCounter" value="29" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -314,6 +328,8 @@
     <MESSAGE value="Add User class with initial attributes + minor print statements in habit.py" />
     <MESSAGE value="Implement user_name() in User class" />
     <MESSAGE value="Implement user_gender() in User class" />
-    <option name="LAST_COMMIT_MESSAGE" value="Implement user_gender() in User class" />
+    <MESSAGE value="Remove female_user_phases.py and female_user.py - stick to core functionality for the project" />
+    <MESSAGE value="Remove user_gender() and self.gender in User class" />
+    <option name="LAST_COMMIT_MESSAGE" value="Remove user_gender() and self.gender in User class" />
   </component>
 </project>

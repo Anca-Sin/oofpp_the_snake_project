@@ -8,10 +8,11 @@ class Habit:
     as part of predefined fitness categories, or as a custom habit.
     """
     def __init__(self):
-        self.name = None        # Store habit name
-        self.frequency = None   # Stores either daily, weekly, or later custom
-        self.creation = None    # Stores the creation date of the habit
-        self.completions = []   # Completion dates when the user checks-off a habit
+        self.name = None                # Store habit name
+        self.frequency = None           # Stores either daily, weekly, or later custom
+        self.custom_frequency = None    # Holds the user-input custom frequency range
+        self.creation = None            # Stores the creation date of the habit
+        self.completions = []           # Completion dates when the user checks-off a habit
         self.streaks = Streaks()
 
     def habit_name(self):
