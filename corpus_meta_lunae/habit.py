@@ -20,14 +20,70 @@ class Habit:
         while True:
             print("What new habit do you want to register?:")
             self.name = input().title()
+            # Use confirm_input helper function to confirm the habit name
             self.name = confirm_input("name", self.name)
 
     def habit_frequency(self):
         """Prompts the user to assign their habit's frequency."""
         while True:
-            print("Please type in 'Daily' or 'Weekly' to assign your habit's frequency:")
+            print("Please type in 'Daily', 'Weekly', or 'Custom' to assign your habit's frequency:")
             self.frequency = input().lower()
-            self.frequency = confirm_input("frequency", self.frequency)
+
+            # Handle custom frequency
+            if self.frequency == "custom":
+                self.set_custom_frequency() # Call the custom frequency setup method
+
+            # Handle pre-defined daily and weekly frequencies
+            elif self.frequency in ["daily", "weekly"]:
+                self.frequency = confirm_input("frequency", self.frequency)
+
+            # Handle miss-spelling
+            else:
+                print("Invalid Input. Pleas enter 'Daily', 'Weekly', or 'Custom'!")
+
+    def set_custom_frequency(self):
+        """
+        Prompts the user to input a desired custom frequency:
+        either a single value or a range (e.g., '3' or '3-4' times a week).
+            """
+        while True:
+            print("""Please specify your desired custom frequency as, for example:
+- '3', for a single weekly value to track
+or
+- '3-5', times a week as a range for your tracked habit""")
+            custom_input = input().strip() # Take input and remove any surrounding whitespaces
+
+            # Handle a single value input for custom frequency
+            if custom_input.isdigit(): # If the input is a single number
+                times_per_week = int(custom_input)
+                self.custom_frequency = (times_per_week, times_per_week) # Set both min and max to the same value
+                self.frequency = "custom" # Set the frequency type to custom
+                # Use confirm_input helper function to confirm custom frequency
+                self.custom_frequency = confirm_input("frequency", f"{times_per_week} times a week")
+                break
+
+            # Handle a range input for custom frequency
+            # Allowing the user to insert any range is intended (exceeding 7 times/week)
+            elif "-" in custom_input: # If it contains a dash, indicate a range
+                try:
+                    # Try to split the input by the dash into two integers
+                    min_freq, max_freq = map(int, custom_input.split("-"))
+
+                    if min_freq < max_freq: # Ensure min is less than max
+                        self.custom_frequency = (min_freq, max_freq) # Store the range as a tuple
+                        self.frequency = "custom" # Set the frequency type to custom
+                        # Use confirm_input helper function to confirm custom frequency
+                        self.custom_frequency = confirm_input("frequency", f"{min_freq}-{max_freq} times a week")
+                        break
+
+                    else:
+                        print("The minimum frequency must be lower than the maximum frequency, or enter a single value!")
+                except ValueError:
+                    print("Invalid Format. Please enter a valid range, like '3-5', or a single digit.")
+
+            else:
+                # If the input doesn't match either format, prompt the user again
+                print("Invalid Input. Please enter a single value (e.g. '3') or a range (e.g. '3-5')")
 
     def creation_date(self):
         """Sets the creation date of the habit to the current date."""

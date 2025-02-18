@@ -1,22 +1,14 @@
-from corpus_meta_lunae.user import User
+from habit import Habit
+from helper_functions import confirm_input
 
-def test_user_class():
-    # Test case 1: Create a user with a username and gender
-    user1 = User(username="JohnDoe", gender="Male")
-    print(f"Test 1 - User with username and gender: Username: {user1.username}, Gender: {user1.gender}")
+habit = Habit()
 
-    # Test case 2: Create a user without passing username and gender (uses default values)
-    user2 = User()
-    print(f"Test 2 - User with default values: Username: {user2.username}, Gender: {user2.gender}")
+# Test 1: Single value input (e.g., "3")
+print("\nTest 1: Single value input (e.g., '3')")
+habit.set_custom_frequency()
+print(f"Custom Frequency: {habit.custom_frequency}, Frequency: {habit.frequency}")
 
-    # Test case 3: Create a user with only username, gender should default to ""
-    user3 = User(username="JaneDoe")
-    print(f"Test 3 - User with only username: Username: {user3.username}, Gender: {user3.gender}")
-
-    # Test case 4: Create a user with only gender, username should default to ""
-    user4 = User(gender="Female")
-    print(f"Test 4 - User with only gender: Username: {user4.username}, Gender: {user4.gender}")
-
-
-# Run the test
-test_user_class()
+# Test 2: Range input (e.g., "3-5")
+print("\nTest 2: Range input (e.g., '3-5')")
+habit.set_custom_frequency()
+print(f"Custom Frequency: {habit.custom_frequency}, Frequency: {habit.frequency}")

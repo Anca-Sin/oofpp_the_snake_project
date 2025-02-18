@@ -4,8 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c616fd42-f0e1-480b-874e-850f1a6b95b5" name="Changes" comment="Remove user_gender() and self.gender in User class">
+    <list default="true" id="c616fd42-f0e1-480b-874e-850f1a6b95b5" name="Changes" comment="Implement self.custom_frequency in Habit class">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/corpus_meta_lunae/habit.py" beforeDir="false" afterPath="$PROJECT_DIR$/corpus_meta_lunae/habit.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/corpus_meta_lunae/wheelchair_testing.py" beforeDir="false" afterPath="$PROJECT_DIR$/corpus_meta_lunae/wheelchair_testing.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -53,7 +55,7 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-python-sdk-a5bc9544c897-aa17d162503b-com.jetbrains.pycharm.community.sharedIndexes.bundled-PC-243.23654.177" />
+        <option value="bundled-python-sdk-fc1d50d2d915-aa17d162503b-com.jetbrains.pycharm.community.sharedIndexes.bundled-PC-243.24978.54" />
       </set>
     </attachedChunks>
   </component>
@@ -290,7 +292,15 @@
       <option name="project" value="LOCAL" />
       <updated>1739462923954</updated>
     </task>
-    <option name="localTasksCounter" value="29" />
+    <task id="LOCAL-00029" summary="Implement self.custom_frequency in Habit class">
+      <option name="closed" value="true" />
+      <created>1739892184753</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1739892184753</updated>
+    </task>
+    <option name="localTasksCounter" value="30" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -305,7 +315,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Add Habit class with required attributes" />
     <MESSAGE value="Implement habit_name() method in Habit class" />
     <MESSAGE value="Implement habit_frequency() method in Habit class" />
     <MESSAGE value="Update habit_name() to handle user mistyping and ask for confirmation" />
@@ -330,6 +339,7 @@
     <MESSAGE value="Implement user_gender() in User class" />
     <MESSAGE value="Remove female_user_phases.py and female_user.py - stick to core functionality for the project" />
     <MESSAGE value="Remove user_gender() and self.gender in User class" />
-    <option name="LAST_COMMIT_MESSAGE" value="Remove user_gender() and self.gender in User class" />
+    <MESSAGE value="Implement self.custom_frequency in Habit class" />
+    <option name="LAST_COMMIT_MESSAGE" value="Implement self.custom_frequency in Habit class" />
   </component>
 </project>
