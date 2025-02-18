@@ -126,3 +126,22 @@ or
             print(f"'{self.name.title()}' checked off successfully!")
             self.streaks.calculate_current_streak(self.frequency, self.completions)
             return True
+
+        elif self.frequency == "custom":
+            # Handle it like daily and weekly but with custom range
+            if self.custom_frequency:
+                min_freq, max_freq = self.custom_frequency  # min and max completions for custom frequency
+                # Calculate the start of the current week (Monday)
+                week_start = current_date - timedelta(days=current_date.weekday())
+                week_completions = [date for date in self.completions if date >= week_start.date()]
+
+                # Check if the number of completions isn't fully completed
+                if len(week_completions) < max_freq:
+                    self.completions.append(current_date.date())
+                    print(f"'{self.name.title()}' checked off successfully!")
+                    self.streaks.calculate_current_streak(self.frequency, self.completions)
+                    return True
+
+                else:
+                    print(f"'{self.name.title()}' has already been fully completed this week!")
+                    return False

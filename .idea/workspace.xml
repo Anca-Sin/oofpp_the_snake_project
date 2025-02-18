@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c616fd42-f0e1-480b-874e-850f1a6b95b5" name="Changes" comment="Implement self.custom_frequency in Habit class">
+    <list default="true" id="c616fd42-f0e1-480b-874e-850f1a6b95b5" name="Changes" comment="Create set_custom_frequency() + changes to habit_frequency() in Habit class">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/corpus_meta_lunae/habit.py" beforeDir="false" afterPath="$PROJECT_DIR$/corpus_meta_lunae/habit.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/corpus_meta_lunae/wheelchair_testing.py" beforeDir="false" afterPath="$PROJECT_DIR$/corpus_meta_lunae/wheelchair_testing.py" afterDir="false" />
@@ -300,7 +300,15 @@
       <option name="project" value="LOCAL" />
       <updated>1739892184753</updated>
     </task>
-    <option name="localTasksCounter" value="30" />
+    <task id="LOCAL-00030" summary="Create set_custom_frequency() + changes to habit_frequency() in Habit class">
+      <option name="closed" value="true" />
+      <created>1739909805841</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1739909805841</updated>
+    </task>
+    <option name="localTasksCounter" value="31" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -315,7 +323,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Implement habit_name() method in Habit class" />
     <MESSAGE value="Implement habit_frequency() method in Habit class" />
     <MESSAGE value="Update habit_name() to handle user mistyping and ask for confirmation" />
     <MESSAGE value="Implement set_creation_date() method in Habit class" />
@@ -340,6 +347,7 @@
     <MESSAGE value="Remove female_user_phases.py and female_user.py - stick to core functionality for the project" />
     <MESSAGE value="Remove user_gender() and self.gender in User class" />
     <MESSAGE value="Implement self.custom_frequency in Habit class" />
-    <option name="LAST_COMMIT_MESSAGE" value="Implement self.custom_frequency in Habit class" />
+    <MESSAGE value="Create set_custom_frequency() + changes to habit_frequency() in Habit class" />
+    <option name="LAST_COMMIT_MESSAGE" value="Create set_custom_frequency() + changes to habit_frequency() in Habit class" />
   </component>
 </project>
