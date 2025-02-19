@@ -47,25 +47,18 @@ class Habit:
         current_date = datetime.now()
         # Calculate start of the current week (Monday)
         week_start = current_date - timedelta(days=current_date.weekday())
-        this_week = []
 
         if self.frequency == "daily":
             # Check if habit was already completed today
             if current_date.date() in self.completions:
-                print(f"'{self.name.title()}' already completed today!")
                 return True
 
         elif self.frequency == "weekly":
             for date in self.completions:
                 if date >= week_start.date():
-                    this_week.append(date)
+                    return True # Early return if we find any completions this week
 
-            if this_week:
-                print(f"'{self.name.title()}' already completed this week!")
-                return True
-
-        else:
-            return False
+        return False
 
     def check_off_habit(self):
         """
@@ -79,7 +72,7 @@ class Habit:
             print(f"'{self.name.title()}' has already been completed!")
             return False
 
-        # Add today's date to completions if it's not fully completed
+        # Add today's date to completions if it's not already completed
         self.completions.append(current_date.date())
         print(f"'{self.name.title()}' checked off successfully!")
 

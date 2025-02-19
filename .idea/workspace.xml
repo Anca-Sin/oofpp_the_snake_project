@@ -4,10 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c616fd42-f0e1-480b-874e-850f1a6b95b5" name="Changes" comment="Add self.frequency = &quot;custom&quot; in check_off_habit() in Habit class">
+    <list default="true" id="c616fd42-f0e1-480b-874e-850f1a6b95b5" name="Changes" comment="Refactor check_off_habit and revert all changes for custom frequency - stick to core functionality for the project">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/corpus_meta_lunae/habit.py" beforeDir="false" afterPath="$PROJECT_DIR$/corpus_meta_lunae/habit.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/corpus_meta_lunae/ideas" beforeDir="false" afterPath="$PROJECT_DIR$/corpus_meta_lunae/ideas" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -316,7 +315,15 @@
       <option name="project" value="LOCAL" />
       <updated>1739912432241</updated>
     </task>
-    <option name="localTasksCounter" value="32" />
+    <task id="LOCAL-00032" summary="Refactor check_off_habit and revert all changes for custom frequency - stick to core functionality for the project">
+      <option name="closed" value="true" />
+      <created>1739974835894</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1739974835894</updated>
+    </task>
+    <option name="localTasksCounter" value="33" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -331,7 +338,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Update habit_name() to handle user mistyping and ask for confirmation" />
     <MESSAGE value="Implement set_creation_date() method in Habit class" />
     <MESSAGE value="Implement check_off_habit() method in Habit class" />
     <MESSAGE value="Add call to calculate_current_streak in check_off_habit() of Habit class. Temporarily using placeholder.py to sort code" />
@@ -356,6 +362,7 @@
     <MESSAGE value="Implement self.custom_frequency in Habit class" />
     <MESSAGE value="Create set_custom_frequency() + changes to habit_frequency() in Habit class" />
     <MESSAGE value="Add self.frequency = &quot;custom&quot; in check_off_habit() in Habit class" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add self.frequency = &quot;custom&quot; in check_off_habit() in Habit class" />
+    <MESSAGE value="Refactor check_off_habit and revert all changes for custom frequency - stick to core functionality for the project" />
+    <option name="LAST_COMMIT_MESSAGE" value="Refactor check_off_habit and revert all changes for custom frequency - stick to core functionality for the project" />
   </component>
 </project>
