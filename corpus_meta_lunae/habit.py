@@ -1,20 +1,22 @@
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, date
 from streaks import Streaks
 from helper_functions import confirm_input
+from typing import List
 
 class Habit:
     """
     Allows users to create their own habit
     as part of predefined fitness categories, or as a custom habit.
     """
-    def __init__(self):
-        self.name = None                # Store habit name
-        self.frequency = None           # Stores either daily, weekly, or later custom
-        self.creation = None            # Stores the creation date of the habit
-        self.completions = []           # Completion dates when the user checks-off a habit
-        self.streaks = Streaks()
 
-    def habit_name(self):
+    def __init__(self):
+        self.name: str = None                # Store habit name
+        self.frequency: str = None           # Stores either daily, weekly, or later custom
+        self.creation: date = None           # Stores the creation date of the habit
+        self.completions: List[date] = []    # Completion dates when the user checks-off a habit
+        self.streaks: Streaks = Streaks()    # Streaks object (instance of Streaks class)
+
+    def habit_name(self) -> None:
         """Prompts the user to name their new habit and confirm it."""
         while True:
             print("What new habit do you want to register?:")
@@ -22,7 +24,7 @@ class Habit:
             # Use confirm_input helper function to confirm the habit name
             self.name = confirm_input("name", self.name)
 
-    def habit_frequency(self):
+    def habit_frequency(self) -> None:
         """Prompts the user to assign their habit's frequency."""
         while True:
             print("Please type in 'Daily' or 'Weekly'")
@@ -35,13 +37,14 @@ class Habit:
             else:
                 print("Invalid Input. Pleas enter 'Daily' or 'Weekly'!")
 
-    def creation_date(self):
+    def creation_date(self) -> None:
         """Sets the creation date of the habit to the current date."""
         self.creation = datetime.now().date()
 
-    def _is_habit_completed(self):
+    def _is_habit_completed(self) -> bool:
         """
-        Check if the habit is already completed based on its frequency (daily, weekly).
+        Check if the habit is already completed based on its frequency ("daily" or "weekly").
+
         :return: True if completed, False otherwise.
         """
         current_date = datetime.now()
@@ -58,9 +61,10 @@ class Habit:
 
         return False # If neither condition is met
 
-    def check_off_habit(self):
+    def check_off_habit(self) -> bool:
         """
         Marks a habit as complete for the current day if it hasn't been completed yet.
+
         :return: False if already completed, True if marked complete.
         """
         current_date = datetime.now()

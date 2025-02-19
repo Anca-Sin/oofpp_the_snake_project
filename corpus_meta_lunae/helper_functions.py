@@ -1,4 +1,4 @@
-def confirm_input(attribute_name, value):
+def confirm_input(attribute_name: str, value: str) -> str:
     """Helper method to confirm input with the user."""
     while True:
         print(f"You entered '{value}'. Is this correct? (yes/no):")

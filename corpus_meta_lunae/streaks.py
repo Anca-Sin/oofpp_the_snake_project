@@ -1,21 +1,33 @@
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, date
+from typing import List
 
 class Streaks:
     """Tracks current and longest streaks with basic functionality for now."""
+
     def __init__(self):
-        self.current = 0 # Current streak counter
-        self.longest = 0 # Longest streak counter
+        self.current: int = 0 # Current streak counter
+        self.longest: int = 0 # Longest streak counter
         # self.announce_streaks ? does the user request a specific streak or display all?
 
-    def _sort_completions(self, completions):
+    @staticmethod
+    def _sort_completions(completions: List[date]) -> List[date]:
         """
-        Sorting completion dates externally to be used across all methods.
-        :param completions: (list) of completion dates
+        Sorts completion dates externally to be used across all methods.
+
+        :param completions: List of completion dates.
+        :return: Sorted list of completion dates.
         """
         return sorted(completions)
 
-    def _is_streak_broken(self, frequency, latest_completion):
-        """Helper method to reset streak counter to 0 if streak is broken."""
+    @staticmethod
+    def _is_streak_broken(frequency: str, latest_completion: date) -> bool:
+        """
+        Helper method to reset streak counter to 0 if streak is broken.
+
+        :param frequency: The frequency of the habit ("daily" or "weekly").
+        :param latest_completion: The date of the latest completion.
+        :return: True if streak is broken, False otherwise.
+        """
         today = datetime.now().date()
 
         if frequency == "daily" and (today - latest_completion).days > 1:
@@ -23,12 +35,15 @@ class Streaks:
         elif frequency == "weekly" and (today - latest_completion).days > 7:
             return True
 
-        return False    # Streak is not broken
+        return False
 
-    def calculate_current_streak(self, frequency, completions):
+    def calculate_current_streak(self, frequency: str, completions: List[date]) -> int:
         """
         Calculates current streak based on habit frequency and completion dates.
-        :param frequency: (str) "daily" or "weekly"
+
+        :param frequency: The frequency of the habit ("daily" or "weekly").
+        :param completions: List of completion dates
+        :return: The current streak count
         """
         if len(completions) == 0:
             return self.current
@@ -54,14 +69,14 @@ class Streaks:
                 if (current_date - previous_date).days == 1:
                     self.current += 1
                 else:
-                    break   # Streak is broken
+                    break # Streak is broken
 
             elif frequency == "weekly":
                 # Find days since Monday
                 days_since_monday = current_date.weekday()
                 days_since_last_monday = previous_date.weekday()
 
-                # Get the Mondat of current_date's week
+                # Get the Monday of current_date's week
                 current_monday = current_date - timedelta(days=days_since_monday)
                 previous_monday = previous_date - timedelta(days=days_since_last_monday)
 
@@ -69,11 +84,15 @@ class Streaks:
                 if (current_monday - previous_monday).days == 7:
                     self.current += 1
                 else:
-                    break   # Streak is broken
+                    break # Streak is broken
 
         self.longest = max(self.longest, self.current)
         return self.current
 
-    def get_longest_streak(self):
-        """Returns the longest streak achieved for this habit."""
+    def get_longest_streak(self) -> int:
+        """
+        Gets the longest streak achieved for this habit.
+
+        :return: The longest streak as an integer.
+        """
         return self.longest
