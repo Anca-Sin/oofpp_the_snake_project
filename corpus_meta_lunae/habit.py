@@ -50,15 +50,13 @@ class Habit:
 
         if self.frequency == "daily":
             # Check if habit was already completed today
-            if current_date.date() in self.completions:
-                return True
+            return current_date.date() in self.completions
 
         elif self.frequency == "weekly":
-            for date in self.completions:
-                if date >= week_start.date():
-                    return True # Early return if we find any completions this week
+            # Check if habit was already completed this week
+            return any(date >= week_start.date() for date in self.completions)
 
-        return False
+        return False # If neither condition is met
 
     def check_off_habit(self):
         """
