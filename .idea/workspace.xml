@@ -4,14 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c616fd42-f0e1-480b-874e-850f1a6b95b5" name="Changes" comment="Apply list comprehension in _is_habit_complete()">
+    <list default="true" id="c616fd42-f0e1-480b-874e-850f1a6b95b5" name="Changes" comment="Add type hinting and update docstrings for methods and classes">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/corpus_meta_lunae/habit.py" beforeDir="false" afterPath="$PROJECT_DIR$/corpus_meta_lunae/habit.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/corpus_meta_lunae/helper_functions.py" beforeDir="false" afterPath="$PROJECT_DIR$/corpus_meta_lunae/helper_functions.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/corpus_meta_lunae/ideas" beforeDir="false" afterPath="$PROJECT_DIR$/corpus_meta_lunae/ideas" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/corpus_meta_lunae/streaks.py" beforeDir="false" afterPath="$PROJECT_DIR$/corpus_meta_lunae/streaks.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/corpus_meta_lunae/user.py" beforeDir="false" afterPath="$PROJECT_DIR$/corpus_meta_lunae/user.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/corpus_meta_lunae/wheelchair_testing.py" beforeDir="false" afterPath="$PROJECT_DIR$/corpus_meta_lunae/wheelchair_testing.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/corpus_meta_lunae/fitness_habit_tracker.py" beforeDir="false" afterPath="$PROJECT_DIR$/corpus_meta_lunae/habit_tracker.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -352,7 +347,15 @@
       <option name="project" value="LOCAL" />
       <updated>1739975759346</updated>
     </task>
-    <option name="localTasksCounter" value="36" />
+    <task id="LOCAL-00036" summary="Add type hinting and update docstrings for methods and classes">
+      <option name="closed" value="true" />
+      <created>1739988904910</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1739988904910</updated>
+    </task>
+    <option name="localTasksCounter" value="37" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -367,7 +370,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Add Streaks class with initial attributes" />
     <MESSAGE value="Implement _sorted_completions() in Streaks class" />
     <MESSAGE value="Implement calculate_current_streak() in Streaks class" />
     <MESSAGE value="Update calculate_current_streak() to handle Monday-based weeks" />
@@ -392,6 +394,7 @@
     <MESSAGE value="Clear out the code after refactoring" />
     <MESSAGE value="Apply list comprehensions in _is_habit_complete()" />
     <MESSAGE value="Apply list comprehension in _is_habit_complete()" />
-    <option name="LAST_COMMIT_MESSAGE" value="Apply list comprehension in _is_habit_complete()" />
+    <MESSAGE value="Add type hinting and update docstrings for methods and classes" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add type hinting and update docstrings for methods and classes" />
   </component>
 </project>
