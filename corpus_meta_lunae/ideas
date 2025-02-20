@@ -1,4 +1,10 @@
+Random ideas:
 - let the user mark a habit as complete on another date if he forgot it on the current date
     - will lead to the possibility that he marks the date wrong
     - need to implement the option to delete completions
     - need to not forget to reset streaks whenever such changes are made
+
+Libraries:
+- pathlib offers a clean, intuitive, and cross-platform way to manage file paths compared to traditional
+ string-based operations. This helps prevent errors (e.g., when different operating systems use different path
+ separators) and simplifies file I/O in Python.
