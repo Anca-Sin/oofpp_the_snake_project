@@ -1,13 +1,25 @@
-from datetime import datetime
+# from datetime import datetime
 from helper_functions import confirm_input
+from habit import Habit
+from typing import List
 
 class User:
-    """User creation class."""
+    """
+    Represents a user in the habit tracking system.
 
-    def __init__(self, username: str = "") - None:
-        # Initialize user attributes with values passed during account creation
+    Attributes:
+        username (str): The username the user registers to use.
+        habits (List[Habit]): A list of habits associated with the user.
+    """
+
+    def __init__(self, username: str = "") -> None:
+        """
+        Initializes a User object with a username and an empty list of habits.
+
+        :arg username (str): The username which defaults to an empty string if not provided.
+        """
         self.username: str = username # Unique identifier for the user
-        # Default to an empty string if no username is provided
+        self.habits: List[Habit] = [] # List to store the user's habits
 
     def user_name(self) -> None:
         """Prompts the user to type in a desired username."""

@@ -4,9 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c616fd42-f0e1-480b-874e-850f1a6b95b5" name="Changes" comment="Rename to habit_tracker.py -&gt; stick to core functionality for the project">
+    <list default="true" id="c616fd42-f0e1-480b-874e-850f1a6b95b5" name="Changes" comment="Implement load_users() in UserDatabase class + self.habits in User class">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/corpus_meta_lunae/ideas" beforeDir="false" afterPath="$PROJECT_DIR$/corpus_meta_lunae/ideas" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/corpus_meta_lunae/user_database.py" beforeDir="false" afterPath="$PROJECT_DIR$/corpus_meta_lunae/user_database.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -39,20 +38,20 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "Python tests.Python tests in wheelchair_testing.py.executor": "Run",
-    "Python.wheelchair_testing.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "dev",
-    "ignore.virus.scanning.warn.message": "true",
-    "last_opened_file_path": "C:/Users/User/Desktop/OOP Portfolio",
-    "settings.editor.selected.configurable": "reference.settingsdialog.IDE.editor.colors.General"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;Python tests.Python tests in wheelchair_testing.py.executor&quot;: &quot;Run&quot;,
+    &quot;Python.wheelchair_testing.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;dev&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/User/Desktop/OOP Portfolio&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settingsdialog.IDE.editor.colors.General&quot;
   }
-}]]></component>
+}</component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
@@ -365,7 +364,39 @@
       <option name="project" value="LOCAL" />
       <updated>1740085281569</updated>
     </task>
-    <option name="localTasksCounter" value="38" />
+    <task id="LOCAL-00038" summary="Add UserDatabase class and attributes">
+      <option name="closed" value="true" />
+      <created>1740087514941</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1740087514941</updated>
+    </task>
+    <task id="LOCAL-00039" summary="Implement load_users() in UserDatabase class + self.habits in User class">
+      <option name="closed" value="true" />
+      <created>1740090069937</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1740090069937</updated>
+    </task>
+    <task id="LOCAL-00040" summary="Implement load_users() in UserDatabase class + self.habits in User class">
+      <option name="closed" value="true" />
+      <created>1740090106579</created>
+      <option name="number" value="00040" />
+      <option name="presentableId" value="LOCAL-00040" />
+      <option name="project" value="LOCAL" />
+      <updated>1740090106579</updated>
+    </task>
+    <task id="LOCAL-00041" summary="Implement load_users() in UserDatabase class + self.habits in User class">
+      <option name="closed" value="true" />
+      <created>1740090135375</created>
+      <option name="number" value="00041" />
+      <option name="presentableId" value="LOCAL-00041" />
+      <option name="project" value="LOCAL" />
+      <updated>1740090135375</updated>
+    </task>
+    <option name="localTasksCounter" value="42" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -380,8 +411,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Implement calculate_current_streak() in Streaks class" />
-    <MESSAGE value="Update calculate_current_streak() to handle Monday-based weeks" />
     <MESSAGE value="Update habit_name() to handle user mistyping and ask for confirmation" />
     <MESSAGE value="Implemented get_longest_streak() in Streaks class" />
     <MESSAGE value="Implement _is_streak_broken() in Streaks class + Update calculate_current_streak()" />
@@ -405,6 +434,8 @@
     <MESSAGE value="Apply list comprehension in _is_habit_complete()" />
     <MESSAGE value="Add type hinting and update docstrings for methods and classes" />
     <MESSAGE value="Rename to habit_tracker.py -&gt; stick to core functionality for the project" />
-    <option name="LAST_COMMIT_MESSAGE" value="Rename to habit_tracker.py -&gt; stick to core functionality for the project" />
+    <MESSAGE value="Add UserDatabase class and attributes" />
+    <MESSAGE value="Implement load_users() in UserDatabase class + self.habits in User class" />
+    <option name="LAST_COMMIT_MESSAGE" value="Implement load_users() in UserDatabase class + self.habits in User class" />
   </component>
 </project>
