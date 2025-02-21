@@ -1,6 +1,6 @@
 # from datetime import datetime
-from helper_functions import confirm_input
-from habit import Habit
+from .helper_functions import confirm_input
+from .habit import Habit
 from typing import List
 
 class User:

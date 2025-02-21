@@ -1,6 +1,6 @@
 from datetime import datetime, timedelta, date
-from streaks import Streaks
-from helper_functions import confirm_input
+from .streaks import Streaks
+from .helper_functions import confirm_input
 from typing import List
 
 class Habit:

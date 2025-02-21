@@ -1,7 +1,7 @@
 import json
 from typing import List
-from user import User
-from habit import Habit
+from .user import User
+from .habit import Habit
 from pathlib import Path
 
 class UserDatabase:
