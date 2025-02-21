@@ -4,9 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c616fd42-f0e1-480b-874e-850f1a6b95b5" name="Changes" comment="Add DataAnalytics class and attributes">
+    <list default="true" id="c616fd42-f0e1-480b-874e-850f1a6b95b5" name="Changes" comment="Structure task requirements">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/corpus_meta_lunae/data_analytics.py" beforeDir="false" afterPath="$PROJECT_DIR$/corpus_meta_lunae/data_analytics.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/corpus_meta_lunae/analytics.py" beforeDir="false" afterPath="$PROJECT_DIR$/corpus_meta_lunae/analytics.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -72,14 +72,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1739222621736</updated>
-    </task>
-    <task id="LOCAL-00002" summary="Implement habit_name() method in Habit class">
-      <option name="closed" value="true" />
-      <created>1739224488314</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1739224488314</updated>
     </task>
     <task id="LOCAL-00003" summary="Implement habit_name() method in Habit class">
       <option name="closed" value="true" />
@@ -465,7 +457,15 @@
       <option name="project" value="LOCAL" />
       <updated>1740176502142</updated>
     </task>
-    <option name="localTasksCounter" value="51" />
+    <task id="LOCAL-00051" summary="Structure task requirements">
+      <option name="closed" value="true" />
+      <created>1740178574754</created>
+      <option name="number" value="00051" />
+      <option name="presentableId" value="LOCAL-00051" />
+      <option name="project" value="LOCAL" />
+      <updated>1740178574754</updated>
+    </task>
+    <option name="localTasksCounter" value="52" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -480,7 +480,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Rename user_database.py and add sample_database.py" />
     <MESSAGE value="Implement _is_streak_broken() in Streaks class + Update calculate_current_streak()" />
     <MESSAGE value="Add User class with initial attributes + minor print statements in habit.py" />
     <MESSAGE value="Add User class with initial attributes + minor print statements in habit.py" />
@@ -505,6 +504,7 @@
     <MESSAGE value="Fix: Specify encoding when opening file for writing to resolve PyCharm type warning" />
     <MESSAGE value="Fix: resolve PyCharm type warning" />
     <MESSAGE value="Add DataAnalytics class and attributes" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add DataAnalytics class and attributes" />
+    <MESSAGE value="Structure task requirements" />
+    <option name="LAST_COMMIT_MESSAGE" value="Structure task requirements" />
   </component>
 </project>
