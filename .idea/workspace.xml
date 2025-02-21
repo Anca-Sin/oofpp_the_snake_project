@@ -4,13 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c616fd42-f0e1-480b-874e-850f1a6b95b5" name="Changes" comment="Implement _check_if_file_exists() and load_users() in UserDatabase class + self.habits in User class">
-      <change afterPath="$PROJECT_DIR$/testing/wheelchair_testing.py" afterDir="false" />
+    <list default="true" id="c616fd42-f0e1-480b-874e-850f1a6b95b5" name="Changes" comment="Move wheelchair_testing.py in the testing folder + fix imports throughout the project">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/corpus_meta_lunae/habit.py" beforeDir="false" afterPath="$PROJECT_DIR$/corpus_meta_lunae/habit.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/corpus_meta_lunae/user.py" beforeDir="false" afterPath="$PROJECT_DIR$/corpus_meta_lunae/user.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/corpus_meta_lunae/user_database.py" beforeDir="false" afterPath="$PROJECT_DIR$/corpus_meta_lunae/user_database.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/corpus_meta_lunae/wheelchair_testing.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/wheelchair_testing.py" beforeDir="false" afterPath="$PROJECT_DIR$/testing/wheelchair_testing.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -56,6 +53,11 @@
     &quot;settings.editor.selected.configurable&quot;: &quot;reference.settingsdialog.IDE.editor.colors.General&quot;
   }
 }</component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\User\Desktop\TheSnakeProject\testing" />
+    </key>
+  </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
@@ -408,7 +410,15 @@
       <option name="project" value="LOCAL" />
       <updated>1740151991440</updated>
     </task>
-    <option name="localTasksCounter" value="43" />
+    <task id="LOCAL-00043" summary="Move wheelchair_testing.py in the testing folder + fix imports throughout the project">
+      <option name="closed" value="true" />
+      <created>1740153785800</created>
+      <option name="number" value="00043" />
+      <option name="presentableId" value="LOCAL-00043" />
+      <option name="project" value="LOCAL" />
+      <updated>1740153785800</updated>
+    </task>
+    <option name="localTasksCounter" value="44" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -423,7 +433,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Implemented get_longest_streak() in Streaks class" />
     <MESSAGE value="Implement _is_streak_broken() in Streaks class + Update calculate_current_streak()" />
     <MESSAGE value="Rename user_database.py and add sample_database.py" />
     <MESSAGE value="Rename user_database.py and added sample_database.py" />
@@ -448,6 +457,7 @@
     <MESSAGE value="Add UserDatabase class and attributes" />
     <MESSAGE value="Implement load_users() in UserDatabase class + self.habits in User class" />
     <MESSAGE value="Implement _check_if_file_exists() and load_users() in UserDatabase class + self.habits in User class" />
-    <option name="LAST_COMMIT_MESSAGE" value="Implement _check_if_file_exists() and load_users() in UserDatabase class + self.habits in User class" />
+    <MESSAGE value="Move wheelchair_testing.py in the testing folder + fix imports throughout the project" />
+    <option name="LAST_COMMIT_MESSAGE" value="Move wheelchair_testing.py in the testing folder + fix imports throughout the project" />
   </component>
 </project>

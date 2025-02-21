@@ -55,3 +55,30 @@ class UserDatabase:
 
         return users # Return the list of User objects
 
+    def save_users(self, users: List[User]) -> None:
+        """
+        Saves a list of User objects to the JSON file.
+
+        :param users: A list of User objects to save.
+        """
+        # Create an empty list to hold dictionaries tha represent each user
+        data_list = []
+        for user in users:
+            user_data = {
+                "username": user.username,
+                "habits": []
+            }
+
+            # Convert each Habit object to a dictionary and add to it user_data
+            for habit in user.habits:
+                habit_data = {
+                    "name": habit.name,
+                    "frequency": habit.frequency
+                }
+                user_data["habits"].append(habit_data)
+
+            data_list.append(user_data)
+
+        # Write the list of dictionaries to the JSON file
+        with self.filepath.open("w") as f:
+            json.dump(data_list, f, indent=4)
