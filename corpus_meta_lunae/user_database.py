@@ -1,5 +1,5 @@
 import json
-from typing import List
+from typing import List, cast, Any
 from .user import User
 from .habit import Habit
 from pathlib import Path
@@ -80,5 +80,5 @@ class UserDatabase:
             data_list.append(user_data)
 
         # Write the list of dictionaries to the JSON file
-        with self.filepath.open("w") as f:
-            json.dump(data_list, f, indent=4)
+        with self.filepath.open("w", encoding="utf-8") as f:
+            json.dump(data_list, cast(Any, f), indent=4)
