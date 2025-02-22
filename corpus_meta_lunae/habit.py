@@ -1,7 +1,7 @@
 from datetime import datetime, timedelta, date
 from .streaks import Streaks
 from .helper_functions import confirm_input
-from typing import List
+from typing import List, Optional
 
 class Habit:
     """
@@ -10,11 +10,11 @@ class Habit:
     """
 
     def __init__(self):
-        self.name: str = None                # Store habit name
-        self.frequency: str = None           # Stores either daily, weekly, or later custom
-        self.creation: date = None           # Stores the creation date of the habit
-        self.completions: List[date] = []    # Completion dates when the user checks-off a habit
-        self.streaks: Streaks = Streaks()    # Streaks object (instance of Streaks class)
+        self.name: Optional[str] = None        # Store habit name
+        self.frequency: Optional[str] = None   # Stores either daily, weekly, or later custom
+        self.creation: Optional[date] = None   # Stores the creation date of the habit
+        self.completions: List[date] = []      # Completion dates when the user checks-off a habit
+        self.streaks: Streaks = Streaks()      # Streaks object (instance of Streaks class)
 
     def habit_name(self) -> None:
         """Prompts the user to name their new habit and confirm it."""
@@ -57,7 +57,7 @@ class Habit:
 
         elif self.frequency == "weekly":
             # Check if habit was already completed this week
-            return any(date >= week_start.date() for date in self.completions)
+            return any(completion_date >= week_start.date() for completion_date in self.completions)
 
         return False # If neither condition is met
 
