@@ -27,9 +27,23 @@ class Analytics:
         # return [habit.name for habit in self.user.habits]
 
         # Using FPP
+        # Map extracts the "name" of each habit from self.user.habits and returns the result as a list.
         return list(map(lambda habit: habit.name, self.user.habits))
 
     # Task requirement: "return a list of all habits with the same periodicity"
+    def list_habits_by_periodicity(self, periodicity: str) -> List[str]:
+        """
+        Retrieves habits filtered by the period of their completion (daily or weekly).
+
+        :param periodicity: The frequency to filter habits by.
+        :return: List of habit names that match the given filter.
+        """
+        # Using list comprehension
+        # return [habit.name for habit in self.user.habits if habit.frequency == periodicity]
+
+        # Using FPP
+        # Filter habits to include only those with the given periodicity and return the matching habits as a list
+        return list(filter(lambda habit: habit.frequency == periodicity, self.user.habits))
 
     # Task requirement: "return the longest streak of all defined habits"
 
