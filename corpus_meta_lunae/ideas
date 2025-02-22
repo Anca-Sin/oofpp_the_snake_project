@@ -33,6 +33,6 @@ Random ideas:
 ------------------------------------------------------------------------------------------------------------------------
 Libraries:
 
-- pathlib offers a clean, intuitive, and cross-platform way to manage file paths compared to traditional
- string-based operations. This helps prevent errors (e.g., when different operating systems use different path
- separators) and simplifies file I/O in Python
+- pathlib
+
+- sqlite3
