@@ -52,6 +52,24 @@ class Analytics:
         return habit_names
 
     # Task requirement: "return the longest streak of all defined habits"
+    def longest_streak_all_habits(self) -> tuple:
+        """
+        Retrieves the longest streak of all defined habits.
+
+        :return: A tuple (habit_name, longest_streak) of the habit with the longest streak.
+        """
+        # Using FPP
+        # map() to iterate through the longest streak for each habit and compare the streaks (second element)
+        #   and use max() to get the highest value
+        longest_habit_all = max(
+            map(lambda habit: (habit.name, habit.streaks.get_longest_streak()), self.user.habits),
+            key=lambda x: x[1]
+        )
+
+        print(f"The habit with the longest streak is '{longest_habit_all[0].title()}', "
+              f"with {longest_habit_all[1]} completions!")
+
+        return longest_habit_all[0], longest_habit_all[1]
 
     # Task requirement: "return the longest streak for a given habit"
     def longest_streak_for_habit(self, habit_name: str) -> int:
@@ -62,8 +80,8 @@ class Analytics:
         :return: The longest streak for the specified habit.
         """
         # Using FPP
-        # Use next to get the first matching habit (or None if no match),
-        #   while iterating with filter over self.user.habits applying the lambda function
+        # Use next() to get the first matching habit (or None if no match),
+        #   while iterating with filter() over self.user.habits applying the lambda function
         habit = next(
             filter(lambda habit_item: habit_item.name == habit_name, self.user.habits),
             None

@@ -1,10 +1,38 @@
+Next to do:
+
+- data persistence with habit creation, completions and streaks
+
+- more analytics:
+    - which habits have been most challenging
+    - most frequently completed habit
+    - average streak length for each habit
+
+- revisit random ideas
+
+- unit testing
+
+- check for clean docstrings and comments
+
+- refactor if needed
+
+- cli
+
+- revisit complexity of initial functionality and if i got what it takes - don't break everything!
+- revisit at least custom habit frequency
+
+- we done?! OMG!
+
+------------------------------------------------------------------------------------------------------------------------
 Random ideas:
+
 - let the user mark a habit as complete on another date if he forgot it on the current date
     - will lead to the possibility that he marks the date wrong
     - need to implement the option to delete completions
     - need to not forget to reset streaks whenever such changes are made
 
+------------------------------------------------------------------------------------------------------------------------
 Libraries:
+
 - pathlib offers a clean, intuitive, and cross-platform way to manage file paths compared to traditional
  string-based operations. This helps prevent errors (e.g., when different operating systems use different path
- separators) and simplifies file I/O in Python.
+ separators) and simplifies file I/O in Python

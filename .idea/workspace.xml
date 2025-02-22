@@ -4,8 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c616fd42-f0e1-480b-874e-850f1a6b95b5" name="Changes" comment="Implement longest_streak_for_habit() in Analytics class">
-      <change beforePath="$PROJECT_DIR$/corpus_meta_lunae/analytics.py" beforeDir="false" afterPath="$PROJECT_DIR$/corpus_meta_lunae/analytics.py" afterDir="false" />
+    <list default="true" id="c616fd42-f0e1-480b-874e-850f1a6b95b5" name="Changes" comment="Implement longest_streak_all_habits() in Analytics class">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/corpus_meta_lunae/ideas" beforeDir="false" afterPath="$PROJECT_DIR$/corpus_meta_lunae/ideas" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -71,38 +72,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1739222621736</updated>
-    </task>
-    <task id="LOCAL-00013" summary="Add call to calculate_current_streak in check_off_habit() of Habit class. Temporarily using placeholder.py to sort code">
-      <option name="closed" value="true" />
-      <created>1739275604073</created>
-      <option name="number" value="00013" />
-      <option name="presentableId" value="LOCAL-00013" />
-      <option name="project" value="LOCAL" />
-      <updated>1739275604073</updated>
-    </task>
-    <task id="LOCAL-00014" summary="Add Streaks class with initial attributes">
-      <option name="closed" value="true" />
-      <created>1739275919263</created>
-      <option name="number" value="00014" />
-      <option name="presentableId" value="LOCAL-00014" />
-      <option name="project" value="LOCAL" />
-      <updated>1739275919263</updated>
-    </task>
-    <task id="LOCAL-00015" summary="Implement _sorted_completions() in Streaks class">
-      <option name="closed" value="true" />
-      <created>1739276018156</created>
-      <option name="number" value="00015" />
-      <option name="presentableId" value="LOCAL-00015" />
-      <option name="project" value="LOCAL" />
-      <updated>1739276018156</updated>
-    </task>
-    <task id="LOCAL-00016" summary="Implement calculate_current_streak() in Streaks class">
-      <option name="closed" value="true" />
-      <created>1739309945538</created>
-      <option name="number" value="00016" />
-      <option name="presentableId" value="LOCAL-00016" />
-      <option name="project" value="LOCAL" />
-      <updated>1739309945539</updated>
     </task>
     <task id="LOCAL-00017" summary="Update calculate_current_streak() to handle Monday-based weeks">
       <option name="closed" value="true" />
@@ -464,7 +433,39 @@
       <option name="project" value="LOCAL" />
       <updated>1740231799067</updated>
     </task>
-    <option name="localTasksCounter" value="62" />
+    <task id="LOCAL-00062" summary="Implement longest_streak_for_habit() in Analytics class">
+      <option name="closed" value="true" />
+      <created>1740233622520</created>
+      <option name="number" value="00062" />
+      <option name="presentableId" value="LOCAL-00062" />
+      <option name="project" value="LOCAL" />
+      <updated>1740233622520</updated>
+    </task>
+    <task id="LOCAL-00063" summary="Implement longest_streak_all_habits() in Analytics class">
+      <option name="closed" value="true" />
+      <created>1740235556833</created>
+      <option name="number" value="00063" />
+      <option name="presentableId" value="LOCAL-00063" />
+      <option name="project" value="LOCAL" />
+      <updated>1740235556833</updated>
+    </task>
+    <task id="LOCAL-00064" summary="Implement longest_streak_all_habits() in Analytics class">
+      <option name="closed" value="true" />
+      <created>1740235647827</created>
+      <option name="number" value="00064" />
+      <option name="presentableId" value="LOCAL-00064" />
+      <option name="project" value="LOCAL" />
+      <updated>1740235647827</updated>
+    </task>
+    <task id="LOCAL-00065" summary="Implement longest_streak_all_habits() in Analytics class">
+      <option name="closed" value="true" />
+      <created>1740251990278</created>
+      <option name="number" value="00065" />
+      <option name="presentableId" value="LOCAL-00065" />
+      <option name="project" value="LOCAL" />
+      <updated>1740251990278</updated>
+    </task>
+    <option name="localTasksCounter" value="66" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -479,8 +480,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Add self.frequency = &quot;custom&quot; in check_off_habit() in Habit class" />
-    <MESSAGE value="Refactor check_off_habit and revert all changes for custom frequency - stick to core functionality for the project" />
     <MESSAGE value="Clear out the code after refactoring" />
     <MESSAGE value="Apply list comprehensions in _is_habit_complete()" />
     <MESSAGE value="Apply list comprehension in _is_habit_complete()" />
@@ -502,8 +501,10 @@
     <MESSAGE value="Review current and longest streak logic in Streaks class for further implementation in the Analytics class" />
     <MESSAGE value="Fix list_habits_by_periodicity() in Analytics class" />
     <MESSAGE value="Fix warnings in habit.py" />
+    <MESSAGE value="Implement list_habits_by_periodicity() in Analytics class" />
     <MESSAGE value="Implement longest_streak_for_habit() in Analytics class" />
     <MESSAGE value="Implement longest_streak_for_habit() in Analytics class" />
-    <option name="LAST_COMMIT_MESSAGE" value="Implement longest_streak_for_habit() in Analytics class" />
+    <MESSAGE value="Implement longest_streak_all_habits() in Analytics class" />
+    <option name="LAST_COMMIT_MESSAGE" value="Implement longest_streak_all_habits() in Analytics class" />
   </component>
 </project>
