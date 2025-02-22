@@ -27,8 +27,10 @@ class Analytics:
         # return [habit.name for habit in self.user.habits]
 
         # Using FPP
-        # Map extracts the "name" of each habit from self.user.habits and returns the result as a list.
-        return list(map(lambda habit: habit.name, self.user.habits))
+        # Map extracts the "name" of each habit from self.user.habits and returns the result as a list
+        all_habits_list = list(map(lambda habit: habit.name, self.user.habits))
+        print(f"{self.user.username.title()}'s current habit list: {', '.join(all_habits_list).title()}")
+        return all_habits_list
 
     # Task requirement: "return a list of all habits with the same periodicity"
     def list_habits_by_periodicity(self, periodicity: str) -> List[str]:
@@ -43,7 +45,9 @@ class Analytics:
 
         # Using FPP
         # Filter habits to include only those with the given periodicity and return the matching habits as a list
-        return list(filter(lambda habit: habit.frequency == periodicity, self.user.habits))
+        filtered_habits_list = list(filter(lambda habit: habit.frequency == periodicity, self.user.habits))
+        print(f"{self.user.username.title()}'s current {periodicity} habits: {', '.join(filtered_habits_list).title()}")
+        return filtered_habits_list
 
     # Task requirement: "return the longest streak of all defined habits"
 
