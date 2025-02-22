@@ -4,47 +4,26 @@ from corpus_meta_lunae.user import User
 from corpus_meta_lunae.habit import Habit
 from corpus_meta_lunae.analytics import Analytics
 
-def test_list_all_habits():
+def test_longest_streak_for_habit():
     # Arrange: Create a mock user with habits
     user = User(username="john_doe")
     habit1 = Habit()
     habit1.name = "Exercise"
     habit1.frequency = "daily"
+    habit1.streaks.current_streak = 14  # Assume the current streak is 14
+    habit1.streaks.longest_streak = 20  # Assume the longest streak is 20
 
     habit2 = Habit()
     habit2.name = "Reading"
     habit2.frequency = "weekly"
+    habit2.streaks.current_streak = 5
+    habit2.streaks.longest_streak = 10
 
     user.habits = [habit1, habit2]
 
     # Act: Create Analytics instance and call the method
     analytics = Analytics(user)
-    result = analytics.list_all_habits()
+    result = analytics.longest_streak_for_habit("Exercise")
 
-    # Assert: Verify that the habit names are returned correctly
-    assert result == ["Exercise", "Reading"], f"Expected ['Exercise', 'Reading'], but got {result}"
-
-
-def test_list_habits_by_periodicity():
-    # Arrange: Create a mock user with habits
-    user = User(username="john_doe")
-    habit1 = Habit()
-    habit1.name = "Exercise"
-    habit1.frequency = "daily"
-
-    habit2 = Habit()
-    habit2.name = "Reading"
-    habit2.frequency = "weekly"
-
-    habit3 = Habit()
-    habit3.name = "Jogging"
-    habit3.frequency = "daily"
-
-    user.habits = [habit1, habit2, habit3]
-
-    # Act: Create Analytics instance and call the method
-    analytics = Analytics(user)
-    result = analytics.list_habits_by_periodicity("daily")
-
-    # Assert: Verify that the daily habits are returned correctly
-    assert result == ["Exercise", "Jogging"], f"Expected ['Exercise', 'Jogging'], but got {result}"
+    # Assert: Verify that the longest streak for 'Exercise' is returned correctly
+    assert result == 20, f"Expected longest streak to be 20, but got {result}"

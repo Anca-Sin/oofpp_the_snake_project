@@ -1,5 +1,4 @@
 from .user import User
-from .habit import Habit
 from .streaks import Streaks
 from typing import List
 
@@ -55,3 +54,24 @@ class Analytics:
     # Task requirement: "return the longest streak of all defined habits"
 
     # Task requirement: "return the longest streak for a given habit"
+    def longest_streak_for_habit(self, habit_name: str) -> int:
+        """
+        Retrieves the longest streak for a given habit.
+
+        :param habit_name: The name of the habit to get the longest streak for.
+        :return: The longest streak for the specified habit.
+        """
+        # Using FPP
+        # Use next to get the first matching habit (or None if no match),
+        #   while iterating with filter over self.user.habits applying the lambda function
+        habit = next(
+            filter(lambda habit_item: habit_item.name == habit_name, self.user.habits),
+            None
+        )
+
+        # If no match is found
+        if habit is None:
+            raise ValueError(f"Habit '{habit_name.title()}' not found!")
+
+        print(f"The longest streak for '{habit_name.title()}' is: {habit.streaks.get_longest_streak()}!")
+        return habit.streaks.get_longest_streak()

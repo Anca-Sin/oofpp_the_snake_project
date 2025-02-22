@@ -4,8 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c616fd42-f0e1-480b-874e-850f1a6b95b5" name="Changes" comment="Fix list_habits_by_periodicity() in Analytics class">
-      <change beforePath="$PROJECT_DIR$/corpus_meta_lunae/habit.py" beforeDir="false" afterPath="$PROJECT_DIR$/corpus_meta_lunae/habit.py" afterDir="false" />
+    <list default="true" id="c616fd42-f0e1-480b-874e-850f1a6b95b5" name="Changes" comment="Implement longest_streak_for_habit() in Analytics class">
+      <change beforePath="$PROJECT_DIR$/corpus_meta_lunae/analytics.py" beforeDir="false" afterPath="$PROJECT_DIR$/corpus_meta_lunae/analytics.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -71,22 +71,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1739222621736</updated>
-    </task>
-    <task id="LOCAL-00011" summary="Implement check_off_habit() method in Habit class">
-      <option name="closed" value="true" />
-      <created>1739229371697</created>
-      <option name="number" value="00011" />
-      <option name="presentableId" value="LOCAL-00011" />
-      <option name="project" value="LOCAL" />
-      <updated>1739229371697</updated>
-    </task>
-    <task id="LOCAL-00012" summary="Implement check_off_habit() method in Habit class">
-      <option name="closed" value="true" />
-      <created>1739229520007</created>
-      <option name="number" value="00012" />
-      <option name="presentableId" value="LOCAL-00012" />
-      <option name="project" value="LOCAL" />
-      <updated>1739229520007</updated>
     </task>
     <task id="LOCAL-00013" summary="Add call to calculate_current_streak in check_off_habit() of Habit class. Temporarily using placeholder.py to sort code">
       <option name="closed" value="true" />
@@ -464,7 +448,23 @@
       <option name="project" value="LOCAL" />
       <updated>1740229667217</updated>
     </task>
-    <option name="localTasksCounter" value="60" />
+    <task id="LOCAL-00060" summary="Fix warnings in habit.py">
+      <option name="closed" value="true" />
+      <created>1740230121747</created>
+      <option name="number" value="00060" />
+      <option name="presentableId" value="LOCAL-00060" />
+      <option name="project" value="LOCAL" />
+      <updated>1740230121747</updated>
+    </task>
+    <task id="LOCAL-00061" summary="Implement list_habits_by_periodicity() in Analytics class">
+      <option name="closed" value="true" />
+      <created>1740231799066</created>
+      <option name="number" value="00061" />
+      <option name="presentableId" value="LOCAL-00061" />
+      <option name="project" value="LOCAL" />
+      <updated>1740231799067</updated>
+    </task>
+    <option name="localTasksCounter" value="62" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -479,8 +479,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Implement self.custom_frequency in Habit class" />
-    <MESSAGE value="Create set_custom_frequency() + changes to habit_frequency() in Habit class" />
     <MESSAGE value="Add self.frequency = &quot;custom&quot; in check_off_habit() in Habit class" />
     <MESSAGE value="Refactor check_off_habit and revert all changes for custom frequency - stick to core functionality for the project" />
     <MESSAGE value="Clear out the code after refactoring" />
@@ -499,11 +497,13 @@
     <MESSAGE value="Structure task requirements" />
     <MESSAGE value="Implement list_all_habits() in Analytics class" />
     <MESSAGE value="Add Analytics class and attributes" />
-    <MESSAGE value="Implement list_habits_by_periodicity() in Analytics class" />
     <MESSAGE value="Add print statements to methods in Analytics class" />
     <MESSAGE value="Review current and longest streak logic in Streaks class for further implementation in the Analytics class" />
     <MESSAGE value="Review current and longest streak logic in Streaks class for further implementation in the Analytics class" />
     <MESSAGE value="Fix list_habits_by_periodicity() in Analytics class" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fix list_habits_by_periodicity() in Analytics class" />
+    <MESSAGE value="Fix warnings in habit.py" />
+    <MESSAGE value="Implement longest_streak_for_habit() in Analytics class" />
+    <MESSAGE value="Implement longest_streak_for_habit() in Analytics class" />
+    <option name="LAST_COMMIT_MESSAGE" value="Implement longest_streak_for_habit() in Analytics class" />
   </component>
 </project>
