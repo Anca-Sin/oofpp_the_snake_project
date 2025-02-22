@@ -5,8 +5,8 @@ class Streaks:
     """Tracks current and longest streaks with basic functionality for now."""
 
     def __init__(self):
-        self.current: int = 0 # Current streak counter
-        self.longest: int = 0 # Longest streak counter
+        self.current_streak: int = 0 # Current streak counter
+        self.longest_streak: int = 0 # Longest streak counter
         # self.announce_streaks ? does the user request a specific streak or display all?
 
     @staticmethod
@@ -46,17 +46,17 @@ class Streaks:
         :return: The current streak count
         """
         if len(completions) == 0:
-            return self.current
+            return self.current_streak
 
         sorted_completions = self._sort_completions(completions)
 
         # Check if streak is broken by passing frequency and latest completion date,
         # and if broken, immediately exit.
         if self._is_streak_broken(frequency, sorted_completions[-1]):
-            return self.current
+            return self.current_streak
 
         # If no streak was broken start with first completion
-        self.current = 1
+        self.current_streak = 1
 
         # Compare consecutive dates
         # Iterate backwards to compare each date with the previous date
@@ -67,7 +67,7 @@ class Streaks:
             if frequency == "daily":
                 # Check if dates are consecutive
                 if (current_date - previous_date).days == 1:
-                    self.current += 1
+                    self.current_streak += 1
                 else:
                     break # Streak is broken
 
@@ -82,12 +82,14 @@ class Streaks:
 
                 # Check if Mondays are one week apart
                 if (current_monday - previous_monday).days == 7:
-                    self.current += 1
+                    self.current_streak += 1
                 else:
                     break # Streak is broken
 
-        self.longest = max(self.longest, self.current)
-        return self.current
+        # Longest streak needs to be updated each time we calculate a current streak
+        self.longest_streak = max(self.longest_streak, self.current_streak)
+
+        return self.current_streak
 
     def get_longest_streak(self) -> int:
         """
@@ -95,4 +97,4 @@ class Streaks:
 
         :return: The longest streak as an integer.
         """
-        return self.longest
+        return self.longest_streak

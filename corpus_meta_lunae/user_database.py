@@ -82,3 +82,5 @@ class UserDatabase:
         # Write the list of dictionaries to the JSON file
         with self.filepath.open("w", encoding="utf-8") as f:
             json.dump(data_list, cast(Any, f), indent=4)
+
+    # Need to save completions and streaks too
