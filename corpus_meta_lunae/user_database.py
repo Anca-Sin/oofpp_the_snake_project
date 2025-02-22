@@ -15,3 +15,9 @@ class UserDatabase:
         """
         self.db_filepath = db_filepath
 
+    def _connect(self) -> sqlite3.Connection:
+        """Establishes a connection to the SQLite database."""
+        # sqlite3.connect() -> opens a connection to the SQLite database
+        # If the db doesn't exist it will be created automatically
+        return sqlite3.connect(self.db_filepath)
+
