@@ -46,8 +46,11 @@ class Analytics:
         # Using FPP
         # Filter habits to include only those with the given periodicity and return the matching habits as a list
         filtered_habits_list = list(filter(lambda habit: habit.frequency == periodicity, self.user.habits))
-        print(f"{self.user.username.title()}'s current {periodicity} habits: {', '.join(filtered_habits_list).title()}")
-        return filtered_habits_list
+
+        # Extract habit names from the Habit object to avoid TypeError (expected str instance, Habit found)
+        habit_names = list(map(lambda habit: habit.name, filtered_habits_list))
+        print(f"{self.user.username.title()}'s current {periodicity} habits: {', '.join(habit_names).title()}")
+        return habit_names
 
     # Task requirement: "return the longest streak of all defined habits"
 

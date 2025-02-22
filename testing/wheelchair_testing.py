@@ -2,49 +2,49 @@ import unittest
 from corpus_meta_lunae.user_database import UserDatabase
 from corpus_meta_lunae.user import User
 from corpus_meta_lunae.habit import Habit
+from corpus_meta_lunae.analytics import Analytics
 
-class TestUserDatabase(unittest.TestCase):
-    def test_save_users(self):
-        # Create a UserDatabase instance
-        db = UserDatabase("test_users.json")
+def test_list_all_habits():
+    # Arrange: Create a mock user with habits
+    user = User(username="john_doe")
+    habit1 = Habit()
+    habit1.name = "Exercise"
+    habit1.frequency = "daily"
 
-        # Create sample users
-        user1 = User("Alice")
-        habit1 = Habit()
-        habit1.name = "Exercise"
-        habit1.frequency = "daily"
-        user1.habits.append(habit1)
+    habit2 = Habit()
+    habit2.name = "Reading"
+    habit2.frequency = "weekly"
 
-        user2 = User("Bob")
-        habit2 = Habit()
-        habit2.name = "Read"
-        habit2.frequency = "weekly"
-        user2.habits.append(habit2)
+    user.habits = [habit1, habit2]
 
-        users = [user1, user2]
+    # Act: Create Analytics instance and call the method
+    analytics = Analytics(user)
+    result = analytics.list_all_habits()
 
-        # Save the users to the JSON file
-        db.save_users(users)
+    # Assert: Verify that the habit names are returned correctly
+    assert result == ["Exercise", "Reading"], f"Expected ['Exercise', 'Reading'], but got {result}"
 
-        # Load the users back from the file
-        loaded_users = db.load_users()
 
-        # Check if the number of users is correct
-        self.assertEqual(len(loaded_users), 2)
+def test_list_habits_by_periodicity():
+    # Arrange: Create a mock user with habits
+    user = User(username="john_doe")
+    habit1 = Habit()
+    habit1.name = "Exercise"
+    habit1.frequency = "daily"
 
-        # Check if user data is saved correctly
-        self.assertEqual(loaded_users[0].username, "Alice")
-        self.assertEqual(len(loaded_users[0].habits), 1)
-        self.assertEqual(loaded_users[0].habits[0].name, "Exercise")
+    habit2 = Habit()
+    habit2.name = "Reading"
+    habit2.frequency = "weekly"
 
-        self.assertEqual(loaded_users[1].username, "Bob")
-        self.assertEqual(len(loaded_users[1].habits), 1)
-        self.assertEqual(loaded_users[1].habits[0].name, "Read")
+    habit3 = Habit()
+    habit3.name = "Jogging"
+    habit3.frequency = "daily"
 
-    def tearDown(self):
-        """Remove the test file after the test"""
-        db = UserDatabase("test_users.json")
-        db.filepath.unlink()  # Remove the test file to clean up
+    user.habits = [habit1, habit2, habit3]
 
-if __name__ == "__main__":
-    unittest.main()
+    # Act: Create Analytics instance and call the method
+    analytics = Analytics(user)
+    result = analytics.list_habits_by_periodicity("daily")
+
+    # Assert: Verify that the daily habits are returned correctly
+    assert result == ["Exercise", "Jogging"], f"Expected ['Exercise', 'Jogging'], but got {result}"
