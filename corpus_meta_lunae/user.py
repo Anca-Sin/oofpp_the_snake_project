@@ -21,7 +21,7 @@ class User:
         self.username: str = username # Unique identifier for the user
         self.habits: List[Habit] = [] # List to store the user's habits
 
-    def user_name(self) -> None:
+    def create_username(self) -> None:
         """Prompts the user to type in a desired username."""
         while True:
             print("Please type in your desired username:")
