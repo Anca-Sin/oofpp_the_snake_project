@@ -54,11 +54,11 @@ class UserDatabase:
             CREATE TABLE IF NOT EXISTS streaks (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             habit_id INTEGER, 
-            current_streak INTEGER NOT NULL,
-            current_streak_start TEXT NOT NULL,
-            longest_streak INTEGER NOT NULL,
-            longest_streak_start TEXT NOT NULL,
-            longest_streak_end TEXT NOT NULL,
+            current_streak INTEGER,
+            current_streak_start TEXT,
+            longest_streak INTEGER,
+            longest_streak_start TEXT,
+            longest_streak_end TEXT,
             FOREIGN KEY (habit_id) REFERENCES habits(id) -- Link streak to a habit from the habit table
             )
         """)
