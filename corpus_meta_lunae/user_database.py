@@ -43,8 +43,8 @@ class UserDatabase:
                 name TEXT NOT NULL,
                 frequency TEXT NOT NULL,
                 creation_date TEXT NOT NULL,
-                completions TEXT NOT NULL,
-                check_off_dates TEXT NOT NULL, -- Comma separated check off dates
+                completions TEXT,
+                check_off_dates TEXT, -- Comma separated check off dates
                 FOREIGN KEY (user_id) REFERENCES users(id) -- Links habits to a specific user in the user table
             )
         """)
