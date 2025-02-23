@@ -1,6 +1,7 @@
 import sqlite3
+from typing import List
 # from pathlib import Path
-# from .user import User
+from .user import User
 # from .habit import Habit
 
 class UserDatabase:
@@ -63,3 +64,26 @@ class UserDatabase:
 
         connection.commit() # Commit the changes to the db to make sure the tables are created
         connection.close()  # Close the db connection
+
+    def load_users(self) -> List[User]:
+        """
+        Loads all users from the db.
+
+        :return: A list of User objects.
+        """
+        connection = self._connect()
+        cursor = connection.cursor() # Create a cursor to execute the query
+
+        # Query to select all users from the "users" table
+        cursor.execute("SELECT id, username FROM users")
+        user_data = cursor.fetchall() # Fetch all rows from the query
+
+        users = [] # An empty list to store User objects
+
+        # Iterate through the fetched data and create User objects
+        for user_row in user_data:
+            user = User(username=user_row[1]) # Create an object with the username
+            users.append(user)
+
+        connection.close()
+        return users

@@ -1,6 +1,6 @@
 Next to do:
 
-- data persistence with habit creation, completions and streaks
+- order the tables according to user id and habit id
 
 - more analytics:
     - which habits have been most challenging
