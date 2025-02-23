@@ -13,7 +13,7 @@ class Habit:
         self.name: Optional[str] = None        # Store habit name
         self.frequency: Optional[str] = None   # Stores either daily, weekly, or later custom
         self.creation: Optional[date] = None   # Stores the creation date of the habit
-        self.completions: List[date] = []      # Completion dates when the user checks-off a habit
+        self.completion_dates: List[date] = [] # List of completion dates when the user checks-off a habit
         self.streaks: Streaks = Streaks()      # Streaks object (instance of Streaks class)
 
     def habit_name(self) -> None:
@@ -53,11 +53,11 @@ class Habit:
 
         if self.frequency == "daily":
             # Check if habit was already completed today
-            return current_date.date() in self.completions
+            return current_date.date() in self.completion_dates
 
         elif self.frequency == "weekly":
             # Check if habit was already completed this week
-            return any(completion_date >= week_start.date() for completion_date in self.completions)
+            return any(completion_date >= week_start.date() for completion_date in self.completion_dates)
 
         return False # If neither condition is met
 
@@ -75,7 +75,7 @@ class Habit:
             return False
 
         # Add today's date to completions if it's not already completed
-        self.completions.append(current_date.date())
+        self.completion_dates.append(current_date.date())
         print(f"'{self.name.title()}' checked off successfully!")
 
         # Calculate current streak

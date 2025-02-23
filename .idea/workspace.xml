@@ -4,10 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c616fd42-f0e1-480b-874e-850f1a6b95b5" name="Changes" comment="Implement select_user() in UserDatabase class">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/corpus_meta_lunae/user_database.py" beforeDir="false" afterPath="$PROJECT_DIR$/corpus_meta_lunae/user_database.py" afterDir="false" />
-    </list>
+    <list default="true" id="c616fd42-f0e1-480b-874e-850f1a6b95b5" name="Changes" comment="Change terminology in habits table and Habits class to ease coding logic" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -72,46 +69,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1739222621736</updated>
-    </task>
-    <task id="LOCAL-00023" summary="Add User class with initial attributes">
-      <option name="closed" value="true" />
-      <created>1739380217338</created>
-      <option name="number" value="00023" />
-      <option name="presentableId" value="LOCAL-00023" />
-      <option name="project" value="LOCAL" />
-      <updated>1739380217338</updated>
-    </task>
-    <task id="LOCAL-00024" summary="Implement user_name() in User class">
-      <option name="closed" value="true" />
-      <created>1739380408907</created>
-      <option name="number" value="00024" />
-      <option name="presentableId" value="LOCAL-00024" />
-      <option name="project" value="LOCAL" />
-      <updated>1739380408907</updated>
-    </task>
-    <task id="LOCAL-00025" summary="Implement user_gender() in User class">
-      <option name="closed" value="true" />
-      <created>1739380443104</created>
-      <option name="number" value="00025" />
-      <option name="presentableId" value="LOCAL-00025" />
-      <option name="project" value="LOCAL" />
-      <updated>1739380443104</updated>
-    </task>
-    <task id="LOCAL-00026" summary="Implement user_gender() in User class">
-      <option name="closed" value="true" />
-      <created>1739380537450</created>
-      <option name="number" value="00026" />
-      <option name="presentableId" value="LOCAL-00026" />
-      <option name="project" value="LOCAL" />
-      <updated>1739380537450</updated>
-    </task>
-    <task id="LOCAL-00027" summary="Remove female_user_phases.py and female_user.py - stick to core functionality for the project">
-      <option name="closed" value="true" />
-      <created>1739462839646</created>
-      <option name="number" value="00027" />
-      <option name="presentableId" value="LOCAL-00027" />
-      <option name="project" value="LOCAL" />
-      <updated>1739462839646</updated>
     </task>
     <task id="LOCAL-00028" summary="Remove user_gender() and self.gender in User class">
       <option name="closed" value="true" />
@@ -465,7 +422,47 @@
       <option name="project" value="LOCAL" />
       <updated>1740323971651</updated>
     </task>
-    <option name="localTasksCounter" value="72" />
+    <task id="LOCAL-00072" summary="Fix logic in habits table: check_of_dates &quot;NOT NULL&quot; removed">
+      <option name="closed" value="true" />
+      <created>1740324599177</created>
+      <option name="number" value="00072" />
+      <option name="presentableId" value="LOCAL-00072" />
+      <option name="project" value="LOCAL" />
+      <updated>1740324599177</updated>
+    </task>
+    <task id="LOCAL-00073" summary="Fix logic in habits table: check_of_dates &quot;NOT NULL&quot; removed">
+      <option name="closed" value="true" />
+      <created>1740324737196</created>
+      <option name="number" value="00073" />
+      <option name="presentableId" value="LOCAL-00073" />
+      <option name="project" value="LOCAL" />
+      <updated>1740324737196</updated>
+    </task>
+    <task id="LOCAL-00074" summary="Fix logic in streaks table: &quot;NOT NULL&quot; removed for all streaks">
+      <option name="closed" value="true" />
+      <created>1740324845446</created>
+      <option name="number" value="00074" />
+      <option name="presentableId" value="LOCAL-00074" />
+      <option name="project" value="LOCAL" />
+      <updated>1740324845446</updated>
+    </task>
+    <task id="LOCAL-00075" summary="Change terminology in habits table and Habits class to ease coding logic">
+      <option name="closed" value="true" />
+      <created>1740326188974</created>
+      <option name="number" value="00075" />
+      <option name="presentableId" value="LOCAL-00075" />
+      <option name="project" value="LOCAL" />
+      <updated>1740326188974</updated>
+    </task>
+    <task id="LOCAL-00076" summary="Change terminology in habits table and Habits class to ease coding logic">
+      <option name="closed" value="true" />
+      <created>1740326361360</created>
+      <option name="number" value="00076" />
+      <option name="presentableId" value="LOCAL-00076" />
+      <option name="project" value="LOCAL" />
+      <updated>1740326361360</updated>
+    </task>
+    <option name="localTasksCounter" value="77" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -480,11 +477,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Add UserDatabase class and attributes" />
-    <MESSAGE value="Implement load_users() in UserDatabase class + self.habits in User class" />
-    <MESSAGE value="Implement _check_if_file_exists() and load_users() in UserDatabase class + self.habits in User class" />
-    <MESSAGE value="Move wheelchair_testing.py in the testing folder + fix imports throughout the project" />
-    <MESSAGE value="Implement save_users() in UserDatabase class" />
     <MESSAGE value="Fix: Specify encoding when opening file for writing to resolve PyCharm type warning" />
     <MESSAGE value="Fix: resolve PyCharm type warning" />
     <MESSAGE value="Add Analytics class and attributes" />
@@ -505,6 +497,11 @@
     <MESSAGE value="Implement _check_if_table_exists() in UserDatabase class" />
     <MESSAGE value="Change terminology to create_username() in User class" />
     <MESSAGE value="Implement select_user() in UserDatabase class" />
-    <option name="LAST_COMMIT_MESSAGE" value="Implement select_user() in UserDatabase class" />
+    <MESSAGE value="Fix logic in habits table: &quot;NOT NULL&quot; removed for completions and check_off_dates" />
+    <MESSAGE value="Fix logic in habits table: completions and check_of_dates &quot;NOT NULL&quot; removed" />
+    <MESSAGE value="Fix logic in habits table: completions and check_of_dates &quot;NOT NULL&quot; removed" />
+    <MESSAGE value="Fix logic in streaks table: &quot;NOT NULL&quot; removed for all streaks" />
+    <MESSAGE value="Change terminology in habits table and Habits class to ease coding logic" />
+    <option name="LAST_COMMIT_MESSAGE" value="Change terminology in habits table and Habits class to ease coding logic" />
   </component>
 </project>

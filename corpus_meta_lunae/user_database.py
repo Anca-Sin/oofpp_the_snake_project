@@ -40,11 +40,11 @@ class UserDatabase:
             CREATE TABLE IF NOT EXISTS habits (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
                 user_id INTEGER, 
-                name TEXT NOT NULL,
+                habit_name TEXT NOT NULL,
                 frequency TEXT NOT NULL,
                 creation_date TEXT NOT NULL,
-                completions TEXT,
-                check_off_dates TEXT, -- Comma separated check off dates
+                completions_count INTEGER, -- Count of completions
+                checked_off_dates TEXT, -- Comma separated check off dates
                 FOREIGN KEY (user_id) REFERENCES users(id) -- Links habits to a specific user in the user table
             )
         """)
@@ -124,13 +124,9 @@ class UserDatabase:
             except ValueError: # Handle invalid input (e.g. "abc")
                 print(f"Invalid input! Please enter a number between 1 and {len(users)}: ")
 
-        # Proceed with the valid selection and confirm using helper method
+        # Proceed with the valid selection and confirm it using helper method
         selected_user = users[choice -1] # Adjust index since user listing starts from 1
         confirm_input("user", selected_user.username)
 
         print(f"You've selected: {selected_user.username}")
         return selected_user
-
-
-
-
