@@ -1,11 +1,10 @@
 Next to do:
 
-- order the tables according to user id and habit id
+- ? order the tables according to user id and habit id? needed? maybe just exercise
 
-- more analytics:
-    - which habits have been most challenging
-    - most frequently completed habit
-    - average streak length for each habit
+- find a way to refactor:
+        connection = self._connect()
+        cursor = connection.cursor()
 
 - revisit random ideas
 
@@ -17,8 +16,7 @@ Next to do:
 
 - cli
 
-- revisit complexity of initial functionality and if i got what it takes - don't break everything!
-- revisit at least custom habit frequency
+- revisit implementing custom habit frequency
 
 - we done?! OMG!
 
