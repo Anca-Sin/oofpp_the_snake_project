@@ -1,9 +1,11 @@
 import sqlite3
 from typing import List
+
+from .helper_functions import confirm_int_input
 # from pathlib import Path
 from .user import User
 # from .habit import Habit
-from .helper_functions import confirm_input
+import helper_functions
 
 class UserDatabase:
     """Handles saving and loading user data to/from an SQLite database."""
@@ -101,34 +103,43 @@ class UserDatabase:
         # If there are no users, directly prompt to create a new user
         if not users:
             print("No users found!")
-            new_user = User()
-            new_user.create_username()
-            # Save the newly created user to the db
-            # -------> Upcoming method <-----------
-            print(f"New user '{new_user.username} created successfully!")
+            selected_user = User()
+            selected_user.create_username()
+            return selected_user
 
         # Display the users to choose from
-        print("Please select a user from the following list:")
+        print("Please select a user from the following list: ")
         for idx, user in enumerate(users, 1):
             print(f"{idx}. {user.username}")
 
-        # Ask user for input (just select a number for the username)
+        # Or allow for a new user creation
+        print("Or type in 'new' to create a new user!")
+
+        # Ask user for a choice
         while True:
             try:
-                # User ids are saved as integers in the user table
-                choice = int(input(f"Enter the number between 1 and {len(users)} to select an user: "))
-                if 1 <= choice <= len(users): # Check if the choice is valid
-                    break # Exit loop if input is valid
+                choice = input(f"Enter a number between 1 and {len(users)} or type in 'new': ").strip()
+
+                if choice.lower() == "new":
+                    selected_user = User()
+                    selected_user.create_username()
+                    return selected_user
+                elif choice.isdigit() and 1 <= int(choice) <= len(users):
+                    # Confirm the choice
+                    confirmed_choice = confirm_int_input(choice)
+
+                    if confirmed_choice is not None:
+                        # If the choice was confirmed, get the corresponding user
+                        selected_user = users[int(confirmed_choice) - 1] # Adjust index since user listing starts from 1
+                        print(f"You've selected: {selected_user.username}")
+                        break
+                    # If choice wasn't confirmed, the loop will execute again asking for an user index
                 else:
-                    print(f"Invalid selection! Please enter a number between 1 and {len(users)}: ")
-            except ValueError: # Handle invalid input (e.g. "abc")
-                print(f"Invalid input! Please enter a number between 1 and {len(users)}: ")
+                    print(f"Invalid selection! Please enter a number between 1 and {len(users)}, or 'new': ")
 
-        # Proceed with the valid selection and confirm it using helper method
-        selected_user = users[choice -1] # Adjust index since user listing starts from 1
-        confirm_input("user", selected_user.username)
+            except ValueError: # Handle invalid input
+                print(f"Invalid input! Please enter a number between 1 and {len(users)} or 'new': ")
 
-        print(f"You've selected: {selected_user.username}")
         return selected_user
 
     # def save_habits(self, user: User) -> None:

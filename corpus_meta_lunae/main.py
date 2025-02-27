@@ -39,6 +39,7 @@ class HabitTracker:
     def main_menu(self):
         # I. My habits
         # II. My Analytics
+        # III. Select a different user
         #
         # I. My habits
         #     1. Register New Habit  *

@@ -4,9 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c616fd42-f0e1-480b-874e-850f1a6b95b5" name="Changes" comment="Ideas for main menu, rename to main.py">
+    <list default="true" id="c616fd42-f0e1-480b-874e-850f1a6b95b5" name="Changes" comment="Implement start() in HabitTracker class">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/corpus_meta_lunae/helper_functions.py" beforeDir="false" afterPath="$PROJECT_DIR$/corpus_meta_lunae/helper_functions.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/corpus_meta_lunae/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/corpus_meta_lunae/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/corpus_meta_lunae/user_database.py" beforeDir="false" afterPath="$PROJECT_DIR$/corpus_meta_lunae/user_database.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -72,14 +74,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1739222621736</updated>
-    </task>
-    <task id="LOCAL-00030" summary="Create set_custom_frequency() + changes to habit_frequency() in Habit class">
-      <option name="closed" value="true" />
-      <created>1739909805841</created>
-      <option name="number" value="00030" />
-      <option name="presentableId" value="LOCAL-00030" />
-      <option name="project" value="LOCAL" />
-      <updated>1739909805841</updated>
     </task>
     <task id="LOCAL-00031" summary="Add self.frequency = &quot;custom&quot; in check_off_habit() in Habit class">
       <option name="closed" value="true" />
@@ -465,7 +459,15 @@
       <option name="project" value="LOCAL" />
       <updated>1740355846007</updated>
     </task>
-    <option name="localTasksCounter" value="79" />
+    <task id="LOCAL-00079" summary="Implement start() in HabitTracker class">
+      <option name="closed" value="true" />
+      <created>1740680003536</created>
+      <option name="number" value="00079" />
+      <option name="presentableId" value="LOCAL-00079" />
+      <option name="project" value="LOCAL" />
+      <updated>1740680003536</updated>
+    </task>
+    <option name="localTasksCounter" value="80" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -480,7 +482,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Add Analytics class and attributes" />
     <MESSAGE value="Structure task requirements" />
     <MESSAGE value="Implement list_all_habits() in Analytics class" />
     <MESSAGE value="Add Analytics class and attributes" />
@@ -505,6 +506,7 @@
     <MESSAGE value="Change terminology in habits table and Habits class to ease coding logic" />
     <MESSAGE value="Ideas for main menu, rename to main.py" />
     <MESSAGE value="Ideas for main menu, rename to main.py" />
-    <option name="LAST_COMMIT_MESSAGE" value="Ideas for main menu, rename to main.py" />
+    <MESSAGE value="Implement start() in HabitTracker class" />
+    <option name="LAST_COMMIT_MESSAGE" value="Implement start() in HabitTracker class" />
   </component>
 </project>
