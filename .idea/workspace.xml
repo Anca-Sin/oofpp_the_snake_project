@@ -4,8 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c616fd42-f0e1-480b-874e-850f1a6b95b5" name="Changes" comment="Implement save_user() in UserDatabase">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="c616fd42-f0e1-480b-874e-850f1a6b95b5" name="Changes" comment="Fix start() in HabitTracker class">
       <change beforePath="$PROJECT_DIR$/corpus_meta_lunae/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/corpus_meta_lunae/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -72,14 +71,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1739222621736</updated>
-    </task>
-    <task id="LOCAL-00037" summary="Rename to habit_tracker.py -&gt; stick to core functionality for the project">
-      <option name="closed" value="true" />
-      <created>1740085281569</created>
-      <option name="number" value="00037" />
-      <option name="presentableId" value="LOCAL-00037" />
-      <option name="project" value="LOCAL" />
-      <updated>1740085281569</updated>
     </task>
     <task id="LOCAL-00038" summary="Add UserDatabase class and attributes">
       <option name="closed" value="true" />
@@ -465,7 +456,15 @@
       <option name="project" value="LOCAL" />
       <updated>1740697353359</updated>
     </task>
-    <option name="localTasksCounter" value="86" />
+    <task id="LOCAL-00086" summary="Fix start() in HabitTracker class">
+      <option name="closed" value="true" />
+      <created>1740697853300</created>
+      <option name="number" value="00086" />
+      <option name="presentableId" value="LOCAL-00086" />
+      <option name="project" value="LOCAL" />
+      <updated>1740697853300</updated>
+    </task>
+    <option name="localTasksCounter" value="87" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -480,7 +479,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Fix warnings in habit.py" />
     <MESSAGE value="Implement list_habits_by_periodicity() in Analytics class" />
     <MESSAGE value="Implement longest_streak_for_habit() in Analytics class" />
     <MESSAGE value="Implement longest_streak_for_habit() in Analytics class" />
@@ -505,6 +503,7 @@
     <MESSAGE value="Fix how confirm_input logic applies throughout the project" />
     <MESSAGE value="Fix warnings" />
     <MESSAGE value="Implement save_user() in UserDatabase" />
-    <option name="LAST_COMMIT_MESSAGE" value="Implement save_user() in UserDatabase" />
+    <MESSAGE value="Fix start() in HabitTracker class" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fix start() in HabitTracker class" />
   </component>
 </project>

@@ -34,8 +34,16 @@ class HabitTracker:
         self.main_menu()
 
     def select_user(self):
+        """
+        Prompts the user to select or create a username.
+
+        :return: The selected User object.
+        """
+        return self.db.select_user()
 
     def load_user_data(self):
+        """Loads the habits for the current user from the db."""
+        # Need new method in UserDatabase
 
     def main_menu(self):
         # I. My habits
