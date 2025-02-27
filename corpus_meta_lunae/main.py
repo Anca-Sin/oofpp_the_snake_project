@@ -46,6 +46,30 @@ class HabitTracker:
         # Need new method in UserDatabase
 
     def main_menu(self):
+        """Displays the main menu and handles user navigation."""
+        while True:
+            print("""\n- - - Main Menu - - -
+            1. My Habits
+            2. My Analytics
+            3. Select a different user
+            4. Exit
+            """)
+
+            choice = input("Enter your choice (1-4): ").strip()
+
+            if choice == "1":
+                self.habits_menu
+            elif choice == "2":
+                self.analytics_menu
+            elif choice == "3":
+                self.logged_in_user = self.select_user()
+                self.load_user_data()
+            elif choice == "4":
+                print("Until next time! Stay on track!")
+            else:
+                print("Sorry, invalid option. Please try again!")
+
+
         # I. My habits
         # II. My Analytics
         # III. Select a different user
