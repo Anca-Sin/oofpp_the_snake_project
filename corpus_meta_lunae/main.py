@@ -58,9 +58,9 @@ class HabitTracker:
             choice = input("Enter your choice (1-4): ").strip()
 
             if choice == "1":
-                self.habits_menu
+                self.habits_menu()
             elif choice == "2":
-                self.analytics_menu
+                self.analytics_menu()
             elif choice == "3":
                 self.logged_in_user = self.select_user()
                 self.load_user_data()
@@ -69,6 +69,31 @@ class HabitTracker:
             else:
                 print("Sorry, invalid option. Please try again!")
 
+    def habits_menu(self):
+        """Displays the habits menu and handles user navigation."""
+        while True:
+            print("""\n- - - My Habits - - -
+            1. Register new habit
+            2. List all habits
+            3. Daily habits
+            4. Weekly habits
+            5. Back to main menu
+            """)
+
+            choice = input("Enter your choice (1-5): ")
+
+            if choice == "1":
+                self.register_new_habit()
+            elif choice == "2":
+                self.list_habits()
+            elif choice == "3":
+                self.daily_habits()
+            elif choice == "4":
+                self.weekly_habits()
+            elif choice == "5":
+                break # Return to the main_menu's loop
+            else:
+                print("Sorry, invalid option. Please try again!")
 
         # I. My habits
         # II. My Analytics
