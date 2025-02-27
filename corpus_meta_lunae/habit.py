@@ -88,5 +88,5 @@ class Habit:
         print(f"'{self.name.title()}' checked off successfully!")
 
         # Calculate current streak
-        self.streaks.calculate_current_streak(self.frequency, self.completions)
+        self.streaks.calculate_current_streak(self.frequency, self.completion_dates)
         return True

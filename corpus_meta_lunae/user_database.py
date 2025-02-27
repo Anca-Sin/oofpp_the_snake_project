@@ -1,11 +1,9 @@
 import sqlite3
 from typing import List
-
-from .helper_functions import confirm_int_input
 # from pathlib import Path
 from .user import User
 # from .habit import Habit
-import helper_functions
+from .helper_functions import confirm_int_input
 
 class UserDatabase:
     """Handles saving and loading user data to/from an SQLite database."""
