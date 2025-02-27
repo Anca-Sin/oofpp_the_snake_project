@@ -18,7 +18,19 @@ class HabitTracker:
         self.db = UserDatabase()   # Interacts with the local SQLite DB
         self.logged_in_user = None # Hypothetical "logged_in"
 
-    def start(self):
+    def start(self) -> None:
+        """
+        Starts the Habit Tracker app.
+        - Greets the user and allows username selection, or allows creating a new user
+        - After the selection, the main menu is displayed
+        """
+        print("-- 'Corpus Meta Lunae' -- Habit Tracker --")
+
+        # Select or create a user
+        self.logged_in_user = self.select_user()
+
+        # Show the main menu after the user is selected or created
+        self.main_menu()
 
     def select_user(self):
 
