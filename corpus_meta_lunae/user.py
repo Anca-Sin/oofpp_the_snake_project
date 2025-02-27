@@ -25,5 +25,10 @@ class User:
         """Prompts the user to type in a desired username."""
         while True:
             print("Please type in your desired username:")
-            self.username = input().title()
-            self.username = confirm_input("username", self.username)
+            username = input().title()
+            # Confirm the choice
+            confirmed_username = confirm_input("username", username)
+
+            if confirmed_username is not None: # If user confirmed with "yes"
+                self.username = confirmed_username
+                return

@@ -133,7 +133,7 @@ class UserDatabase:
                         selected_user = users[int(confirmed_choice) - 1] # Adjust index since user listing starts from 1
                         print(f"You've selected: {selected_user.username}")
                         break
-                    # If choice wasn't confirmed, the loop will execute again asking for an user index
+                    # If choice wasn't confirmed, the loop will execute again asking for a user index
                 else:
                     print(f"Invalid selection! Please enter a number between 1 and {len(users)}, or 'new': ")
 

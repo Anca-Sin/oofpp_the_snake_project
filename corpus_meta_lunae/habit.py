@@ -20,18 +20,27 @@ class Habit:
         """Prompts the user to name their new habit and confirm it."""
         while True:
             print("What new habit do you want to register?:")
-            self.name = input().title()
-            # Use confirm_input helper function to confirm the habit name
-            self.name = confirm_input("name", self.name)
+            habit_name = input().title()
+            # Confirm the choice
+            confirmed_habit = confirm_input("habit", habit_name)
+
+            if confirmed_habit is not None:
+                self.name = confirmed_habit
+                return
 
     def habit_frequency(self) -> None:
         """Prompts the user to assign their habit's frequency."""
         while True:
             print("Please type in 'Daily' or 'Weekly'")
-            self.frequency = input().lower()
+            habit_frequency = input().lower()
 
-            if self.frequency in ["daily", "weekly"]:
-                self.frequency = confirm_input("frequency", self.frequency)
+            if habit_frequency in ["daily", "weekly"]:
+                # Confirm the choice
+                confirmed_frequency = confirm_input("frequency", habit_frequency)
+
+                if confirmed_frequency is not None:
+                    self.frequency = confirmed_frequency
+                    return
 
             # Handle miss-spelling
             else:
