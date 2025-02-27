@@ -4,8 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c616fd42-f0e1-480b-874e-850f1a6b95b5" name="Changes" comment="Implement main_menu() in HabitTracker class">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="c616fd42-f0e1-480b-874e-850f1a6b95b5" name="Changes" comment="Implement habits_menu() in HabitTracker class">
       <change beforePath="$PROJECT_DIR$/corpus_meta_lunae/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/corpus_meta_lunae/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -72,14 +71,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1739222621736</updated>
-    </task>
-    <task id="LOCAL-00041" summary="Implement load_users() in UserDatabase class + self.habits in User class">
-      <option name="closed" value="true" />
-      <created>1740090135375</created>
-      <option name="number" value="00041" />
-      <option name="presentableId" value="LOCAL-00041" />
-      <option name="project" value="LOCAL" />
-      <updated>1740090135375</updated>
     </task>
     <task id="LOCAL-00042" summary="Implement _check_if_file_exists() and load_users() in UserDatabase class + self.habits in User class">
       <option name="closed" value="true" />
@@ -465,7 +456,15 @@
       <option name="project" value="LOCAL" />
       <updated>1740698923163</updated>
     </task>
-    <option name="localTasksCounter" value="90" />
+    <task id="LOCAL-00090" summary="Implement habits_menu() in HabitTracker class">
+      <option name="closed" value="true" />
+      <created>1740699891785</created>
+      <option name="number" value="00090" />
+      <option name="presentableId" value="LOCAL-00090" />
+      <option name="project" value="LOCAL" />
+      <updated>1740699891785</updated>
+    </task>
+    <option name="localTasksCounter" value="91" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -480,7 +479,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Implement longest_streak_for_habit() in Analytics class" />
     <MESSAGE value="Implement longest_streak_all_habits() in Analytics class" />
     <MESSAGE value="Change user_database.py to use SQLite instead of JSON" />
     <MESSAGE value="Implement _connect() in UserDatabase class" />
@@ -505,6 +503,7 @@
     <MESSAGE value="Fix start() in HabitTracker class" />
     <MESSAGE value="Implement select_user() in HabitTracker class" />
     <MESSAGE value="Implement main_menu() in HabitTracker class" />
-    <option name="LAST_COMMIT_MESSAGE" value="Implement main_menu() in HabitTracker class" />
+    <MESSAGE value="Implement habits_menu() in HabitTracker class" />
+    <option name="LAST_COMMIT_MESSAGE" value="Implement habits_menu() in HabitTracker class" />
   </component>
 </project>

@@ -1,3 +1,4 @@
+from random import choice
 from ssl import CHANNEL_BINDING_TYPES
 
 from .analytics import Analytics
@@ -92,6 +93,32 @@ class HabitTracker:
                 self.weekly_habits()
             elif choice == "5":
                 break # Return to the main_menu's loop
+            else:
+                print("Sorry, invalid option. Please try again!")
+
+    def analytics_menu(self):
+        """Displays the analytics menu and handles user navigation."""
+        # Create Analytics object for the current user
+        analytics = Analytics(self.logged_in_user)
+
+        while True:
+            print("""\n- - - My Analytics - - -
+            1. Longest streak across all habits
+            2. Most completed habit
+            3. Least completed habit
+            4. Back to main menu
+            """)
+
+            choice = input("Enter your choice (1-4): ")
+
+            if choice == "1":
+                analytics.longest_streak_all_habits()
+            elif choice == "2":
+                self.most_completed_habit()
+            elif choice == "3":
+                self.least_completed_habit()
+            elif choice == "4":
+                break
             else:
                 print("Sorry, invalid option. Please try again!")
 
