@@ -27,9 +27,10 @@ class HabitTracker:
         print("-- 'Corpus Meta Lunae' -- Habit Tracker --")
 
         # Select or create a user
-        self.logged_in_user = self.select_user()
-
-        # Show the main menu after the user is selected or created
+        self.logged_in_user = self.select_user() # Store the returned user
+        # Load their data
+        self.load_user_data()
+        # Show the main menu
         self.main_menu()
 
     def select_user(self):
