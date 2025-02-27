@@ -15,6 +15,7 @@ class UserDatabase:
         :param db_filepath: Path to the SQLite database file.
         """
         self.db_filepath = db_filepath
+        self._check_if_table_exists()
 
     def _connect(self) -> sqlite3.Connection:
         """Establishes a connection to the SQLite database."""
@@ -89,6 +90,32 @@ class UserDatabase:
         connection.close()
         return users
 
+    def save_user(self, user: User) -> int: # Return the user_id to set faster connections, eliminating an extra query.
+        """
+        Saves a user to the db if it doesn't already exist.
+
+        :param user: The User object to save.
+        :return: The user_id from the db.
+        """
+        connection = self._connect()
+        cursor = connection.cursor()
+
+        # Check if the user exists
+        cursor.execute("SELECT id FROM users WHERE username = ?", (user.username,))
+        user_row = cursor.fetchone()
+
+        if user_row:
+            # Return the existing user's id
+            user_id = user_row[0]
+        else:
+            # Insert new user
+            cursor.execute("INSERT INTO users (username) VALUES (?)", (user.username,))
+            user_id = cursor.lastrowid
+            connection.commit()
+
+        connection.close()
+        return user_id
+
     def select_user(self) -> User:
         """
         Prompts the user to select an existing user or create a new one if none exists.
@@ -100,9 +127,11 @@ class UserDatabase:
 
         # If there are no users, directly prompt to create a new user
         if not users:
-            print("No users found!")
+            print("""No users found!
+            You need to create a new user!""")
             selected_user = User()
             selected_user.create_username()
+            self.save_user(selected_user)
             return selected_user
 
         # Display the users to choose from
@@ -121,6 +150,7 @@ class UserDatabase:
                 if choice.lower() == "new":
                     selected_user = User()
                     selected_user.create_username()
+                    self.save_user(selected_user)
                     return selected_user
                 elif choice.isdigit() and 1 <= int(choice) <= len(users):
                     # Confirm the choice
