@@ -3,6 +3,7 @@ from ssl import CHANNEL_BINDING_TYPES
 
 from .analytics import Analytics
 from .user_database import UserDatabase
+from .habit import Habit
 
 
 class HabitTracker:
@@ -121,6 +122,20 @@ class HabitTracker:
                 break
             else:
                 print("Sorry, invalid option. Please try again!")
+
+    def register_new_habit(self):
+        """Guides the user through a new habit creation."""
+        new_habit = Habit()
+        new_habit.habit_name()
+        new_habit.habit_frequency()
+        new_habit.creation_date()
+
+        # Add the habit to the user's list
+        self.logged_in_user.habits.append(new_habit)
+
+        # Save to db
+        self.db.save_habits(self.logged_in_user)
+        print(f"Habit creation process completed for {new_habit.name.title()}")
 
         # I. My habits
         # II. My Analytics
