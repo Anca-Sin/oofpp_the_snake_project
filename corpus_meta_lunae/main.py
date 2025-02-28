@@ -51,6 +51,7 @@ class HabitTracker:
     def main_menu(self):
         """Displays the main menu and handles user navigation."""
         while True:
+            os.system('cls' if os.name == 'nt' else 'clear')
             print("""\n- - - Main Menu - - -
             1. My Habit Tracker
             2. Select a different user
@@ -72,6 +73,7 @@ class HabitTracker:
                     print("Until next time! Do your best to stay on track!")
             else:
                 print("Sorry, invalid option. Please try again!")
+                reload_menu_countdown()
 
     def my_habit_tracker(self):
         self.habits_menu()
@@ -80,6 +82,7 @@ class HabitTracker:
     def habits_menu(self):
         """Displays the habits menu and handles user navigation."""
         while True:
+            os.system('cls' if os.name == 'nt' else 'clear')
             print("""\n- - - My Habits - - -
             1. Register new habit
             2. List all habits
@@ -103,6 +106,7 @@ class HabitTracker:
                     break # Return to the main_menu's loop
             else:
                 print("Sorry, invalid option. Please try again!")
+                reload_menu_countdown()
 
     def analytics_menu(self):
         """Displays the analytics menu and handles user navigation."""
@@ -110,6 +114,7 @@ class HabitTracker:
         analytics = Analytics(self.logged_in_user)
 
         while True:
+            os.system('cls' if os.name == 'nt' else 'clear')
             print("""\n- - - My Analytics - - -
             1. Longest streak across all habits
             2. Most completed habit
@@ -130,6 +135,7 @@ class HabitTracker:
                     break
             else:
                 print("Sorry, invalid option. Please try again!")
+                reload_menu_countdown()
 
     def register_new_habit(self, frequency_preset=None):
         """Guides the user through a new habit creation."""
