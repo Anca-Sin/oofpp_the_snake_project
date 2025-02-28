@@ -1,6 +1,7 @@
 # noinspection PyShadowingNames
 
 from .analytics import Analytics
+from .helper_functions import reload_menu_countdown
 from .user_database import UserDatabase
 from .habit import Habit
 import os
@@ -162,10 +163,12 @@ class HabitTracker:
             print("""You don't have any habits yet.
             Please register a new habit!
             """)
+            reload_menu_countdown()
             return # Return to the habits menu
 
         # Display all habits with numbering
         while True:
+            os.system('cls' if os.name == 'nt' else 'clear')
             print("\n- - - My Habits - - -")
             for idx, habit in enumerate(self.logged_in_user.habits, 1): # Start indexing at 1, instead of default 0
                 print(f"{idx}. {habit.name} ({habit.frequency})")
@@ -189,8 +192,10 @@ class HabitTracker:
                     break # Return to My Habits menu
                 else:
                     print(f"Please enter a number between 1 and {back_option}!") # Handle invalid int input
+                    reload_menu_countdown()
             else:
                 print("Sorry, invalid input. Please try again!") # Handle invalid input and re-run the loop
+                reload_menu_countdown()
 
     def list_daily_habits(self):
         """
@@ -204,22 +209,32 @@ class HabitTracker:
 
         # Check if there are no daily habits
         if not daily_habits:
-            print("\nYou don't have any daily habits yet!")
-
-            # Ask the user if they want to create a daily habit
             while True:
-                choice = input("Would you like to register a new daily habit? (yes/no): ").strip()
+                os.system('cls' if os.name == 'nt' else 'clear')
+                print("You don't have any daily habits yet!")
+                time.sleep(1)
+                # Ask the user if they want to create a daily habit or return to the previous menu
+                choice = input("""Please chose between 1 or 2:
+                1. Create a new daily habit
+                2. Back to My Habits menu
+                """).strip()
 
-                if choice == "yes":
-                    self.register_new_habit(frequency_preset = "daily")
-                    return
-                elif choice == "no":
-                    return # Return to My Habits menu
+                if choice.isdigit():
+                    if choice == "1":
+                        self.register_new_habit(frequency_preset="daily")
+                        return
+                    elif choice == "2":
+                        return  # Return to My Habits menu
+                    else:
+                        print("Please enter 1 or 2!")
+                        reload_menu_countdown()
                 else:
-                    print("Sorry, invalid option. Please enter 'yes' or 'no'!")
+                    print("Sorry, invalid input. Please try again!")
+                    reload_menu_countdown()
 
         # Display daily habits with numbering
         while True:
+            os.system('cls' if os.name == 'nt' else 'clear')
             print("\n- - - Daily Habits - - -")
             for idx, habit in enumerate(daily_habits, 1): # Start indexing at 1
                 print(f"{idx}. {habit.name}")
@@ -244,8 +259,10 @@ class HabitTracker:
                     break # Return to My Habits menu
                 else:
                     print(f"Please enter a number between 1 and {back_option}!") # Handle invalid int input
+                    reload_menu_countdown()
             else:
                 print("Sorry, invalid input. Please try again!") # Handle general invalid input and re-run the loop
+                reload_menu_countdown()
 
     def list_weekly_habits(self):
         """
@@ -259,22 +276,32 @@ class HabitTracker:
 
         # Check if there are no daily habits
         if not weekly_habits:
-            print("\nYou don't have any weekly habits yet!")
-
-            # Ask the user if they want to create a weekly habit
             while True:
-                choice = input("Would you like to register a new weekly habit? (yes/no): ").strip()
+                os.system('cls' if os.name == 'nt' else 'clear')
+                print("You don't have any weekly habits yet!")
+                time.sleep(1)
+                # Ask the user if they want to create a weekly habit or return to the previous menu
+                choice = input("""Please chose between 1 or 2:
+                1. Create a new weekly habit
+                2. Back to My Habits menu
+                """).strip()
 
-                if choice == "yes":
-                    self.register_new_habit(frequency_preset="weekly")
-                    return
-                elif choice == "no":
-                    return  # Return to My Habits menu
+                if choice.isdigit():
+                    if choice == "1":
+                        self.register_new_habit(frequency_preset="weekly")
+                        return
+                    elif choice == "2":
+                        return  # Return to My Habits menu
+                    else:
+                        print("Please enter 1 or 2!")
+                        reload_menu_countdown()
                 else:
-                    print("Sorry, invalid option. Please enter 'yes' or 'no'!")
+                    print("Sorry, invalid input. Please try again!")
+                    reload_menu_countdown()
 
         # Display weekly habits with numbering
         while True:
+            os.system('cls' if os.name == 'nt' else 'clear')
             print("\n- - - Weekly Habits - - -")
             for idx, habit in enumerate(weekly_habits, 1):  # Start indexing at 1
                 print(f"{idx}. {habit.name}")
@@ -299,8 +326,10 @@ class HabitTracker:
                     break  # Return to My Habits menu
                 else:
                     print(f"Please enter a number between 1 and {back_option}!")  # Handle invalid int input
+                    reload_menu_countdown()
             else:
                 print("Sorry, invalid input. Please try again!")  # Handle general invalid input and re-run the loop
+                reload_menu_countdown()
 
     def habit_detail_menu(self, habit):
         """Shows detail menu for a selected habit and allows for completion/analysis."""
@@ -324,24 +353,10 @@ class HabitTracker:
                     break
                 else:
                     print("Please enter a number between 1 and 4!")
-                    time.sleep(1)
-                    print("""Reloading Menu...
-                    3
-                    """)
-                    time.sleep(1)
-                    print("2")
-                    time.sleep(1)
-                    print("1")
+                    reload_menu_countdown()
             else:
                 print("Sorry, invalid input. Please try again!")
-                time.sleep(1)
-                print("""Reloading Menu...
-                3
-                """)
-                time.sleep(1)
-                print("2")
-                time.sleep(1)
-                print("1")
+                reload_menu_countdown()
 
         # I. My habits
         # II. My Analytics

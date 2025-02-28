@@ -4,7 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c616fd42-f0e1-480b-874e-850f1a6b95b5" name="Changes" comment="Implement habit_detail_menu() in HabitTracker class">
+    <list default="true" id="c616fd42-f0e1-480b-874e-850f1a6b95b5" name="Changes" comment="Refactor to reload_menu_countdown() in helper_functions.py and apply to all methods in HabitTracker">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/corpus_meta_lunae/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/corpus_meta_lunae/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -71,22 +72,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1739222621736</updated>
-    </task>
-    <task id="LOCAL-00052" summary="Implement list_all_habits() in Analytics class">
-      <option name="closed" value="true" />
-      <created>1740179409132</created>
-      <option name="number" value="00052" />
-      <option name="presentableId" value="LOCAL-00052" />
-      <option name="project" value="LOCAL" />
-      <updated>1740179409132</updated>
-    </task>
-    <task id="LOCAL-00053" summary="Implement list_habits_by_periodicity() in Analytics class">
-      <option name="closed" value="true" />
-      <created>1740220680517</created>
-      <option name="number" value="00053" />
-      <option name="presentableId" value="LOCAL-00053" />
-      <option name="project" value="LOCAL" />
-      <updated>1740220680517</updated>
     </task>
     <task id="LOCAL-00054" summary="Add print statements to methods in Analytics class">
       <option name="closed" value="true" />
@@ -464,7 +449,23 @@
       <option name="project" value="LOCAL" />
       <updated>1740757492041</updated>
     </task>
-    <option name="localTasksCounter" value="101" />
+    <task id="LOCAL-00101" summary="Add reload screen in habit_detail_menu() with visual countdown so the user can read feedback before reload">
+      <option name="closed" value="true" />
+      <created>1740758098944</created>
+      <option name="number" value="00101" />
+      <option name="presentableId" value="LOCAL-00101" />
+      <option name="project" value="LOCAL" />
+      <updated>1740758098944</updated>
+    </task>
+    <task id="LOCAL-00102" summary="Refactor to reload_menu_countdown() in helper_functions.py and apply to all methods in HabitTracker">
+      <option name="closed" value="true" />
+      <created>1740758745515</created>
+      <option name="number" value="00102" />
+      <option name="presentableId" value="LOCAL-00102" />
+      <option name="project" value="LOCAL" />
+      <updated>1740758745515</updated>
+    </task>
+    <option name="localTasksCounter" value="103" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -491,8 +492,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Change terminology in habits table and Habits class to ease coding logic" />
-    <MESSAGE value="Ideas for main menu, rename to main.py" />
     <MESSAGE value="Ideas for main menu, rename to main.py" />
     <MESSAGE value="Implement start() in HabitTracker class" />
     <MESSAGE value="Fix select_user() in UserDatabase to work as intended + Fix logic in helper functions" />
@@ -516,6 +515,8 @@
     <MESSAGE value="Update register_new_habit() to accept a frequency preset in HabitTracker" />
     <MESSAGE value="Implement list_weekly_habits() and Fix in list_daily_habits() in HabitTracker" />
     <MESSAGE value="Implement habit_detail_menu() in HabitTracker class" />
-    <option name="LAST_COMMIT_MESSAGE" value="Implement habit_detail_menu() in HabitTracker class" />
+    <MESSAGE value="Add reload screen in habit_detail_menu() with visual countdown so the user can read feedback before reload" />
+    <MESSAGE value="Refactor to reload_menu_countdown() in helper_functions.py and apply to all methods in HabitTracker" />
+    <option name="LAST_COMMIT_MESSAGE" value="Refactor to reload_menu_countdown() in helper_functions.py and apply to all methods in HabitTracker" />
   </component>
 </project>
