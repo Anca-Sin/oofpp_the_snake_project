@@ -57,17 +57,18 @@ class HabitTracker:
             4. Exit
             """)
 
-            choice = input("Enter your choice (1-4): ").strip()
+            main_menu_choice = input("Enter your choice (1-4): ").strip()
 
-            if choice == "1":
-                self.habits_menu()
-            elif choice == "2":
-                self.analytics_menu()
-            elif choice == "3":
-                self.logged_in_user = self.select_user()
-                self.load_user_data()
-            elif choice == "4":
-                print("Until next time! Stay on track!")
+            if main_menu_choice.isdigit():
+                if main_menu_choice == "1":
+                    self.habits_menu()
+                elif main_menu_choice == "2":
+                    self.analytics_menu()
+                elif main_menu_choice == "3":
+                    self.logged_in_user = self.select_user()
+                    self.load_user_data()
+                elif main_menu_choice == "4":
+                    print("Until next time! Stay on track!")
             else:
                 print("Sorry, invalid option. Please try again!")
 
@@ -82,18 +83,19 @@ class HabitTracker:
             5. Back to main menu
             """)
 
-            choice = input("Enter your choice (1-5): ")
+            habits_menu_choice = input("Enter your choice (1-5): ").strip()
 
-            if choice == "1":
-                self.register_new_habit()
-            elif choice == "2":
-                self.list_habits()
-            elif choice == "3":
-                self.daily_habits()
-            elif choice == "4":
-                self.weekly_habits()
-            elif choice == "5":
-                break # Return to the main_menu's loop
+            if habits_menu_choice.isdigit():
+                if habits_menu_choice == "1":
+                    self.register_new_habit()
+                elif habits_menu_choice == "2":
+                    self.list_habits()
+                elif habits_menu_choice == "3":
+                    self.daily_habits()
+                elif habits_menu_choice == "4":
+                    self.weekly_habits()
+                elif habits_menu_choice == "5":
+                    break # Return to the main_menu's loop
             else:
                 print("Sorry, invalid option. Please try again!")
 
@@ -110,16 +112,17 @@ class HabitTracker:
             4. Back to main menu
             """)
 
-            choice = input("Enter your choice (1-4): ")
+            analytics_menu_choice = input("Enter your choice (1-4): ").strip()
 
-            if choice == "1":
-                analytics.longest_streak_all_habits()
-            elif choice == "2":
-                self.most_completed_habit()
-            elif choice == "3":
-                self.least_completed_habit()
-            elif choice == "4":
-                break
+            if analytics_menu_choice.isdigit():
+                if analytics_menu_choice == "1":
+                    analytics.longest_streak_all_habits()
+                elif analytics_menu_choice == "2":
+                    self.most_completed_habit()
+                elif analytics_menu_choice == "3":
+                    self.least_completed_habit()
+                elif analytics_menu_choice == "4":
+                    break
             else:
                 print("Sorry, invalid option. Please try again!")
 
