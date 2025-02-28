@@ -4,7 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c616fd42-f0e1-480b-874e-850f1a6b95b5" name="Changes" comment="Fix list_all_habits() analytics to return list of habits instead of str + Fix random typos">
+    <list default="true" id="c616fd42-f0e1-480b-874e-850f1a6b95b5" name="Changes" comment="Fix methods in main.py to align to the same cli">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/corpus_meta_lunae/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/corpus_meta_lunae/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -71,22 +72,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1739222621736</updated>
-    </task>
-    <task id="LOCAL-00063" summary="Implement longest_streak_all_habits() in Analytics class">
-      <option name="closed" value="true" />
-      <created>1740235556833</created>
-      <option name="number" value="00063" />
-      <option name="presentableId" value="LOCAL-00063" />
-      <option name="project" value="LOCAL" />
-      <updated>1740235556833</updated>
-    </task>
-    <task id="LOCAL-00064" summary="Implement longest_streak_all_habits() in Analytics class">
-      <option name="closed" value="true" />
-      <created>1740235647827</created>
-      <option name="number" value="00064" />
-      <option name="presentableId" value="LOCAL-00064" />
-      <option name="project" value="LOCAL" />
-      <updated>1740235647827</updated>
     </task>
     <task id="LOCAL-00065" summary="Implement longest_streak_all_habits() in Analytics class">
       <option name="closed" value="true" />
@@ -464,7 +449,23 @@
       <option name="project" value="LOCAL" />
       <updated>1740784640121</updated>
     </task>
-    <option name="localTasksCounter" value="112" />
+    <task id="LOCAL-00112" summary="Define my_habit_tracker() in main.py">
+      <option name="closed" value="true" />
+      <created>1740785178259</created>
+      <option name="number" value="00112" />
+      <option name="presentableId" value="LOCAL-00112" />
+      <option name="project" value="LOCAL" />
+      <updated>1740785178259</updated>
+    </task>
+    <task id="LOCAL-00113" summary="Fix methods in main.py to align to the same cli">
+      <option name="closed" value="true" />
+      <created>1740786523449</created>
+      <option name="number" value="00113" />
+      <option name="presentableId" value="LOCAL-00113" />
+      <option name="project" value="LOCAL" />
+      <updated>1740786523449</updated>
+    </task>
+    <option name="localTasksCounter" value="114" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -491,8 +492,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Implement save_user() in UserDatabase" />
-    <MESSAGE value="Fix start() in HabitTracker class" />
     <MESSAGE value="Implement select_user() in HabitTracker class" />
     <MESSAGE value="Implement main_menu() in HabitTracker class" />
     <MESSAGE value="Implement habits_menu() in HabitTracker class" />
@@ -516,6 +515,8 @@
     <MESSAGE value="Add reload screen in all current main menus" />
     <MESSAGE value="Add reload screen in all current main menus" />
     <MESSAGE value="Fix list_all_habits() analytics to return list of habits instead of str + Fix random typos" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fix list_all_habits() analytics to return list of habits instead of str + Fix random typos" />
+    <MESSAGE value="Define my_habit_tracker() in main.py" />
+    <MESSAGE value="Fix methods in main.py to align to the same cli" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fix methods in main.py to align to the same cli" />
   </component>
 </project>
