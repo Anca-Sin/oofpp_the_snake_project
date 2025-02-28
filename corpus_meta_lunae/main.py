@@ -38,7 +38,7 @@ class HabitTracker:
 
     def select_user(self):
         """
-        Prompts the user to select or create a username.
+        Prompts the user to select or create/delete a username.
 
         :return: The selected User object.
         """
@@ -52,26 +52,30 @@ class HabitTracker:
         """Displays the main menu and handles user navigation."""
         while True:
             print("""\n- - - Main Menu - - -
-            1. My Habits
-            2. My Analytics
-            3. Select a different user
+            1. My Habit Tracker
+            2. Select a different user
+            3. Delete this user
             4. Exit
             """)
 
-            main_menu_choice = input("Enter your choice (1-4): ").strip()
+            choice = input("Enter your choice (1-4): ").strip()
 
-            if main_menu_choice.isdigit():
-                if main_menu_choice == "1":
-                    self.habits_menu()
-                elif main_menu_choice == "2":
-                    self.analytics_menu()
-                elif main_menu_choice == "3":
+            if choice.isdigit():
+                if choice == "1":
+                    self.my_habit_tracker()
+                elif choice == "2":
                     self.logged_in_user = self.select_user()
                     self.load_user_data()
-                elif main_menu_choice == "4":
-                    print("Until next time! Stay on track!")
+                elif choice == "3":
+                    userdatabase.delete_user()
+                elif choice == "4":
+                    print("Until next time! Do your best to stay on track!")
             else:
                 print("Sorry, invalid option. Please try again!")
+
+    def my_habit_tracker(self):
+        self.habits_menu()
+        self.analytics_menu()
 
     def habits_menu(self):
         """Displays the habits menu and handles user navigation."""
@@ -113,16 +117,16 @@ class HabitTracker:
             4. Back to main menu
             """)
 
-            analytics_menu_choice = input("Enter your choice (1-4): ").strip()
+            choice = input("Enter your choice (1-4): ").strip()
 
-            if analytics_menu_choice.isdigit():
-                if analytics_menu_choice == "1":
+            if choice.isdigit():
+                if choice == "1":
                     analytics.longest_streak_all_habits()
-                elif analytics_menu_choice == "2":
-                    self.most_completed_habit()
-                elif analytics_menu_choice == "3":
-                    self.least_completed_habit()
-                elif analytics_menu_choice == "4":
+                elif choice == "2":
+                    analytics.most_completed_habit()
+                elif choice == "3":
+                    analytics.least_completed_habit()
+                elif choice == "4":
                     break
             else:
                 print("Sorry, invalid option. Please try again!")
@@ -358,27 +362,17 @@ class HabitTracker:
                 print("Sorry, invalid input. Please try again!")
                 reload_menu_countdown()
 
-        # I. My habits
-        # II. My Analytics
-        # III. Select a different user
-        #
-        # I. My habits
-        #     1. Register New Habit  *
-        #     2. List All My Habits  *
-        #     3. My Daily Habits     *
-        #     4. My Weekly Habits    *
-        #
-        #         * when selecting a Habit:
-        #             - {habit} Completions: - Mark as complete: - today
-        #                                                        - a previous date
-        #                                    - Remove a completion
-        #             - {habit} Analytics: - creation date
-        #                                  - current streak
-        #                                  - longest streak
-        #                                  - average streak length
-        #                                  - all-time completions count
-        #
-        # II. My Analytics
-        #     1. Longest streak all habits
-        #     2. Most completed habit
-        #     3. Least completed habit
+    def complete_habit(self):
+        if choice == "1":
+            complete_habit_today()
+            complete_habit_past()
+            delete_completion()
+            delete_habit()
+
+    def view_habit_analytics(self):
+        if choice == "1":
+            get_current_streak()
+            get_longest_streak_habit()
+            average_streak_lenght()
+            all_time_completions_count()
+            creation_date()

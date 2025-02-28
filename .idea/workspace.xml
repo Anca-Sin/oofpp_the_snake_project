@@ -4,9 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c616fd42-f0e1-480b-874e-850f1a6b95b5" name="Changes" comment="Refactor to reload_menu_countdown() in helper_functions.py and apply to all methods in HabitTracker">
+    <list default="true" id="c616fd42-f0e1-480b-874e-850f1a6b95b5" name="Changes" comment="Temporary structuring">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/corpus_meta_lunae/analytics.py" beforeDir="false" afterPath="$PROJECT_DIR$/corpus_meta_lunae/analytics.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/corpus_meta_lunae/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/corpus_meta_lunae/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/corpus_meta_lunae/user_database.py" beforeDir="false" afterPath="$PROJECT_DIR$/corpus_meta_lunae/user_database.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -72,30 +74,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1739222621736</updated>
-    </task>
-    <task id="LOCAL-00054" summary="Add print statements to methods in Analytics class">
-      <option name="closed" value="true" />
-      <created>1740222028131</created>
-      <option name="number" value="00054" />
-      <option name="presentableId" value="LOCAL-00054" />
-      <option name="project" value="LOCAL" />
-      <updated>1740222028131</updated>
-    </task>
-    <task id="LOCAL-00055" summary="Add print statements to methods in Analytics class">
-      <option name="closed" value="true" />
-      <created>1740222098457</created>
-      <option name="number" value="00055" />
-      <option name="presentableId" value="LOCAL-00055" />
-      <option name="project" value="LOCAL" />
-      <updated>1740222098457</updated>
-    </task>
-    <task id="LOCAL-00056" summary="Fix current and longest streak logic in Streaks class">
-      <option name="closed" value="true" />
-      <created>1740223080995</created>
-      <option name="number" value="00056" />
-      <option name="presentableId" value="LOCAL-00056" />
-      <option name="project" value="LOCAL" />
-      <updated>1740223080995</updated>
     </task>
     <task id="LOCAL-00057" summary="Review current and longest streak logic in Streaks class for further implementation in the Analytics class">
       <option name="closed" value="true" />
@@ -465,7 +443,31 @@
       <option name="project" value="LOCAL" />
       <updated>1740758745515</updated>
     </task>
-    <option name="localTasksCounter" value="103" />
+    <task id="LOCAL-00103" summary="Refactor to reload_menu_countdown() in helper_functions.py and apply to list_daily/weekly_habits() and list_habits() in HabitTracker">
+      <option name="closed" value="true" />
+      <created>1740760625579</created>
+      <option name="number" value="00103" />
+      <option name="presentableId" value="LOCAL-00103" />
+      <option name="project" value="LOCAL" />
+      <updated>1740760625579</updated>
+    </task>
+    <task id="LOCAL-00104" summary="Temporary structuring">
+      <option name="closed" value="true" />
+      <created>1740780378789</created>
+      <option name="number" value="00104" />
+      <option name="presentableId" value="LOCAL-00104" />
+      <option name="project" value="LOCAL" />
+      <updated>1740780378789</updated>
+    </task>
+    <task id="LOCAL-00105" summary="Temporary structuring">
+      <option name="closed" value="true" />
+      <created>1740781316935</created>
+      <option name="number" value="00105" />
+      <option name="presentableId" value="LOCAL-00105" />
+      <option name="project" value="LOCAL" />
+      <updated>1740781316935</updated>
+    </task>
+    <option name="localTasksCounter" value="106" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -492,8 +494,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Ideas for main menu, rename to main.py" />
-    <MESSAGE value="Implement start() in HabitTracker class" />
     <MESSAGE value="Fix select_user() in UserDatabase to work as intended + Fix logic in helper functions" />
     <MESSAGE value="Fix select_user() in UserDatabase to work as intended + Fix logic in helper functions" />
     <MESSAGE value="Fix how confirm_input logic applies in the project" />
@@ -517,6 +517,8 @@
     <MESSAGE value="Implement habit_detail_menu() in HabitTracker class" />
     <MESSAGE value="Add reload screen in habit_detail_menu() with visual countdown so the user can read feedback before reload" />
     <MESSAGE value="Refactor to reload_menu_countdown() in helper_functions.py and apply to all methods in HabitTracker" />
-    <option name="LAST_COMMIT_MESSAGE" value="Refactor to reload_menu_countdown() in helper_functions.py and apply to all methods in HabitTracker" />
+    <MESSAGE value="Refactor to reload_menu_countdown() in helper_functions.py and apply to list_daily/weekly_habits() and list_habits() in HabitTracker" />
+    <MESSAGE value="Temporary structuring" />
+    <option name="LAST_COMMIT_MESSAGE" value="Temporary structuring" />
   </component>
 </project>

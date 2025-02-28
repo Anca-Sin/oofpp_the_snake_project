@@ -170,14 +170,11 @@ class UserDatabase:
 
         return selected_user
 
-    # def save_habits(self, user: User) -> None:
-    #     """Saves or updates the user's habits in the db."""
-    #     connection = self._connect()
-    #     cursor = connection.cursor()
-    #
-    #     for habit in user.habits:
-    #         # Convert completion_dates list into a comma-separated string
-    #         checked_off_dates = ",".join(str(date) for date in habit.completion_dates)
-    #
-    #         # Count how many times the habit has been completed
-    #         completions_count = len(habit.completion_dates)
+    def delete_user(self):
+
+    def save_habits(self, user: User) -> None:
+
+    def complete_habit_today()
+    def complete_habit_past()
+    def delete_completion()
+    def delete_habit()

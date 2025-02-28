@@ -81,3 +81,11 @@ class Analytics:
         )
 
         return habit_name, habit.streaks.get_longest_streak()
+
+    def most_completed_habit(self):
+
+    def least_completed_habit(self):
+
+    def average_streak_lenght(self)
+
+    def all_time_completions_count(self)
