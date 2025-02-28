@@ -194,9 +194,7 @@ class HabitTracker:
                     break
                 elif choice_num == back_option:
                     break # Return to My Habits menu
-                else:
-                    print(f"Please enter a number between 1 and {back_option}!") # Handle invalid int input
-                    reload_menu_countdown()
+
             else:
                 print("Sorry, invalid input. Please try again!") # Handle invalid input and re-run the loop
                 reload_menu_countdown()
@@ -229,9 +227,7 @@ class HabitTracker:
                         return
                     elif choice == "2":
                         return  # Return to My Habits menu
-                    else:
-                        print("Please enter 1 or 2!")
-                        reload_menu_countdown()
+
                 else:
                     print("Sorry, invalid input. Please try again!")
                     reload_menu_countdown()
@@ -261,9 +257,7 @@ class HabitTracker:
                     break
                 elif choice_num == back_option:
                     break # Return to My Habits menu
-                else:
-                    print(f"Please enter a number between 1 and {back_option}!") # Handle invalid int input
-                    reload_menu_countdown()
+
             else:
                 print("Sorry, invalid input. Please try again!") # Handle general invalid input and re-run the loop
                 reload_menu_countdown()
@@ -296,9 +290,7 @@ class HabitTracker:
                         return
                     elif choice == "2":
                         return  # Return to My Habits menu
-                    else:
-                        print("Please enter 1 or 2!")
-                        reload_menu_countdown()
+
                 else:
                     print("Sorry, invalid input. Please try again!")
                     reload_menu_countdown()
@@ -355,9 +347,7 @@ class HabitTracker:
                     self.view_habit_analytics(habit)
                 elif choice == "3":
                     break
-                else:
-                    print("Please enter a number between 1 and 4!")
-                    reload_menu_countdown()
+
             else:
                 print("Sorry, invalid input. Please try again!")
                 reload_menu_countdown()
