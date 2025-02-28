@@ -301,6 +301,31 @@ class HabitTracker:
             else:
                 print("Sorry, invalid input. Please try again!")  # Handle general invalid input and re-run the loop
 
+    def habit_detail_menu(self, habit):
+        """Shows detail menu for a selected habit and allows for completion/analysis."""
+        while True:
+            print(f"""\n- - - {habit.name}'s Details - - -
+            1. Completion
+            2. Delete a completion
+            3. {habit.name}'s Analytics
+            4. Back            
+            """)
+
+            choice = input("Enter your choice (1-4): ").strip()
+
+            if choice.isdigit():
+                if choice == "1":
+                    self.complete_habit(habit)
+                if choice == "2":
+                    self.view_habit_analytics(habit)
+                elif choice == "3":
+                    break
+                else:
+                    print("Please enter a number between 1 and 4!")
+            else:
+                print("Sorry, invalid input. Please try again!")
+
+
         # I. My habits
         # II. My Analytics
         # III. Select a different user
