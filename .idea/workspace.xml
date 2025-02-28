@@ -4,9 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c616fd42-f0e1-480b-874e-850f1a6b95b5" name="Changes" comment="Add reload screen in all main menus">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/corpus_meta_lunae/analytics.py" beforeDir="false" afterPath="$PROJECT_DIR$/corpus_meta_lunae/analytics.py" afterDir="false" />
+    <list default="true" id="c616fd42-f0e1-480b-874e-850f1a6b95b5" name="Changes" comment="Fix list_all_habits() analytics to return list of habits instead of str + Fix random typos">
       <change beforePath="$PROJECT_DIR$/corpus_meta_lunae/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/corpus_meta_lunae/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -73,22 +71,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1739222621736</updated>
-    </task>
-    <task id="LOCAL-00061" summary="Implement list_habits_by_periodicity() in Analytics class">
-      <option name="closed" value="true" />
-      <created>1740231799066</created>
-      <option name="number" value="00061" />
-      <option name="presentableId" value="LOCAL-00061" />
-      <option name="project" value="LOCAL" />
-      <updated>1740231799067</updated>
-    </task>
-    <task id="LOCAL-00062" summary="Implement longest_streak_for_habit() in Analytics class">
-      <option name="closed" value="true" />
-      <created>1740233622520</created>
-      <option name="number" value="00062" />
-      <option name="presentableId" value="LOCAL-00062" />
-      <option name="project" value="LOCAL" />
-      <updated>1740233622520</updated>
     </task>
     <task id="LOCAL-00063" summary="Implement longest_streak_all_habits() in Analytics class">
       <option name="closed" value="true" />
@@ -466,7 +448,23 @@
       <option name="project" value="LOCAL" />
       <updated>1740782733859</updated>
     </task>
-    <option name="localTasksCounter" value="110" />
+    <task id="LOCAL-00110" summary="Fix list_all_habits() analytics to return list of habits instead of str + Fix random typos">
+      <option name="closed" value="true" />
+      <created>1740784511430</created>
+      <option name="number" value="00110" />
+      <option name="presentableId" value="LOCAL-00110" />
+      <option name="project" value="LOCAL" />
+      <updated>1740784511430</updated>
+    </task>
+    <task id="LOCAL-00111" summary="Fix list_all_habits() analytics to return list of habits instead of str + Fix random typos">
+      <option name="closed" value="true" />
+      <created>1740784640121</created>
+      <option name="number" value="00111" />
+      <option name="presentableId" value="LOCAL-00111" />
+      <option name="project" value="LOCAL" />
+      <updated>1740784640121</updated>
+    </task>
+    <option name="localTasksCounter" value="112" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -493,7 +491,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Fix warnings" />
     <MESSAGE value="Implement save_user() in UserDatabase" />
     <MESSAGE value="Fix start() in HabitTracker class" />
     <MESSAGE value="Implement select_user() in HabitTracker class" />
@@ -518,6 +515,7 @@
     <MESSAGE value="Remove extra else statements after all choice.isdigit() menu checks - simplify code, achieves same results" />
     <MESSAGE value="Add reload screen in all current main menus" />
     <MESSAGE value="Add reload screen in all current main menus" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add reload screen in all current main menus" />
+    <MESSAGE value="Fix list_all_habits() analytics to return list of habits instead of str + Fix random typos" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fix list_all_habits() analytics to return list of habits instead of str + Fix random typos" />
   </component>
 </project>

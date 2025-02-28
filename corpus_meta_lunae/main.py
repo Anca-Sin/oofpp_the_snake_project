@@ -76,14 +76,34 @@ class HabitTracker:
                 reload_menu_countdown()
 
     def my_habit_tracker(self):
-        self.habits_menu()
-        self.analytics_menu()
+        """Displays the habit tracker menu and handles user navigation."""
+        while True:
+            os.system('cls' if os.name == 'nt' else 'clear')
+            print("""- - - My Habit Tracker - - -
+            
+            1. My Habits
+            2. My Analytics
+            3. Back to Main Menu
+            """)
+
+            choice = input("\nEnter your choice (1-3): ").strip()
+
+            if choice.isdigit():
+                if choice == "1":
+                    self.habits_menu()
+                elif choice == "2":
+                    self.analytics_menu()
+                elif choice == "3":
+                   break # Return to the main_menu's loop
+            else:
+                print("Sorry, invalid option. Please try again!")
+                reload_menu_countdown()
 
     def habits_menu(self):
         """Displays the habits menu and handles user navigation."""
         while True:
             os.system('cls' if os.name == 'nt' else 'clear')
-            print("""\n- - - My Habits - - -
+            print("""- - - My Habits - - -
             1. Register new habit
             2. List all habits
             3. Daily habits
@@ -91,18 +111,18 @@ class HabitTracker:
             5. Back to main menu
             """)
 
-            habits_menu_choice = input("Enter your choice (1-5): ").strip()
+            choice = input("Enter your choice (1-5): ").strip()
 
-            if habits_menu_choice.isdigit():
-                if habits_menu_choice == "1":
+            if choice.isdigit():
+                if choice == "1":
                     self.register_new_habit()
-                elif habits_menu_choice == "2":
+                elif choice == "2":
                     self.list_habits()
-                elif habits_menu_choice == "3":
+                elif choice == "3":
                     self.list_daily_habits()
-                elif habits_menu_choice == "4":
+                elif choice == "4":
                     self.list_weekly_habits()
-                elif habits_menu_choice == "5":
+                elif choice == "5":
                     break # Return to the main_menu's loop
             else:
                 print("Sorry, invalid option. Please try again!")
