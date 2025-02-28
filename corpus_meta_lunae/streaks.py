@@ -37,7 +37,7 @@ class Streaks:
 
         return False
 
-    def calculate_current_streak(self, frequency: str, completions: List[date]) -> int:
+    def get_current_streak(self, frequency: str, completions: List[date]) -> int:
         """
         Calculates current streak based on habit frequency and completion dates.
 
