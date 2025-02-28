@@ -4,7 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c616fd42-f0e1-480b-874e-850f1a6b95b5" name="Changes" comment="Remove extra else statements after all choice.isdigit() menu checks - simplify code, achieves same results">
+    <list default="true" id="c616fd42-f0e1-480b-874e-850f1a6b95b5" name="Changes" comment="Add reload screen in all main menus">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/corpus_meta_lunae/analytics.py" beforeDir="false" afterPath="$PROJECT_DIR$/corpus_meta_lunae/analytics.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/corpus_meta_lunae/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/corpus_meta_lunae/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -71,14 +73,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1739222621736</updated>
-    </task>
-    <task id="LOCAL-00060" summary="Fix warnings in habit.py">
-      <option name="closed" value="true" />
-      <created>1740230121747</created>
-      <option name="number" value="00060" />
-      <option name="presentableId" value="LOCAL-00060" />
-      <option name="project" value="LOCAL" />
-      <updated>1740230121747</updated>
     </task>
     <task id="LOCAL-00061" summary="Implement list_habits_by_periodicity() in Analytics class">
       <option name="closed" value="true" />
@@ -464,7 +458,15 @@
       <option name="project" value="LOCAL" />
       <updated>1740782454372</updated>
     </task>
-    <option name="localTasksCounter" value="109" />
+    <task id="LOCAL-00109" summary="Add reload screen in all main menus">
+      <option name="closed" value="true" />
+      <created>1740782733859</created>
+      <option name="number" value="00109" />
+      <option name="presentableId" value="LOCAL-00109" />
+      <option name="project" value="LOCAL" />
+      <updated>1740782733859</updated>
+    </task>
+    <option name="localTasksCounter" value="110" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -491,8 +493,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Fix how confirm_input logic applies throughout the project" />
-    <MESSAGE value="Fix how confirm_input logic applies throughout the project" />
     <MESSAGE value="Fix warnings" />
     <MESSAGE value="Implement save_user() in UserDatabase" />
     <MESSAGE value="Fix start() in HabitTracker class" />
@@ -516,6 +516,8 @@
     <MESSAGE value="Remove extra else statements after all choice.isdigit() in menu checks - simplify code, achieves same results" />
     <MESSAGE value="Remove extra else statements after all choice.isdigit() menu checks - simplify code, achieves same results" />
     <MESSAGE value="Remove extra else statements after all choice.isdigit() menu checks - simplify code, achieves same results" />
-    <option name="LAST_COMMIT_MESSAGE" value="Remove extra else statements after all choice.isdigit() menu checks - simplify code, achieves same results" />
+    <MESSAGE value="Add reload screen in all current main menus" />
+    <MESSAGE value="Add reload screen in all current main menus" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add reload screen in all current main menus" />
   </component>
 </project>

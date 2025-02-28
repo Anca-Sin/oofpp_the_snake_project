@@ -68,7 +68,7 @@ class HabitTracker:
                     self.logged_in_user = self.select_user()
                     self.load_user_data()
                 elif choice == "3":
-                    userdatabase.delete_user()
+                    self.db.delete_user()
                 elif choice == "4":
                     print("Until next time! Do your best to stay on track!")
             else:

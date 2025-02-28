@@ -24,11 +24,11 @@ class Analytics:
         :return: List of habit names.
         """
         # Using list comprehension
-        # return [habit.name for habit in self.user.habits]
+        # return self.user.habits
 
         # Using FPP
         # Map extracts the "name" of each habit from self.user.habits and returns the result as a list
-        all_habits_list = list(map(lambda habit: habit.name, self.user.habits))
+        all_habits_list = list(map(lambda habit: habit, self.user.habits))
         return all_habits_list
 
     # Task requirement: "return a list of all habits with the same periodicity"
@@ -86,6 +86,6 @@ class Analytics:
 
     def least_completed_habit(self):
 
-    def average_streak_lenght(self)
+    def average_streak_length(self)
 
     def all_time_completions_count(self)
