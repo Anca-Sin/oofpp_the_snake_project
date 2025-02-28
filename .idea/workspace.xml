@@ -4,11 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c616fd42-f0e1-480b-874e-850f1a6b95b5" name="Changes" comment="Implement list_daily_habits() in HabitTracker">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/corpus_meta_lunae/analytics.py" beforeDir="false" afterPath="$PROJECT_DIR$/corpus_meta_lunae/analytics.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/corpus_meta_lunae/streaks.py" beforeDir="false" afterPath="$PROJECT_DIR$/corpus_meta_lunae/streaks.py" afterDir="false" />
-    </list>
+    <list default="true" id="c616fd42-f0e1-480b-874e-850f1a6b95b5" name="Changes" comment="Fix Analytics methods to align with their use in main.py (remove print functions, fix annotation and logic) + Fix annotation in Streaks" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -73,14 +69,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1739222621736</updated>
-    </task>
-    <task id="LOCAL-00048" summary="Add DataAnalytics class and attributes">
-      <option name="closed" value="true" />
-      <created>1740176407045</created>
-      <option name="number" value="00048" />
-      <option name="presentableId" value="LOCAL-00048" />
-      <option name="project" value="LOCAL" />
-      <updated>1740176407045</updated>
     </task>
     <task id="LOCAL-00049" summary="Add DataAnalytics class and attributes">
       <option name="closed" value="true" />
@@ -466,7 +454,15 @@
       <option name="project" value="LOCAL" />
       <updated>1740751109266</updated>
     </task>
-    <option name="localTasksCounter" value="97" />
+    <task id="LOCAL-00097" summary="Fix Analytics methods to align with their use in main.py (remove print functions, fix annotation and logic) + Fix annotation in Streaks">
+      <option name="closed" value="true" />
+      <created>1740752543305</created>
+      <option name="number" value="00097" />
+      <option name="presentableId" value="LOCAL-00097" />
+      <option name="project" value="LOCAL" />
+      <updated>1740752543305</updated>
+    </task>
+    <option name="localTasksCounter" value="98" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -493,7 +489,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Fix logic in habits table: &quot;NOT NULL&quot; removed for completions and check_off_dates" />
     <MESSAGE value="Fix logic in habits table: completions and check_of_dates &quot;NOT NULL&quot; removed" />
     <MESSAGE value="Fix logic in habits table: completions and check_of_dates &quot;NOT NULL&quot; removed" />
     <MESSAGE value="Fix logic in streaks table: &quot;NOT NULL&quot; removed for all streaks" />
@@ -518,6 +513,7 @@
     <MESSAGE value="Fixes to main_menu, habits_menu, analytics_menu methods in HabitTracker class" />
     <MESSAGE value="Implement list_daily_habits() + fix list_habits() in HabitTracker" />
     <MESSAGE value="Implement list_daily_habits() in HabitTracker" />
-    <option name="LAST_COMMIT_MESSAGE" value="Implement list_daily_habits() in HabitTracker" />
+    <MESSAGE value="Fix Analytics methods to align with their use in main.py (remove print functions, fix annotation and logic) + Fix annotation in Streaks" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fix Analytics methods to align with their use in main.py (remove print functions, fix annotation and logic) + Fix annotation in Streaks" />
   </component>
 </project>

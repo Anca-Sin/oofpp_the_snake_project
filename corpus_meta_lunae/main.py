@@ -125,11 +125,19 @@ class HabitTracker:
             else:
                 print("Sorry, invalid option. Please try again!")
 
-    def register_new_habit(self):
+    def register_new_habit(self, frequency_preset=None):
         """Guides the user through a new habit creation."""
         new_habit = Habit()
         new_habit.habit_name()
-        new_habit.habit_frequency()
+
+        if frequency_preset:
+            # Use the frequency preset
+            new_habit.frequency = frequency_preset
+            print(f"Frequency automatically set to {frequency_preset}.")
+        else:
+            # Let the user chose the frequency
+            new_habit.habit_frequency()
+
         new_habit.creation_date()
 
         # Add the habit to the user's list
@@ -137,7 +145,7 @@ class HabitTracker:
 
         # Save to db
         self.db.save_habits(self.logged_in_user)
-        print(f"Habit creation process completed for {new_habit.name.title()}")
+        print(f"{new_habit.name} creation process completed!")
 
     def list_habits(self):
         """
