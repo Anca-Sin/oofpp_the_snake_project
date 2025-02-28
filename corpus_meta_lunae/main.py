@@ -137,6 +137,39 @@ class HabitTracker:
         self.db.save_habits(self.logged_in_user)
         print(f"Habit creation process completed for {new_habit.name.title()}")
 
+    def list_habits(self):
+        """Lists all habits and allows the user to select one for detailed view."""
+        if not self.logged_in_user.habits:
+            print("""You don't have any habits yet.
+            Please register a new habit!
+            """)
+            return # Return to the habits menu
+
+        while True:
+            print("\n- - - My Habits - - -")
+            for idx, habit in enumerate(self.logged_in_user.habits, 1): # Start indexing at 1, instead of default 0
+                print(f"{idx}. {habit.name} ({habit.frequency})")
+
+            habits_number = len(self.logged_in_user.habits)
+            # Add extra option to go back to previous menu at the end
+            print(f"{habits_number + 1}. Back to My Habits Menu")
+
+            habit_choice = input(f"Enter your choice (1-{habits_number + 1}): ")
+
+            if habit_choice.isdigit():
+                choice_num = int(habit_choice)
+                if 1 <= choice_num <= habits_number:
+                    self.habit_detail_menu(self.logged_in_user.habits[choice_num - 1]) # Adjust back to 0 indexing
+                    # Exit the loop after selecting a habit or returning from the detail menu
+                    break
+                elif choice_num == habits_number + 1:
+                    break # Return to My Habits menu
+            else:
+                print("Sorry, invalid option. Please try again!") # Returns to My Habits menu
+
+
+
+
         # I. My habits
         # II. My Analytics
         # III. Select a different user
