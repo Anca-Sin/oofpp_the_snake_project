@@ -220,7 +220,7 @@ class HabitTracker:
         # Display daily habits with numbering
         while True:
             print("\n- - - Daily Habits - - -")
-            for idx, habit in enumerate(self.logged_in_user.habits, 1): # Start indexing at 1
+            for idx, habit in enumerate(daily_habits, 1): # Start indexing at 1
                 print(f"{idx}. {habit.name}")
 
             habits_number = len(daily_habits)
@@ -245,6 +245,61 @@ class HabitTracker:
                     print(f"Please enter a number between 1 and {back_option}!") # Handle invalid int input
             else:
                 print("Sorry, invalid input. Please try again!") # Handle general invalid input and re-run the loop
+
+    def list_weekly_habits(self):
+        """
+        Lists only weekly habits and allows the user to select one for detailed view.
+        Uses the analytics module's functional programming methods.
+        If no weekly habit exists, offers to create one.
+        """
+        # Get weekly habits (using Analytics)
+        analytics = Analytics(self.logged_in_user)
+        weekly_habits = analytics.list_habits_by_periodicity("weekly")
+
+        # Check if there are no daily habits
+        if not weekly_habits:
+            print("\nYou don't have any weekly habits yet!")
+
+            # Ask the user if they want to create a weekly habit
+            while True:
+                choice = input("Would you like to register a new weekly habit? (yes/no): ").strip()
+
+                if choice == "yes":
+                    self.register_new_habit(frequency_preset="weekly")
+                    return
+                elif choice == "no":
+                    return  # Return to My Habits menu
+                else:
+                    print("Sorry, invalid option. Please enter 'yes' or 'no'!")
+
+        # Display weekly habits with numbering
+        while True:
+            print("\n- - - Weekly Habits - - -")
+            for idx, habit in enumerate(weekly_habits, 1):  # Start indexing at 1
+                print(f"{idx}. {habit.name}")
+
+            habits_number = len(weekly_habits)
+            # Add extra option to go back to previous menu at the end
+            back_option = habits_number + 1
+            print(f"{back_option}. Back to My Habits Menu")
+
+            # Get user selection
+            choice = input(f"Enter your choice (1-{back_option}): ")
+
+            if choice.isdigit():
+                choice_num = int(choice)
+
+                if 1 <= choice_num <= habits_number:
+                    # Show detailed manu for selected habit
+                    self.habit_detail_menu(weekly_habits[choice_num - 1])  # Adjust back to 0 indexing
+                    # Exit the loop after selecting a habit or returning from the detail menu
+                    break
+                elif choice_num == back_option:
+                    break  # Return to My Habits menu
+                else:
+                    print(f"Please enter a number between 1 and {back_option}!")  # Handle invalid int input
+            else:
+                print("Sorry, invalid input. Please try again!")  # Handle general invalid input and re-run the loop
 
         # I. My habits
         # II. My Analytics
