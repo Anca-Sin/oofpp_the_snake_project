@@ -3,7 +3,8 @@
 from .analytics import Analytics
 from .user_database import UserDatabase
 from .habit import Habit
-
+import os
+import time
 
 class HabitTracker:
     """
@@ -304,6 +305,7 @@ class HabitTracker:
     def habit_detail_menu(self, habit):
         """Shows detail menu for a selected habit and allows for completion/analysis."""
         while True:
+            os.system('cls' if os.name == 'nt' else 'clear')
             print(f"""\n- - - {habit.name}'s Details - - -
             1. Completion
             2. Delete a completion
@@ -322,9 +324,24 @@ class HabitTracker:
                     break
                 else:
                     print("Please enter a number between 1 and 4!")
+                    time.sleep(1)
+                    print("""Reloading Menu...
+                    3
+                    """)
+                    time.sleep(1)
+                    print("2")
+                    time.sleep(1)
+                    print("1")
             else:
                 print("Sorry, invalid input. Please try again!")
-
+                time.sleep(1)
+                print("""Reloading Menu...
+                3
+                """)
+                time.sleep(1)
+                print("2")
+                time.sleep(1)
+                print("1")
 
         # I. My habits
         # II. My Analytics
