@@ -180,12 +180,31 @@ class UserDatabase:
     def delete_completion()
     def delete_habit()
 
-    def save_broken_streak_length(self, habit_id: int, streak_length: int) -> None:
+    def save_broken_streak_length(self, habit_name: str, streak_length: int) -> None:
         """
         When a streak is broken, this method records the length and stores it the db.
 
-        :param habit_id: DB ID of the habit whose streak was broken.
-        :param streak_length: Length of the streak that was broken.
+        :param habit_name: The name of the habit whose streak was broken.
+        :param streak_length: The length of the streak that was broken.
         """
         connection = self._connect()
         cursor = connection.cursor()
+
+        # Retrieve the current streak_length_history for the habit
+        cursor.execute("SELECT streak_length_history FROM streaks WHERE habit_name = ?", habit_name)
+        result = cursor.fetchone()
+
+        if result[0]: # If there's an existing streak history
+            streak_history = result[0] + f",{streak_length}" # Append the new streak length
+        else: # If no streak history exists
+            streak_history = str(streak_length) # Initialize it
+
+        # Update the streak_length history in the db
+        cursor.execute("""
+            UPDATE streaks
+            SET streak_length_history = ?
+            WHERE habit_name = ?
+        """, (streak_history, habit_name))
+
+        connection.commit()
+        connection.close()

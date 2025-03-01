@@ -4,9 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c616fd42-f0e1-480b-874e-850f1a6b95b5" name="Changes" comment="Implement incomplete average_streak_length_habit() in Analytics -&gt; desired approach requires modifications across the project">
+    <list default="true" id="c616fd42-f0e1-480b-874e-850f1a6b95b5" name="Changes" comment="Add streak_length_history in streaks table + incomplete save_broken_streak_length() in UserDatabase + calling the method in _is_streak_broken() in Streaks">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/corpus_meta_lunae/streaks.py" beforeDir="false" afterPath="$PROJECT_DIR$/corpus_meta_lunae/streaks.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/corpus_meta_lunae/user_database.py" beforeDir="false" afterPath="$PROJECT_DIR$/corpus_meta_lunae/user_database.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -76,14 +75,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1739222621736</updated>
-    </task>
-    <task id="LOCAL-00076" summary="Change terminology in habits table and Habits class to ease coding logic">
-      <option name="closed" value="true" />
-      <created>1740326361360</created>
-      <option name="number" value="00076" />
-      <option name="presentableId" value="LOCAL-00076" />
-      <option name="project" value="LOCAL" />
-      <updated>1740326361360</updated>
     </task>
     <task id="LOCAL-00077" summary="Change terminology in habits table and Habits class to ease coding logic">
       <option name="closed" value="true" />
@@ -469,7 +460,15 @@
       <option name="project" value="LOCAL" />
       <updated>1740849300196</updated>
     </task>
-    <option name="localTasksCounter" value="125" />
+    <task id="LOCAL-00125" summary="Add streak_length_history in streaks table + incomplete save_broken_streak_length() in UserDatabase + calling the method in _is_streak_broken() in Streaks">
+      <option name="closed" value="true" />
+      <created>1740853725380</created>
+      <option name="number" value="00125" />
+      <option name="presentableId" value="LOCAL-00125" />
+      <option name="project" value="LOCAL" />
+      <updated>1740853725380</updated>
+    </task>
+    <option name="localTasksCounter" value="126" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -496,7 +495,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Implement habit_detail_menu() in HabitTracker class" />
     <MESSAGE value="Add reload screen in habit_detail_menu() with visual countdown so the user can read feedback before reload" />
     <MESSAGE value="Refactor to reload_menu_countdown() in helper_functions.py and apply to all methods in HabitTracker" />
     <MESSAGE value="Refactor to reload_menu_countdown() in helper_functions.py and apply to list_daily/weekly_habits() and list_habits() in HabitTracker" />
@@ -521,6 +519,7 @@
     <MESSAGE value="Implement most_completed_habit() in Analytics" />
     <MESSAGE value="Implement least_completed_habit() in Analytics" />
     <MESSAGE value="Implement incomplete average_streak_length_habit() in Analytics -&gt; desired approach requires modifications across the project" />
-    <option name="LAST_COMMIT_MESSAGE" value="Implement incomplete average_streak_length_habit() in Analytics -&gt; desired approach requires modifications across the project" />
+    <MESSAGE value="Add streak_length_history in streaks table + incomplete save_broken_streak_length() in UserDatabase + calling the method in _is_streak_broken() in Streaks" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add streak_length_history in streaks table + incomplete save_broken_streak_length() in UserDatabase + calling the method in _is_streak_broken() in Streaks" />
   </component>
 </project>
