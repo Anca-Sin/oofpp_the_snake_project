@@ -4,10 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c616fd42-f0e1-480b-874e-850f1a6b95b5" name="Changes" comment="Implement average_streak_length_habit() in Analytics + needed imports in user.py + its application in habit_analytics_menu()">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/corpus_meta_lunae/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/corpus_meta_lunae/main.py" afterDir="false" />
+    <list default="true" id="c616fd42-f0e1-480b-874e-850f1a6b95b5" name="Changes" comment="Move self.analytics after user initialization (in start()) in HabitTracker">
+      <change beforePath="$PROJECT_DIR$/corpus_meta_lunae/placeholder.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/corpus_meta_lunae/user_database.py" beforeDir="false" afterPath="$PROJECT_DIR$/corpus_meta_lunae/user_database.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testing/wheelchair_testing.py" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -76,30 +76,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1739222621736</updated>
-    </task>
-    <task id="LOCAL-00081" summary="Fix how confirm_input logic applies in the project">
-      <option name="closed" value="true" />
-      <created>1740690812352</created>
-      <option name="number" value="00081" />
-      <option name="presentableId" value="LOCAL-00081" />
-      <option name="project" value="LOCAL" />
-      <updated>1740690812352</updated>
-    </task>
-    <task id="LOCAL-00082" summary="Fix how confirm_input logic applies throughout the project">
-      <option name="closed" value="true" />
-      <created>1740690923380</created>
-      <option name="number" value="00082" />
-      <option name="presentableId" value="LOCAL-00082" />
-      <option name="project" value="LOCAL" />
-      <updated>1740690923380</updated>
-    </task>
-    <task id="LOCAL-00083" summary="Fix warnings">
-      <option name="closed" value="true" />
-      <created>1740691113472</created>
-      <option name="number" value="00083" />
-      <option name="presentableId" value="LOCAL-00083" />
-      <option name="project" value="LOCAL" />
-      <updated>1740691113472</updated>
     </task>
     <task id="LOCAL-00084" summary="Implement save_user() in UserDatabase">
       <option name="closed" value="true" />
@@ -469,7 +445,31 @@
       <option name="project" value="LOCAL" />
       <updated>1740858139019</updated>
     </task>
-    <option name="localTasksCounter" value="130" />
+    <task id="LOCAL-00130" summary="Implement delete_user() in UserDatabase">
+      <option name="closed" value="true" />
+      <created>1740865159782</created>
+      <option name="number" value="00130" />
+      <option name="presentableId" value="LOCAL-00130" />
+      <option name="project" value="LOCAL" />
+      <updated>1740865159782</updated>
+    </task>
+    <task id="LOCAL-00131" summary="Move self.analytics after user initialization (in start()) in HabitTracker">
+      <option name="closed" value="true" />
+      <created>1740865275780</created>
+      <option name="number" value="00131" />
+      <option name="presentableId" value="LOCAL-00131" />
+      <option name="project" value="LOCAL" />
+      <updated>1740865275780</updated>
+    </task>
+    <task id="LOCAL-00132" summary="Move self.analytics after user initialization (in start()) in HabitTracker">
+      <option name="closed" value="true" />
+      <created>1740865298811</created>
+      <option name="number" value="00132" />
+      <option name="presentableId" value="LOCAL-00132" />
+      <option name="project" value="LOCAL" />
+      <updated>1740865298811</updated>
+    </task>
+    <option name="localTasksCounter" value="133" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -496,8 +496,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Remove extra else statements after all choice.isdigit() menu checks - simplify code, achieves same results" />
-    <MESSAGE value="Remove extra else statements after all choice.isdigit() menu checks - simplify code, achieves same results" />
     <MESSAGE value="Add reload screen in all current main menus" />
     <MESSAGE value="Add reload screen in all current main menus" />
     <MESSAGE value="Fix list_all_habits() analytics to return list of habits instead of str + Fix random typos" />
@@ -521,6 +519,8 @@
     <MESSAGE value="Implement average_streak_length_habit() in Analytics + needed imports in user.py" />
     <MESSAGE value="Apply habit average calculation in habit_analytics_menu() in HabitTracker" />
     <MESSAGE value="Apply habit average calculation in habit_analytics_menu() in HabitTracker" />
-    <option name="LAST_COMMIT_MESSAGE" value="Apply habit average calculation in habit_analytics_menu() in HabitTracker" />
+    <MESSAGE value="Implement delete_user() in UserDatabase" />
+    <MESSAGE value="Move self.analytics after user initialization (in start()) in HabitTracker" />
+    <option name="LAST_COMMIT_MESSAGE" value="Move self.analytics after user initialization (in start()) in HabitTracker" />
   </component>
 </project>
