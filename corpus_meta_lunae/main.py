@@ -23,6 +23,7 @@ class HabitTracker:
         """
         self.db = UserDatabase()   # Interacts with the local SQLite DB
         self.logged_in_user = None # Hypothetical "logged_in"
+        self.analytics = Analytics(self.logged_in_user)
 
     def start(self) -> None:
         """
@@ -447,13 +448,16 @@ class HabitTracker:
                 input("\nPress ENTER to continue...")
 
             elif choice == "2":
-                # Get and display longest streak
+                # Get and display the longest streak
                 habit.name, streak = analytics.longest_streak_for_habit(habit.name)
                 print(f"\nLongest streak for {habit.name}: {streak}")
                 input("\nPress ENTER to continue...")
 
             elif choice == "3":
-                # Method still needs to be implemented in Analytics
+                # Show average streak length
+                average_streak = self.analytics.average_streak_length_habit(habit.name)
+                print(f"\nAverage streak length for {habit.name}: {average_streak}")
+                input("\nPress ENTER to continue...")
 
             elif choice == "4":
                 # Display total completions count
