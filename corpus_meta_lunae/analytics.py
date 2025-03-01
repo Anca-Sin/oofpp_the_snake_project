@@ -96,13 +96,25 @@ class Analytics:
         """
         # FPP using map and max
         most_completed = max(
-            map(lambda habit: (habit.name, len(habit.completion_dates)), self.user.habits)
+            map(lambda habit: (habit.name, len(habit.completion_dates)), self.user.habits),
             key=lambda x: x[1]
         )
 
         return most_completed
 
-    def least_completed_habit(self):
+    def least_completed_habit(self) -> tuple:
+        """
+        Finds the habit with the fewest completions.
+
+        :return: A tuple (habit_name, completion_count) of the habit
+        """
+        # FPP using map and min
+        least_completed = min(
+            map(lambda habit: (habit.name, len(habit.completion_dates)), self.user.habits),
+            key=lambda x: x[1]
+        )
+
+        return least_completed
 
     def average_streak_length(self)
 

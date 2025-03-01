@@ -4,8 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c616fd42-f0e1-480b-874e-850f1a6b95b5" name="Changes" comment="Add functionalities in habit_analytics_menu() in HabitTracker">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="c616fd42-f0e1-480b-874e-850f1a6b95b5" name="Changes" comment="Implement most_completed_habit() in Analytics">
       <change beforePath="$PROJECT_DIR$/corpus_meta_lunae/analytics.py" beforeDir="false" afterPath="$PROJECT_DIR$/corpus_meta_lunae/analytics.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -75,14 +74,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1739222621736</updated>
-    </task>
-    <task id="LOCAL-00073" summary="Fix logic in habits table: check_of_dates &quot;NOT NULL&quot; removed">
-      <option name="closed" value="true" />
-      <created>1740324737196</created>
-      <option name="number" value="00073" />
-      <option name="presentableId" value="LOCAL-00073" />
-      <option name="project" value="LOCAL" />
-      <updated>1740324737196</updated>
     </task>
     <task id="LOCAL-00074" summary="Fix logic in streaks table: &quot;NOT NULL&quot; removed for all streaks">
       <option name="closed" value="true" />
@@ -468,7 +459,15 @@
       <option name="project" value="LOCAL" />
       <updated>1740836748714</updated>
     </task>
-    <option name="localTasksCounter" value="122" />
+    <task id="LOCAL-00122" summary="Implement most_completed_habit() in Analytics">
+      <option name="closed" value="true" />
+      <created>1740837525225</created>
+      <option name="number" value="00122" />
+      <option name="presentableId" value="LOCAL-00122" />
+      <option name="project" value="LOCAL" />
+      <updated>1740837525225</updated>
+    </task>
+    <option name="localTasksCounter" value="123" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -495,7 +494,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Fix Analytics methods to align with their use in main.py (remove print functions, fix annotation and logic) + Fix annotation in Streaks" />
     <MESSAGE value="Update register_new_habit() to accept a frequency preset in HabitTracker" />
     <MESSAGE value="Implement list_weekly_habits() and Fix in list_daily_habits() in HabitTracker" />
     <MESSAGE value="Implement habit_detail_menu() in HabitTracker class" />
@@ -520,6 +518,7 @@
     <MESSAGE value="Implement incomplete habit_analytics_menu() in HabitTracker" />
     <MESSAGE value="Review Streaks and Analytics functionalities, add comments for context" />
     <MESSAGE value="Add functionalities in habit_analytics_menu() in HabitTracker" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add functionalities in habit_analytics_menu() in HabitTracker" />
+    <MESSAGE value="Implement most_completed_habit() in Analytics" />
+    <option name="LAST_COMMIT_MESSAGE" value="Implement most_completed_habit() in Analytics" />
   </component>
 </project>
