@@ -3,7 +3,8 @@ from typing import List
 # from pathlib import Path
 from .user import User
 # from .habit import Habit
-from .helper_functions import confirm_int_input
+from .helper_functions import confirm_int_input, reload_menu_countdown
+
 
 class UserDatabase:
     """Handles saving and loading user data to/from an SQLite database."""
@@ -171,7 +172,47 @@ class UserDatabase:
 
         return selected_user
 
-    def delete_user(self):
+    def delete_user(self, current_user) -> None:
+        """Deletes an user and all associated data."""
+        # Ask for confirmation
+        print(f"""This will delete:
+        - your username
+        - all associated habits and data
+        
+        """)
+        confirmation = input("Type in 'yes' if you are sure to proceed: ")
+
+        if confirmation.lower() != "yes":
+            print("Deletion canceled.")
+            reload_menu_countdown()
+            return
+
+        connection = self._connect()
+        cursor = connection.cursor()
+
+        # Get the current user's ID
+        cursor.execute("SELECT id FROM users WHERE username = ?", (current_user.username,))
+        user_id = cursor.fetchone()[0]
+
+        # Get all habit IDs for this user
+        cursor.execute("SELECT id FROM habit WHERE user_id = ?", (user_id,))
+        habit_ids = [row[0] for row in cursor.fetchall()]
+
+        # Delete streak records
+        for habit_id in habit_ids:
+            cursor.execute("DELETE FROM streaks WHERE habit_id = ?", (habit_id,))
+
+        # Delete habits
+        cursor.execute("DELETE FROM habits WHERE user_id = ?", (user_id,))
+
+        # Delete user
+        cursor.execute("DELETE FROM users WHERE user_id = ?", (user_id,))
+
+        connection.commit()
+        connection.close()
+
+        print(f"User '{current_user.username}' and all associated data have been deleted.")
+        reload_menu_countdown()
 
     def save_habits(self, user: User) -> None:
 
