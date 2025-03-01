@@ -94,10 +94,12 @@ class Analytics:
 
         :return: A tuple (habit_name, completion_count) of the habit
         """
-        # FPP using map and max
+        # Passing max() to the list of tuples created by iterating with map()
+        #   to find the tuple with the highest count of completions
+
         most_completed = max(
             map(lambda habit: (habit.name, len(habit.completion_dates)), self.user.habits),
-            key=lambda x: x[1]
+            key=lambda x: x[1] # Sort by completion count
         )
 
         return most_completed
@@ -108,7 +110,8 @@ class Analytics:
 
         :return: A tuple (habit_name, completion_count) of the habit
         """
-        # FPP using map and min
+        # Passing min() to the list of tuples created by iterating with map()
+        #   to find the tuple with the lowest count of completions
         least_completed = min(
             map(lambda habit: (habit.name, len(habit.completion_dates)), self.user.habits),
             key=lambda x: x[1]
@@ -116,6 +119,11 @@ class Analytics:
 
         return least_completed
 
-    def average_streak_length(self)
+    def average_streak_length_habit(self, habit_name: str) -> float:
+        """
+        Calculates the average streak length for a given habit.
 
-    def all_time_completions_count(self)
+        :param habit_name: The name of the habit to analyze.
+        :return: The average streak length as a float.
+        """
+        # Need to store all streaks history
