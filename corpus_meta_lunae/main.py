@@ -5,6 +5,7 @@ from .helper_functions import reload_menu_countdown
 from .user_database import UserDatabase
 from .habit import Habit
 from .user import User
+from .streaks import Streaks
 from typing import Optional
 import os
 import time
@@ -380,21 +381,21 @@ class HabitTracker:
 
     def completion_menu(self, habit: Habit) -> None:
         """
-        Shows completion menu for a selected habit and allows for:
+        Shows selected habit's completion menu and allows for:
         - completion of habit
         - completion deletion
         - deletion of habit
         """
         while True:
             os.system('cls' if os.name == 'nt' else 'clear')
-            print(f"""- - - {habit.name}'s Details - - -
+            print(f"""- - - {habit.name}'s Menu - - -
 
-                    1. Complete habit today
-                    2. Complete habit past date
-                    3. Delete a completion
-                    4. Delete habit
-                    5. Back
-                    """)
+            1. Complete habit today
+            2. Complete habit past date
+            3. Delete a completion
+            4. Delete habit
+            5. Back
+            """)
 
             choice = input("\nEnter your choice (1-5): ").strip()
 
@@ -414,9 +415,40 @@ class HabitTracker:
                 reload_menu_countdown()
 
     def habit_analytics_menu(self, habit: Habit) -> None:
-        if choice == "1":
-            get_current_streak()
-            get_longest_streak_habit()
-            average_streak_lenght()
-            all_time_completions_count()
-            creation_date()
+        """
+        Shows selected habit's analytics menu and allows for checking:
+        - current streak
+        - longest streak
+        - average length of streaks
+        - all time completions count
+        - creation date
+        """
+        while True:
+            os.system('cls' if os.name == 'nt' else 'clear')
+            print(f"""- - - {habit.name}'s Analytics - - -
+
+            1. Current streak
+            2. Longest streak
+            3. Average streak length
+            4. All time completions count
+            5. Creation date
+            6. Back
+            """)
+
+            choice = input("\nEnter your choice (1-5): ").strip()
+
+            if choice == "1":
+                get_current_streak(habit)
+            elif choice == "2":
+                get_longest_streak_habit(habit)
+            elif choice == "3":
+                average_streak_length(habit)
+            elif choice == "4":
+                all_time_completions_count(habit)
+            elif choice == "5":
+                creation_date(habit)
+            elif choice == "6":
+                break
+            else:
+                print("\nSorry, invalid input. Please try again!")
+                reload_menu_countdown()
