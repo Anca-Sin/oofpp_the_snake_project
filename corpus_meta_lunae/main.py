@@ -423,6 +423,9 @@ class HabitTracker:
         - all time completions count
         - creation date
         """
+        # Create an Analytics instance to use its methods
+        analytics = Analytics(self.logged_in_user)
+
         while True:
             os.system('cls' if os.name == 'nt' else 'clear')
             print(f"""- - - {habit.name}'s Analytics - - -
@@ -435,18 +438,33 @@ class HabitTracker:
             6. Back
             """)
 
-            choice = input("\nEnter your choice (1-5): ").strip()
+            choice = input("\nEnter your choice (1-6): ").strip()
 
             if choice == "1":
-                get_current_streak(habit)
+                # Get and display current streak
+                current_streak = habit.streaks.get_current_streak(habit.frequency, habit.completion_dates)
+                print(f"\nCurrent streak for {habit.name}: {current_streak}")
+                input("\nPress ENTER to continue...")
+
             elif choice == "2":
-                get_longest_streak_habit(habit)
+                # Get and display longest streak
+                habit.name, streak = analytics.longest_streak_for_habit(habit.name)
+                print(f"\nLongest streak for {habit.name}: {streak}")
+                input("\nPress ENTER to continue...")
+
             elif choice == "3":
-                average_streak_length(habit)
+                # Method still needs to be implemented in Analytics
+
             elif choice == "4":
-                all_time_completions_count(habit)
+                # Display total completions count
+                print(f"\nTotal completions count for {habit.name}: {len(habit.completion_dates)}")
+                input("\nPress ENTER to continue...")
+
             elif choice == "5":
-                creation_date(habit)
+                # Display creation date
+                print(f"\n{habit.name} was created on: {habit.creation_date})
+                input("\nPress ENTER to continue...")
+
             elif choice == "6":
                 break
             else:
