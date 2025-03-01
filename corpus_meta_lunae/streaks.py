@@ -1,6 +1,12 @@
 from datetime import datetime, timedelta, date
 from typing import List
 
+# Class Design:
+# - Handles streak calculations for individual habits
+# - Low-level calculations for determining if a streak is broken
+# - Maintains state (current_streak and longest_streak)
+# - Ties directly to individual habit instances (each habit has its own Streaks object)
+
 class Streaks:
     """Tracks current and longest streaks with basic functionality for now."""
 

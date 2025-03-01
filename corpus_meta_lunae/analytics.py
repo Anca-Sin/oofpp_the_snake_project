@@ -3,7 +3,14 @@ from .streaks import Streaks
 from .habit import Habit
 from typing import List
 
+# Task requirement:
 # "The functionality of this analytics module must be implemented using the functional programming paradigm."
+
+# Class Design:
+# - Provides broad, higher-level calculations across multiple habits
+# - Doesn't maintain state of its own, but analyzes user/habit data
+# - Already uses Streaks functionality through habit.streaks references
+
 class Analytics:
     """Analyzes the user's habits and provide statistics."""
 
@@ -14,7 +21,6 @@ class Analytics:
         :param user: The User object whose habits will be analyzed.
         """
         self.user = user         # Store the user for analytics
-        self.streaks = Streaks() # Create an instance of Streaks to analyze
 
     # Task requirement: "return a list of all currently tracked habits"
     def list_all_habits(self) -> List[Habit]:
