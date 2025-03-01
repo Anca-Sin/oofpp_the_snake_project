@@ -88,7 +88,19 @@ class Analytics:
 
         return habit_name, habit.streaks.get_longest_streak()
 
-    def most_completed_habit(self):
+    def most_completed_habit(self) -> tuple:
+        """
+        Finds the habits with the most completions.
+
+        :return: A tuple (habit_name, completion_count) of the habit
+        """
+        # FPP using map and max
+        most_completed = max(
+            map(lambda habit: (habit.name, len(habit.completion_dates)), self.user.habits)
+            key=lambda x: x[1]
+        )
+
+        return most_completed
 
     def least_completed_habit(self):
 

@@ -4,9 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c616fd42-f0e1-480b-874e-850f1a6b95b5" name="Changes" comment="Review Streaks and Analytics functionalities, add comments for context">
+    <list default="true" id="c616fd42-f0e1-480b-874e-850f1a6b95b5" name="Changes" comment="Add functionalities in habit_analytics_menu() in HabitTracker">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/corpus_meta_lunae/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/corpus_meta_lunae/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/corpus_meta_lunae/analytics.py" beforeDir="false" afterPath="$PROJECT_DIR$/corpus_meta_lunae/analytics.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -28,6 +28,9 @@
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="RESET_MODE" value="HARD" />
+  </component>
+  <component name="LLMProjectSettings">
+    <option name="turned_on" value="false" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 5
@@ -72,14 +75,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1739222621736</updated>
-    </task>
-    <task id="LOCAL-00072" summary="Fix logic in habits table: check_of_dates &quot;NOT NULL&quot; removed">
-      <option name="closed" value="true" />
-      <created>1740324599177</created>
-      <option name="number" value="00072" />
-      <option name="presentableId" value="LOCAL-00072" />
-      <option name="project" value="LOCAL" />
-      <updated>1740324599177</updated>
     </task>
     <task id="LOCAL-00073" summary="Fix logic in habits table: check_of_dates &quot;NOT NULL&quot; removed">
       <option name="closed" value="true" />
@@ -465,7 +460,15 @@
       <option name="project" value="LOCAL" />
       <updated>1740835560056</updated>
     </task>
-    <option name="localTasksCounter" value="121" />
+    <task id="LOCAL-00121" summary="Add functionalities in habit_analytics_menu() in HabitTracker">
+      <option name="closed" value="true" />
+      <created>1740836748714</created>
+      <option name="number" value="00121" />
+      <option name="presentableId" value="LOCAL-00121" />
+      <option name="project" value="LOCAL" />
+      <updated>1740836748714</updated>
+    </task>
+    <option name="localTasksCounter" value="122" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -492,7 +495,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Implement list_daily_habits() in HabitTracker" />
     <MESSAGE value="Fix Analytics methods to align with their use in main.py (remove print functions, fix annotation and logic) + Fix annotation in Streaks" />
     <MESSAGE value="Update register_new_habit() to accept a frequency preset in HabitTracker" />
     <MESSAGE value="Implement list_weekly_habits() and Fix in list_daily_habits() in HabitTracker" />
@@ -517,6 +519,7 @@
     <MESSAGE value="Add missing type hints in HabitTracker" />
     <MESSAGE value="Implement incomplete habit_analytics_menu() in HabitTracker" />
     <MESSAGE value="Review Streaks and Analytics functionalities, add comments for context" />
-    <option name="LAST_COMMIT_MESSAGE" value="Review Streaks and Analytics functionalities, add comments for context" />
+    <MESSAGE value="Add functionalities in habit_analytics_menu() in HabitTracker" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add functionalities in habit_analytics_menu() in HabitTracker" />
   </component>
 </project>
