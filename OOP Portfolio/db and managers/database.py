@@ -6,12 +6,12 @@ from .user import User
 from .helper_functions import confirm_int_input, reload_menu_countdown
 
 
-class UserDatabase:
+class Database:
     """Handles saving and loading user data to/from an SQLite database."""
 
     def __init__(self, db_filepath: str = "habit_tracker.db") -> None:
         """
-        Initializes the UserDatabase with a database file path.
+        Initializes the Database with a database file path.
 
         :param db_filepath: Path to the SQLite database file.
         """

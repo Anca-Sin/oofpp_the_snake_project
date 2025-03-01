@@ -17,7 +17,7 @@ class HabitTracker:
     def __init__(self):
         """
         Initializes the habit tracker.
-        - Connects to the UserDatabase (handles storage and retrieval)
+        - Connects to the Database (handles storage and retrieval)
         - Optionally handles multiple users, but no login required (just for my exercise)
         """
         self.db = UserDatabase()   # Interacts with the local SQLite DB
@@ -51,7 +51,7 @@ class HabitTracker:
 
     def load_user_data(self) -> None:
         """Loads the habits for the current user from the db."""
-        # Need new method in UserDatabase
+        # Need new method in Database
 
     def main_menu(self) -> None:
         """Displays the main menu and handles user navigation."""

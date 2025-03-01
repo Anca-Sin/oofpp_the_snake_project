@@ -20,7 +20,7 @@ class User:
         Initializes a User object with a username and an empty list of habits.
 
         :param username: The username which defaults to an empty string if not provided.
-        :param db: An instance of UserDatabase to interact with the db
+        :param db: An instance of Database to interact with the db
         """
         self.username: str = username # Unique identifier for the user
         self.habits: List[Habit] = [] # List to store the user's habits
