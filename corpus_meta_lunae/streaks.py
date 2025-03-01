@@ -1,3 +1,5 @@
+from .user_database import UserDatabase
+
 from datetime import datetime, timedelta, date
 from typing import List
 
@@ -10,10 +12,10 @@ from typing import List
 class Streaks:
     """Tracks current and longest streaks with basic functionality for now."""
 
-    def __init__(self):
+    def __init__(self, db: UserDatabase = None):
         self.current_streak: int = 0 # Current streak counter
         self.longest_streak: int = 0 # Longest streak counter
-        # self.announce_streaks ? does the user request a specific streak or display all?
+        self.db = db                 # Initialize a db instance
 
     @staticmethod
     def _sort_completions(completions: List[date]) -> List[date]:
@@ -26,19 +28,23 @@ class Streaks:
         return sorted(completions)
 
     @staticmethod
-    def _is_streak_broken(frequency: str, latest_completion: date) -> bool:
+    def _is_streak_broken(frequency: str, latest_completion: date, habit_id: int) -> bool:
         """
         Helper method to reset streak counter to 0 if streak is broken.
 
         :param frequency: The frequency of the habit ("daily" or "weekly").
         :param latest_completion: The date of the latest completion.
+        :param habit_id: The ID of the habit whose streak was broken.
         :return: True if streak is broken, False otherwise.
         """
         today = datetime.now().date()
 
         if frequency == "daily" and (today - latest_completion).days > 1:
+            # Save broken streak length to the db before resetting
+            self.db.save_broken_streak_length(habit_id, self.current_streak)
             return True
         elif frequency == "weekly" and (today - latest_completion).days > 7:
+            self.db.save_broken_streak_length(habit_id, self.current_streak)
             return True
 
         return False

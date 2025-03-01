@@ -60,6 +60,7 @@ class UserDatabase:
             longest_streak INTEGER,
             longest_streak_start TEXT,
             longest_streak_end TEXT,
+            streak_length_history TEXT,
             FOREIGN KEY (habit_id) REFERENCES habits(id) -- Link streak to a habit from the habit table
             )
         """)
@@ -178,3 +179,13 @@ class UserDatabase:
     def complete_habit_past()
     def delete_completion()
     def delete_habit()
+
+    def save_broken_streak_length(self, habit_id: int, streak_length: int) -> None:
+        """
+        When a streak is broken, this method records the length and stores it the db.
+
+        :param habit_id: DB ID of the habit whose streak was broken.
+        :param streak_length: Length of the streak that was broken.
+        """
+        connection = self._connect()
+        cursor = connection.cursor()
