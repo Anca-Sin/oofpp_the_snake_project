@@ -232,7 +232,7 @@ class UserDatabase:
         cursor = connection.cursor()
 
         # Retrieve the current streak_length_history for the habit
-        cursor.execute("SELECT streak_length_history FROM streaks WHERE habit_name = ?", habit_name)
+        cursor.execute("SELECT streak_length_history FROM streaks WHERE habit_name = ?", (habit_name,))
         result = cursor.fetchone()
 
         if result[0]: # If there's an existing streak history
@@ -261,7 +261,7 @@ class UserDatabase:
         cursor = connection.cursor()
 
         # Retrieve the streak_length_history for the given habit
-        cursor.execute("SELECT streak_length_history FROM streaks WHERE habit_name = ?", habit_name)
+        cursor.execute("SELECT streak_length_history FROM streaks WHERE habit_name = ?", (habit_name,))
         result = cursor.fetchone()
 
         connection.close()
