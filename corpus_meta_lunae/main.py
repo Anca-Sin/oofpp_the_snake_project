@@ -5,7 +5,6 @@ from .helper_functions import reload_menu_countdown
 from .user_database import UserDatabase
 from .habit import Habit
 from .user import User
-from .streaks import Streaks
 from typing import Optional
 import os
 import time
@@ -23,7 +22,7 @@ class HabitTracker:
         """
         self.db = UserDatabase()   # Interacts with the local SQLite DB
         self.logged_in_user = None # Hypothetical "logged_in"
-        self.analytics = Analytics(self.logged_in_user)
+        self.analytics = None
 
     def start(self) -> None:
         """
@@ -37,6 +36,8 @@ class HabitTracker:
         self.logged_in_user = self.select_user() # Store the returned user
         # Load their data
         self.load_user_data()
+        # Initialize analytics after user is loaded
+        self.analytics = Analytics(self.logged_in_user)
         # Show the main menu
         self.main_menu()
 
