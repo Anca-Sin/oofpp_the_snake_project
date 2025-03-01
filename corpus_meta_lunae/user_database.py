@@ -208,3 +208,26 @@ class UserDatabase:
 
         connection.commit()
         connection.close()
+
+    def load_broken_streak_length(self, habit_name: str) -> str:
+        """
+        Loads streak_length_history for a given habit from the db.
+
+        :param habit_name:
+        :return: The broken streaks' lengths as a list of integers.
+        """
+        connection = self._connect()
+        cursor = connection.cursor()
+
+        # Retrieve the streak_length_history for the given habit
+        cursor.execute("SELECT streak_length_history FROM streaks WHERE habit_name = ?", habit_name)
+        result = cursor.fetchone()
+
+        connection.close()
+
+        # If streak_length_history is empty or NULL
+        if not result[0]:
+            return "" # Return an empty string
+        else:
+            return result[0] # Return the streak_length_history string
+
