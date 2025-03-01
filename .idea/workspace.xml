@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c616fd42-f0e1-480b-874e-850f1a6b95b5" name="Changes" comment="Fix methods in main.py to align to the same cli">
+    <list default="true" id="c616fd42-f0e1-480b-874e-850f1a6b95b5" name="Changes" comment="Fix methods in main.py to align to the same cli + Simplify the code (e.g. remove choice.isdigit check everywhere)">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/corpus_meta_lunae/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/corpus_meta_lunae/main.py" afterDir="false" />
     </list>
@@ -60,7 +60,7 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-python-sdk-fc1d50d2d915-aa17d162503b-com.jetbrains.pycharm.community.sharedIndexes.bundled-PC-243.24978.54" />
+        <option value="bundled-python-sdk-14705d77f0bb-aa17d162503b-com.jetbrains.pycharm.community.sharedIndexes.bundled-PC-243.25659.43" />
       </set>
     </attachedChunks>
   </component>
@@ -72,22 +72,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1739222621736</updated>
-    </task>
-    <task id="LOCAL-00065" summary="Implement longest_streak_all_habits() in Analytics class">
-      <option name="closed" value="true" />
-      <created>1740251990278</created>
-      <option name="number" value="00065" />
-      <option name="presentableId" value="LOCAL-00065" />
-      <option name="project" value="LOCAL" />
-      <updated>1740251990278</updated>
-    </task>
-    <task id="LOCAL-00066" summary="Implement longest_streak_all_habits() in Analytics class">
-      <option name="closed" value="true" />
-      <created>1740252661087</created>
-      <option name="number" value="00066" />
-      <option name="presentableId" value="LOCAL-00066" />
-      <option name="project" value="LOCAL" />
-      <updated>1740252661087</updated>
     </task>
     <task id="LOCAL-00067" summary="Change user_database.py to use SQLite instead of JSON">
       <option name="closed" value="true" />
@@ -465,7 +449,23 @@
       <option name="project" value="LOCAL" />
       <updated>1740786523449</updated>
     </task>
-    <option name="localTasksCounter" value="114" />
+    <task id="LOCAL-00114" summary="Fix methods in main.py to align to the same cli">
+      <option name="closed" value="true" />
+      <created>1740788243794</created>
+      <option name="number" value="00114" />
+      <option name="presentableId" value="LOCAL-00114" />
+      <option name="project" value="LOCAL" />
+      <updated>1740788243794</updated>
+    </task>
+    <task id="LOCAL-00115" summary="Fix methods in main.py to align to the same cli + Simplify the code (e.g. remove choice.isdigit check everywhere)">
+      <option name="closed" value="true" />
+      <created>1740788469749</created>
+      <option name="number" value="00115" />
+      <option name="presentableId" value="LOCAL-00115" />
+      <option name="project" value="LOCAL" />
+      <updated>1740788469749</updated>
+    </task>
+    <option name="localTasksCounter" value="116" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -492,10 +492,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Implement select_user() in HabitTracker class" />
-    <MESSAGE value="Implement main_menu() in HabitTracker class" />
-    <MESSAGE value="Implement habits_menu() in HabitTracker class" />
-    <MESSAGE value="Implement analytics_menu() in HabitTracker class" />
     <MESSAGE value="Implement register_new_habit() in HabitTracker class" />
     <MESSAGE value="Implement list_habits() in HabitTracker class" />
     <MESSAGE value="Fixes to main_menu, habits_menu, analytics_menu methods in HabitTracker class" />
@@ -516,7 +512,11 @@
     <MESSAGE value="Add reload screen in all current main menus" />
     <MESSAGE value="Fix list_all_habits() analytics to return list of habits instead of str + Fix random typos" />
     <MESSAGE value="Define my_habit_tracker() in main.py" />
+    <MESSAGE value="Fix methods in main.py to align to the same cli + Simplify the code" />
+    <MESSAGE value="Fix methods in main.py to align to the same cli + Simplify the code (remove choice.isdigit check everywhere)" />
     <MESSAGE value="Fix methods in main.py to align to the same cli" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fix methods in main.py to align to the same cli" />
+    <MESSAGE value="Fix methods in main.py to align to the same cli + Simplify the code (e.g. remove choice.isdigit check everywhere)" />
+    <MESSAGE value="Fix methods in main.py to align to the same cli + Simplify the code (e.g. remove choice.isdigit check everywhere)" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fix methods in main.py to align to the same cli + Simplify the code (e.g. remove choice.isdigit check everywhere)" />
   </component>
 </project>

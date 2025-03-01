@@ -352,7 +352,7 @@ class HabitTracker:
                 print("\nSorry, invalid input. Please try again!")  # Handle general invalid input and re-run the loop
                 reload_menu_countdown()
 
-    def habit_detail_menu(self, habit):
+    def habit_detail_menu(self, habit: Habit) -> None:
         """Shows detail menu for a selected habit and allows for completion/analysis."""
         while True:
             os.system('cls' if os.name == 'nt' else 'clear')
@@ -367,23 +367,51 @@ class HabitTracker:
             choice = input("\nEnter your choice (1-4): ").strip()
 
             if choice == "1":
-                self.complete_habit(habit)
+                self.completion_menu(habit)
             elif choice == "2":
-                self.view_habit_analytics(habit)
+                self.habit_analytics_menu(habit)
             elif choice == "3":
                 break
             else:
                 print("\nSorry, invalid input. Please try again!")
                 reload_menu_countdown()
 
-    def complete_habit(self):
-        if choice == "1":
-            complete_habit_today()
-            complete_habit_past()
-            delete_completion()
-            delete_habit()
+    def completion_menu(self, habit: Habit) -> None:
+        """
+        Shows completion menu for a selected habit and allows for:
+        - completion of habit
+        - completion deletion
+        - deletion of habit
+        """
+        while True:
+            os.system('cls' if os.name == 'nt' else 'clear')
+            print(f"""- - - {habit.name}'s Details - - -
 
-    def view_habit_analytics(self):
+                    1. Complete habit today
+                    2. Complete habit past date
+                    3. Delete a completion
+                    4. Delete habit
+                    5. Back
+                    """)
+
+            choice = input("\nEnter your choice (1-5): ").strip()
+
+            if choice == "1":
+                self.db.complete_habit_today(habit)
+            elif choice == "2":
+                self.db.complete_habit_past(habit)
+            elif choice == "3":
+                self.db.delete_completion(habit)
+            elif choice == "4":
+                self.db.delete_habit(habit)
+                break # Exit after deleting habit
+            elif choice == "5":
+                break
+            else:
+                print("\nSorry, invalid input. Please try again!")
+                reload_menu_countdown()
+
+    def habit_analytics_menu(self, habit):
         if choice == "1":
             get_current_streak()
             get_longest_streak_habit()
