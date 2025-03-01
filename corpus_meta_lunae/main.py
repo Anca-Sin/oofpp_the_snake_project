@@ -4,6 +4,8 @@ from .analytics import Analytics
 from .helper_functions import reload_menu_countdown
 from .user_database import UserDatabase
 from .habit import Habit
+from .user import User
+from typing import Optional
 import os
 import time
 
@@ -36,7 +38,7 @@ class HabitTracker:
         # Show the main menu
         self.main_menu()
 
-    def select_user(self):
+    def select_user(self) -> User:
         """
         Prompts the user to select or create/delete a username.
 
@@ -44,11 +46,11 @@ class HabitTracker:
         """
         return self.db.select_user()
 
-    def load_user_data(self):
+    def load_user_data(self) -> None:
         """Loads the habits for the current user from the db."""
         # Need new method in UserDatabase
 
-    def main_menu(self):
+    def main_menu(self) -> None:
         """Displays the main menu and handles user navigation."""
         while True:
             os.system('cls' if os.name == 'nt' else 'clear')
@@ -75,7 +77,7 @@ class HabitTracker:
                 print("\nSorry, invalid input. Please try again!")
                 reload_menu_countdown()
 
-    def my_habit_tracker(self):
+    def my_habit_tracker(self) -> None:
         """Displays the habit tracker menu and handles user navigation."""
         while True:
             os.system('cls' if os.name == 'nt' else 'clear')
@@ -98,7 +100,7 @@ class HabitTracker:
                 print("\nSorry, invalid input. Please try again!")
                 reload_menu_countdown()
 
-    def habits_menu(self):
+    def habits_menu(self) -> None:
         """Displays the habits menu and handles user navigation."""
         while True:
             os.system('cls' if os.name == 'nt' else 'clear')
@@ -127,7 +129,7 @@ class HabitTracker:
                 print("\nSorry, invalid option. Please try again!")
                 reload_menu_countdown()
 
-    def analytics_menu(self):
+    def analytics_menu(self) -> None:
         """Displays the analytics menu and handles user navigation."""
         # Create Analytics object for the current user
         analytics = Analytics(self.logged_in_user)
@@ -156,7 +158,7 @@ class HabitTracker:
                 print("\nSorry, invalid option. Please try again!")
                 reload_menu_countdown()
 
-    def register_new_habit(self, frequency_preset=None):
+    def register_new_habit(self, frequency_preset: Optional[str] = None) -> None:
         """Guides the user through a new habit creation."""
         os.system('cls' if os.name == 'nt' else 'clear')
         new_habit = Habit()
@@ -180,7 +182,7 @@ class HabitTracker:
         print(f"\n{new_habit.name} creation process completed!")
         reload_menu_countdown()
 
-    def list_habits(self):
+    def list_habits(self) -> None:
         """
         Lists only daily habits and allows the user to select one for detailed view.
         Uses the analytics module's functional programming methods.
@@ -227,7 +229,7 @@ class HabitTracker:
                 print("\nSorry, invalid input. Please try again!") # Handle invalid input and re-run the loop
                 reload_menu_countdown()
 
-    def list_daily_habits(self):
+    def list_daily_habits(self) -> None:
         """
         Lists only daily habits and allows the user to select one for detailed view.
         Uses the analytics module's functional programming methods.
@@ -290,7 +292,7 @@ class HabitTracker:
                 print("\nSorry, invalid input. Please try again!")
                 reload_menu_countdown()
 
-    def list_weekly_habits(self):
+    def list_weekly_habits(self) -> None:
         """
         Lists only weekly habits and allows the user to select one for detailed view.
         Uses the analytics module's functional programming methods.
@@ -411,7 +413,7 @@ class HabitTracker:
                 print("\nSorry, invalid input. Please try again!")
                 reload_menu_countdown()
 
-    def habit_analytics_menu(self, habit):
+    def habit_analytics_menu(self, habit: Habit) -> None:
         if choice == "1":
             get_current_streak()
             get_longest_streak_habit()
