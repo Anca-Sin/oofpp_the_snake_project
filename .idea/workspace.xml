@@ -4,9 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c616fd42-f0e1-480b-874e-850f1a6b95b5" name="Changes" comment="Complete save_broken_streak_length() in UserDatabase">
+    <list default="true" id="c616fd42-f0e1-480b-874e-850f1a6b95b5" name="Changes" comment="Implement load_broken_streak_length() in UserDatabase">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/corpus_meta_lunae/user_database.py" beforeDir="false" afterPath="$PROJECT_DIR$/corpus_meta_lunae/user_database.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/corpus_meta_lunae/analytics.py" beforeDir="false" afterPath="$PROJECT_DIR$/corpus_meta_lunae/analytics.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/corpus_meta_lunae/user.py" beforeDir="false" afterPath="$PROJECT_DIR$/corpus_meta_lunae/user.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -75,14 +76,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1739222621736</updated>
-    </task>
-    <task id="LOCAL-00078" summary="Ideas for main menu, renamed main.py">
-      <option name="closed" value="true" />
-      <created>1740355846007</created>
-      <option name="number" value="00078" />
-      <option name="presentableId" value="LOCAL-00078" />
-      <option name="project" value="LOCAL" />
-      <updated>1740355846007</updated>
     </task>
     <task id="LOCAL-00079" summary="Implement start() in HabitTracker class">
       <option name="closed" value="true" />
@@ -468,7 +461,15 @@
       <option name="project" value="LOCAL" />
       <updated>1740855803006</updated>
     </task>
-    <option name="localTasksCounter" value="127" />
+    <task id="LOCAL-00127" summary="Implement load_broken_streak_length() in UserDatabase">
+      <option name="closed" value="true" />
+      <created>1740856791622</created>
+      <option name="number" value="00127" />
+      <option name="presentableId" value="LOCAL-00127" />
+      <option name="project" value="LOCAL" />
+      <updated>1740856791622</updated>
+    </task>
+    <option name="localTasksCounter" value="128" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -495,7 +496,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Refactor to reload_menu_countdown() in helper_functions.py and apply to all methods in HabitTracker" />
     <MESSAGE value="Refactor to reload_menu_countdown() in helper_functions.py and apply to list_daily/weekly_habits() and list_habits() in HabitTracker" />
     <MESSAGE value="Temporary structuring" />
     <MESSAGE value="Remove extra else statements after all choice.isdigit() in menu checks - simplify code, achieves same results" />
@@ -520,6 +520,7 @@
     <MESSAGE value="Implement incomplete average_streak_length_habit() in Analytics -&gt; desired approach requires modifications across the project" />
     <MESSAGE value="Add streak_length_history in streaks table + incomplete save_broken_streak_length() in UserDatabase + calling the method in _is_streak_broken() in Streaks" />
     <MESSAGE value="Complete save_broken_streak_length() in UserDatabase" />
-    <option name="LAST_COMMIT_MESSAGE" value="Complete save_broken_streak_length() in UserDatabase" />
+    <MESSAGE value="Implement load_broken_streak_length() in UserDatabase" />
+    <option name="LAST_COMMIT_MESSAGE" value="Implement load_broken_streak_length() in UserDatabase" />
   </component>
 </project>

@@ -1,5 +1,4 @@
 from .user import User
-from .streaks import Streaks
 from .habit import Habit
 from typing import List
 
@@ -121,9 +120,18 @@ class Analytics:
 
     def average_streak_length_habit(self, habit_name: str) -> float:
         """
-        Calculates the average streak length for a given habit.
+        Calculates the average streak length for a given habit based on its recorded streak length history.
 
         :param habit_name: The name of the habit to analyze.
         :return: The average streak length as a float.
         """
-        # Need to store all streaks history
+        # Get the streak length history string from the db
+        streak_history = self.user.db.load_broken_streak_length(habit_name)
+
+        # If no history exists (empty string)
+        if streak_history == "":
+            return 0.0
+        else:
+            streak_lengths = list(map(int, streak_history.split(",")))
+            average_streak = sum(streak_lengths) / len(streak_lengths)
+            return average_streak
