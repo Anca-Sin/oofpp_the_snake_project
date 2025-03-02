@@ -1,9 +1,8 @@
 import sqlite3
 from typing import List
-# from pathlib import Path
-from .user import User
-# from .habit import Habit
-from .helper_functions import confirm_int_input, reload_menu_countdown
+from core.user import User
+from .db_structure import db_tables
+from helper_functions import confirm_int_input, reload_menu_countdown
 
 
 class Database:
@@ -16,58 +15,21 @@ class Database:
         :param db_filepath: Path to the SQLite database file.
         """
         self.db_filepath = db_filepath
-        self._check_if_table_exists()
+        self._access_db_tables()
 
-    def _connect(self) -> sqlite3.Connection:
+    def connect(self) -> sqlite3.Connection:
         """Establishes a connection to the SQLite database."""
         # sqlite3.connect() -> opens a connection to the SQLite database
         # If the db doesn't exist it will be created automatically
         return sqlite3.connect(self.db_filepath)
 
-    def _check_if_table_exists(self) -> None:
-        """Ensures the required table exists in the db."""
-        connection = self._connect() # Connect to the db
-        cursor = connection.cursor() # Create a cursor object to execute SQL commands
+    def _access_db_tables(self) -> None:
+        """Establishes a connection to the SQLite db for further interactions."""
+        connection = self.check_db_connection() # Upcoming helper function
 
-        # Create the "users" table if it doesn't exist
-        cursor.execute("""
-            CREATE TABLE IF NOT EXISTS users (     
-                id INTEGER PRIMARY KEY AUTOINCREMENT,  -- Auto-incrementing id (int) for each user
-                username TEXT NOT NULL UNIQUE          -- Username (str) cannot be left empty (NOT NULL) 
-            )                                          --   and must be unique
-        """)
+        db_tables(connection) # Access the tables
 
-        # Create the "habits" table if it doesn't exist
-        cursor.execute("""
-            CREATE TABLE IF NOT EXISTS habits (
-                id INTEGER PRIMARY KEY AUTOINCREMENT,
-                user_id INTEGER, 
-                habit_name TEXT NOT NULL,
-                frequency TEXT NOT NULL,
-                creation_date TEXT NOT NULL,
-                completions_count INTEGER, -- Count of completions
-                checked_off_dates TEXT, -- Comma separated check off dates
-                FOREIGN KEY (user_id) REFERENCES users(id) -- Links habits to a specific user in the user table
-            )
-        """)
-
-        # Create the "streaks" table if it doesn't exist
-        cursor.execute("""
-            CREATE TABLE IF NOT EXISTS streaks (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            habit_id INTEGER, 
-            current_streak INTEGER,
-            current_streak_start TEXT,
-            longest_streak INTEGER,
-            longest_streak_start TEXT,
-            longest_streak_end TEXT,
-            streak_length_history TEXT,
-            FOREIGN KEY (habit_id) REFERENCES habits(id) -- Link streak to a habit from the habit table
-            )
-        """)
-
-        connection.commit() # Commit the changes to the db to make sure the tables are created
-        connection.close()  # Close the db connection
+        connection.close()
 
     def load_users(self) -> List[User]:
         """
@@ -75,7 +37,7 @@ class Database:
 
         :return: A list of User objects.
         """
-        connection = self._connect()
+        connection = self.connect()
         cursor = connection.cursor() # Create a cursor to execute the query
 
         # Query to select all users from the "users" table
@@ -99,7 +61,7 @@ class Database:
         :param user: The User object to save.
         :return: The user_id from the db.
         """
-        connection = self._connect()
+        connection = self.connect()
         cursor = connection.cursor()
 
         # Check if the user exists
@@ -187,7 +149,7 @@ class Database:
             reload_menu_countdown()
             return
 
-        connection = self._connect()
+        connection = self.connect()
         cursor = connection.cursor()
 
         # Get the current user's ID
@@ -228,7 +190,7 @@ class Database:
         :param habit_name: The name of the habit whose streak was broken.
         :param streak_length: The length of the streak that was broken.
         """
-        connection = self._connect()
+        connection = self.connect()
         cursor = connection.cursor()
 
         # Retrieve the current streak_length_history for the habit
@@ -257,7 +219,7 @@ class Database:
         :param habit_name:
         :return: The broken streaks' lengths as a list of integers.
         """
-        connection = self._connect()
+        connection = self.connect()
         cursor = connection.cursor()
 
         # Retrieve the streak_length_history for the given habit
