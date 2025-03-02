@@ -1,6 +1,7 @@
-from typing import Any
 import time
 import sqlite3
+
+from typing import Any
 
 def confirm_input(attribute_name: str, value: str) -> str | None:
     """Helper method to confirm input with the user."""
@@ -71,7 +72,3 @@ def close_db_connection(connection):
     """
     if connection:
         connection.close()
-
-def close_db_connection():
-    if connection:
-        connection

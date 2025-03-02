@@ -1,14 +1,13 @@
-from .database import Database
-from helpers.helper_functions import db_connection, close_db_connection
 from cli.main import HabitTracker
-db = Database()
-habit_tracker = HabitTracker()
+from helpers.helper_functions import db_connection, close_db_connection
 
 def db_tables() -> None:
     """
     Ensures the required tables exist in the SQLite db.
     Other functions interact with them to store or retrieve data.
     """
+    habit_tracker = HabitTracker()
+
     connection = db_connection(habit_tracker, habit_tracker.db.db_filepath)  # Connect to the db
     cursor = connection.cursor()  # Create a cursor object to execute SQL commands
 

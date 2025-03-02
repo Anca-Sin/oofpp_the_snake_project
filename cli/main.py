@@ -1,13 +1,21 @@
 # noinspection PyShadowingNames
 
-from core.analytics import Analytics
-from helpers.helper_functions import reload_menu_countdown
-from db_and_managers.database import Database
-from core.habit import Habit
-from core.user import User
-from typing import Optional
 import os
 import time
+
+from typing import Optional
+
+from core.analytics import Analytics
+from core.habit import Habit
+from core.user import User
+from db_and_managers.database import Database
+from helpers.helper_functions import reload_menu_countdown
+
+from .main_menu import *
+from .menu_habits import *
+from .menu_analytics import *
+from .menu_habit_detail import *
+from .menu_my_habit_tracker import *
 
 class HabitTracker:
     """

@@ -1,8 +1,9 @@
 from typing import List
-from core.user import User
-from .db_structure import db_tables
-from helpers.helper_functions import db_connection, close_db_connection, reload_menu_countdown
 
+from core.user import User
+from helpers.helper_functions import *
+
+from db_structure import db_tables
 
 class Database:
     """Handles saving and loading user data to/from an SQLite database."""
@@ -30,7 +31,7 @@ class Database:
 
         :return: A list of User objects.
         """
-        connection = self.connect()
+        connection = db_connection(self, self.db_filepath)
         cursor = connection.cursor() # Create a cursor to execute the query
 
         # Query to select all users from the "users" table
@@ -44,7 +45,7 @@ class Database:
             user = User(username=user_row[1]) # Create an object with the username
             users.append(user)
 
-        connection.close()
+        close_db_connection(connection)
         return users
 
     def save_user(self, user: User) -> int: # Return the user_id to set faster connections, eliminating an extra query.
