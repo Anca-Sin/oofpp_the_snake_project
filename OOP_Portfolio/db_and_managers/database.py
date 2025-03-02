@@ -1,8 +1,8 @@
 import sqlite3
 from typing import List
 from core.user import User
-from db_and_managers.database import Database
-from helper_functions import confirm_int_input, reload_menu_countdown
+from .db_structure import db_tables
+from ..helpers.helper_functions import db_connection, reload_menu_countdown
 
 
 class Database:
@@ -17,14 +17,9 @@ class Database:
         self.db_filepath = db_filepath
         self._access_db_tables()
 
-    def connect(self) -> sqlite3.Connection:
-        """Establishes a connection to the SQLite database."""
-        # sqlite3.connect() -> opens a connection to the SQLite database
-        return sqlite3.connect(self.db_filepath)
-
     def _access_db_tables(self) -> None:
         """Establishes a connection to the SQLite db for further interactions."""
-        connection = self.check_db_connection() # Upcoming helper function
+        db_connection(self, self.db_filepath) # Upcoming helper function
 
         db_tables(connection) # Access the tables
 
