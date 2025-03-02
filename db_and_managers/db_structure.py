@@ -28,7 +28,7 @@ def db_tables() -> None:
             creation_date TEXT NOT NULL,
             completions_count INTEGER, -- Count of completions
             checked_off_dates TEXT, -- Comma separated check off dates
-            FOREIGN KEY (user_id) REFERENCES users(id) -- Links habits to a specific user in the user table
+            FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE -- Links habits to a specific user in the user table
         )
     """)
 
@@ -43,7 +43,7 @@ def db_tables() -> None:
         longest_streak_start TEXT,
         longest_streak_end TEXT,
         streak_length_history TEXT,
-        FOREIGN KEY (habit_id) REFERENCES habits(id) -- Link streak to a habit from the habit table
+        FOREIGN KEY (habit_id) REFERENCES habits(id) ON DELETE CASCADE -- Link streak to a habit from the habit table
         )
     """)
 

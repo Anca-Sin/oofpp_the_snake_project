@@ -101,3 +101,33 @@ def save_user(user: User) -> None:
     connection.commit()
 
     connection.close()
+
+def delete_user(self, selected_user) -> None:
+    """Deletes an user and all associated data."""
+    # Ask for confirmation
+    print(f"""This operation will permanently DELETE:
+        
+    - Your username
+    - All associated habits and data
+
+    """)
+
+    confirmation = input("Type in 'DELETE' if you are sure to proceed (or cancel by pressing ENTER): ")
+
+    if confirmation.lower() != "delete":
+        print("Deletion canceled.")
+        reload_menu_countdown()
+        return # To the main menu
+
+    # If not canceled, continue with deletion
+    connection = db_connection(DB_FILEPATH)
+    cursor = connection.cursor()
+
+    # Delete the user - cascading will delete its associated data
+    cursor.execute("DELETE FROM users WHERE username = ?", (selected_user.username,))
+
+    connection.commit()
+    connection.close()
+
+    print(f"User '{logged_user.username}' and all associated data have been deleted.")
+    reload_menu_countdown()

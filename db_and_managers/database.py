@@ -31,47 +31,8 @@ class Database:
     def select_user(self) -> User:
         return user_db.select_user()
 
-    def delete_user(self, current_user) -> None:
-        """Deletes an user and all associated data."""
-        # Ask for confirmation
-        print(f"""This will delete:
-        - your username
-        - all associated habits and data
-        
-        """)
-        confirmation = input("Type in 'yes' if you are sure to proceed: ")
-
-        if confirmation.lower() != "yes":
-            print("Deletion canceled.")
-            reload_menu_countdown()
-            return
-
-        connection = self.connect()
-        cursor = connection.cursor()
-
-        # Get the current user's ID
-        cursor.execute("SELECT id FROM users WHERE username = ?", (current_user.username,))
-        user_id = cursor.fetchone()[0]
-
-        # Get all habit IDs for this user
-        cursor.execute("SELECT id FROM habit WHERE user_id = ?", (user_id,))
-        habit_ids = [row[0] for row in cursor.fetchall()]
-
-        # Delete streak records
-        for habit_id in habit_ids:
-            cursor.execute("DELETE FROM streaks WHERE habit_id = ?", (habit_id,))
-
-        # Delete habits
-        cursor.execute("DELETE FROM habits WHERE user_id = ?", (user_id,))
-
-        # Delete user
-        cursor.execute("DELETE FROM users WHERE user_id = ?", (user_id,))
-
-        connection.commit()
-        connection.close()
-
-        print(f"User '{current_user.username}' and all associated data have been deleted.")
-        reload_menu_countdown()
+    def delete_user(self, selected_user):
+        return user_db.delete_user(selected_user)
 
     def save_habits(self, user: User) -> None:
         pass

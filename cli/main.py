@@ -27,8 +27,8 @@ class HabitTracker:
         - Connects to the Database (handles storage and retrieval)
         - Optionally handles multiple users, but no login required (just for my exercise)
         """
-        self.db = Database()   # Interacts with the local SQLite DB
-        self.logged_in_user = None # Hypothetical "logged_in"
+        self.db = Database()      # Interacts with the local SQLite DB
+        self.selected_user = None # Hypothetical "logged_in"
         self.analytics = None
 
     def start(self) -> None:
@@ -85,6 +85,7 @@ class HabitTracker:
                 self.load_user_data()
             elif choice == "3":
                 self.db.delete_user(self.logged_in_user)
+                # Back to select user
             elif choice == "4":
                 print("\nUntil next time! Do your best to stay on track!")
             else:
