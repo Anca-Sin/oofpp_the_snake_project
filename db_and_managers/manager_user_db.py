@@ -1,5 +1,5 @@
-from typing import List
 import sys
+from typing import List
 
 # noinspection PyUnresolvedReferences
 from config import DB_FILEPATH
@@ -8,25 +8,25 @@ from core.user import User
 from helpers.helper_functions import *
 
 def load_users() -> List[User]: # For access to all user properties
-        """
-        Loads all users from the db.
+    """
+    Loads all users from the db.
 
-        :return: A list of User objects.
-        """
-        connection = db_connection(DB_FILEPATH)
-        cursor = connection.cursor()
+    :return: A list of User objects.
+    """
+    connection = db_connection(DB_FILEPATH)
+    cursor = connection.cursor()
 
-        # Query to select all users
-        cursor.execute("SELECT id, username FROM users")
-        user_data = cursor.fetchall()
+    # Query to select all users
+    cursor.execute("SELECT username FROM users")
+    user_data = cursor.fetchall()
 
-        users = []
-        for user_row in user_data:
-            user = User(username=user_row[1])
-            users.append(user)
+    users = []
+    for user_row in user_data:
+        user = User(username=user_row[1])
+        users.append(user)
 
-        connection.close()
-        return users
+    connection.close()
+    return users
 
 def select_user() -> User:
     """
