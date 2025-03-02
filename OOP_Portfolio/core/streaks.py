@@ -1,4 +1,4 @@
-from .user_database import UserDatabase
+from ..db_and_managers.database import Database
 
 from datetime import datetime, timedelta, date
 from typing import List
@@ -12,7 +12,7 @@ from typing import List
 class Streaks:
     """Tracks current and longest streaks with basic functionality for now."""
 
-    def __init__(self, db: UserDatabase = None):
+    def __init__(self, db: Database = None):
         self.current_streak: int = 0 # Current streak counter
         self.longest_streak: int = 0 # Longest streak counter
         self.db = db                 # Initialize a db instance

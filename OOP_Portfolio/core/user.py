@@ -1,10 +1,6 @@
-# from datetime import datetime
-from .helper_functions import confirm_input
-from .habit import Habit
 from typing import List
-
-from .user_database import UserDatabase
-
+from ..helpers.helper_functions import confirm_input
+from ..db_and_managers.database import Database
 
 class User:
     """
@@ -15,13 +11,14 @@ class User:
         habits (List[Habit]): A list of habits associated with the user.
     """
 
-    def __init__(self, username: str = "", db: UserDatabase = None) -> None:
+    def __init__(self, username: str = "", db: Database = None) -> None:
         """
         Initializes a User object with a username and an empty list of habits.
 
         :param username: The username which defaults to an empty string if not provided.
         :param db: An instance of Database to interact with the db
         """
+        from .habit import Habit
         self.username: str = username # Unique identifier for the user
         self.habits: List[Habit] = [] # List to store the user's habits
         self.db = db

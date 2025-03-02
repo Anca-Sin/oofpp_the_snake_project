@@ -1,10 +1,10 @@
 # noinspection PyShadowingNames
 
-from .analytics import Analytics
-from .helper_functions import reload_menu_countdown
-from .user_database import UserDatabase
-from .habit import Habit
-from .user import User
+from ..core.analytics import Analytics
+from ..helpers.helper_functions import reload_menu_countdown
+from ..db_and_managers.database import Database
+from ..core.habit import Habit
+from ..core.user import User
 from typing import Optional
 import os
 import time
@@ -20,7 +20,7 @@ class HabitTracker:
         - Connects to the Database (handles storage and retrieval)
         - Optionally handles multiple users, but no login required (just for my exercise)
         """
-        self.db = UserDatabase()   # Interacts with the local SQLite DB
+        self.db = Database()   # Interacts with the local SQLite DB
         self.logged_in_user = None # Hypothetical "logged_in"
         self.analytics = None
 
@@ -471,7 +471,7 @@ class HabitTracker:
 
             elif choice == "5":
                 # Display creation date
-                print(f"\n{habit.name} was created on: {habit.creation_date})
+                print(f"\n{habit.name} was created on: {habit.creation_date}")
                 input("\nPress ENTER to continue...")
 
             elif choice == "6":

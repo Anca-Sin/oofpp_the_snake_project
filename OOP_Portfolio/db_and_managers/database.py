@@ -1,8 +1,8 @@
 import sqlite3
 from typing import List
-from core.user import User
+from ..core.user import User
 from .db_structure import db_tables
-from ..helpers.helper_functions import db_connection, reload_menu_countdown
+from ..helpers.helper_functions import db_connection, close_db_connection, reload_menu_countdown
 
 
 class Database:
@@ -19,11 +19,11 @@ class Database:
 
     def _access_db_tables(self) -> None:
         """Establishes a connection to the SQLite db for further interactions."""
-        db_connection(self, self.db_filepath) # Upcoming helper function
+        connection = db_connection(self, self.db_filepath)
 
-        db_tables(connection) # Access the tables
+        db_tables() # Access the tables
 
-        connection.close()
+        close_db_connection(connection)
 
     def load_users(self) -> List[User]:
         """
@@ -171,11 +171,17 @@ class Database:
         reload_menu_countdown()
 
     def save_habits(self, user: User) -> None:
+        pass
 
-    def complete_habit_today()
-    def complete_habit_past()
-    def delete_completion()
-    def delete_habit()
+    def complete_habit_today(self):
+        pass
+
+    def complete_habit_past(self):
+        pass
+    def delete_completion(self):
+        pass
+    def delete_habit(self):
+        pass
 
     def save_broken_streak_length(self, habit_name: str, streak_length: int) -> None:
         """

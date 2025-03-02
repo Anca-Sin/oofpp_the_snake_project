@@ -1,14 +1,15 @@
-import sqlite3
 from .database import Database
-
+from ..helpers.helper_functions import db_connection, close_db_connection
+from ..cli.main import HabitTracker
 db = Database()
+habit_tracker = HabitTracker()
 
-def db_tables(connection: sqlite3.Connection) -> None:
+def db_tables() -> None:
     """
     Ensures the required tables exist in the SQLite db.
     Other functions interact with them to store or retrieve data.
     """
-    connection = db.connect()     # Connect to the db
+    connection = db_connection(habit_tracker, habit_tracker.db.db_filepath)  # Connect to the db
     cursor = connection.cursor()  # Create a cursor object to execute SQL commands
 
     # Create the "users" table if it doesn't exist
@@ -49,4 +50,4 @@ def db_tables(connection: sqlite3.Connection) -> None:
     """)
 
     connection.commit()  # Commit the changes to the db to make sure the tables are created
-    connection.close()   # Close the db connection
+    close_db_connection(connection)  # Close the db connection
