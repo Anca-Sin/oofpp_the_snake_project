@@ -34,6 +34,10 @@ class HabitTracker:
 
         # Select or create a user
         self.logged_in_user = self.select_user() # Store the returned user
+
+        # Restart if user is "logged off"
+        if self.logged_in_user is None:
+            return
         # Load their data
         self.load_user_data()
         # Initialize analytics after user is loaded

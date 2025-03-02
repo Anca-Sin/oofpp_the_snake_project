@@ -1,5 +1,6 @@
 from typing import Any
 import time
+import sqlite3
 
 def confirm_input(attribute_name: str, value: str) -> str | None:
     """Helper method to confirm input with the user."""
@@ -44,3 +45,20 @@ def reload_menu_countdown() -> None:
     ...
     """)
     time.sleep(1)
+
+def db_connection(instance, db_filepath = "habit_tracker.db"):
+    """
+    Attempts to connect to the db.
+    If connection fails, "logs user off" (hypothetically).
+    :return: The active connection or None if connection fails.
+    """
+    try:
+        connection = sqlite3.connect(db_filepath)
+        return connection
+    except sqlite3.Error as e:
+        print(f"Database connection error: {e}")
+        time.sleep(1)
+        print("... logging you off...")
+        time.sleep(1)
+        instance.logged_in_user = None
+        return None
