@@ -1,4 +1,4 @@
-from ..db_and_managers.database import Database
+from db_and_managers.database import Database
 
 from datetime import datetime, timedelta, date
 from typing import List

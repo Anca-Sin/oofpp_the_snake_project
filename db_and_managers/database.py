@@ -1,8 +1,7 @@
-import sqlite3
 from typing import List
-from ..core.user import User
+from core.user import User
 from .db_structure import db_tables
-from ..helpers.helper_functions import db_connection, close_db_connection, reload_menu_countdown
+from helpers.helper_functions import db_connection, close_db_connection, reload_menu_countdown
 
 
 class Database:

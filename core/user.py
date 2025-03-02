@@ -1,6 +1,6 @@
 from typing import List
-from ..helpers.helper_functions import confirm_input
-from ..db_and_managers.database import Database
+from helpers.helper_functions import confirm_input
+from db_and_managers.database import Database
 
 class User:
     """

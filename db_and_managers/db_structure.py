@@ -1,6 +1,6 @@
 from .database import Database
-from ..helpers.helper_functions import db_connection, close_db_connection
-from ..cli.main import HabitTracker
+from helpers.helper_functions import db_connection, close_db_connection
+from cli.main import HabitTracker
 db = Database()
 habit_tracker = HabitTracker()
 
