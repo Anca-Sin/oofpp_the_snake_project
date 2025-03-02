@@ -102,7 +102,7 @@ def save_user(user: User) -> None:
 
     connection.close()
 
-def delete_user(self, selected_user) -> None:
+def delete_user(selected_user) -> None:
     """Deletes an user and all associated data."""
     # Ask for confirmation
     print(f"""This operation will permanently DELETE:
@@ -129,5 +129,5 @@ def delete_user(self, selected_user) -> None:
     connection.commit()
     connection.close()
 
-    print(f"User '{logged_user.username}' and all associated data have been deleted.")
+    print(f"User '{selected_user.username}' and all associated data have been deleted.")
     reload_menu_countdown()
