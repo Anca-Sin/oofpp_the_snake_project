@@ -1,5 +1,8 @@
+import os
 import time
 import sqlite3
+
+from config import DB_FILEPATH
 
 from typing import Any
 
@@ -47,14 +50,14 @@ def reload_menu_countdown() -> None:
     """)
     time.sleep(1)
 
-def db_connection(instance, db_filepath = "habit_tracker.db"):
+def db_connection(instance):
     """
     Attempts to connect to the db.
     If connection fails, "logs user off" (hypothetically).
     :return: The active connection or None if connection fails.
     """
     try:
-        connection = sqlite3.connect(db_filepath)
+        connection = sqlite3.connect(DB_FILEPATH)
         return connection
     except sqlite3.Error as e:
         print(f"Database connection error: {e}")
@@ -64,11 +67,6 @@ def db_connection(instance, db_filepath = "habit_tracker.db"):
         instance.logged_in_user = None
         return None
 
-def close_db_connection(connection):
-    """
-    Closes the db connection.
-    :param connection: The active db connection.
-    :return:
-    """
-    if connection:
-        connection.close()
+def reload_cli():
+    """Used to refresh the cli across various operations."""
+    os.system('cls' if os.name == 'nt' else 'clear')

@@ -1,6 +1,5 @@
 # noinspection PyShadowingNames
 
-import os
 import time
 
 from typing import Optional
@@ -9,7 +8,7 @@ from core.analytics import Analytics
 from core.habit import Habit
 from core.user import User
 from db_and_managers.database import Database
-from helpers.helper_functions import reload_menu_countdown
+from helpers.helper_functions import *
 
 from .main_menu import *
 from .menu_habits import *

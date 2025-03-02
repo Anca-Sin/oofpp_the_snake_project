@@ -1,0 +1,12 @@
+Initial setup:
+config.py: DB_FILEPATH = "habit_tracker.db"
+
+When Database is initialized:
+database.py: Database.__init__(db_filepath="custom.db")
+    --> calls set_db_filepath("custom.db")
+        --> updates config.py: DB_FILEPATH = "custom.db" --> What db to use if nothing else is specified
+
+When other functions need the database:
+db_structure.py, manager_user_db.py, etc:
+    --> import DB_FILEPATH from config
+    --> use sqlite3.connect(DB_FILEPATH)                 --> What to use if the user doesn't specify when creating a db
