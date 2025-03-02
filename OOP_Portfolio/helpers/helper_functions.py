@@ -62,3 +62,16 @@ def db_connection(instance, db_filepath = "habit_tracker.db"):
         time.sleep(1)
         instance.logged_in_user = None
         return None
+
+def close_db_connection(connection):
+    """
+    Closes the db connection.
+    :param connection: The active db connection.
+    :return:
+    """
+    if connection:
+        connection.close()
+
+def close_db_connection():
+    if connection:
+        connection
