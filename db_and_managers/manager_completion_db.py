@@ -1,7 +1,5 @@
 from datetime import datetime
 
-from config import DB_FILEPATH
-
 from manager_habit_db import save_habits
 from core.user import User
 from core.habit import Habit
@@ -23,9 +21,17 @@ def complete_habit_past(selected_user: User, habit: Habit) -> None:
     """Marks a habit as completed for a past date."""
     current_date = datetime.now().date()
 
+
+    # Prompt for the date of the past completion or ENTER to exit
     while True:
         reload_cli()
-        date_str = input(f"Enter the date for completion (YYYY-MM-DD): ").strip()
+        date_str = input(f"\nEnter the date to delete for '{habit.name}' (YYYY-MM-DD) or ENTER to exit: ").strip()
+
+        # If the user presses ENTER without any date, exit
+        if not date_str:
+            print("Exiting past completion menu.")
+            reload_menu_countdown()
+            return
 
         try:
             # Attempt to parse the date
@@ -35,7 +41,7 @@ def complete_habit_past(selected_user: User, habit: Habit) -> None:
             if completion_date > current_date:
                 print("Cannot complete habits for future dates!")
                 reload_menu_countdown()
-                return
+                continue
 
             # Check if this date already has a completion
             # Let the user exit this "menu" if he wants
@@ -50,12 +56,13 @@ def complete_habit_past(selected_user: User, habit: Habit) -> None:
                 choice = input("\nEnter your choice (1-2): ").strip()
 
                 if choice == "1":
-                    return
+                    continue
                 elif choice == "2":
-                    habit_detail_menu
+                    return
                 else:
                     print("\nSorry, invalid input. Please try again!")
                     reload_menu_countdown()
+                    continue
 
             # If valid, confirm and break the loop
             else:
@@ -66,9 +73,57 @@ def complete_habit_past(selected_user: User, habit: Habit) -> None:
                     save_habits(selected_user)
                     print(f"'{habit.name}' has been completed for {date_str}!")
                     reload_menu_countdown()
-                    break
+                    return
 
         except ValueError:
             print("Invalid date format! Please use YYYY-MM-DD format!")
             reload_menu_countdown()
             continue
+
+def delete_completion(selected_user: User, habit: Habit) -> None:
+    """Deletes a completion for a habit."""
+    # Check if there are no completions to delete
+    if not habit.completion_dates:
+        print(f"No completions found for '{habit.name}'")
+        reload_menu_countdown()
+        return
+
+    # Prompt for the date of the completion to delete or ENTER to exit
+    while True:
+        reload_cli()
+        date_str = input(f"\nEnter the date to delete for '{habit.name}' (YYYY-MM-DD) or ENTER to exit: ").strip()
+
+        # If the user presses ENTER without any date, exit
+        if not date_str:
+            print("Exiting the deletion menu.")
+            reload_menu_countdown()
+            return
+
+        try:
+            # Parse the entered date
+            completion_date = datetime.strptime(date_str, "%Y-%m-%d").date()
+
+            # Check if the entered date exists in the completion_dates
+            if completion_date in habit.completion_dates:
+                # Confirm deletion
+                if confirm_input("completion date", date_str):
+                    # Remove the completion
+                    habit.completion_dates.remove(completion_date)
+                    habit.streaks.get_current_streak(habit.frequency, habit.completion_dates)
+                    save_habits(selected_user)
+
+                    print(f"Completion on {date_str} has been deleted!")
+                    break
+
+            else:
+                print(f"Completion for {date_str} not found. Try again!")
+                reload_menu_countdown()
+                continue
+
+        except ValueError:
+            print("Invalid date format! Please use YYYY-MM-DD format!")
+            reload_menu_countdown()
+            continue
+
+    reload_menu_countdown()
+    return
