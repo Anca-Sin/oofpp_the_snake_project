@@ -7,13 +7,6 @@ from core.habit import Habit
 from core.streaks import Streaks
 from helpers.helper_functions import db_connection
 
-"""
-add habit
-load habits
-save habits
-delete habit
-"""
-
 def load_habits(selected_user) -> List[Habit]:
     """
     Loads all habits for the selected user.
@@ -162,6 +155,30 @@ def save_habits(selected_user) -> None:
         else:
             # Insert new habit
             add_habit(selected_user, habit)
+
+    connection.commit()
+    connection.close()
+
+def delete_habit(selected_user, habit: Habit) -> None:
+    """
+    Deletes a habit and its associated data from the db.
+
+    :param selected_user: The User object whose habit to delete.
+    :param habit: The Habit object to delete.
+    """
+    connection = db_connection(DB_FILEPATH)
+    cursor = connection.cursor()
+
+    # Find the habit ID
+    cursor.execute("""
+        SELECT id FROM habits
+        WHERE user_id = ? AND habit_name = ?
+    """, (selected_user.user_id, habit.name))
+
+    habit_id = cursor.fetchone()[0]
+
+    # Delete all information, including streaks, on cascade
+    cursor.execute("DELETE FROM habits WHERE id = ?", (habit_id,))
 
     connection.commit()
     connection.close()

@@ -48,8 +48,19 @@ class Database:
         """Loads all habits for a user."""
         selected_user.habits = habit_db.load_habits(selected_user)
 
-    def save_habits(self, user: User) -> None:
-        pass
+    def add_habit(self, selected_user: User, habit: Habit) -> None:
+        """Adds a new habit to the db."""
+        habit_db.add_habit(selected_user, habit)
+
+    def save_habits(self, selected_user: User) -> None:
+        """Saves all habit modifications for a user."""
+        habit_db.save_habits(selected_user)
+
+    def delete_habit(self, selected_user: User, habit: Habit) -> None:
+        """Deletes a habit from the user's data."""
+        habit_db.delete_habit(selected_user, habit)
+
+    # Completion related methods
 
     def complete_habit_today(self):
         pass
