@@ -1,11 +1,12 @@
-from typing import List
+from typing import List, Optional
 
 from config import set_db_filepath
 
 from core.user import User
-from helpers.helper_functions import reload_menu_countdown
+from core.habit import Habit
 
 import manager_user_db as user_db
+import manager_habit_db as habit_db
 
 # noinspection PyMethodMayBeStatic
 class Database:
@@ -18,6 +19,7 @@ class Database:
         :param db_filepath: Path to the SQLite database file.
         """
         self.db_filepath = db_filepath # Store the filepath as an instance attribute
+        self.user_id = None            # Current user's ID (set when a user is selected)
         set_db_filepath(db_filepath)   # Set the global configuration
         # Initialize db tables
         from db_structure import db_tables
@@ -25,14 +27,26 @@ class Database:
 
     # Using instance methods for consistent API, despite not using self
 
+    # User related methods
     def load_users(self) -> List[User]:
+        """Loads all users from the database."""
         return user_db.load_users()
 
-    def select_user(self) -> User:
+    def select_user(self) -> Optional[User]:
+        """Prompts user to select an existing user or create a new one."""
+        selected_user = user_db.select_user()
+        if selected_user:
+            self.user_id = selected_user.user_id
         return user_db.select_user()
 
-    def delete_user(self, selected_user):
+    def delete_user(self, selected_user: User) -> None:
+        """Deletes selected user and all their data."""
         return user_db.delete_user(selected_user)
+
+    # Habit related methods
+    def load_habits(self, selected_user: User) -> None:
+        """Loads all habits for a user."""
+        selected_user.habits = habit_db.load_habits(selected_user)
 
     def save_habits(self, user: User) -> None:
         pass

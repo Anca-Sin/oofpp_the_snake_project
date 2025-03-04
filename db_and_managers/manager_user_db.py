@@ -17,12 +17,12 @@ def load_users() -> List[User]: # For access to all user properties
     cursor = connection.cursor()
 
     # Query to select all users
-    cursor.execute("SELECT username FROM users")
+    cursor.execute("SELECT id, username FROM users")
     user_data = cursor.fetchall()
 
     users = []
     for user_row in user_data:
-        user = User(username=user_row[1])
+        user = User(user_id=user_data[0], username=user_row[1])
         users.append(user)
 
     connection.close()

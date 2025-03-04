@@ -11,7 +11,7 @@ class User:
         habits (List[Habit]): A list of habits associated with the user.
     """
 
-    def __init__(self, username: str = "", db: Database = None) -> None:
+    def __init__(self, username: str = "", user_id: int = None, db: Database = None) -> None:
         """
         Initializes a User object with a username and an empty list of habits.
 
@@ -19,7 +19,8 @@ class User:
         :param db: An instance of Database to interact with the db
         """
         from .habit import Habit
-        self.username: str = username # Unique identifier for the user
+        self.username: str = username
+        self.user_id = user_id
         self.habits: List[Habit] = [] # List to store the user's habits
         self.db = db
 
