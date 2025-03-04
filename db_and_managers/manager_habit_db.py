@@ -33,15 +33,13 @@ def load_habits(selected_user) -> List[Habit]:
     """, (selected_user.user_id,))
 
     habit_data = cursor.fetchall()
-    habits = []
+    habits = [] # List to hold Habit objects
 
     for habit_row in habit_data:
         habit_id = habit_row[0]
         habit = Habit()
         habit.name = habit_row[2]
-        habits.append(habit)
         habit.frequency = habit_row[3]
-
         # Convert creation date to datetime.date object
         habit.creation = datetime.strptime(habit_row[4], "%Y-%m-%d").date()
 
@@ -54,6 +52,8 @@ def load_habits(selected_user) -> List[Habit]:
                 for date_str in checked_off_dates.split(",")
             ]
 
+        habits.append(habit)
+
         # Load streak data
         cursor.execute("""
             SELECT current_streak, longest_streak, streak_length_history
@@ -64,10 +64,8 @@ def load_habits(selected_user) -> List[Habit]:
         streak_data = cursor.fetchone()
         if streak_data:
             habit.streaks = Streaks(selected_user.db)
-            habit.streaks.current_streak = streak_data[0] or 0
+            habit.streaks.current_streak = streak_data[0] or 0 # Default to 0 if None
             habit.streaks.longest_streak = streak_data[1] or 0
-
-        habits.append(habit)
 
     connection.close()
     return habits
@@ -97,7 +95,7 @@ def add_habit(selected_user, habit: Habit) -> None:
         creation_date_str,
         len(habit.completion_dates),
         ",".join(completion_date.strftime("%Y-%m-%d") for completion_date in habit.completion_dates)
-        if habit.completion_dates else ""
+        if habit.completion_dates else "" # Store the completion dates as a comma separated string
     ))
 
     # Get the habit ID
@@ -111,8 +109,59 @@ def add_habit(selected_user, habit: Habit) -> None:
         habit_id,
         habit.streaks.current_streak,
         habit.streaks.longest_streak,
-        ""
+        "" # Initialize streak history as an empty string
     ))
+
+    connection.commit()
+    connection.close()
+
+def save_habits(selected_user) -> None:
+    """
+    Saves all habits for a user to the db.
+
+    :param selected_user: The User object whose habits to save/update.
+    """
+    connection = db_connection(DB_FILEPATH)
+    cursor = connection.cursor()
+
+    # For each habit in the user's habit list
+    for habit in selected_user.habits:
+        # Check if the habit already exists
+        cursor.execute("""
+            SELECT id FROM habits
+            WHERE user_id = ? AND habit_name =?
+        """, (selected_user.user_id, habit.name))
+
+        result = cursor.fetchone()
+
+        if result:
+            # If the habit exists, update it
+            habit_id = result[0]
+            cursor.execute("""
+                UPDATE habits
+                SET completions_count = ?, checked_off_dates = ?
+                WHERE id = ?
+            """, (
+                len(habit.completion_dates), # Update number of completions
+                ",".join(completion_date.strftime("%Y-%m-%d") for completion_date in habit.completion_dates)
+                    if habit.completion_dates else "", # Update completion dates
+                habit_id
+            ))
+
+            # Update streak data
+            cursor.execute("""
+                UPDATE streaks
+                SET current_streak = ?, longest_streak = ?
+                WHERE habit_id = ?
+            """, (
+                habit.streaks.current_streak,
+                habit.streaks.longest_streak,
+                habit_id
+            ))
+
+        else:
+            # Insert new habit
+            add_habit(selected_user, habit)
 
     connection.commit()
     connection.close()
