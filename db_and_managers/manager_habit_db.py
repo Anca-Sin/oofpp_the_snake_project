@@ -71,3 +71,48 @@ def load_habits(selected_user) -> List[Habit]:
 
     connection.close()
     return habits
+
+def add_habit(selected_user, habit: Habit) -> None:
+    """
+    Adds a new habit to the user's db.
+
+    :param selected_user: The User object to associate the habit with.
+    :param habit: The Habit object to add.
+    """
+    connection = db_connection(DB_FILEPATH)
+    cursor = connection.cursor()
+
+    # Format creation date for storage
+    creation_date_str = habit.creation.strftime("%Y-%m-%d")
+
+    # Insert the habit
+    cursor.execute("""
+        INSERT INTO habits (user_id, habit_name, frequency, creation_date,
+        completions_count, checked_off_dates)
+        VALUES (?, ?, ?, ?, ?, ?)
+    """, (
+        selected_user.user_id,
+        habit.name,
+        habit.frequency,
+        creation_date_str,
+        len(habit.completion_dates),
+        ",".join(completion_date.strftime("%Y-%m-%d") for completion_date in habit.completion_dates)
+        if habit.completion_dates else ""
+    ))
+
+    # Get the habit ID
+    habit_id = cursor.lastrowid
+
+    # Initialize streak record
+    cursor.execute("""
+        INSERT INTO streaks (habit_id, current_streak, longest_streak, streak_length_history)
+        VALUES (?, ?, ?, ?)
+    """, (
+        habit_id,
+        habit.streaks.current_streak,
+        habit.streaks.longest_streak,
+        ""
+    ))
+
+    connection.commit()
+    connection.close()
