@@ -38,10 +38,7 @@ def db_tables() -> None:
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         habit_id INTEGER, 
         current_streak INTEGER,
-        current_streak_start TEXT,
         longest_streak INTEGER,
-        longest_streak_start TEXT,
-        longest_streak_end TEXT,
         streak_length_history TEXT,
         FOREIGN KEY (habit_id) REFERENCES habits(id) ON DELETE CASCADE -- Link streak to a habit from the habit table
         )

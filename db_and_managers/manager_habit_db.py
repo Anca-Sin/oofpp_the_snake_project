@@ -45,7 +45,8 @@ def load_habits(selected_user) -> List[Habit]:
                 for date_str in checked_off_dates.split(",")
             ]
 
-        habits.append(habit)
+        # Initialize streaks
+        habit.streaks = Streaks()
 
         # Load streak data
         cursor.execute("""
@@ -56,9 +57,15 @@ def load_habits(selected_user) -> List[Habit]:
 
         streak_data = cursor.fetchone()
         if streak_data:
-            habit.streaks = Streaks(selected_user.db)
+            habit.streaks = Streaks()
             habit.streaks.current_streak = streak_data[0] or 0 # Default to 0 if None
             habit.streaks.longest_streak = streak_data[1] or 0
+            # Load broken streak history
+            streak_history = streak_data[2]
+            if streak_history and streak_history.strip():
+                habit.streaks.broken_streak_length = [int(streak) for streak in streak_history.split(",")]
+
+        habits.append(habit)
 
     connection.close()
     return habits
@@ -141,14 +148,20 @@ def save_habits(selected_user) -> None:
                 habit_id
             ))
 
-            # Update streak data
+            # Update streak data including broken streak history
+            # Convert broken_streak_length list to a comma separated string
+            streak_history = ""
+            if habit.streaks.broken_streak_length:
+                streak_history = ",".join(map(str, habit.streaks.broken_streak_length))
+
             cursor.execute("""
                 UPDATE streaks
-                SET current_streak = ?, longest_streak = ?
+                SET current_streak = ?, longest_streak = ?, streak_length_history = ?
                 WHERE habit_id = ?
             """, (
                 habit.streaks.current_streak,
                 habit.streaks.longest_streak,
+                streak_history,
                 habit_id
             ))
 

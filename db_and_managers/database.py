@@ -7,6 +7,7 @@ from core.habit import Habit
 
 import manager_user_db as user_db
 import manager_habit_db as habit_db
+import manager_completion_db as completion_db
 
 # noinspection PyMethodMayBeStatic
 class Database:
@@ -61,65 +62,14 @@ class Database:
         habit_db.delete_habit(selected_user, habit)
 
     # Completion related methods
+    def complete_habit_today(self, selected_user: User, habit: Habit) -> None:
+        """Marks a habit as complete for today."""
+        completion_db.complete_habit_today(selected_user, habit)
 
-    def complete_habit_today(self):
-        pass
+    def complete_habit_past(self, selected_user: User, habit: Habit) -> None:
+        """Marks a habit as complete for a past date."""
+        completion_db.complete_habit_past(selected_user, habit)
 
-    def complete_habit_past(self):
-        pass
-    def delete_completion(self):
-        pass
-    def delete_habit(self):
-        pass
-
-    def save_broken_streak_length(self, habit_name: str, streak_length: int) -> None:
-        """
-        When a streak is broken, this method records the length and stores it the db.
-
-        :param habit_name: The name of the habit whose streak was broken.
-        :param streak_length: The length of the streak that was broken.
-        """
-        connection = self.connect()
-        cursor = connection.cursor()
-
-        # Retrieve the current streak_length_history for the habit
-        cursor.execute("SELECT streak_length_history FROM streaks WHERE habit_name = ?", (habit_name,))
-        result = cursor.fetchone()
-
-        if result[0]: # If there's an existing streak history
-            streak_history = result[0] + f",{streak_length}" # Append the new streak length
-        else: # If no streak history exists
-            streak_history = str(streak_length) # Initialize it
-
-        # Update the streak_length history in the db
-        cursor.execute("""
-            UPDATE streaks
-            SET streak_length_history = ?
-            WHERE habit_name = ?
-        """, (streak_history, habit_name))
-
-        connection.commit()
-        connection.close()
-
-    def load_broken_streak_length(self, habit_name: str) -> str:
-        """
-        Loads streak_length_history for a given habit from the db.
-
-        :param habit_name:
-        :return: The broken streaks' lengths as a list of integers.
-        """
-        connection = self.connect()
-        cursor = connection.cursor()
-
-        # Retrieve the streak_length_history for the given habit
-        cursor.execute("SELECT streak_length_history FROM streaks WHERE habit_name = ?", (habit_name,))
-        result = cursor.fetchone()
-
-        connection.close()
-
-        # If streak_length_history is empty or NULL
-        if not result[0]:
-            return "" # Return an empty string
-        else:
-            return result[0] # Return the streak_length_history string
-
+    def delete_completion(self, selected_user: User, habit: Habit) -> None:
+        """Deletes a completion for a habit."""
+        completion_db.delete_completion(selected_user, habit)
