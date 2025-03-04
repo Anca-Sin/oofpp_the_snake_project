@@ -85,8 +85,8 @@ class Habit:
 
         # Add today's date to completions if it's not already completed
         self.completion_dates.append(current_date.date())
-        print(f"'{self.name.title()}' checked off successfully!")
+        print(f"'{self.name.title()}' completed for today successfully!")
 
         # Calculate current streak
-        self.streaks.calculate_current_streak(self.frequency, self.completion_dates)
+        self.streaks.get_current_streak(self.frequency, self.completion_dates)
         return True
