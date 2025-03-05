@@ -12,7 +12,7 @@ def main_menu(ht) -> None:
     """
     Displays the main menu and handles user navigation.
 
-    :param ht: The Habit Tracker instance.
+    :param ht: The HabitTracker instance.
     """
     while True:
         reload_cli()
