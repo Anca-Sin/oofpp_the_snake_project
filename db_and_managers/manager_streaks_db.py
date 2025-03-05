@@ -18,7 +18,7 @@ def load_broken_streak_length(habit_name: str) -> str:
     cursor.execute("""
         SELECT streak_length_history
         FROM streaks
-        JOIN habits ON streaks.habit_id = habit.id
+        JOIN habits ON streaks.habit_id = habits.id
         WHERE habits.habit_name = ?
     """, (habit_name,))
 

@@ -11,7 +11,7 @@ from cli.main_menu import main_menu
 def confirm_input(attribute_name: str, value: str) -> str | None:
     """Helper method to confirm input with the user."""
     while True:
-        print(f"You entered '{value}'. Is this correct? (yes/no):")
+        print(f"You entered '{value}'. Is this correct? (yes/no): ")
         confirmation = input().lower().strip()
         if confirmation == "yes":
             print(f"You've successfully stored {value.title()} as your {attribute_name}!")

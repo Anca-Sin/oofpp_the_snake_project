@@ -1,4 +1,5 @@
 from typing import List
+
 from helpers.helper_functions import confirm_input
 from db_and_managers.database import Database
 
@@ -6,32 +7,47 @@ class User:
     """
     Represents a user in the habit tracking system.
 
+    The User class serves as the central entity that owns habits and interacts with the db.
+    Each user has a unique username and user_id.
+
     Attributes:
-        username (str): The username the user registers to use.
+        username (str): The username of the user.
+        user_id (int): The unique db ID for this user.
         habits (List[Habit]): A list of habits associated with the user.
+        db (Database): Reference to the db instance for operations.
     """
 
     def __init__(self, username: str = "", user_id: int = None, db: Database = None) -> None:
         """
         Initializes a User object with a username and an empty list of habits.
 
-        :param username: The username which defaults to an empty string if not provided.
-        :param db: An instance of Database to interact with the db
+        Args:
+            username: The username the user chooses.
+            user_id: The db ID for this user.
+            db: An instance of Database to interact with the db
         """
-        from .habit import Habit
+        from .habit import Habit      # Avoiding circular imports
         self.username: str = username
         self.user_id = user_id
-        self.habits: List[Habit] = [] # List to store the user's habits
-        self.db = db
+        self.habits: List[Habit] = [] # Starts with an empty list of habits
+        self.db = db                  # Assign db instance for data operations
 
     def create_username(self) -> None:
-        """Prompts the user to type in a desired username."""
+        """
+        Prompts the user to type in a desired username and confirms their choice.
+
+        This method handles user input, validation, and confirmation in a loop
+        until a valid username is confirmed by the user.
+        """
         while True:
+            # Ask user for input
             print("Please type in your desired username:")
             username = input().title()
+
             # Confirm the choice
             confirmed_username = confirm_input("username", username)
 
-            if confirmed_username is not None: # If user confirmed with "yes"
+            # If the choice is confirmed
+            if confirmed_username is not None:
                 self.username = confirmed_username
-                return
+                return # Exit the method after setting the username
