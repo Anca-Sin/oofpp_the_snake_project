@@ -8,6 +8,7 @@ from core.habit import Habit
 import manager_user_db as user_db
 import manager_habit_db as habit_db
 import manager_completion_db as completion_db
+import manager_streaks_db as streaks_db
 
 # noinspection PyMethodMayBeStatic
 class Database:
@@ -73,3 +74,13 @@ class Database:
     def delete_completion(self, selected_user: User, habit: Habit) -> None:
         """Deletes a completion for a habit."""
         completion_db.delete_completion(selected_user, habit)
+
+    # Streak related methods
+    def load_broken_streak_length(self, habit_name: str) -> str:
+        """
+        Loads broken streak length history for a given habit.
+
+        :param habit_name: Name of the habit
+        :return: Comma separated string of broken streak lengths.
+        """
+        return streaks_db.load_broken_streak_length(habit_name)
