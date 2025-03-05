@@ -1,10 +1,12 @@
 import os
+import sys
 import time
 import sqlite3
+from typing import Any
 
 from config import DB_FILEPATH
 
-from typing import Any
+from cli.main_menu import main_menu
 
 def confirm_input(attribute_name: str, value: str) -> str | None:
     """Helper method to confirm input with the user."""
@@ -53,19 +55,44 @@ def reload_menu_countdown() -> None:
 def db_connection(instance):
     """
     Attempts to connect to the db.
-    If connection fails, "logs user off" (hypothetically).
-    :return: The active connection or None if connection fails.
+    If connection fails, prompts the user with retry options.
+
+    :param instance: The HabitTracker instance.
+    :return: Connection object or None
     """
     try:
-        connection = sqlite3.connect(DB_FILEPATH)
-        return connection
+        return sqlite3.connect(DB_FILEPATH)
     except sqlite3.Error as e:
         print(f"Database connection error: {e}")
         time.sleep(1)
-        print("... logging you off...")
+        print("Failed to connect to the database.")
         time.sleep(1)
-        instance.logged_in_user = None
-        return None
+
+        while True:
+            reload_cli()
+            print("""\nOptions:
+            1. Retry database connection
+            2. Return to main menu
+            3. Exit the application
+            """)
+
+            choice = input("\nEnter your choice (1-3): ").strip()
+
+            if choice == "1":
+                print("Trying to re-establish your connection...")
+                return db_connection(instance)
+            elif choice == "2":
+                print("Returning to main menu...")
+                time.sleep(1)
+                main_menu(instance)
+                return
+            elif choice == "3":
+                print("Goodbye! Remember to stay on track!")
+                time.sleep(1)
+                sys.exit(0)
+            else:
+                print("\Invalid input. Please try again!")
+                reload_menu_countdown()
 
 def reload_cli():
     """Used to refresh the cli across various operations."""

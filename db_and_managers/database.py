@@ -38,7 +38,7 @@ class Database:
         selected_user = user_db.select_user()
         if selected_user:
             self.user_id = selected_user.user_id
-        return user_db.select_user()
+        return selected_user
 
     def delete_user(self, selected_user: User) -> None:
         """Deletes selected user and all their data."""

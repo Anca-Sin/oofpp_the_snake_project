@@ -53,6 +53,7 @@ def select_user() -> User:
                 selected_user = User()
                 selected_user.create_username()
                 save_user(selected_user)
+                print(f"You've created user: {selected_user.username}")
                 return selected_user
             elif choice == "2":
                 sys.exit() # Close the app
@@ -69,8 +70,11 @@ def select_user() -> User:
             for idx, user in enumerate(users, 1):
                 print(f"{idx}. {user.username}")
 
+            # Last option: Create new user
+            print(f"{len(users) + 1}. Create a new user")
+
             # Ask user for a choice
-            choice = input(f"Enter your choice (1-{len(users)}): ").strip()
+            choice = input(f"Enter your choice (1-{len(users) + 1}): ").strip()
 
             if choice.isdigit() and 1 <= int(choice) <= len(users):
                 # Confirm the choice
@@ -79,6 +83,14 @@ def select_user() -> User:
                 # If the choice was confirmed, get the corresponding user
                 selected_user = users[int(confirmed_choice) - 1]  # Adjust index since user listing starts from 1
                 print(f"You've selected: {selected_user.username}")
+                return selected_user
+
+            elif int(choice) == len(users) + 1:
+                # Create new user
+                selected_user = User()
+                selected_user.create_username()
+                save_user(selected_user)
+                print(f"You've created user: {selected_user.username}")
                 return selected_user
 
             else:
