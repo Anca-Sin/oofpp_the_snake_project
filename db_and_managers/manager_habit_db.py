@@ -70,19 +70,20 @@ def load_habits(selected_user) -> List[Habit]:
     connection.close()
     return habits
 
-def new_habit(selected_user, habit: Habit) -> None:
+def new_habit(selected_user, set_frequency: str = None) -> None:
     """
     Adds a new habit to the user's db.
 
     :param selected_user: The User object to associate the habit with.
-    :param habit: The Habit object to add.
+    :param set_frequency: Optional preset frequency for the habit ("daily" or "weekly").
     """
     connection = db_connection(DB_FILEPATH)
     cursor = connection.cursor()
 
     habit = Habit()
     habit.habit_name()
-    habit.habit_frequency()
+    # Set frequency using preset if provided
+    habit.habit_frequency(preset_frequency=set_frequency)
     habit.creation_date()
 
     # Format creation date for storage

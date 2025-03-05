@@ -28,8 +28,19 @@ class Habit:
                 self.name = confirmed_habit
                 return
 
-    def habit_frequency(self) -> None:
-        """Prompts the user to assign their habit's frequency."""
+    def habit_frequency(self, preset_frequency: Optional[str] = None) -> None:
+        """
+        Sets the habit's frequency. If preset_frequency is provided,
+        use that value directly; otherwise prompt the user.
+
+        :param preset_frequency: Optional preset frequency value ("daily" or "weekly).
+        """
+        if preset_frequency in ["daily", "weekly"]:
+            # Use the preset frequency without prompting
+            self.frequency = preset_frequency
+            print(f"Frequency automatically set to {preset_frequency}.")
+
+        # If no preset, prompt the user
         while True:
             print("Please type in 'Daily' or 'Weekly'")
             habit_frequency = input().lower()
@@ -42,8 +53,8 @@ class Habit:
                     self.frequency = confirmed_frequency
                     return
 
-            # Handle miss-spelling
             else:
+                # Handle miss-spelling
                 print("Invalid Input. Pleas enter 'Daily' or 'Weekly'!")
 
     def creation_date(self) -> None:
