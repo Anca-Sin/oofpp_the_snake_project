@@ -70,7 +70,7 @@ def load_habits(selected_user) -> List[Habit]:
     connection.close()
     return habits
 
-def add_habit(selected_user, habit: Habit) -> None:
+def new_habit(selected_user, habit: Habit) -> None:
     """
     Adds a new habit to the user's db.
 
@@ -80,9 +80,15 @@ def add_habit(selected_user, habit: Habit) -> None:
     connection = db_connection(DB_FILEPATH)
     cursor = connection.cursor()
 
+    habit = Habit()
+    habit.habit_name()
+    habit.habit_frequency()
+    habit.creation_date()
+
     # Format creation date for storage
     creation_date_str = habit.creation.strftime("%Y-%m-%d")
 
+    # Convert completion dates to a comma-separated
     # Insert the habit
     cursor.execute("""
         INSERT INTO habits (user_id, habit_name, frequency, creation_date,
@@ -93,9 +99,8 @@ def add_habit(selected_user, habit: Habit) -> None:
         habit.name,
         habit.frequency,
         creation_date_str,
-        len(habit.completion_dates),
-        ",".join(completion_date.strftime("%Y-%m-%d") for completion_date in habit.completion_dates)
-        if habit.completion_dates else "" # Store the completion dates as a comma separated string
+        0, # Initialize completion counts as 0
+        "" # Initialize check_off_dates as an empty string
     ))
 
     # Get the habit ID
@@ -107,8 +112,8 @@ def add_habit(selected_user, habit: Habit) -> None:
         VALUES (?, ?, ?, ?)
     """, (
         habit_id,
-        habit.streaks.current_streak,
-        habit.streaks.longest_streak,
+        0, # Initialize current_streak as 0
+        0, # Initialize longest_streak as 0
         "" # Initialize streak history as an empty string
     ))
 
@@ -167,7 +172,7 @@ def save_habits(selected_user) -> None:
 
         else:
             # Insert new habit
-            add_habit(selected_user, habit)
+            new_habit(selected_user, habit)
 
     connection.commit()
     connection.close()

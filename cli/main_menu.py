@@ -54,4 +54,3 @@ def main_menu(ht) -> None:
         else:
             print("\nInvalid input. Please try again!")
             reload_menu_countdown()
-

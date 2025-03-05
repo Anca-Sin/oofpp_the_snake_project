@@ -49,9 +49,9 @@ class Database:
         """Loads all habits for a user."""
         selected_user.habits = habit_db.load_habits(selected_user)
 
-    def add_habit(self, selected_user: User, habit: Habit) -> None:
+    def new_habit(self, selected_user: User, habit: Habit) -> None:
         """Adds a new habit to the db."""
-        habit_db.add_habit(selected_user, habit)
+        habit_db.new_habit(selected_user, habit)
 
     def save_habits(self, selected_user: User) -> None:
         """Saves all habit modifications for a user."""
