@@ -37,8 +37,13 @@ class Habit:
 
         """
         while True:
-            print("What new habit do you want to register?:")
-            habit_name = input().title()
+            print("What new habit do you want to register? (Press ENTER to exit): ")
+            habit_name = input().strip().title()
+
+            # Exit the loop if empty
+            if not habit_name:
+                return
+
             # Confirm the choice through helper method
             confirmed_habit = confirm_input("habit", habit_name)
 
@@ -64,19 +69,17 @@ class Habit:
 
         # If no preset frequency, prompt the user
         while True:
-            print("Please type in 'Daily' or 'Weekly'")
-            habit_frequency = input().lower()
+            print("Please type in 'Daily' or 'Weekly' (Press ENTER to exit): ")
+            habit_frequency = input().strip().lower()
+
+            # Exit the loop if empty
+            if not habit_frequency:
+                return
 
             # Check if input is valid
             if habit_frequency in ["daily", "weekly"]:
-                # Confirm the choice
-                confirmed_frequency = confirm_input("frequency", habit_frequency)
-
-                # If confirmed, set the frequency and exit the loop
-                if confirmed_frequency is not None:
-                    self.frequency = confirmed_frequency
-                    return
-
+                self.frequency = habit_frequency
+                return
             else:
                 # Handle invalid input
                 print("Invalid Input. Pleas enter 'Daily' or 'Weekly'!")

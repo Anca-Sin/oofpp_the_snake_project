@@ -33,8 +33,12 @@ class User:
         """
         while True:
             # Ask user for input
-            print("Please type in your desired username:")
-            username = input().title()
+            print("Please type in your desired username (Press ENTER to exit): ")
+            username = input().strip().title()
+
+            # Exit the loop if empty
+            if not username:
+                return
 
             # Confirm the choice
             confirmed_username = confirm_input("username", username)
