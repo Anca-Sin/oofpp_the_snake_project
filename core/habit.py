@@ -21,9 +21,7 @@ class Habit:
     """
 
     def __init__(self):
-        """
-        Initializes a new Habit object with default values.
-        """
+        """Initializes a new Habit object with default values."""
         self.name: Optional[str] = None        # Habit name will be set by habit_name()
         self.frequency: Optional[str] = None   # Stores either "daily" or "weekly"
         self.creation: Optional[date] = None   # Set by creation_date()
@@ -31,11 +29,7 @@ class Habit:
         self.streaks: Streaks = Streaks()      # Tracks streak information
 
     def habit_name(self) -> None:
-        """
-        Prompts the user to name their new habit and confirm it.
-
-
-        """
+        """Prompts the user to name their new habit and confirm it."""
         while True:
             print("What new habit do you want to register? (Press ENTER to exit): ")
             habit_name = input().strip().title()
@@ -96,7 +90,7 @@ class Habit:
         - for weekly habits, checks if completed this week
 
         Returns:
-            bool: True if already completed, False otherwise.
+            True if already completed, False otherwise.
         """
         current_date = datetime.now()
 
@@ -120,7 +114,7 @@ class Habit:
         - updates streak information upon completion
 
         Returns:
-            bool: True if marked complete, False otherwise.
+            True if marked complete, False otherwise.
         """
         current_date = datetime.now()
 

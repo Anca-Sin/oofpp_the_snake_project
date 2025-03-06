@@ -27,7 +27,7 @@ class Analytics:
         Retrieves all habits for the selected user.
 
         Returns:
-            List[Habit]: List of all habits for the user.
+            List of all habits for the user.
         """
         # Using list comprehension
         # return self.user.habits
@@ -45,7 +45,7 @@ class Analytics:
         Args:
             periodicity: The frequency to filter habits by ("daily" or "weekly).
         Returns:
-            List[Habit]: List of habits matching the given periodicity.
+            List of habits matching the given periodicity.
         """
         # Using list comprehension
         # return [habit.name for habit in self.user.habits if habit.frequency == periodicity]
@@ -61,7 +61,7 @@ class Analytics:
         Finds the habit with the longest streak across all habits.
 
         Returns:
-            Tuple[str, int]: A tuple containing (habit_name, longest_streak).
+            A tuple containing (habit_name, longest_streak).
         """
         # Map each habit to a tuple of (name, longest_streak)
         # Then use max() to find he tuple with the highest longest_streak value
@@ -80,7 +80,7 @@ class Analytics:
         Args:
             habit_name: The name of the habit to get the longest streak for.
         Returns:
-            Tuple[str, int]: A tuple containing (habit_name, longest_streak).
+            A tuple containing (habit_name, longest_streak).
         """
         # Filter habits to find the one with the matching name
         # Use next() to get the first (and only matching habit)
@@ -95,8 +95,8 @@ class Analytics:
         Args:
             periodicity: The periodicity to filter by ("daily" or "weekly").
         Returns:
-            Tuple[str, int]: A tuple of (habit_name, longest_streak)
-                                     or ("None", 0) if no habit exists; not accounted for in the cli logic.
+            A tuple of (habit_name, longest_streak)
+                    or ("None", 0) if no habit exists; not accounted for in the cli logic.
         """
         # Filter habits by periodicity
         habits = self.list_habits_by_periodicity(periodicity)
@@ -115,7 +115,7 @@ class Analytics:
         Finds the habits with the most completions across all habit.
 
         Returns:
-             Tuple[str, int]: A tuple of (habit_name, completion_count).
+             A tuple of (habit_name, completion_count).
         """
         # Map each habit to a tuple of (name, completion_count)
         # Then find the tuple with the highest count
@@ -133,8 +133,8 @@ class Analytics:
         Args:
             periodicity: The periodicity to filter by ("daily" or "weekly")
         Returns:
-            Tuple[str, int]: A tuple of (habit_name, completion_count)
-                                     or ("None", 0) if no habit exists; not accounted for in the cli logic.
+            A tuple of (habit_name, completion_count)
+                    or ("None", 0) if no habit exists; not accounted for in the cli logic.
         """
         # Filter habits by periodicity
         habits = self.list_habits_by_periodicity(periodicity)
@@ -152,7 +152,7 @@ class Analytics:
         Finds the habit with the fewest completions across all habits.
 
         Returns:
-            Tuple[str, int]: A tuple of (habit_name, completion_count).
+            A tuple of (habit_name, completion_count).
         """
         # Map each habit to a tuple of (name, completion_count)
         # Then find the tuple with the lowest count
@@ -171,8 +171,8 @@ class Analytics:
         Args:
             periodicity: The periodicity to filter by ("daily" or "weekly).
         Returns:
-             Tuple[str, int]: A tuple of (habit_name, completion_count)
-                                      or ("None", 0) if no habit exists; not accounted for in the cli logic.
+             A tuple of (habit_name, completion_count)
+                     or ("None", 0) if no habit exists; not accounted for in the cli logic.
         """
         # Filter habits by periodicity
         habits = self.list_habits_by_periodicity(periodicity)
@@ -193,7 +193,7 @@ class Analytics:
         Args:
             habit_name: The name of the habit to analyze.
         Returns:
-            float: The average streak length.
+            The average streak length.
         """
         # Get the streak length history string from the db
         # Returns a comma separated string of streak lengths
@@ -216,7 +216,7 @@ class Analytics:
         Calculates the average streak length across all habits.
 
         Returns:
-            float: The average streak as a float.
+            The average streak as a float.
         """
         # Initialize an empty list to collect streak lengths from all habits
         all_streak_lengths = []
@@ -242,7 +242,7 @@ class Analytics:
         Args:
             periodicity: The periodicity to filter by ("daily" or "weekly")
         Returns:
-            float: The average streak length.
+            The average streak length.
         """
         # Filter habits by periodicity
         habits = self.list_habits_by_periodicity(periodicity)

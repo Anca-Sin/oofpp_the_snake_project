@@ -2,17 +2,31 @@ import os
 import sys
 import time
 import sqlite3
-from typing import Any
+from typing import Any, Optional
 
 from config import DB_FILEPATH
 
 from cli.main_menu import main_menu
 
-def confirm_input(attribute_name: str, value: str) -> str | None:
-    """Helper method to confirm input with the user."""
+def confirm_input(attribute_name: str, value: str) -> Optional[str]:
+    """
+    Helper method to confirm input with the user.
+
+    - asks the user to confirm their input (yes/no)
+    - returns the value if "yes"
+    - exits if "no"
+
+    Args:
+        attribute_name: The "type" of input being confirmed (e.g. "username", "habit_name").
+        value: The value to confirm (e.g. the username or habit name the user chooses to assign).
+    Returns:
+        The confirmed value, or None if not confirmed.
+    """
     while True:
+        # Ask for confirmation
         print(f"You entered '{value}'. Is this correct? (yes/no): ")
         confirmation = input().lower().strip()
+
         if confirmation == "yes":
             print(f"You've successfully stored {value.title()} as your {attribute_name}!")
             return value
@@ -23,7 +37,10 @@ def confirm_input(attribute_name: str, value: str) -> str | None:
             print("Invalid input! Please enter 'yes' or 'no'!")
 
 def confirm_int_input(value: Any) -> Any | None:
-    """Helper method to confirm numerical input with the user."""
+    """
+    Helper method to confirm numerical input with the user.
+    Identical to confirm_input, only prints are different.
+    """
     while True:
         print(f"You've chosen '{value}', is this correct? (yes/no): ")
         confirmation = input().lower().strip()
@@ -38,8 +55,8 @@ def confirm_int_input(value: Any) -> Any | None:
 
 def reload_menu_countdown() -> None:
     """
-    Allows the user time to read invalid input feedback.
-    Displays a countdown message to simulate reloading.
+    Displays a countdown before returning.
+    Allows visual feedback: the user has time to read the screen before it is reloaded (in most cases).
     """
     print("Reloading Menu in...")
     time.sleep(1)
@@ -52,25 +69,38 @@ def reload_menu_countdown() -> None:
     """)
     time.sleep(1)
 
-def db_connection(instance):
+
+def reload_cli():
+    """
+    Used to refresh the cli across various operations.
+    Mostly used together with reload_menu_countdown.
+    Simplifies implementation throughout the project.
+    """
+    os.system('cls' if os.name == 'nt' else 'clear')
+
+def db_connection(instance) -> Optional[sqlite3.Connection]:
     """
     Attempts to connect to the db.
-    If connection fails, prompts the user with retry options.
+    If connection fails, provides retry options.
 
-    :param instance: The HabitTracker instance.
-    :return: Connection object or None
+    Args:
+        instance: The HabitTracker instance or DB_FILEPATH.
+    Returns:
+        Connection object to the db, or exits if unable to connect.
     """
+    # Try to connect to the db
     try:
         return sqlite3.connect(DB_FILEPATH)
-    except sqlite3.Error as e:
-        print(f"Database connection error: {e}")
-        time.sleep(1)
-        print("Failed to connect to the database.")
-        time.sleep(1)
 
+    # Handle connection error
+    except sqlite3.Error as e:
+        # Provides options to retry, return to main menu, or exit
         while True:
             reload_cli()
-            print("""\nOptions:
+            print(f"""\nDatabase connection error: {e}
+            Failed to connect to the database.
+            
+            Options:
             1. Retry database connection
             2. Return to main menu
             3. Exit the application
@@ -82,18 +112,16 @@ def db_connection(instance):
                 print("Trying to re-establish your connection...")
                 return db_connection(instance)
             elif choice == "2":
+                # Return to main menu
                 print("Returning to main menu...")
                 time.sleep(1)
                 main_menu(instance)
-                return
+                return None
             elif choice == "3":
+                # Exit the application
                 print("Goodbye! Remember to stay on track!")
                 time.sleep(1)
                 sys.exit(0)
             else:
                 print("\Invalid input. Please try again!")
                 reload_menu_countdown()
-
-def reload_cli():
-    """Used to refresh the cli across various operations."""
-    os.system('cls' if os.name == 'nt' else 'clear')

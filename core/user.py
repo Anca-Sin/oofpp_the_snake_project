@@ -28,7 +28,6 @@ class User:
     def create_username(self) -> None:
         """
         Prompts the user to type in a desired username and confirms their choice.
-
         It handles user input and confirmation in a loop until a valid username is confirmed by the user.
         """
         while True:

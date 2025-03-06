@@ -5,8 +5,8 @@ class Streaks:
     """
     Tracks and calculates streak information for habits.
 
-    This class handles the logic for determining current and longest streaks, and keeping a history of broken streaks.
-    It provides methods to check if a streak is broken and to calculate streak lengths based on habit completion dates.
+    - handles the logic for determining current and longest streaks, and keeping a history of broken streaks
+    - provides methods to check if a streak is broken and to calculate streak lengths based on habit completion dates
 
     Attributes:
         current_streak (int): The current active streak count.
@@ -28,7 +28,7 @@ class Streaks:
         - ensures dates are processed in the correct order when calculating streaks
 
         Returns:
-            List[date]: A sorted list of completion dates.
+            A sorted list of completion dates.
         """
         return sorted(completions) # Returns dates in ascending order
 
@@ -42,12 +42,12 @@ class Streaks:
         - then resets the current_streak to 0
 
         Args:
-            frequency (str): The frequency of the habit ("daily" or "weekly").
-            latest_completion (date): The date of the most recent completion.
+            frequency: The frequency of the habit ("daily" or "weekly").
+            latest_completion: The date of the most recent completion.
                                       Retrieved in get_current_streak() where is_streak_broken is called.
 
         Returns:
-            bool: True if streak is broken, False if still active streak.
+            True if streak is broken, False if still active streak.
         """
         today = datetime.now().date()
 
@@ -89,7 +89,7 @@ class Streaks:
             frequency: The frequency of the habit ("daily" or "weekly").
             completions: List of dates when the habit was completed.
         Returns:
-            int: The current streak count.
+            The current streak count.
         """
         # If no completions, current streak is 0
         if len(completions) == 0:
@@ -116,6 +116,6 @@ class Streaks:
         Gets the longest streak achieved for the selected habit.
 
         Returns:
-            int: The longest streak count.
+            The longest streak count.
         """
         return self.longest_streak
