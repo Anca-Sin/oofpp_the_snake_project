@@ -19,3 +19,11 @@ Analytics Class
 # - Provides broad, higher-level calculations across multiple habits
 # - Doesn't maintain state of its own, but analyzes user/habit data
 # - Already uses Streaks functionality through habit.streaks references
+
+Streaks Class
+
+# Class Design:
+# - Handles streak calculations for individual habits
+# - Low-level calculations for determining if a streak is broken
+# - Maintains state (current_streak and longest_streak)
+# - Ties directly to individual habit instances (each habit has its own Streaks object)
