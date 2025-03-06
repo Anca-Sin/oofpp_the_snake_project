@@ -25,7 +25,7 @@ class Streaks:
         """
         Sorts completion dates externally to be used across all methods.
 
-        This helper method ensures dates are processed in the correct order when calculating streaks.
+        - ensures dates are processed in the correct order when calculating streaks
 
         Returns:
             List[date]: A sorted list of completion dates.
@@ -36,7 +36,6 @@ class Streaks:
         """
         Determines if a streak is broken based on the frequency and latest completion date.
 
-        This method:
         - checks if there are any completions
         - checks if the streak is broken
         - if yes, it adds the current streak length to the broken_streak_length history
@@ -81,7 +80,6 @@ class Streaks:
         """
         Calculates the current streak of the selected habit based on habit frequency and completion dates.
 
-        This method:
         - checks if there are any completions
         - checks if the streak is broken
         - updates the current streak count

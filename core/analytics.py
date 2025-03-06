@@ -18,12 +18,7 @@ class Analytics:
     """
 
     def __init__(self, user: User) -> None:
-        """
-        Initializes the Analytics object with a user.
-
-        Args:
-            user: The user object whose habits will be analyzed.
-        """
+        """Initializes the Analytics object with a user."""
         self.user = user         # Store the user reference for analytics operations
 
     # Task requirement: "return a list of all currently tracked habits"

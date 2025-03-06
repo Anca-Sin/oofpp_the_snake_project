@@ -18,14 +18,7 @@ class User:
     """
 
     def __init__(self, username: str = "", user_id: int = None, db: Database = None) -> None:
-        """
-        Initializes a User object with a username and an empty list of habits.
-
-        Args:
-            username: The username the user chooses.
-            user_id: The db ID for this user.
-            db: An instance of Database to interact with the db
-        """
+        """Initializes a User object with a username and an empty list of habits."""
         from .habit import Habit      # Avoiding circular imports
         self.username: str = username
         self.user_id = user_id
@@ -36,8 +29,7 @@ class User:
         """
         Prompts the user to type in a desired username and confirms their choice.
 
-        This method handles user input, validation, and confirmation in a loop
-        until a valid username is confirmed by the user.
+        It handles user input and confirmation in a loop until a valid username is confirmed by the user.
         """
         while True:
             # Ask user for input

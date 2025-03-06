@@ -1,60 +1,84 @@
 from datetime import datetime, timedelta, date
+from typing import List, Optional
+
 from .streaks import Streaks
 from helpers.helper_functions import confirm_input
-from typing import List, Optional
 
 class Habit:
     """
-    Allows users to create their own habit
-    as part of predefined fitness categories, or as a custom habit.
+    Represents a habit that a user wants to track.
+
+    This class handles:
+    - creating and checking-off habits
+    - tracking completion status
+
+    Attributes:
+        name (str): The name of the habit.
+        frequency (str): How often the habit should be completed ("daily" or "weekly").
+        creation (date): The date when the habit was created.
+        completion_dates (List[date]): List of dates when the habit was completed.
+        streaks (Streaks): An object to track the streak information for the habit.
     """
 
     def __init__(self):
-        self.name: Optional[str] = None        # Store habit name
-        self.frequency: Optional[str] = None   # Stores either daily, weekly, or later custom
-        self.creation: Optional[date] = None   # Stores the creation date of the habit
-        self.completion_dates: List[date] = [] # List of completion dates when the user checks-off a habit
-        self.streaks: Streaks = Streaks()      # Streaks object (instance of Streaks class)
+        """
+        Initializes a new Habit object with default values.
+        """
+        self.name: Optional[str] = None        # Habit name will be set by habit_name()
+        self.frequency: Optional[str] = None   # Stores either "daily" or "weekly"
+        self.creation: Optional[date] = None   # Set by creation_date()
+        self.completion_dates: List[date] = [] # Dates when habit was completed
+        self.streaks: Streaks = Streaks()      # Tracks streak information
 
     def habit_name(self) -> None:
-        """Prompts the user to name their new habit and confirm it."""
+        """
+        Prompts the user to name their new habit and confirm it.
+
+
+        """
         while True:
             print("What new habit do you want to register?:")
             habit_name = input().title()
-            # Confirm the choice
+            # Confirm the choice through helper method
             confirmed_habit = confirm_input("habit", habit_name)
 
+            # If confirmed, set the name and exit the loop
             if confirmed_habit is not None:
                 self.name = confirmed_habit
                 return
 
     def habit_frequency(self, preset_frequency: Optional[str] = None) -> None:
         """
-        Sets the habit's frequency. If preset_frequency is provided,
-        use that value directly; otherwise prompt the user.
+        Sets the habit's frequency either by:
+        - prompting the user
+        - using a preset value
 
-        :param preset_frequency: Optional preset frequency value ("daily" or "weekly).
+        Args:
+            preset_frequency: Optional preset frequency value ("daily" or "weekly).
+                              If provided, skips prompting the user.
         """
+        # If preset frequency is provided, assign it without prompting
         if preset_frequency in ["daily", "weekly"]:
-            # Use the preset frequency without prompting
             self.frequency = preset_frequency
             print(f"Frequency automatically set to {preset_frequency}.")
 
-        # If no preset, prompt the user
+        # If no preset frequency, prompt the user
         while True:
             print("Please type in 'Daily' or 'Weekly'")
             habit_frequency = input().lower()
 
+            # Check if input is valid
             if habit_frequency in ["daily", "weekly"]:
                 # Confirm the choice
                 confirmed_frequency = confirm_input("frequency", habit_frequency)
 
+                # If confirmed, set the frequency and exit the loop
                 if confirmed_frequency is not None:
                     self.frequency = confirmed_frequency
                     return
 
             else:
-                # Handle miss-spelling
+                # Handle invalid input
                 print("Invalid Input. Pleas enter 'Daily' or 'Weekly'!")
 
     def creation_date(self) -> None:
@@ -63,19 +87,23 @@ class Habit:
 
     def _is_habit_completed(self) -> bool:
         """
-        Check if the habit is already completed based on its frequency ("daily" or "weekly").
+        Check if the habit is already completed.
 
-        :return: True if completed, False otherwise.
+        - for daily habits, checks if completed today
+        - for weekly habits, checks if completed this week
+
+        Returns:
+            bool: True if already completed, False otherwise.
         """
         current_date = datetime.now()
-        # Calculate start of the current week (Monday)
-        week_start = current_date - timedelta(days=current_date.weekday())
 
         if self.frequency == "daily":
             # Check if habit was already completed today
             return current_date.date() in self.completion_dates
 
         elif self.frequency == "weekly":
+            # Calculate start of the current week (Monday)
+            week_start = current_date - timedelta(days=current_date.weekday())
             # Check if habit was already completed this week
             return any(completion_date >= week_start.date() for completion_date in self.completion_dates)
 
@@ -83,9 +111,13 @@ class Habit:
 
     def check_off_habit(self) -> bool:
         """
-        Marks a habit as complete for the current day if it hasn't been completed yet.
+        Marks a habit as complete for the current day.
 
-        :return: False if already completed, True if marked complete.
+        - prevents duplicate completion
+        - updates streak information upon completion
+
+        Returns:
+            bool: True if marked complete, False otherwise.
         """
         current_date = datetime.now()
 
@@ -98,6 +130,6 @@ class Habit:
         self.completion_dates.append(current_date.date())
         print(f"'{self.name.title()}' completed for today successfully!")
 
-        # Calculate current streak
+        # Calculate current streak based on completion history
         self.streaks.get_current_streak(self.frequency, self.completion_dates)
         return True
