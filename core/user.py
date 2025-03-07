@@ -1,6 +1,6 @@
 from typing import List
 
-from helpers.helper_functions import confirm_input
+from helpers.helper_functions import confirm_input, reload_menu_countdown
 from db_and_managers.database import Database
 
 class User:
@@ -19,7 +19,7 @@ class User:
 
     def __init__(self, username: str = "", user_id: int = None, db: Database = None) -> None:
         """Initializes a User object with a username and an empty list of habits."""
-        from .habit import Habit      # Avoiding circular imports
+        from .habit import Habit      # Avoid circular imports
         self.username: str = username
         self.user_id = user_id
         self.habits: List[Habit] = [] # Starts with an empty list of habits
@@ -27,22 +27,33 @@ class User:
 
     def create_username(self) -> None:
         """
-        Prompts the user to type in a desired username and confirms their choice.
-        It handles user input and confirmation in a loop until a valid username is confirmed by the user.
+        Creates a new username.
+
+        - handles input and confirmation
+        - checks if the username already exists in the db
         """
+        # Avoid circular imports
+        from db_and_managers.manager_user_db import username_exists
+
         while True:
             # Ask user for input
             print("Please type in your desired username (Press ENTER to exit): ")
             username = input().strip().title()
 
-            # Exit the loop if empty
+            # Exit the loop if "ENTER"
             if not username:
                 return
 
-            # Confirm the choice
-            confirmed_username = confirm_input("username", username)
+            # Check if the username already exists
+            elif username_exists(username):
+                print(f"Username '{username}' is taken! Please try again!")
+                reload_menu_countdown()
 
-            # If the choice is confirmed
-            if confirmed_username is not None:
-                self.username = confirmed_username
-                return # Exit the method after setting the username
+            else:
+                # Confirm the choice
+                confirmed_username = confirm_input("username", username)
+
+                # If the choice is confirmed
+                if confirmed_username is not None:
+                    self.username = confirmed_username
+                    return # Exit the method after setting the username
