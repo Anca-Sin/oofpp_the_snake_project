@@ -5,10 +5,11 @@ from config import DB_FILEPATH
 
 from core.habit import Habit
 from core.streaks import Streaks
+from core.user import User
 from helpers.helper_functions import db_connection, reload_menu_countdown
 
 
-def load_habits(selected_user) -> List[Habit]:
+def load_habits(selected_user: User) -> List[Habit]:
     """
     Loads all habits for the selected user.
 
@@ -87,7 +88,7 @@ def load_habits(selected_user) -> List[Habit]:
     return habits
 
 
-def habit_name_exists(selected_user, habit_name: str) -> bool:
+def habit_name_exists(selected_user: User, habit_name: str) -> bool:
     """
     Checks if a habit name already exists for the selected user.
 
@@ -110,7 +111,7 @@ def habit_name_exists(selected_user, habit_name: str) -> bool:
 
     return count > 0
 
-def new_habit(selected_user, set_frequency: str = None) -> None:
+def new_habit(selected_user: User, set_frequency: str = None) -> None:
     """
     Adds a new habit to the selected user's db.
 
@@ -135,7 +136,7 @@ def new_habit(selected_user, set_frequency: str = None) -> None:
     # Insert the new habit to the db
     save_habits(selected_user)
 
-def save_habits(selected_user, new_habit=None) -> None:
+def save_habits(selected_user: User, new_habit=None) -> None:
     """
     Saves (INSERT) / Updates (UPDATE) existing habit data.
 
@@ -206,15 +207,16 @@ def save_habits(selected_user, new_habit=None) -> None:
     connection.commit()
     connection.close()
 
-def delete_habit(selected_user, habit: Habit) -> None:
+def delete_habit(selected_user: User, habit: Habit) -> None:
     """
     Deletes a habit and all associated data from the db.
 
     - asks for confirmation before deleting
     - deletes on cascade all associated streaks
 
-    :param selected_user: The User object whose habit to delete.
-    :param habit: The Habit object to delete.
+    Parameters:
+        selected_user: The User object whose habit to delete.
+        habit: The Habit object to delete.
     """
     # Ask for confirmation
     print(f"""This operation will permanently DELETE:

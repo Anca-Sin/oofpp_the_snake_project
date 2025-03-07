@@ -36,7 +36,7 @@ class User:
         from db_and_managers.manager_user_db import username_exists
 
         while True:
-            # Ask user for input
+            # Ask user for username
             print("Please type in your desired username (Press ENTER to exit): ")
             username = input().strip().title()
 
@@ -48,6 +48,7 @@ class User:
             elif username_exists(username):
                 print(f"Username '{username}' is taken! Please try again!")
                 reload_menu_countdown()
+                continue
 
             else:
                 # Confirm the choice
@@ -56,4 +57,4 @@ class User:
                 # If the choice is confirmed
                 if confirmed_username is not None:
                     self.username = confirmed_username
-                    return # Exit the method after setting the username
+                    return

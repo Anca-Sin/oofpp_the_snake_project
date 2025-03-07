@@ -2,7 +2,8 @@ from datetime import datetime, timedelta, date
 from typing import List, Optional
 
 from .streaks import Streaks
-from helpers.helper_functions import confirm_input
+from helpers.helper_functions import confirm_input, reload_menu_countdown
+
 
 class Habit:
     """
@@ -28,23 +29,40 @@ class Habit:
         self.completion_dates: List[date] = [] # Dates when habit was completed
         self.streaks: Streaks = Streaks()      # Tracks streak information
 
-    def habit_name(self) -> None:
-        """Prompts the user to name their new habit and confirm it."""
+    def habit_name(self, user=None) -> None:
+        """
+        Creates a new habit name.
+
+        - handles input and confirmation
+        - checks if the habit name already exists in the db
+
+        Args:
+            user: The User object to check for existing habit names.
+        """
+        # Avoid circular imports
+        from db_and_managers.manager_habit_db import habit_name_exists
+
         while True:
+            # Ask for habit name
             print("What new habit do you want to register? (Press ENTER to exit): ")
             habit_name = input().strip().title()
 
-            # Exit the loop if empty
+            # Exit the loop if "ENTER"
             if not habit_name:
                 return
 
-            # Confirm the choice through helper method
-            confirmed_habit = confirm_input("habit", habit_name)
+            elif user and habit_name_exists(user, habit_name):
+                print(f"A habit named '{habit_name}' already exists! Please try again!")
+                reload_menu_countdown()
 
-            # If confirmed, set the name and exit the loop
-            if confirmed_habit is not None:
-                self.name = confirmed_habit
-                return
+            else:
+                # Confirm the choice
+                confirmed_habit = confirm_input("habit", habit_name)
+
+                # If confirmed, set the name and exit the loop
+                if confirmed_habit is not None:
+                    self.name = confirmed_habit
+                    return
 
     def habit_frequency(self, preset_frequency: Optional[str] = None) -> None:
         """
