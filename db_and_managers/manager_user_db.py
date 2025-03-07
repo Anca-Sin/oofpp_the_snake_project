@@ -97,25 +97,55 @@ def select_user() -> User:
                 print("\nSorry, invalid input. Please try again!")
                 reload_menu_countdown()
 
+def username_exists(username: str) -> bool:
+    """
+    Checks if a username already exists in the db.
+
+    Parameters:
+        username: The username to check.
+    Returns:
+        True if the username exists, False otherwise.
+    """
+    connection = db_connection(DB_FILEPATH)
+    cursor = connection.cursor()
+
+    cursor.execute("""
+        SELECT COUNT(*) FROM users 
+        WHERE username = ?
+    """, (username,))
+
+    count = cursor.fetchone()[0]
+
+    connection.close()
+    return count > 0
+
 def save_user(user: User) -> None:
     """
-    Saves a user to the db.
+    Saves a new user to the db.
     Doesn't need to check if the user exists because it is called only if there are no users after load_users().
 
-    :param user: The User object to save.
-    :return: The user_id from the db.
+    Parameters:
+        user: The User object to save to the db.
     """
     connection = db_connection(DB_FILEPATH)
     cursor = connection.cursor()
 
     # Insert new user
     cursor.execute("INSERT INTO users (username) VALUES (?)", (user.username,))
-    connection.commit()
 
+    connection.commit()
     connection.close()
 
 def delete_user(selected_user) -> None:
-    """Deletes an user and all associated data."""
+    """
+    Deletes a user and all associated data from the db.
+
+    - asks for confirmation before deleting
+    - deletes on cascade all associated habits and streaks
+
+    Parameters:
+        selected_user: The User object to delete.
+    """
     # Ask for confirmation
     print(f"""This operation will permanently DELETE:
         
@@ -126,16 +156,17 @@ def delete_user(selected_user) -> None:
 
     confirmation = input("Type in 'DELETE' if you are sure to proceed (or cancel by pressing ENTER): ")
 
+    # Check if the user doesn't confirm
     if confirmation.lower() != "delete":
         print("Deletion canceled.")
         reload_menu_countdown()
-        return # To the main menu
+        return # Return to Main Menu
 
-    # If not canceled, continue with deletion
+    # If confirmed, continue with deletion
     connection = db_connection(DB_FILEPATH)
     cursor = connection.cursor()
 
-    # Delete the user - cascading will delete its associated data
+    # Delete the user - cascading will delete all associated data
     cursor.execute("DELETE FROM users WHERE username = ?", (selected_user.username,))
 
     connection.commit()
