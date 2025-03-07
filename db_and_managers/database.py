@@ -47,14 +47,16 @@ class Database:
         """
         return user_db.load_users()
 
-    def select_user(self) -> Optional[User]:
+    def select_user(self, instance=None) -> Optional[User]:
         """
         Prompts user to select an existing user or create a new one.
 
+        Args:
+            instance: The HabitTracker instance for returning to Main Menu.
         Returns:
              The selected User object, or None if no selection is made.
         """
-        selected_user = user_db.select_user()
+        selected_user = user_db.select_user(instance)
         if selected_user:
             self.user_id = selected_user.user_id
         return selected_user

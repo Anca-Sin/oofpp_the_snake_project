@@ -116,7 +116,6 @@ def db_connection(instance) -> Optional[sqlite3.Connection]:
                 print("Returning to main menu...")
                 time.sleep(1)
                 main_menu(instance)
-                return None
             elif choice == "3":
                 # Exit the application
                 print("Goodbye! Remember to stay on track!")
