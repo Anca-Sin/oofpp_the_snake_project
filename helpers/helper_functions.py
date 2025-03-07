@@ -16,7 +16,7 @@ def confirm_input(attribute_name: str, value: str) -> Optional[str]:
     - returns the value if "yes"
     - exits if "no"
 
-    Args:
+    Parameters:
         attribute_name: The "type" of input being confirmed (e.g. "username", "habit_name").
         value: The value to confirm (e.g. the username or habit name the user chooses to assign).
     Returns:
@@ -83,7 +83,7 @@ def db_connection(instance) -> Optional[sqlite3.Connection]:
     Attempts to connect to the db.
     If connection fails, provides retry options.
 
-    Args:
+    Parameters:
         instance: The HabitTracker instance or DB_FILEPATH.
     Returns:
         Connection object to the db, or exits if unable to connect.

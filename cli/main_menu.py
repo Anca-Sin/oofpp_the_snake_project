@@ -12,7 +12,7 @@ def main_menu(ht) -> None:
     """
     Displays the main menu and handles user navigation.
 
-    Args:
+    Parameters:
         ht: The HabitTracker instance that manages the application state.
     """
     while True:

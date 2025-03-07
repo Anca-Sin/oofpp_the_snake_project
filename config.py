@@ -12,7 +12,7 @@ def set_db_filepath(filepath: str):
 
     - allows changing the db filepath at runtime, which is useful for testing or when specified by the user
 
-    Args:
+    Parameters:
         filepath: The new db filepath to use.
     """
     global DB_FILEPATH

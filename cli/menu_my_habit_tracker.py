@@ -13,7 +13,7 @@ def menu_my_habit_tracker(ht):
     - redirects to viewing analytics across all habits
     - can go back to main menu
 
-    Args:
+    Parameters:
         ht: The HabitTracker instance that manages the application state.
     """
     while True:
