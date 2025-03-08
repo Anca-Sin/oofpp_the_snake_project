@@ -5,16 +5,21 @@ from helpers.helper_functions import db_connection
 def load_broken_streak_length(habit_name: str) -> str:
     """
     Loads streak_length_history for a given habit from the db.
-    Streak_length_history is initialized as an empty string when creating a habit,
-    so will always return a valid string.
 
-    :param habit_name: The name of the habit.
-    :return: The broken streaks' lengths as a comma separated string.
+    - retrieves the history of broken streak lengths for a selected habit
+    - streak_length_history is initialized as an empty string when creating a habit,
+      so it will always return a valid string
+
+    Parameters:
+        habit_name: The name of the habit to get the streak history for.
+    Returns:
+        The broken streaks' lengths as a comma separated string.
+        An empty string if no history exists.
     """
     connection = db_connection(DB_FILEPATH)
     cursor = connection.cursor()
 
-    # Retrieve the streak_length_history for the given habit
+    # Retrieve the streak_length_history for the selected habit
     cursor.execute("""
         SELECT streak_length_history
         FROM streaks
@@ -22,7 +27,9 @@ def load_broken_streak_length(habit_name: str) -> str:
         WHERE habits.habit_name = ?
     """, (habit_name,))
 
+    # Get result
     result = cursor.fetchone()
     connection.close()
 
-    return result[0] # Will return empty string if no history
+    # Will return empty string if no history
+    return result[0]
