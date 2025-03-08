@@ -38,7 +38,7 @@ class User:
         while True:
             # Ask user for username
             print("Please type in your desired username (Press ENTER to exit): ")
-            username = input().strip().title()
+            username = input().title()
 
             # Exit the loop if "ENTER"
             if not username:

@@ -45,7 +45,7 @@ class Habit:
         while True:
             # Ask for habit name
             print("What new habit do you want to register? (Press ENTER to exit): ")
-            habit_name = input().strip().title()
+            habit_name = input().title()
 
             # Exit the loop if "ENTER"
             if not habit_name:
