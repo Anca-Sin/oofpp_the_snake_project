@@ -14,16 +14,14 @@ class User:
         username (str): The username of the user.
         user_id (int): The unique db ID for this user.
         habits (List[Habit]): A list of habits associated with the user.
-        db (Database): Reference to the db instance for operations.
     """
 
-    def __init__(self, username: str = "", user_id: int = None, db: Database = None) -> None:
+    def __init__(self, username: str = "", user_id: int = None) -> None:
         """Initializes a User object with a username and an empty list of habits."""
         from .habit import Habit      # Avoid circular imports
         self.username: str = username
         self.user_id = user_id
         self.habits: List[Habit] = [] # Starts with an empty list of habits
-        self.db = db                  # Assign db instance for data operations
 
     def create_username(self) -> None:
         """
