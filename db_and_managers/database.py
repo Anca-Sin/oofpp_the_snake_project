@@ -61,6 +61,15 @@ class Database:
             self.user_id = selected_user.user_id
         return selected_user
 
+    def save_user(self, user: User) -> None:
+        """
+        Saves a new user to the db.
+
+        Args:
+             The User object to be saved.
+        """
+        return user_db.save_user(user)
+
     def delete_user(self, selected_user: User) -> None:
         """
         Deletes the selected user and all their data from the db.
@@ -90,14 +99,15 @@ class Database:
         """
         habit_db.new_habit(selected_user, set_frequency)
 
-    def save_habits(self, selected_user: User) -> None:
+    def save_habits(self, selected_user: User, new_habit=None) -> None:
         """
         Saves or updates all habit modifications for the selected user in the db.
 
         Args:
-            selected_user: The User object whose habits are to be saved/updated.
+            selected_user: The User object whose habits to save/update.
+            new_habit
         """
-        habit_db.save_habits(selected_user)
+        habit_db.save_habits(selected_user, new_habit)
 
     def delete_habit(self, selected_user: User, habit: Habit) -> None:
         """
