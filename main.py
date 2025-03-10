@@ -25,7 +25,7 @@ class HabitTracker:
 
     def __init__(self):
         """Initializes the habit tracker."""
-        self.db = Database         # Local SQLite db access
+        self.db = Database()       # Local SQLite db access
         self.logged_in_user = None # Will be set during user selection
         self.analytics = None      # Will be initialized after user selection
 
