@@ -6,8 +6,6 @@ from typing import Any, Optional
 
 from config import DB_FILEPATH
 
-from cli.main_menu import main_menu
-
 def confirm_input(attribute_name: str, value: str) -> Optional[str]:
     """
     Helper method to confirm input with the user.
@@ -113,6 +111,7 @@ def db_connection(instance) -> Optional[sqlite3.Connection]:
                 return db_connection(instance)
             elif choice == "2":
                 # Return to main menu
+                from cli.main_menu import main_menu
                 print("Returning to main menu...")
                 time.sleep(1)
                 main_menu(instance)
