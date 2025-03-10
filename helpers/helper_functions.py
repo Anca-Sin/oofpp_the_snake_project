@@ -58,15 +58,24 @@ def reload_menu_countdown() -> None:
     """
     print("Reloading Menu in...")
     time.sleep(1)
-    print("""2
-    ...
-    """)
-    time.sleep(1)
-    print("""1
-    ...
-    """)
-    time.sleep(1)
 
+    print("2")
+    time.sleep(0.25)
+    print(".")
+    time.sleep(0.25)
+    print(".")
+    time.sleep(0.25)
+    print(".")
+    time.sleep(0.25)
+
+    print("1")
+    time.sleep(0.25)
+    print(".")
+    time.sleep(0.25)
+    print(".")
+    time.sleep(0.25)
+    print(".")
+    time.sleep(0.25)
 
 def reload_cli():
     """
