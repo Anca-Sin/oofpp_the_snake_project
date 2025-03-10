@@ -124,6 +124,9 @@ class TestStreaks(unittest.TestCase):
         # One completion
         self.assertEqual(self.streaks.get_current_streak("daily", [today]), 1)
 
+        # Two completions
+        self.assertEqual(self.streaks.get_current_streak("daily", [yesterday, today]), 2)
+
         # Consecutive completions
         completions = [two_days_ago, yesterday, today]
         self.assertEqual(self.streaks.get_current_streak("daily", completions), 3)
