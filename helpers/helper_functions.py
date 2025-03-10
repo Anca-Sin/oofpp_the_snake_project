@@ -144,6 +144,7 @@ def check_exit_cmd(command: str) -> bool:
     """
     if command.lower() == "quit":
         print("\nExiting the application. Goodbye!")
+        time.sleep(1)
         print("Remember to stay on track!")
         time.sleep(0.40)
         print(".")
