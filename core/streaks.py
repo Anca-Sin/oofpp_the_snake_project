@@ -56,7 +56,8 @@ class Streaks:
             # Save broken streak length to the list
             self.broken_streak_length.append(self.current_streak)
             # Reset current streak
-            self.current_streak = 0
+            # Only today's completion
+            self.current_streak = 1
             return True
 
         # For weekly habits
@@ -71,7 +72,9 @@ class Streaks:
             if current_week_monday > last_completion_week_monday + timedelta(days=7):
                 # Save broken streak length to the list
                 self.broken_streak_length.append(self.current_streak)
-                self.current_streak = 0
+                # Reset current streak
+                # Only today's completion
+                self.current_streak = 1
                 return True
 
         return False
@@ -103,11 +106,42 @@ class Streaks:
 
         # Check if streak is broken (using most recent completion)
         if self.is_streak_broken(frequency, latest_completion):
-            # If streak is broken, current_streak was already reset to 0 in is_streak_broken()
+            # If streak is broken, current_streak was already reset in is_streak_broken()
             return self.current_streak
 
-        # If streak not broken, increment it
-        self.current_streak += 1
+        # If streak isn't broken
+        # Start with at least 1 since we passed 0 completions check
+        self.current_streak = 1
+
+        if frequency == "daily":
+            # Iterate backwards
+            #   starting with last index
+            #   stopping before the first index
+            #   with a step of -1
+            for i in range(len(sorted_completions) - 1, 0, -1):
+                # [i-1] will now compare also the first completion on the list
+                # Check if completions are 1 day apart
+                if (sorted_completions[i] - sorted_completions[i-1]).days == 1:
+                    # Increment count by 1 for each consecutive days
+                    self.current_streak += 1
+                else:
+                    break # Current streak goes back to 1
+
+        elif frequency == "weekly":
+            # Get the Monday of the most recent completion
+            latest_monday = latest_completion - timedelta(days=latest_completion.weekday())
+
+            # Iterate backwards through completions to count consecutive weeks
+            for i in range(len(sorted_completions) - 1, 0, -1):
+                # Get Mondays for consecutive completions
+                current_monday = sorted_completions[i] - timedelta(days=sorted_completions[i].weekday())
+                previous_monday = sorted_completions[i-1] - timedelta(days=sorted_completions[i-1].weekday())
+
+                # Check if completions are 1 week apart
+                if (current_monday - previous_monday).days == 7:
+                    self.current_streak += 1
+                else:
+                    break
 
         # Update the longest streak if current streak is longer
         if self.current_streak > self.longest_streak:
