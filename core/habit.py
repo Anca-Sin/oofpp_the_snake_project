@@ -134,7 +134,7 @@ class Habit:
         Returns:
             True if marked complete, False otherwise.
         """
-        current_date = datetime.now()
+        current_date = datetime.now().date()
 
         # Use the internal helper method to check completion
         if self._is_habit_completed():
@@ -142,7 +142,7 @@ class Habit:
             return False
 
         # Add today's date to completions if it's not already completed
-        self.completion_dates.append(current_date.date())
+        self.completion_dates.append(current_date)
         print(f"'{self.name.title()}' completed for today successfully!")
 
         # Calculate current streak based on completion history
