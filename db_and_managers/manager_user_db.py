@@ -22,7 +22,7 @@ def load_users() -> List[User]: # For access to all user properties
 
     users = []
     for user_row in user_data:
-        user = User(user_id=user_data[0], username=user_row[1])
+        user = User(user_id=user_row[0], username=user_row[1])
         users.append(user)
 
     connection.close()
