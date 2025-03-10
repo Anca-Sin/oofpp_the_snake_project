@@ -103,7 +103,7 @@ def menu_analytics_all_habits(ht) -> None:
         # If user has registered habits continue to prompt for choice
         else:
             # Get user choice
-            choice = input("\nEnter your choice (1-4): ").strip()
+            choice = input("\nEnter your choice (1-9): ").strip()
 
             # Handle menu options
             if choice == "1":
