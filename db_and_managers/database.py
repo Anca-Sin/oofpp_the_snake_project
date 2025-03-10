@@ -6,10 +6,10 @@ from core.user import User
 from core.habit import Habit
 
 from .db_structure import db_tables
-import manager_user_db as user_db
-import manager_habit_db as habit_db
-import manager_completion_db as completion_db
-import manager_streaks_db as streaks_db
+from db_and_managers import manager_user_db as user_db
+from db_and_managers import manager_habit_db as habit_db
+from db_and_managers import manager_completion_db as completion_db
+from db_and_managers import manager_streaks_db as streaks_db
 
 # noinspection PyMethodMayBeStatic
 class Database:
@@ -47,16 +47,14 @@ class Database:
         """
         return user_db.load_users()
 
-    def select_user(self, instance=None) -> Optional[User]:
+    def select_user(self) -> Optional[User]:
         """
         Prompts user to select an existing user or create a new one.
 
-        Args:
-            instance: The HabitTracker instance for returning to Main Menu.
         Returns:
              The selected User object, or None if no selection is made.
         """
-        selected_user = user_db.select_user(instance)
+        selected_user = user_db.select_user()
         if selected_user:
             self.user_id = selected_user.user_id
         return selected_user
