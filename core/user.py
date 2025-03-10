@@ -14,10 +14,11 @@ class User:
         habits (List[Habit]): A list of habits associated with the user.
     """
 
-    def __init__(self, username: str = "") -> None:
+    def __init__(self, username: str = "", user_id: int = None) -> None:
         """Initializes a User object with a username and an empty list of habits."""
         from .habit import Habit      # Avoid circular imports
         self.username: str = username
+        self.user_id: int = user_id
         self.habits: List[Habit] = [] # Starts with an empty list of habits
 
     def create_username(self) -> None:
