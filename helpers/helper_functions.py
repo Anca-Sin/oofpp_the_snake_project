@@ -132,3 +132,25 @@ def db_connection(instance) -> Optional[sqlite3.Connection]:
             else:
                 print("\Invalid input. Please try again!")
                 reload_menu_countdown()
+
+def check_exit_cmd(command: str) -> bool:
+    """
+    Checks if the input is an exit command.
+
+    Args:
+        command: User input to check
+    Returns:
+        True if the command is an exit command, False otherwise
+    """
+    if command.lower() == "quit":
+        print("\nExiting the application. Goodbye!")
+        print("Remember to stay on track!")
+        time.sleep(0.40)
+        print(".")
+        time.sleep(0.40)
+        print(".")
+        time.sleep(0.40)
+        print(".")
+        time.sleep(0.40)
+        sys.exit(0)
+    return False
