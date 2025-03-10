@@ -11,6 +11,7 @@ class User:
 
     Attributes:
         username (str): The username of the user.
+        user_id (int): The id from the db of the user.
         habits (List[Habit]): A list of habits associated with the user.
     """
 
