@@ -6,7 +6,8 @@ import time
 
 from .menu_my_habit_tracker import menu_my_habit_tracker
 from core.analytics import Analytics
-from helpers.helper_functions import reload_cli, reload_menu_countdown
+from helpers.helper_functions import reload_cli, reload_menu_countdown, check_exit_cmd
+
 
 def main_menu(ht) -> None:
     """
@@ -18,16 +19,20 @@ def main_menu(ht) -> None:
     while True:
         # Clear the screen and display the menu header
         reload_cli()
-        print("""- - - Main Menu - - -
+        print("(Type 'quit' at any time to exit the application)")
+        print("""
+        - - - Main Menu - - -
         
         1. My Habit Tracker
         2. Select a different user
         3. Delete this user
-        4. Exit the application
         """)
 
         # Get user choice
-        choice = input("\nEnter your choice (1-4): ").strip()
+        choice = input("\nEnter your choice (1-3): ").strip()
+
+        # Check for exit command
+        check_exit_cmd(choice)
 
         # Handle menu options
         if choice == "1":
@@ -47,21 +52,6 @@ def main_menu(ht) -> None:
         elif choice == "3":
             # Delete the selected user
             ht.db.delete_user(ht.logged_in_user)
-
-        elif choice == "4":
-            # Exit the application with a countdown
-            print("\nUntil next time! Do your best to stay on track!")
-            print("Exiting in...")
-            time.sleep(1)
-            print("""2
-                ...
-                """)
-            time.sleep(1)
-            print("""1
-                ...
-                """)
-            time.sleep(1)
-            sys.exit(0)
 
         else:
             # Handle invalid input

@@ -5,7 +5,8 @@ from cli.menu_analytics import menu_analytics_one_habit
 from core.habit import Habit
 from db_and_managers.manager_completion_db import complete_habit_today, complete_habit_past, delete_completion
 from db_and_managers.manager_habit_db import delete_habit
-from helpers.helper_functions import reload_cli, reload_menu_countdown
+from helpers.helper_functions import reload_cli, reload_menu_countdown, check_exit_cmd
+
 
 def menu_habit_detail(ht, habit: Habit) -> None:
     """
@@ -18,7 +19,9 @@ def menu_habit_detail(ht, habit: Habit) -> None:
     while True:
         # Clear the screen and display the menu header
         reload_cli()
-        print(f"""- - - {habit.name}'s Details - - -
+        print("(Type 'quit' at any time to exit the application)")
+        print(f"""
+        - - - {habit.name}'s Details - - -
 
         1. Complete for today
         2. Complete for past date
@@ -26,11 +29,14 @@ def menu_habit_detail(ht, habit: Habit) -> None:
         4. Analytics
         5. View creation date
         6. Delete habit
-        7. Return to My Habits Menu
+        7. << Back to My Habits Menu
         """)
 
         # Get user choice
         choice = input("\nEnter your choice (1-7): ").strip()
+
+        # Check for exit command
+        check_exit_cmd(choice)
 
         # Handle menu options
         if choice == "1":

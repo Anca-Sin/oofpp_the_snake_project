@@ -5,7 +5,7 @@ menu_analytics_one_habit: Submenu of Habit Details Menu
 menu_analytics_all_habits: Submenu of My Habit Tracker Menu
 """
 from core.habit import Habit
-from helpers.helper_functions import reload_cli, reload_menu_countdown
+from helpers.helper_functions import reload_cli, reload_menu_countdown, check_exit_cmd
 
 
 def menu_analytics_one_habit(ht, habit: Habit) -> None:
@@ -77,7 +77,9 @@ def menu_analytics_all_habits(ht) -> None:
     while True:
         # Clear the screen and display the menu header
         reload_cli()
-        print("""- - - My Analytics - - -
+        print("(Type 'quit' at any time to exit the application)")
+        print("""
+        - - - My Analytics - - -
         
         1. [All Habits] Longest streak
         2. [All Habits] Most completed habit
@@ -87,7 +89,7 @@ def menu_analytics_all_habits(ht) -> None:
         6. [Daily - Weekly] Most completed habits
         7. [Daily - Weekly] Least completed habits
         8. [Daily - Weekly] Average streak length
-        9. Return to My Habit Tracker Menu
+        9. << Back to My Habit Tracker Menu
         """)
 
         # Check if the user has any habits to analyze
@@ -104,6 +106,9 @@ def menu_analytics_all_habits(ht) -> None:
         else:
             # Get user choice
             choice = input("\nEnter your choice (1-9): ").strip()
+
+            # Check for exit command
+            check_exit_cmd(choice)
 
             # Handle menu options
             if choice == "1":

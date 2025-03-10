@@ -5,7 +5,8 @@ from typing import List
 
 from .menu_habit_detail import menu_habit_detail
 from core.habit import Habit
-from helpers.helper_functions import reload_cli, reload_menu_countdown
+from helpers.helper_functions import reload_cli, reload_menu_countdown, check_exit_cmd
+
 
 def menu_habits(ht):
     """
@@ -17,17 +18,22 @@ def menu_habits(ht):
     while True:
         # Clear the screen and display the menu header
         reload_cli()
-        print("""- - - My Habits - - -
+        print("(Type 'quit' at any time to exit the application)")
+        print("""
+        - - - My Habits - - -
         
         1. Register a new habit
         2. List all habits
         3. Daily habits
         4. Weekly habits
-        5. Back to My Habit Tracker
+        5. << Back to My Habit Tracker
         """)
 
         # Get user choice
         choice = input("\nEnter your choice (1-5): ").strip()
+
+        # Check for exit command
+        check_exit_cmd(choice)
 
         # Handle menu options
         if choice == "1":
@@ -77,21 +83,29 @@ def display_habits_and_select(ht, habits: List[Habit], display_type: str, set_fr
         # For daily, weekly habits
         if display_type in ["daily", "weekly"]:
             print(f"You don't have any {display_type} habits yet!")
+            reload_menu_countdown()
         # For all habits
         else:
             print("You don't have any registered habits yet!")
+            reload_menu_countdown()
 
         # Offer to create a new habit with pre-set frequency/None or return
         while True:
             # If accessed from display daily or weekly habits
             if set_frequency:
-                print(f"""\nWould you like to create a new {set_frequency} habit?
+                print("(Type 'quit' at any time to exit the application)")
+                print(f"""
+                Would you like to create a new {set_frequency} habit?
 
                 1. Register a {set_frequency} habit
-                2. Return to My Habits Menu
+                2. << Back to My Habits Menu
                 """)
 
                 choice = input("\nEnter your choice (1-2): ").strip()
+
+                # Check for exit command
+                check_exit_cmd(choice)
+
                 if choice == "1":
                     # Create a new habit with the pre-set frequency
                     ht.db.new_habit(ht.logged_in_user, set_frequency)
@@ -106,13 +120,19 @@ def display_habits_and_select(ht, habits: List[Habit], display_type: str, set_fr
 
             # If accessed from display all habits
             else:
-                print(f"""\nWould you like to create a new habit?
+                print("(Type 'quit' at any time to exit the application)")
+                print(f"""
+                Would you like to create a new habit?
 
                 1. Register a new habit
-                2. Return to My Habits Menu
+                2. << Back to My Habits Menu
                 """)
 
                 choice = input("\nEnter your choice (1-2): ").strip()
+
+                # Check for exit command
+                check_exit_cmd(choice)
+
                 if choice == "1":
                     # Create a new habit without a pre-set frequency
                     ht.db.new_habit(ht.logged_in_user)
@@ -128,7 +148,8 @@ def display_habits_and_select(ht, habits: List[Habit], display_type: str, set_fr
     # If there are habits to display, show them
     while True:
         reload_cli()
-        print(f"- - - {display_type.title()} Habits - - -")
+        print("(Type 'quit' at any time to exit the application)")
+        print(f"\n- - - {display_type.title()} Habits - - -")
 
         # Display habits with indexing
         for idx, habit in enumerate(habits, 1):
@@ -145,6 +166,9 @@ def display_habits_and_select(ht, habits: List[Habit], display_type: str, set_fr
 
         # Get user selection
         choice = input(f"\nEnter your choice (1-{back_option}): ").strip()
+
+        # Check for exit command
+        check_exit_cmd(choice)
 
         try:
             choice_num = int(choice)
