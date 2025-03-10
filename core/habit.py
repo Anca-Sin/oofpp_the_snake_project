@@ -147,7 +147,7 @@ class Habit:
 
         # Use the internal helper method to check completion
         if self._is_habit_completed(completion_date):
-            print(f"'{self.name}' has already been completed!")
+            print(f"'{self.name}' has already been completed today!")
             return False
 
         # Add today's date to completions if it's not already completed

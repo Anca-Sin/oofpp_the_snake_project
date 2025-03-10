@@ -8,7 +8,6 @@ from .menu_my_habit_tracker import menu_my_habit_tracker
 from core.analytics import Analytics
 from helpers.helper_functions import reload_cli, reload_menu_countdown, check_exit_cmd
 
-
 def main_menu(ht) -> None:
     """
     Displays the main menu and handles user navigation.
@@ -20,6 +19,7 @@ def main_menu(ht) -> None:
         # Clear the screen and display the menu header
         reload_cli()
         print("(Type 'quit' at any time to exit the application)")
+        print(f"\nYou've successfully logged in with '{ht.logged_in_user.username}'...")
         print("""
         - - - Main Menu - - -
         

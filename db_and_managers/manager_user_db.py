@@ -65,37 +65,42 @@ def select_user() -> User:
     else:
         while True:
             reload_cli()
+            print("(Type 'quit' at any time to exit the application)")
             # Display users with numeration
-            print("Please select a user from the following list: ")
+            print("\nPlease select a user from the following list: ")
             for idx, user in enumerate(users, 1):
-                print(f"{idx}. {user.username}")
-
+                print(f"\n{idx}. {user.username}")
+            print("\nor")
             # Last option: Create new user
-            print(f"{len(users) + 1}. Create a new user")
+            print(f"\n{len(users) + 1}. Create a new user")
 
             # Ask user for a choice
-            choice = input(f"Enter your choice (1-{len(users) + 1}): ").strip()
+            choice = input(f"\nEnter your choice (1-{len(users) + 1}): ").strip()
 
-            if choice.isdigit() and 1 <= int(choice) <= len(users):
-                # Confirm the choice
-                confirmed_choice = confirm_int_input(choice)
+            # Check for exit command
+            check_exit_cmd(choice)
 
-                # If the choice was confirmed, get the corresponding user
-                selected_user = users[int(confirmed_choice) - 1]  # Adjust index since user listing starts from 1
-                print(f"You've selected: {selected_user.username}")
-                return selected_user
+            try:
+                if choice.isdigit() and 1 <= int(choice) <= len(users):
+                    # Confirm the choice
+                    selected_user = users[-1]  # Adjust index since user listing starts from 1
+                    return selected_user
 
-            elif int(choice) == len(users) + 1:
-                # Create new user
-                selected_user = User()
-                selected_user.create_username()
-                save_user(selected_user)
-                print(f"You've created user: {selected_user.username}")
-                return selected_user
+                elif int(choice) == len(users) + 1:
+                    # Create new user
+                    selected_user = User()
+                    selected_user.create_username()
+                    save_user(selected_user)
+                    print(f"You've created user: {selected_user.username}")
+                    return selected_user
 
-            else:
+                else:
+                    print("\nSorry, invalid input. Please try again!")
+                    reload_menu_countdown()
+            except ValueError:
                 print("\nSorry, invalid input. Please try again!")
                 reload_menu_countdown()
+
 
 def username_exists(username: str) -> bool:
     """

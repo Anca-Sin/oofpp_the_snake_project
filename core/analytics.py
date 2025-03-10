@@ -75,20 +75,20 @@ class Analytics:
         return longest_streak_all_habits[0], longest_streak_all_habits[1]
 
     # Task requirement: "return the longest streak for a given habit"
-    def longest_streak_for_habit(self, habit_name: str) -> Tuple[str, int]:
+    def longest_streak_for_habit(self, habit_name: str) -> int:
         """
         Finds the longest streak for a selected habit.
 
         Args:
             habit_name: The name of the habit to get the longest streak for.
         Returns:
-            A tuple containing (habit_name, longest_streak).
+            The longest streak for the selected habit.
         """
         # Filter habits to find the one with the matching name
         # Use next() to get the first (and only matching habit)
         habit = next(filter(lambda habit_item: habit_item.name == habit_name, self.user.habits))
 
-        return habit_name, habit.streaks.get_longest_streak()
+        return habit.streaks.get_longest_streak()
 
     def longest_streak_by_periodicity(self, periodicity: str) -> Tuple[str, int]:
         """

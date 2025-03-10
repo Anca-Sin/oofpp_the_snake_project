@@ -155,14 +155,14 @@ def display_habits_and_select(ht, habits: List[Habit], display_type: str, set_fr
         for idx, habit in enumerate(habits, 1):
             # For daily, weekly habits
             if habit.frequency in ["daily", "weekly"]:
-                print(f"{idx}. {habit.name}")
+                print(f"\n{idx}. {habit.name}")
             # For all habits
             else:
-                print(f"{idx}. {habit.name} ({habit.frequency})")
+                print(f"\n{idx}. {habit.name} ({habit.frequency})")
 
         # Add option to return to the previous menu
         back_option = len(habits) + 1
-        print(f"{back_option}. Back to My Habits Menu")
+        print(f"\n{back_option}. << Back to My Habits Menu")
 
         # Get user selection
         choice = input(f"\nEnter your choice (1-{back_option}): ").strip()
