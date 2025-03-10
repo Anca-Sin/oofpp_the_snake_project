@@ -49,7 +49,7 @@ class HabitTracker:
 
         # Load user habits and analytics instance after selection
         self.db.load_habits(self.logged_in_user)
-        self.analytics = Analytics(self.logged_in_user)
+        self.analytics = Analytics(self.logged_in_user, self.db)
 
         # Show the main menu to start user interaction
         main_menu(self)

@@ -15,11 +15,13 @@ class Analytics:
 
     Attributes:
         user(User): The user whose habits will be analyzed.
+        db: Database instance.
     """
 
-    def __init__(self, user: User) -> None:
+    def __init__(self, user: User, db=None) -> None:
         """Initializes the Analytics object with a user."""
         self.user = user         # Store the user reference for analytics operations
+        self.db = db
 
     # Task requirement: "return a list of all currently tracked habits"
     def list_all_habits(self) -> List[Habit]:
@@ -197,7 +199,7 @@ class Analytics:
         """
         # Get the streak length history string from the db
         # Returns a comma separated string of streak lengths
-        streak_history = self.user.db.load_broken_streak_length(habit_name)
+        streak_history = self.db.load_broken_streak_length(habit_name)
 
         # If no history exists, return 0
         if not streak_history:
@@ -223,7 +225,7 @@ class Analytics:
 
         # Process each habit to collect streak lengths
         for habit in self.user.habits:
-            streak_history = self.user.db.load_broken_streak_length(habit.name)
+            streak_history = self.db.load_broken_streak_length(habit.name)
 
             # If streak history exists, convert and add to the collection
             if streak_history:
@@ -252,7 +254,7 @@ class Analytics:
 
         # Process each habit to collect streak lengths
         for habit in habits:
-            streak_history = self.user.db.load_broken_streak_length(habit.name)
+            streak_history = self.db.load_broken_streak_length(habit.name)
 
             # If streak history exists, convert and add to collection
             if streak_history:
