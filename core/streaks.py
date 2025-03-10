@@ -92,14 +92,17 @@ class Streaks:
             The current streak count.
         """
         # If no completions, current streak is 0
-        if len(completions) == 0:
+        if not completions:
+            self.current_streak = 0
             return self.current_streak
 
         # Sort completions to process them chronologically
         sorted_completions = self._sort_completions(completions)
+        # Get latest completion
+        latest_completion = sorted_completions[-1]
 
         # Check if streak is broken (using most recent completion)
-        if self.current_streak > 0 and self.is_streak_broken(frequency, sorted_completions[-1]):
+        if self.is_streak_broken(frequency, latest_completion):
             # If streak is broken, current_streak was already reset to 0 in is_streak_broken()
             return self.current_streak
 
@@ -107,7 +110,8 @@ class Streaks:
         self.current_streak += 1
 
         # Update the longest streak if current streak is longer
-        self.longest_streak = max(self.longest_streak, self.current_streak)
+        if self.current_streak > self.longest_streak:
+            self.longest_streak = self.current_streak
 
         return self.current_streak
 
