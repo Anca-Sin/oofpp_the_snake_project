@@ -9,7 +9,7 @@ from core.user import User
 from helpers.helper_functions import db_connection, reload_menu_countdown
 
 
-def load_habits(selected_user: User) -> None:
+def load_habits(selected_user: User) -> List[Habit]:
     """
     Loads all habits for the selected user.
 
@@ -19,6 +19,8 @@ def load_habits(selected_user: User) -> None:
 
     Parameters:
         selected_user: The User objects whose habits to load.
+    Returns:
+        List of Habit objects for the selected user.
     """
     connection = db_connection(DB_FILEPATH)
     cursor = connection.cursor()
@@ -83,7 +85,7 @@ def load_habits(selected_user: User) -> None:
         habits.append(habit)
 
     connection.close()
-    return None
+    return habits
 
 
 def habit_name_exists(selected_user: User, habit_name: str) -> bool:
