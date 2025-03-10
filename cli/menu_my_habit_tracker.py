@@ -19,7 +19,7 @@ def menu_my_habit_tracker(ht):
     while True:
         # Clear the screen and display the menu header
         reload_cli()
-        print("""- - - My Habit Tracker
+        print("""- - - My Habit Tracker - - -
         
         1. My Habits
         2. My Analytics
