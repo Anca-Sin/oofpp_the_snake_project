@@ -26,7 +26,7 @@ def load_habits(selected_user: User) -> None:
     # Query to get all habits for the selected user
     cursor.execute("""
         SELECT id, user_id, habit_name, frequency, creation_date,
-            completions_count, check_off_dates
+            completions_count, checked_off_dates
         FROM habits 
         WHERE user_id = ?
     """, (selected_user.user_id,))
@@ -157,7 +157,7 @@ def save_habits(selected_user: User, new_habit=None) -> None:
             new_habit.frequency,
             new_habit.creation.strftime("%Y-%m-%d"),
             0,  # Initialize completion counts as 0
-            ""  # Initialize check_off_dates as an empty string
+            ""  # Initialize checked_off_dates as an empty string
         ))
 
         # Get the auto-generated habit ID
