@@ -38,7 +38,7 @@ def _generate_completions(habit: Habit, start_date: date, end_date: date) -> Lis
         if habit.frequency == "daily":
             if random.randint(1, 10) <= 8:  # 80% chance
                 # Check-off the habit as completed for the date
-                habit.check_off_habit_sample_data(current_date)
+                habit.check_off_habit(current_date)
                 completions.append(current_date)
 
 
@@ -47,7 +47,7 @@ def _generate_completions(habit: Habit, start_date: date, end_date: date) -> Lis
             if last_week_completion is None or week_start != last_week_completion:
                 if random.randint(1, 10) <= 9:  # 90% chance
                     # Check-off the habit as completed for the date
-                    habit.check_off_habit_sample_data(current_date)
+                    habit.check_off_habit(current_date)
                     completions.append(current_date)
                     last_week_completion = week_start
 
