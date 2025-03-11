@@ -85,7 +85,7 @@ def complete_habit_past(selected_user: User, habit: Habit) -> None:
                     # Add the completion date
                     habit.completion_dates.append(completion_date)
                     # Update streak information
-                    habit.streaks.get_current_streak(habit.frequency, habit.completion_dates)
+                    habit.streaks.get_current_streak(habit.frequency, habit.completion_dates, completion_date)
                     # Save changes to the db
                     save_habits(selected_user)
                     print(f"'{habit.name}' has been completed for {date_str}!")
@@ -127,23 +127,23 @@ def delete_completion(selected_user: User, habit: Habit) -> None:
 
         try:
             # Parse the entered date
-            completion_date = datetime.strptime(date_str, "%Y-%m-%d").date()
+            deletion_date = datetime.strptime(date_str, "%Y-%m-%d").date()
 
             # Check if the entered date exists in the completion_dates
-            if completion_date in habit.completion_dates:
+            if deletion_date in habit.completion_dates:
                 # Confirm deletion
                 while True:
-                    choice = input(f"\nYou entered '{completion_date}'. Is this correct? (yes/no): ").strip()
+                    choice = input(f"\nYou entered '{deletion_date}'. Is this correct? (yes/no): ").strip()
 
                     # Check for exit command
                     check_exit_cmd(choice)
 
                     if choice == "yes":
-                        print(f"You've successfully deleted {completion_date} from {habit.name}'s completions!")
+                        print(f"You've successfully deleted {deletion_date} from {habit.name}'s completions!")
                         # Remove the completion
-                        habit.completion_dates.remove(completion_date)
+                        habit.completion_dates.remove(deletion_date)
                         # Update streak information
-                        habit.streaks.get_current_streak(habit.frequency, habit.completion_dates)
+                        habit.streaks.get_current_streak(habit.frequency, habit.completion_dates, deletion_date)
                         # Save changes to the db
                         save_habits(selected_user)
                         input("\nPress ENTER to continue... ")
