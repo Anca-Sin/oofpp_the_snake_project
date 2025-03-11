@@ -29,30 +29,29 @@ def _generate_completions(habit: Habit, start_date: date, end_date: date) -> Lis
     habit.streaks.longest_streak = 0
     habit.streaks.broken_streak_length = []
 
+    # Reset completions
     completions = []
-    current_date = start_date
     last_week_completion = None
 
-    while current_date <= end_date:
+    # Iterate through the 4-week period from the start until the end dates
+    completion_date = start_date
+    while completion_date <= end_date:
         # Determine if habit should be completed on this date (random probability)
         if habit.frequency == "daily":
             if random.randint(1, 10) <= 8:  # 80% chance
                 # Check-off the habit as completed for the date
-                habit.check_off_habit(current_date)
-                completions.append(current_date)
-
+                completions.append(completion_date)
 
         elif habit.frequency == "weekly":
-            week_start = current_date - timedelta(days=current_date.weekday())
+            week_start = completion_date - timedelta(days=completion_date.weekday())
             if last_week_completion is None or week_start != last_week_completion:
                 if random.randint(1, 10) <= 9:  # 90% chance
                     # Check-off the habit as completed for the date
-                    habit.check_off_habit(current_date)
-                    completions.append(current_date)
+                    completions.append(completion_date)
                     last_week_completion = week_start
 
         # Move to next day
-        current_date += timedelta(days=1)
+        completion_date += timedelta(days=1)
 
     return completions
 
@@ -68,7 +67,7 @@ def sample_data_generator():
 
     # If sample user exists
     if sample_user:
-        print("Skipping... 'SampleUser' already exists...")
+        print("Skipping User creation... 'SampleUser' already exists...")
     else:
         # If not, start creating one
         sample_user = User(username="SampleUser")
@@ -92,7 +91,7 @@ def sample_data_generator():
     for habit_info in sample_habits:
         # If sample habit names exist
         if habit_info["name"] in existing_habit_names:
-            print(f"Skipping... Habit '{habit_info['name']}' already exists...")
+            print(f"Skipping Habit creation... '{habit_info['name']}' already exists...")
         else:
             # Create new sample habit
             new_habit = Habit()
@@ -119,18 +118,22 @@ def sample_data_generator():
         else:
             print(f"\nGenerating completions for '{habit.name}'...")
 
-            # Generate completions using helper function
+            # Generate completions for habit using helper function
             habit.completion_dates = _generate_completions(habit, start_date, end_date)
+
+            # Calculate streaks
+            completions = habit.completion_dates
+            habit.streaks.get_current_streak(habit.frequency, completions, sample_data=True)
+
+            # Perform checks
             print(f"\nHabit: {habit.name}")
             print(f"Completions: {habit.completion_dates}")
             print(f"Current Streak: {habit.streaks.current_streak}")
             print(f"Longest Streak: {habit.streaks.longest_streak}")
             print(f"Broken Streaks Lengths: {habit.streaks.broken_streak_length}")
-            # Count completions
-            completions = habit.completion_dates
-            completion_count = len(completions)
 
-            # Show completions count for each sample habit
+            # Count completions for display
+            completion_count = len(completions)
             if habit.frequency == "daily":
                 print(f">> ... for 'daily': added {completion_count} new random completions!")
             elif habit.frequency == "weekly":
