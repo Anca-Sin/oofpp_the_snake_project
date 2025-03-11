@@ -11,11 +11,50 @@ Creates a sample user and 5 predefined habits (3 daily, 2 weekly) with 4 weeks o
 """
 
 import random
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, date
+from typing import List
 
+from core.streaks import Streaks
 from core.user import User
 from core.habit import Habit
 from db_and_managers.database import Database
+
+
+def _generate_completions(habit: Habit, start_date: date, end_date: date) -> List[date]:
+    """Generates random completions for sample data with proper streak calculation"""
+    # Reset habit data
+    habit.completion_dates = []
+    habit.streaks = Streaks()
+    habit.streaks.current_streak = 0
+    habit.streaks.longest_streak = 0
+    habit.streaks.broken_streak_length = []
+
+    completions = []
+    current_date = start_date
+    last_week_completion = None
+
+    while current_date <= end_date:
+        # Determine if habit should be completed on this date (random probability)
+        if habit.frequency == "daily":
+            if random.randint(1, 10) <= 8:  # 80% chance
+                # Check-off the habit as completed for the date
+                habit.check_off_habit_sample_data(current_date)
+                completions.append(current_date)
+
+
+        elif habit.frequency == "weekly":
+            week_start = current_date - timedelta(days=current_date.weekday())
+            if last_week_completion is None or week_start != last_week_completion:
+                if random.randint(1, 10) <= 9:  # 90% chance
+                    # Check-off the habit as completed for the date
+                    habit.check_off_habit_sample_data(current_date)
+                    completions.append(current_date)
+                    last_week_completion = week_start
+
+        # Move to next day
+        current_date += timedelta(days=1)
+
+    return completions
 
 def sample_data_generator():
     """Creates a sample user and 5 predefined habits with 4 weeks of completion data."""
@@ -29,7 +68,7 @@ def sample_data_generator():
 
     # If sample user exists
     if sample_user:
-        print("Sample user already exists. Skipping...")
+        print("Skipping... 'SampleUser' already exists...")
     else:
         # If not, start creating one
         sample_user = User(username="SampleUser")
@@ -53,7 +92,7 @@ def sample_data_generator():
     for habit_info in sample_habits:
         # If sample habit names exist
         if habit_info["name"] in existing_habit_names:
-            print(f"Habit '{habit_info['name']}' already exists. Skipping...")
+            print(f"Skipping... Habit '{habit_info['name']}' already exists...")
         else:
             # Create new sample habit
             new_habit = Habit()
@@ -78,85 +117,36 @@ def sample_data_generator():
             continue
 
         else:
-            print(f"Generating completions for '{habit.name}'...")
+            print(f"\nGenerating completions for '{habit.name}'...")
 
-            # Always generates new random completions
-            # Need to clear existing completions and reset streak data
-            habit.completion_dates = []
-            habit.streaks.current_streak = 0
-            habit.streaks.longest_streak = 0
-            habit.streaks.broken_streak_length = []
+            # Generate completions using helper function
+            habit.completion_dates = _generate_completions(habit, start_date, end_date)
+            print(f"\nHabit: {habit.name}")
+            print(f"Completions: {habit.completion_dates}")
+            print(f"Current Streak: {habit.streaks.current_streak}")
+            print(f"Longest Streak: {habit.streaks.longest_streak}")
+            print(f"Broken Streaks Lengths: {habit.streaks.broken_streak_length}")
+            # Count completions
+            completions = habit.completion_dates
+            completion_count = len(completions)
 
-            # Save the reset data to the db
+            # Show completions count for each sample habit
+            if habit.frequency == "daily":
+                print(f">> ... for 'daily': added {completion_count} new random completions!")
+            elif habit.frequency == "weekly":
+                print(f">> ... for 'weekly': added {completion_count} new random completions!")
+
+            # Save the newly generated completions to the db
             db.save_habits(sample_user)
 
-            # Generate completion dates for the 4 weeks period
-            # Start from 4 weeks ago
-            current_date = start_date
-            # Start from a clean slate
-            completion_count = 0
-
-            # Loop through each day in the 4 weeks period
-            while current_date <= end_date:
-                # should_complete: bool -> determines if we complete the habit for the day
-                # Initially set to False (not completed)
-                should_complete = False
-
-                # Determine if habit should be completed on this date
-                # Using random probabilities to simulate completion patterns
-                # 1-8 = "complete the habit" (80% chance)
-                # 9-10 = "skip the habit"    (20% chance)
-                if habit.frequency == "daily":
-                    # 80% completions
-                    should_complete = random.randint(1, 10) <= 8
-                elif habit.frequency == "weekly":
-                    # 90% completion
-                    should_complete = random.randint(1, 10) <= 9
-
-                # If the random check passed, add a completion for this date
-                if should_complete:
-                    # Complete the habit for this date (updates all changes)
-                    _add_past_completion(db, sample_user, habit, current_date)
-                    completion_count += 1
-
-                # Move to the next day
-                current_date += timedelta(days=1)
-
-            print(f"Added {completion_count} completions for '{habit.name}'!")
-
-print("""\nSample data created successfully:
-- 5 habits with 4 weeks of randomly generated completion data
-- streak information has been calculated
-- login as 'SampleUser' to explore the data
-""")
-
-def _add_past_completion(db, user, habit, completion_date):
-    """
-    Adds a completion for a specific past date.
-    No user input and cli - can't reuse already defined methods.
-
-    - adds the completion date to the habit's completion_dates list
-    - updates streak calculations based on the new completion
-    - saves the updated habit and streak data to the db
-
-    Parameters:
-        db: Database instance for saving data -> inherited inside create_sample_data().
-            => Not reopening a database instance each time a date is added.
-        user: The User object whose habit we complete.
-        habit: The Habit object to complete.
-        completion_date: Date to mark as completed.
-    """
-    # No need to check if already completed - each date is only processed once
-
-    # Add completion to the habit's completions list
-    habit.completion_dates.append(completion_date)
-
-    # Update streak information
-    # Calculates current streak, handles longest_streak and broken_streak_length
-    habit.streaks.get_current_streak(habit.frequency, habit.completion_dates)
-
-    # Save changes to the db
-    db.save_habits(user)
+def instructions():
+    print("""
+    Sample data created successfully:
+    - 5 habits with 4 weeks of randomly generated completion data
+    - streak information has been calculated
+    - login as 'SampleUser' to explore the data
+    """)
 
 if __name__ == "__main__":
     sample_data_generator()
+    instructions()
