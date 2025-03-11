@@ -130,7 +130,7 @@ class Habit:
 
         return False # If neither condition is met
 
-    def check_off_habit(self, completion_date: date=None, sample_data: bool=False) -> bool:
+    def check_off_habit(self) -> bool:
         """
         Marks a habit as complete for the current day.
 
@@ -145,29 +145,22 @@ class Habit:
         - updates streak information upon completion correctly:
             = normal app usage behavior was always performing checks against today
 
-        Args:
-            completion_date: Optional date to mark completion. Defaults to today if None (for sample data generation).
-            sample_data: If True -> skips validation checks (for sample data generation).
-                         If False -> desired app behavior in normal use context.
         Returns:
             True if marked complete, False if already completed.
         """
         # If no sample data, default to today
-        if completion_date is None:
-            completion_date = datetime.now().date()
+        today = datetime.now().date()
 
-        # Skip completion validation for sample data generation
-        if sample_data is False:
-            # Check if already completed for normal app usage
-            if self._is_habit_completed(completion_date):
-                print(f"'{self.name}' has already been completed today!")
-                return False
+        # Check if already completed for complete today.
+        if self._is_habit_completed(today):
+            print(f"'{self.name}' has already been completed today!")
+            return False
 
         # Add today's date to completions if it's not already completed
         # Add by default without checking if sample_date is True
-        self.completion_dates.append(completion_date)
-        print(f"'{self.name}' completed for {completion_date} successfully!")
+        self.completion_dates.append(today)
+        print(f"'{self.name}' completed for {today} successfully!")
 
         # Update streaks after the new completion
-        self.streaks.get_current_streak(self.frequency, self.completion_dates, completion_date, sample_data)
+        self.streaks.get_current_streak(self.frequency)
         return True
