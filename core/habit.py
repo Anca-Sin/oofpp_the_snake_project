@@ -134,16 +134,8 @@ class Habit:
         """
         Marks a habit as complete for the current day.
 
-        For normal app usage:
-        - defaults completion_date to today
         - prevents duplicate completion
         - updates streak information upon completion
-
-        For sample data generation:
-        - takes completion_date date which has been generated
-        - doesn't check for duplicate completions (issue handled in generation approach)
-        - updates streak information upon completion correctly:
-            = normal app usage behavior was always performing checks against today
 
         Returns:
             True if marked complete, False if already completed.
@@ -162,5 +154,5 @@ class Habit:
         print(f"'{self.name}' completed for {today} successfully!")
 
         # Update streaks after the new completion
-        self.streaks.get_current_streak(self.frequency)
+        self.streaks.get_current_streak(self.frequency, self.completion_dates)
         return True
