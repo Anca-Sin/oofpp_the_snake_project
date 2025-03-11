@@ -152,8 +152,31 @@ class Habit:
 
         # Add today's date to completions if it's not already completed
         self.completion_dates.append(completion_date)
-        print(f"'{self.name}' completed for today successfully!")
+        print(f"'{self.name}' completed for {completion_date} successfully!")
 
         # Update streaks after the new completion
+        self.streaks.get_current_streak(self.frequency, self.completion_dates)
+        return True
+
+    def check_off_habit_sample_data(self, completion_date: date=None) -> bool:
+        """
+        For sample data generation - marks a habit as complete for a specific historical date.
+
+        Unlike regular check_off_habit, this method:
+        - Doesn't validate against current date
+        - Always succeeds (no duplicate checking)
+        - Updates streak information
+
+        Args:
+            completion_date: The randomly generated date to mark completion for.
+        Returns:
+            True (always succeeds)
+        """
+        # Add the date to completions without validation against current date
+        self.completion_dates.append(completion_date)
+        print(f"'{self.name}' completed for {completion_date} successfully!")
+
+        # Update streaks after the new completion
+        # We pass the completion date itself as the reference point for streak calculations
         self.streaks.get_current_streak(self.frequency, self.completion_dates)
         return True
