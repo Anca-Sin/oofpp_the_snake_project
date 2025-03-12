@@ -61,7 +61,10 @@ def menu_habit_detail(ht, habit: Habit) -> None:
 
         elif choice == "5":
             # Delete selected habit entirely
-            db.delete_habit(ht, habit)
+            db.delete_habit(ht.logged_in_user, habit)
+            # Go to Menu Habits
+            from cli.menu_habits import menu_habits # Avoid circular import
+            menu_habits(ht)
 
         elif choice == "6":
             # Return to My Habits Menu
