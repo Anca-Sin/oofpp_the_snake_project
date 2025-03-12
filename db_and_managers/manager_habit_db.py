@@ -1,12 +1,13 @@
 from typing import List
 from datetime import datetime
+import time
 
 from config import DB_FILEPATH
 
 from core.habit import Habit
 from core.streaks import Streaks
 from core.user import User
-from helpers.colors import RED, RES
+from helpers.colors import RED, RES, GRAY
 from helpers.helper_functions import db_connection, reload_menu_countdown
 
 
@@ -129,13 +130,21 @@ def new_habit(selected_user: User, set_frequency: str = None) -> None:
     habit = Habit()
 
     # Prompt for habit details
-    habit.habit_name()
-    # Set frequency using preset if provided
-    habit.habit_frequency(preset_frequency=set_frequency)
-    habit.creation_date()
+    habit.habit_name(selected_user)
+    # Prompt for next set up if a name is provided
+    # Use set frequency if accessed through, daily or weekly
+    if not habit.name:
+        return
+    else:
+        habit.habit_frequency(preset_frequency=set_frequency)
+        habit.creation_date()
 
     # Insert the new habit to the db
-    save_habits(selected_user)
+    save_habits(selected_user, habit)
+    print(f"\nSaving to your database...")
+    time.sleep(1)
+    input(f"{GRAY}ENTER << to continue...{RES}")
+    return
 
 def save_habits(selected_user: User, new_habit=None) -> None:
     """
@@ -227,7 +236,7 @@ def delete_habit(selected_user: User, habit: Habit) -> None:
 
     """)
 
-    confirmation = input(f"Type in '{RED}DELETE{RES}' if you are sure to proceed (or cancel by pressing ENTER): ").strip()
+    confirmation = input(f"Type in '{RED}DELETE{RES}' if you are sure to proceed {GRAY}(or cancel by pressing ENTER){RES}: ").strip()
 
     # Check if the user doesn't confirm
     if confirmation.lower() != "delete":

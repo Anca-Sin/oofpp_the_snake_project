@@ -7,7 +7,7 @@ from config import DB_FILEPATH
 
 from core.user import User
 from helpers.helper_functions import db_connection, reload_cli, exit_msg, reload_menu_countdown, check_exit_cmd
-from helpers.colors import RED, RES, BLUE
+from helpers.colors import RED, RES, BLUE, GREEN, GRAY
 
 
 def load_users() -> List[User]: # For access to all user properties
@@ -47,8 +47,8 @@ def select_user() -> User:
             exit_msg()
             print("""\nNo users found! You can:
         
-            1. Create a new user
-            2. Quit the application
+            1 - Create a new user
+            2 - Quit the application
             """)
 
             choice = input("\nEnter your choice (1-2): ").strip()
@@ -96,12 +96,14 @@ def select_user() -> User:
             reload_cli()
             exit_msg()
             # Display users with numeration
-            print("\n        Please select a user from the following list: ")
+            print("")
+            print("\n        Login as: ")
+            print("")
             for idx, user in enumerate(users, 1):
-                print(f"\n        {idx}. {user.username}")
-            print("\n        or")
+                print(f"        {idx} - {GREEN}{user.username}{RES}")
+            print("        or")
             # Last option: Create new user
-            print(f"        {len(users) + 1}. Create a new user")
+            print(f"        {len(users) + 1} - Create a {GREEN}new{RES} user")
 
             # Ask user for a choice
             choice = input(f"\nEnter your choice (1-{len(users) + 1}): ").strip()
@@ -120,7 +122,9 @@ def select_user() -> User:
                     selected_user = User()
                     selected_user.create_username()
                     save_user(selected_user)
-                    print(f"\nYou've created user: {selected_user.username}")
+                    print(f"\nSaving to your database...")
+                    time.sleep(1)
+                    input(f"{GRAY}ENTER << to continue...{RES}")
                     return selected_user
 
                 else:
@@ -189,7 +193,7 @@ def delete_user(selected_user) -> None:
     - All associated habits and data
     """)
 
-    confirmation = input(f"Type in '{RED}DELETE{RES}' if you are sure to proceed (or cancel by pressing ENTER): ")
+    confirmation = input(f"Type in '{RED}DELETE{RES}' if you are sure to proceed {GRAY}(or cancel by pressing ENTER){RES}: ")
 
     # Check if the user doesn't confirm
     if confirmation.lower() != "delete":

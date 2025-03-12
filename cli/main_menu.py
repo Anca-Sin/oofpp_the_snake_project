@@ -7,7 +7,7 @@ import time
 from .menu_my_habit_tracker import menu_my_habit_tracker
 from core.analytics import Analytics
 from helpers.helper_functions import reload_cli, reload_menu_countdown, check_exit_cmd, exit_msg
-from helpers.colors import GRAY, RES, BLUE
+from helpers.colors import GRAY, RES, BLUE, RED, GREEN
 
 
 def main_menu(ht) -> None:
@@ -24,13 +24,14 @@ def main_menu(ht) -> None:
         print(f"""
         {BLUE}- - - Main Menu - - -{RES}
         
-        1. My Habit Tracker
-        2. Select a different user
-        3. Delete this user
+        {GREEN}1 - My Habit Tracker{RES}
+        2 - {RED}Delete{RES} this user
+        
+        {GRAY}ENTER << Select a different user{RES} 
         """)
 
         # Get user choice
-        choice = input("\nEnter your choice (1-3): ").strip()
+        choice = input("\nEnter your choice (1-2): ").strip()
 
         # Check for exit command
         check_exit_cmd(choice)
@@ -40,7 +41,7 @@ def main_menu(ht) -> None:
             # Go to my habit tracker menu
             menu_my_habit_tracker(ht)
 
-        elif choice == "2":
+        elif choice == "":
             # Select a different user
             ht.logged_in_user = ht.db.select_user()
 
@@ -50,7 +51,7 @@ def main_menu(ht) -> None:
             # Create an analytics instance for the newly selected user
             ht.analytics = Analytics(ht.logged_in_user, ht.db)
 
-        elif choice == "3":
+        elif choice == "2":
             # Delete the selected user
             ht.db.delete_user(ht.logged_in_user)
 

@@ -1,6 +1,7 @@
 import time
 from typing import List
 
+from helpers.colors import GRAY, RES
 from helpers.helper_functions import confirm_input
 
 class User:
@@ -35,7 +36,7 @@ class User:
 
         while True:
             # Ask user for username
-            print("Please type in your desired username (Press ENTER to exit): ")
+            print(f"Please type in your desired username {GRAY}(Press ENTER to exit){RES}: ")
             username = input().title().strip()
 
             # Exit the loop if "ENTER"
@@ -56,4 +57,4 @@ class User:
                 if confirmed_username is not None:
                     self.username = confirmed_username
                     time.sleep(1)
-                    return
+                    input(f"{GRAY}ENTER << to continue...{RES}")

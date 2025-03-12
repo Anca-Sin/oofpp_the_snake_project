@@ -1,6 +1,7 @@
 from datetime import datetime, timedelta, date
 from typing import List, Optional
 
+from helpers.colors import GRAY, RES
 from .streaks import Streaks
 from helpers.helper_functions import confirm_input, reload_menu_countdown
 
@@ -44,14 +45,14 @@ class Habit:
 
         while True:
             # Ask for habit name
-            print("\nWhat new habit do you want to register? (Press ENTER to exit): ")
+            print(f"\nNew Habit name {GRAY}(Press ENTER to exit):{RES} ")
             habit_name = input().title()
 
             # Exit the loop if "ENTER"
-            if not habit_name:
+            if habit_name == "":
                 return
 
-            elif user and habit_name_exists(user, habit_name):
+            elif habit_name_exists(user, habit_name):
                 print(f"\nA habit named '{habit_name}' already exists! Please try again!")
                 reload_menu_countdown()
 
@@ -81,7 +82,7 @@ class Habit:
 
         # If no preset frequency, prompt the user
         while True:
-            print("\nPlease type in 'Daily' or 'Weekly' (Press ENTER to exit): ")
+            print(f"\nPlease type in 'Daily' or 'Weekly' {GRAY}(Press ENTER to exit){RES}: ")
             habit_frequency = input().strip().lower()
 
             # Exit the loop if empty

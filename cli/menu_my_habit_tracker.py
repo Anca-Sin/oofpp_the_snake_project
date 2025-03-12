@@ -25,14 +25,14 @@ def menu_my_habit_tracker(ht):
         print(f"""
         {BLUE}- - - My Habit Tracker - - -{RES}
         
-        1. My Habits
-        2. My Analytics
+        1 - My Habits
+        2 - My Analytics
         
-        {GRAY}3. << Back to Main Menu{RES}
+        {GRAY}ENTER << Back to Main Menu{RES}
         """)
 
         # Get user choice
-        choice = input("\nEnter your choice (1-3): ").strip()
+        choice = input("\nEnter your choice (1-2): ").strip()
 
         # Check for exit command
         check_exit_cmd(choice)
@@ -46,7 +46,7 @@ def menu_my_habit_tracker(ht):
             # Go to Analytics Menu across all habits
             menu_analytics_all_habits(ht)
 
-        elif choice == "3":
+        elif choice == "":
             # Return to Main Menu
             return
 

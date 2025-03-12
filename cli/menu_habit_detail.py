@@ -26,17 +26,17 @@ def menu_habit_detail(ht, habit: Habit) -> None:
         print(f"""
         {BLUE}- - - {habit.name}'s Details - - -{RES}
 
-        1. Complete for today
-        2. View calendar and manage completions
-        3. Analytics
-        4. View creation date
-        5. Delete habit
+        1 - Complete for today
+        2 - View calendar and manage completions
+        3 - Analytics
+        4 - View creation date
+        5 - Delete habit
         
-        {GRAY}6. << Back to My Habits Menu{RES}
+        {GRAY}ENTER << Back to My Habits Menu{RES}
         """)
 
         # Get user choice
-        choice = input("\nEnter your choice (1-6): ").strip()
+        choice = input("\nEnter your choice (1-5): ").strip()
 
         # Check for exit command
         check_exit_cmd(choice)
@@ -44,7 +44,7 @@ def menu_habit_detail(ht, habit: Habit) -> None:
         # Handle menu options
         if choice == "1":
             # Mark the habit as complete for today
-            db.complete_habit_today(ht, habit)
+            db.complete_habit_today(ht.logged_in_user, habit)
 
         elif choice == "2":
             # View completions on calendar
@@ -57,7 +57,7 @@ def menu_habit_detail(ht, habit: Habit) -> None:
         elif choice == "4":
             # View the creation date of the habit
             print(f"\nHabit '{habit.name}' was created on: {habit.creation.strftime('%Y-%m-%d')}")
-            input("Press ENTER to continue...")
+            input(f"{GRAY}ENTER << to continue...{RES}")
 
         elif choice == "5":
             # Delete selected habit entirely
@@ -66,7 +66,7 @@ def menu_habit_detail(ht, habit: Habit) -> None:
             from cli.menu_habits import menu_habits # Avoid circular import
             menu_habits(ht)
 
-        elif choice == "6":
+        elif choice == "":
             # Return to My Habits Menu
             return
 

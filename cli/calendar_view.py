@@ -115,12 +115,12 @@ def view_completions_calendar(ht, habit: Habit) -> None:
         print(f"""
         {BLUE}- - - Completion Options - - -{RES}
         
-        1. Complete for today
-        2. Complete for a past date
-        3. Delete a completion
+        1 - Complete for today
+        2 - Complete for a past date
+        3 - Delete a completion
         """)
         print(f"""
-        {GRAY}- - - 4. << Back to Habit Details Menu - - -{RES}
+        {GRAY}ENTER << Back to Habit Details Menu - - -{RES}
         """)
 
         choice = input("\nEnter your choice: ").strip().lower()
@@ -183,7 +183,7 @@ def view_completions_calendar(ht, habit: Habit) -> None:
             # Delete a completion
             db.delete_completion(ht.logged_in_user, habit)
 
-        elif choice == "4":
+        elif choice == "":
             # Return to My Habit Details Menu
             return
 

@@ -23,16 +23,16 @@ def menu_habits(ht):
         print(f"""
         {BLUE}- - - My Habits - - -{RES}
         
-        1. Register a new habit
-        2. List all habits
-        3. Daily habits
-        4. Weekly habits
+        1 - Register a new habit
+        2 - List all habits
+        3 - Daily habits
+        4 - Weekly habits
         
-        {GRAY}5. << Back to My Habit Tracker{RES}
+        {GRAY}ENTER << Back to My Habit Tracker{RES}
         """)
 
         # Get user choice
-        choice = input("\nEnter your choice (1-5): ").strip()
+        choice = input("\nEnter your choice (1-4): ").strip()
 
         # Check for exit command
         check_exit_cmd(choice)
@@ -44,20 +44,23 @@ def menu_habits(ht):
 
         elif choice == "2":
             # List all habits
+            ht.db.load_habits(ht.logged_in_user)
             all_habits = ht.analytics.list_all_habits()
             display_habits_and_select(ht, all_habits, "All", None)
 
         elif choice == "3":
+            ht.db.load_habits(ht.logged_in_user)
             # Filter and display daily habits
             daily_habits = ht.analytics.list_habits_by_periodicity("daily")
             display_habits_and_select(ht, daily_habits, "Daily", "daily")
 
         elif choice == "4":
+            ht.db.load_habits(ht.logged_in_user)
             # Filter and display weekly habits
             weekly_habits = ht.analytics.list_habits_by_periodicity("weekly")
             display_habits_and_select(ht, weekly_habits, "Weekly", "weekly")
 
-        elif choice == "5":
+        elif choice == "":
             # Return to My Habit Tracker Menu
             return
 
@@ -101,12 +104,12 @@ def display_habits_and_select(ht, habits: List[Habit], display_type: str, set_fr
                 print(f"""
                 Would you like to create a new {set_frequency} habit?
 
-                1. Register a {set_frequency} habit
+                1 - Register a {set_frequency} habit
                 
-                {GRAY}2. << Back to My Habits Menu{RES}
+                {GRAY}ENTER << Back to My Habits Menu{RES}
                 """)
 
-                choice = input("\nEnter your choice (1-2): ").strip()
+                choice = input("\nEnter your choice: ").strip()
 
                 # Check for exit command
                 check_exit_cmd(choice)
@@ -114,7 +117,7 @@ def display_habits_and_select(ht, habits: List[Habit], display_type: str, set_fr
                 if choice == "1":
                     # Create a new habit with the pre-set frequency
                     ht.db.new_habit(ht.logged_in_user, set_frequency)
-                elif choice == "2":
+                elif choice == "":
                     # Return to My Habits Menu
                     reload_menu_countdown()
                     return
@@ -128,12 +131,12 @@ def display_habits_and_select(ht, habits: List[Habit], display_type: str, set_fr
                 print(f"""
                 Would you like to create a new habit?
 
-                1. Register a new habit
+                1 - Register a new habit
                 
-                {GRAY}2. << Back to My Habits Menu{RES}
+                {GRAY}ENTER << Back to My Habits Menu{RES}
                 """)
 
-                choice = input("\nEnter your choice (1-2): ").strip()
+                choice = input("\nEnter your choice: ").strip()
 
                 # Check for exit command
                 check_exit_cmd(choice)
@@ -161,31 +164,30 @@ def display_habits_and_select(ht, habits: List[Habit], display_type: str, set_fr
         for idx, habit in enumerate(habits, 1):
             # For daily, weekly habits
             if habit.frequency in ["daily", "weekly"]:
-                print(f"        {idx}. {habit.name}")
+                print(f"        {idx} - {habit.name}")
             # For all habits
             else:
-                print(f"        {idx}. {habit.name} ({habit.frequency})")
+                print(f"        {idx} - {habit.name} ({habit.frequency})")
 
-        # Add option to return to the previous menu
-        back_option = len(habits) + 1
-        print(f"\n{GRAY}        {back_option}. << Back to My Habits Menu{RES}")
+        print(f"\n{GRAY}        ENTER << Back to My Habits Menu{RES}")
 
         # Get user selection
-        choice = input(f"\nEnter your choice (1-{back_option}): ").strip()
+        choice = input(f"\nEnter your choice (1-{len(habits)}): ").strip()
 
         # Check for exit command
         check_exit_cmd(choice)
 
         try:
-            choice_num = int(choice)
-            if 1 <= choice_num <= len(habits):
+            if choice == "":
+                return
+
+            elif 1 <= int(choice) <= len(habits):
                 # Get the selected habit
-                selected_habit = habits[choice_num - 1]
+                selected_habit = habits[int(choice) - 1]
                 # Open detail menu for selected habit
                 menu_habit_detail(ht, selected_habit)
                 return # Return the user to the My Habits Menu after he views the habit details
-            elif choice_num == back_option:
-                return
+
             else:
                 # Handle invalid int input
                 print("\nInvalid choice. Please try again!")
