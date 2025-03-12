@@ -20,8 +20,7 @@ def main_menu(ht) -> None:
     while True:
         # Clear the screen and display the menu header
         reload_cli()
-        exit_msg()
-        print(f"{GRAY}You've successfully logged in with '{ht.logged_in_user.username}'...{RES}")
+        exit_msg(ht.logged_in_user)
         print(f"""
         {BLUE}- - - Main Menu - - -{RES}
         

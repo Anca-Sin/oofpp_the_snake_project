@@ -1,4 +1,5 @@
 import sys
+import time
 from typing import List
 
 # noinspection PyUnresolvedReferences
@@ -6,7 +7,7 @@ from config import DB_FILEPATH
 
 from core.user import User
 from helpers.helper_functions import db_connection, reload_cli, exit_msg, reload_menu_countdown, check_exit_cmd
-from helpers.colors import RED, RES
+from helpers.colors import RED, RES, BLUE
 
 
 def load_users() -> List[User]: # For access to all user properties
@@ -52,6 +53,9 @@ def select_user() -> User:
 
             choice = input("\nEnter your choice (1-2): ").strip()
 
+            # Check for exit command
+            check_exit_cmd(choice)
+
             if choice == "1":
                 selected_user = User()
                 selected_user.create_username()
@@ -59,7 +63,29 @@ def select_user() -> User:
                 print(f"\nYou've created user: {selected_user.username}!")
                 return selected_user
             elif choice == "2":
-                sys.exit() # Close the app
+                print("\n        Exiting the application")
+                time.sleep(0.40)
+                print("        .")
+                time.sleep(0.40)
+                print("        .")
+                time.sleep(0.40)
+                print("        .")
+                time.sleep(0.40)
+                print(f"\n        Goodbye! {BLUE}(^_^)/{RES}")
+                time.sleep(0.40)
+                print(f"""\n
+                {BLUE}* * * * * * * * * * * * *{RES}
+                {RED}REMEMBER TO STAY ON TRACK{RES}
+                {BLUE}* * * * * * * * * * * *{RES}
+                """)
+                time.sleep(0.40)
+                print("        .")
+                time.sleep(0.40)
+                print("        .")
+                time.sleep(0.40)
+                print("        .")
+                time.sleep(0.40)
+                sys.exit(0)
             else:
                 print("\nSorry, invalid input. Please try again!")
                 reload_menu_countdown()
@@ -180,4 +206,4 @@ def delete_user(selected_user) -> None:
     connection.close()
 
     print(f"\nUser '{RED}{selected_user.username}{RES}' and all associated data have been {RED}deleted{RES}.")
-    input("Press ENTER to continue...")
+    reload_menu_countdown()

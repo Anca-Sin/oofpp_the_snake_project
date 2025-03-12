@@ -48,9 +48,6 @@ def display_habit_calendar(
     # Get full month name
     month_name = calendar.month_name[month]
 
-    # Clear screen and print header
-    reload_cli()
-    exit_msg()
     print(f"\n{BLUE}- - - '{habit.name}' Calendar View - - -{RES}")
     print(f"\n{month_name} {year}")
     print(f"{GRAY}---------------------------------{RES}")
@@ -98,6 +95,10 @@ def view_completions_calendar(ht, habit: Habit) -> None:
     month = datetime.now().date().month
 
     while True:
+        # Clear screen and print header
+        reload_cli()
+        exit_msg(ht.logged_in_user)
+
         # Display calendar for current month
         display_habit_calendar(habit, year, month)
 

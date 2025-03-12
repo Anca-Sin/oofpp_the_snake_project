@@ -21,7 +21,7 @@ def menu_my_habit_tracker(ht):
     while True:
         # Clear the screen and display the menu header
         reload_cli()
-        exit_msg()
+        exit_msg(ht.logged_in_user)
         print(f"""
         {BLUE}- - - My Habit Tracker - - -{RES}
         

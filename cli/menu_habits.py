@@ -19,7 +19,7 @@ def menu_habits(ht):
     while True:
         # Clear the screen and display the menu header
         reload_cli()
-        exit_msg()
+        exit_msg(ht.logged_in_user)
         print(f"""
         {BLUE}- - - My Habits - - -{RES}
         
@@ -95,7 +95,7 @@ def display_habits_and_select(ht, habits: List[Habit], display_type: str, set_fr
         while True:
             # If accessed from display daily or weekly habits
             if set_frequency:
-                exit_msg()
+                exit_msg(ht.logged_in_user)
                 print(f"""
                 Would you like to create a new {set_frequency} habit?
 
@@ -123,7 +123,7 @@ def display_habits_and_select(ht, habits: List[Habit], display_type: str, set_fr
 
             # If accessed from display all habits
             else:
-                exit_msg()
+                exit_msg(ht.logged_in_user)
                 print(f"""
                 Would you like to create a new habit?
 
@@ -152,7 +152,7 @@ def display_habits_and_select(ht, habits: List[Habit], display_type: str, set_fr
     # If there are habits to display, show them
     while True:
         reload_cli()
-        exit_msg()
+        exit_msg(ht.logged_in_user)
         print(f"""
         {BLUE}- - - {display_type.title()} Habits - - -{RES}
         """)

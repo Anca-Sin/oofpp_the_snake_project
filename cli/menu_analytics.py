@@ -22,7 +22,7 @@ def menu_analytics_one_habit(ht, habit: Habit) -> None:
 
     # Clear the screen and display the menu header
     reload_cli()
-    exit_msg()
+    exit_msg(ht.logged_in_user)
 
     print(f"\n{BLUE}        - - - {habit.name}'s Analytics - - -{RES}")
     print(f"\n        >> Current streak:{RED} {habit.streaks.current_streak}{RES}")
@@ -42,7 +42,7 @@ def menu_analytics_all_habits(ht) -> None:
     while True:
         # Clear the screen and display the menu header
         reload_cli()
-        exit_msg()
+        exit_msg(ht.logged_in_user)
         print(f"""
         {BLUE}- - - My Analytics - - -{RES}
         
@@ -86,7 +86,7 @@ def submenu1_analytics_all_habits(ht):
     while True:
         # Clear the screen and display the menu header
         reload_cli()
-        exit_msg()
+        exit_msg(ht.logged_in_user)
         print(f"\n{BLUE}        - - - [All Habits] Analytics - - -{RES}")
         habit_name, streak = analytics.longest_streak_all_habits()
         print(f"\n        >> Longest streak:    '{RED}{habit_name}{RES}' with a {RED}{streak}{RES}-days streak")
@@ -111,7 +111,7 @@ def submenu2_analytics_d_w_habits(ht):
     while True:
         # Clear the screen and display the menu header
         reload_cli()
-        exit_msg()
+        exit_msg(ht.logged_in_user)
         print("\n{BLUE}        - - - [Daily - Weekly] Analytics - - -{RES}")
 
         print("\n        >> Longest streak <<")
