@@ -199,7 +199,7 @@ class Analytics:
         """
         # Get the streak length history string from the db
         # Returns a comma separated string of streak lengths
-        streak_history = self.db.broken_streak_lengths(habit_name)
+        streak_history = self.db.load_broken_streak_lengths(habit_name)
 
         # If no history exists, return 0
         if not streak_history:
