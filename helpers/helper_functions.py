@@ -168,6 +168,7 @@ def check_exit_cmd(command: str) -> bool:
         time.sleep(0.40)
         print("        .")
         time.sleep(0.40)
+        reload_cli()
         sys.exit(0)
     return False
 
