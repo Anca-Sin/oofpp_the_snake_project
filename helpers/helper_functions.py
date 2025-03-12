@@ -6,6 +6,8 @@ from typing import Any, Optional
 
 from config import DB_FILEPATH
 
+from helpers.colors import GRAY, RES
+
 def confirm_input(attribute_name: str, value: str) -> Optional[str]:
     """
     Helper method to confirm input with the user.
@@ -155,3 +157,6 @@ def check_exit_cmd(command: str) -> bool:
         time.sleep(0.40)
         sys.exit(0)
     return False
+
+def exit_msg():
+    print(f"{GRAY}(Type 'quit' at any time to exit the application){RES}")
