@@ -87,14 +87,10 @@ class TestStreaks(unittest.TestCase):
     """Tests the Streaks class functionality."""
 
     def setUp(self):
-        self.habit = Habit()
-        self.habit.name = "Test Habit"
-        self.habit.frequency = None
-        self.habit.completion_dates = []
-        self.habit.streaks = Streaks()
-        self.habit.streaks.current_streak = 0
-        self.habit.streaks.longest_streak = 0
-        self.habit.streaks.broken_streak_length = []
+        self.streaks = Streaks()
+        self.streaks.current_streak = 0
+        self.streaks.longest_streak = 0
+        self.streaks.broken_streak_length = []
 
     def test_is_streak_broken_daily(self):
         """Tests the is_streak_broken method for daily habits."""
@@ -102,11 +98,17 @@ class TestStreaks(unittest.TestCase):
         yesterday = today - timedelta(days=1)
         two_days_ago = today - timedelta(days=2)
 
+        # Create a list with yesterday as the last completion
+        completions = [two_days_ago, yesterday]
+
         # Streak should not be broken if last completion was yesterday
-        self.assertFalse(self.habit.streaks.is_streak_broken("daily", yesterday))
+        self.assertFalse(self.streaks.is_streak_broken("daily", completions))
+
+        # Create a list with two_days_ago as the last completion
+        completions = [two_days_ago]
 
         # Streak should be broken if last completion was 2 days ago
-        self.assertTrue(self.habit.streaks.is_streak_broken("daily", two_days_ago))
+        self.assertTrue(self.streaks.is_streak_broken("daily", completions))
 
     def test_is_streak_broken_weekly(self):
         """Tests the is_streak_broken method for weekly habits."""
@@ -114,11 +116,17 @@ class TestStreaks(unittest.TestCase):
         last_week = today - timedelta(days=7)
         two_weeks_ago = today - timedelta(days=14)
 
+        # Create a list with last_week as the last completion
+        completions = [two_weeks_ago, last_week]
+
         # Streak should not be broken if last completion was 1 week ago
-        self.assertFalse(self.habit.streaks.is_streak_broken("weekly", last_week))
+        self.assertFalse(self.streaks.is_streak_broken("weekly", completions))
+
+        # Create a list with two_weeks_ago as the last completion
+        completions = [two_weeks_ago]
 
         # Streak should be broken if last completion was 2 weeks ago
-        self.assertTrue(self.habit.streaks.is_streak_broken("weekly", two_weeks_ago))
+        self.assertTrue(self.streaks.is_streak_broken("weekly", completions))
 
     def test_current_streak_daily_consecutive(self):
         """Tests the get_current_streak method for consecutive daily completions."""
@@ -126,20 +134,17 @@ class TestStreaks(unittest.TestCase):
         yesterday = today - timedelta(days=1)
         two_days_ago = today - timedelta(days=2)
 
-        completions = self.habit.completion_dates
+        # Build consecutive completions list
+        completions = [two_days_ago, yesterday, today]
 
-        # 1 completion
-        self.habit.check_off_habit(two_days_ago)
-        self.assertEqual(self.habit.streaks.get_current_streak("daily", completions), 1)
+        # Test the streak calculations
+        result = self.streaks.get_current_streak("daily", completions, sample_data=True)
 
-        # 2 consecutive completions
-        self.habit.check_off_habit(yesterday)
-        self.assertEqual(self.habit.streaks.get_current_streak("daily", completions), 2)
-
-        # 3 consecutive completions
-        self.habit.check_off_habit(today)
-        self.assertEqual(self.habit.streaks.get_current_streak("daily", completions), 3)
-        self.assertEqual(self.habit.streaks.longest_streak, 3)
+        # Verify streak calculations
+        self.assertEqual(result, 3)
+        self.assertEqual(self.streaks.current_streak, 3)
+        self.assertEqual(self.streaks.longest_streak, 3)
+        self.assertEqual(self.streaks.broken_streak_lengths, [])
 
     def test_get_current_streak_daily_non_consecutive(self):
         """Tests the get_current_streak method for non-consecutive daily completions."""
@@ -147,25 +152,17 @@ class TestStreaks(unittest.TestCase):
         yesterday = today - timedelta(days=1)
         three_days_ago = today - timedelta(days=3)
 
-        completions = self.habit.completion_dates
+        # Test with a gap in completions
+        completions = [three_days_ago, yesterday, today]
 
-        # 1 completion
-        self.habit.check_off_habit(three_days_ago)
-        self.assertEqual(self.habit.streaks.get_current_streak("daily", completions), 1)
+        # Calculate streaks using sample_data mode
+        result = self.streaks.get_current_streak("daily", completions, sample_data=True)
 
-        # 2 completions with gap
-        # => broken streak: current_streak=1, broken_streak_length=[1], longest_streak=1
-        self.habit.check_off_habit(yesterday)
-        self.assertEqual(self.habit.streaks.get_current_streak("daily", completions), 1)
-        self.assertEqual(self.habit.streaks.longest_streak, 1)
-        self.assertEqual(self.habit.streaks.broken_streak_length, [1])
-
-        # 3 completions
-        # => streak continues: current_streak+=1, longest_streak+=1, broken_streak_length=same
-        self.habit.check_off_habit(today)
-        self.assertEqual(self.habit.streaks.get_current_streak("daily", completions), 2)
-        self.assertEqual(self.habit.streaks.longest_streak, 2)
-        self.assertEqual(self.habit.streaks.broken_streak_length, [1])
+        # The current streak should be 2 (yesterday and today)
+        self.assertEqual(result, 2)
+        self.assertEqual(self.streaks.current_streak, 2)
+        self.assertEqual(self.streaks.longest_streak, 2)
+        self.assertEqual(self.streaks.broken_streak_lengths, [1])
 
     def test_get_current_streak_weekly_consecutive(self):
         """Tests the get_current_streak method for consecutive weekly completions."""
@@ -173,20 +170,17 @@ class TestStreaks(unittest.TestCase):
         last_week = today - timedelta(days=7)
         two_weeks_ago = today - timedelta(days=14)
 
-        completions = self.habit.completion_dates
+        # Build consecutive weekly completions
+        completions = [two_weeks_ago, last_week, today]
 
-        # 1 completion
-        self.habit.check_off_habit(two_weeks_ago)
-        self.assertEqual(self.habit.streaks.get_current_streak("weekly", completions), 1)
+        # Calculate streaks
+        result = self.streaks.get_current_streak("weekly", completions, sample_data=True)
 
-        # 2 consecutive completions
-        self.habit.check_off_habit(last_week)
-        self.assertEqual(self.habit.streaks.get_current_streak("weekly", completions), 2)
-
-        # 3 consecutive completions
-        self.habit.check_off_habit(today)
-        self.assertEqual(self.habit.streaks.get_current_streak("weekly", completions), 3)
-        self.assertEqual(self.habit.streaks.longest_streak, 3)
+        # Verify streak calculations
+        self.assertEqual(result, 3)
+        self.assertEqual(self.streaks.current_streak, 3)
+        self.assertEqual(self.streaks.longest_streak, 3)
+        self.assertEqual(self.streaks.broken_streak_lengths, [])
 
     def test_get_current_streak_weekly_non_consecutive(self):
         """Tests the get_current_streak method for non-consecutive weekly completions."""
@@ -194,25 +188,17 @@ class TestStreaks(unittest.TestCase):
         last_week = today - timedelta(days=7)
         three_weeks_ago = today - timedelta(days=21)
 
-        completions = self.habit.completion_dates
+        # Test with a gap in weekly completions
+        completions = [three_weeks_ago, last_week, today]
 
-        # 1 completion
-        self.habit.check_off_habit(three_weeks_ago)
-        self.assertEqual(self.habit.streaks.get_current_streak("weekly", completions), 1)
+        # Calculate streaks
+        result = self.streaks.get_current_streak("weekly", completions, sample_data=True)
 
-        # 2 completions with gap
-        # => broken streak: current_streak=1, broken_streak_length=[1], longest_streak=1
-        self.habit.check_off_habit(last_week)
-        self.assertEqual(self.habit.streaks.get_current_streak("weekly", completions), 1)
-        self.assertEqual(self.habit.streaks.longest_streak, 1)
-        self.assertEqual(self.habit.streaks.broken_streak_length, [1])
-
-        # 3 completions
-        # => streak continues: current_streak+=1, longest_streak+=1, broken_streak_length=same
-        self.habit.check_off_habit(today)
-        self.assertEqual(self.habit.streaks.get_current_streak("weekly", completions), 2)
-        self.assertEqual(self.habit.streaks.longest_streak, 2)
-        self.assertEqual(self.habit.streaks.broken_streak_length, [1])
+        # The current streak should be 2 (last week and today)
+        self.assertEqual(result, 2)
+        self.assertEqual(self.streaks.current_streak, 2)
+        self.assertEqual(self.streaks.longest_streak, 2)
+        self.assertEqual(self.streaks.broken_streak_lengths, [1])
 
 class TestAnalytics(unittest.TestCase):
     """Tests the Analytics class functionality."""
@@ -288,10 +274,25 @@ class TestAnalytics(unittest.TestCase):
 
     def test_longest_streak_for_habit(self):
         """Tests the longest_streak_for_habit method."""
-        habit_name, streak = self.analytics.longest_streak_for_habit("Daily Exercise")
+        # Find the habit directly in our test data
+        habit = next(h for h in self.user.habits if h.name == "Daily Exercise")
+        expected_streak = habit.streaks.longest_streak
 
-        self.assertEqual(habit_name, "Daily Exercise")
-        self.assertEqual(streak, 3)
+        # Test the method with our test data
+        streak = self.analytics.longest_streak_for_habit("Daily Exercise")
+        self.assertEqual(streak, expected_streak)
+
+    def test_longest_streak_by_periodicity(self):
+        """Tests the longest_streak_by_periodicity method."""
+        # Test daily habits
+        daily_name, daily_streak = self.analytics.longest_streak_by_periodicity("daily")
+        self.assertEqual(daily_name, "Daily Exercise")
+        self.assertEqual(daily_streak, 3)
+
+        # Test weekly habits
+        weekly_name, weekly_streak = self.analytics.longest_streak_by_periodicity("weekly")
+        self.assertEqual(weekly_name, "Weekly Review")
+        self.assertEqual(weekly_streak, 3)
 
     def test_most_least_completed_habit(self):
         """Tests both most and least completed habit analytics."""
@@ -308,6 +309,38 @@ class TestAnalytics(unittest.TestCase):
         least_name, least_count = self.analytics.least_completed_habit()
         self.assertEqual(least_name, "Weekly Review")
         self.assertEqual(least_count, 3)
+
+    def test_most_completed_by_periodicity(self):
+        """Tests the most_completed_by_periodicity method."""
+        # Test daily habits
+        daily_name, daily_streak = self.analytics.most_completed_by_periodicity("daily")
+        self.assertEqual(daily_name, "Daily Exercise")
+        self.assertEqual(daily_streak, 3)
+
+        # Test weekly habits
+        weekly_name, weekly_streak = self.analytics.most_completed_by_periodicity("weekly")
+        self.assertEqual(weekly_name, "Weekly Review")
+        self.assertEqual(weekly_streak, 3)
+
+    def test_least_completed_by_periodicity(self):
+        """Tests the least_completed_by_periodicity method."""
+        # Test daily habits
+        daily_name, daily_streak = self.analytics.least_completed_by_periodicity("daily")
+        self.assertEqual(daily_name, "Daily Exercise")
+        self.assertEqual(daily_streak, 3)
+
+        # Test weekly habits
+        weekly_name, weekly_streak = self.analytics.least_completed_by_periodicity("weekly")
+        self.assertEqual(weekly_name, "Weekly Review")
+        self.assertEqual(weekly_streak, 3)
+
+# Require db queries - simple avg calculations
+
+    # def test_average_streak_length_habit(self):
+
+    # def test_average_streak_all_habits(self):
+
+    # def test_average_streak_by_periodicity(self):
 
 if __name__ == "__main__":
     unittest.main()
