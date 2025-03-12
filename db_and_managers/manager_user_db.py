@@ -124,7 +124,7 @@ def select_user() -> User:
                     save_user(selected_user)
                     print(f"\nSaving to your database...")
                     time.sleep(1)
-                    input(f"{GRAY}ENTER << to continue...{RES}")
+                    input(f"{GRAY}'{selected_user}' Saved! ENTER << to continue...{RES}")
                     return selected_user
 
                 else:

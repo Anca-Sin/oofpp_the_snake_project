@@ -59,7 +59,7 @@ class Habit:
 
             else:
                 # Confirm the choice
-                confirmed_habit = confirm_input("habit", habit_name)
+                confirmed_habit = confirm_input("new habit name", habit_name)
 
                 # If confirmed, set the name and exit the loop
                 if confirmed_habit is not None:
@@ -86,14 +86,20 @@ class Habit:
             print(f"\nPlease type in 'Daily' or 'Weekly' {GRAY}(Press ENTER to exit){RES}: ")
             habit_frequency = input().strip().lower()
 
-            # Exit the loop if empty
+            # Exit the loop if "ENTER"
             if not habit_frequency:
                 return
 
             # Check if input is valid
             if habit_frequency in ["daily", "weekly"]:
-                self.frequency = habit_frequency
-                return
+                # Confirm the choice
+                confirmed_frequency = confirm_input("frequency", habit_frequency)
+
+                # If confirmed, set the name and exit the loop
+                if confirmed_frequency is not None:
+                    self.frequency = confirmed_frequency
+                    return
+
             else:
                 # Handle invalid input
                 print("\nInvalid Input. Pleas enter 'Daily' or 'Weekly'!")
