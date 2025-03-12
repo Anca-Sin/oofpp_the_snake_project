@@ -73,10 +73,10 @@ def select_user() -> User:
                 time.sleep(0.40)
                 print(f"\n        Goodbye! {BLUE}(^_^)/{RES}")
                 time.sleep(0.40)
-                print(f"""\n
-                {BLUE}* * * * * * * * * * * * *{RES}
-                {RED}REMEMBER TO STAY ON TRACK{RES}
-                {BLUE}* * * * * * * * * * * *{RES}
+                print(f"""
+        {BLUE}* * * * * * * * * * * * *{RES}
+        {RED}REMEMBER TO STAY ON TRACK{RES}
+        {BLUE}* * * * * * * * * * * *{RES}
                 """)
                 time.sleep(0.40)
                 print("        .")
@@ -166,6 +166,8 @@ def save_user(user: User) -> None:
 
     # Insert new user
     cursor.execute("INSERT INTO users (username) VALUES (?)", (user.username,))
+    # Get and set the new user id
+    user.user_id = cursor.lastrowid
 
     connection.commit()
     connection.close()
@@ -199,8 +201,19 @@ def delete_user(selected_user) -> None:
     connection = db_connection(DB_FILEPATH)
     cursor = connection.cursor()
 
-    # Delete the user - cascading will delete all associated data
-    cursor.execute("DELETE FROM users WHERE username = ?", (selected_user.username,))
+    # Delete streaks
+    cursor.execute("""
+        DELETE FROM streaks
+        WHERE habit_id IN (
+        SELECT id FROM habits WHERE user_id = ?
+        )
+    """, (selected_user.user_id,))
+
+    # Delete habits
+    cursor.execute("DELETE FROM habits WHERE user_id = ?", (selected_user.user_id,))
+
+    # Delete user
+    cursor.execute("DELETE FROM users WHERE id = ?", (selected_user.user_id,))
 
     connection.commit()
     connection.close()

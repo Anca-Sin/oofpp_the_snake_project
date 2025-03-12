@@ -247,6 +247,9 @@ def delete_habit(selected_user: User, habit: Habit) -> None:
 
     habit_id = cursor.fetchone()[0]
 
+    # Delete streaks
+    cursor.execute("DELETE FROM streaks WHERE habit_id = ?", (habit_id,))
+
     # Delete the habit - cascading will delete all associated data
     cursor.execute("DELETE FROM habits WHERE id = ?", (habit_id,))
 
