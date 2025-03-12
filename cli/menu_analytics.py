@@ -32,16 +32,11 @@ def menu_analytics_one_habit(ht, habit: Habit) -> None:
 
 def menu_analytics_all_habits(ht) -> None:
     """
-    Displays the Analytics Menu across all habits.
-
-    - 1-4. statistics across all habits
-    - 5-8. statistics broken down by periodicity ("daily" or "weekly)
+    Displays the general Analytics Menu.
 
     Parameters:
         ht: The HabitTracker instance that manages the application state.
     """
-    # Get the Analytics instance from the HabitTracker
-    analytics = ht.analytics
 
     while True:
         # Clear the screen and display the menu header
@@ -50,15 +45,8 @@ def menu_analytics_all_habits(ht) -> None:
         print("""
         - - - My Analytics - - -
         
-        1. [All Habits] Longest streak
-        2. [All Habits] Most completed habit
-        3. [All Habits] Least completed habit
-        4. [All Habits] Average streak length
-        5. [Daily - Weekly] Longest streaks
-        6. [Daily - Weekly] Most completed habits
-        7. [Daily - Weekly] Least completed habits
-        8. [Daily - Weekly] Average streak length
-        9. << Back to My Habit Tracker Menu
+        1. [All Habits]
+        2. [Daily - Weekly]
         """)
 
         # Check if the user has any habits to analyze
@@ -74,93 +62,84 @@ def menu_analytics_all_habits(ht) -> None:
         # If user has registered habits continue to prompt for choice
         else:
             # Get user choice
-            choice = input("\nEnter your choice (1-9): ").strip()
+            choice = input("\nEnter your choice (1-2): ").strip()
 
             # Check for exit command
             check_exit_cmd(choice)
 
-            # Handle menu options
             if choice == "1":
-                # [All Habits] Longest streak
-                print("\n1. [All Habits] Longest streak:")
-                habit_name, streak = analytics.longest_streak_all_habits()
-                print(f"\n>> '{habit_name}' with a {streak}-streak <<")
-                input("Press ENTER to continue... ")
-
+                submenu1_analytics_all_habits(ht)
             elif choice == "2":
-                # [All Habits] Most completed habit
-                print("\n2. [All Habits] Most completed habit:")
-                habit_name, count = analytics.most_completed_habit()
-                print(f"\n>> '{habit_name}' with {count} completions <<")
-                input("Press ENTER to continue... ")
-
-            elif choice == "3":
-                # [All Habits] Least completed habit
-                print("\n3. [All Habits] Least completed habit:")
-                habit_name, count = analytics.least_completed_habit()
-                print(f"\n>> '{habit_name}' with {count} completions <<")
-                input("Press ENTER to continue... ")
-
-            elif choice == "4":
-                # [All Habits] Average streak length
-                print("\n4. [All Habits] Average streak length:")
-                avg_streak = round(analytics.average_streak_all_habits(), 2)
-                print(f"\n>> {avg_streak} <<")
-                input("Press ENTER to continue... ")
-
-            elif choice == "5":
-                # [Daily] Longest streak
-                print("\n5. [Daily - Weekly] Longest streaks")
-                daily_name, daily_streak = analytics.longest_streak_by_periodicity("daily")
-                print(f"\n>> Daily: '{daily_name}' with a {daily_streak}-streak <<")
-                input("Press ENTER to continue... ")
-
-                # [Weekly] Longest streak
-                weekly_name, weekly_streak = analytics.longest_streak_by_periodicity("weekly")
-                print(f"\n>> Weekly: '{weekly_name}' with a {weekly_streak}-streak <<")
-                input("Press ENTER to continue... ")
-
-            elif choice == "6":
-                # [Daily] Most completed habit
-                print("\n6. [Daily - Weekly] Most completed habits")
-                daily_name, daily_count = analytics.most_completed_by_periodicity("daily")
-                print(f"\n>> Daily: '{daily_name}' with {daily_count} completions <<")
-                input("Press ENTER to continue... ")
-
-                # [Weekly] Most completed weekly
-                weekly_name, weekly_count = analytics.most_completed_by_periodicity("weekly")
-                print(f"\n>> Weekly: '{weekly_name}' with {weekly_count} completions <<")
-                input("Press ENTER to continue... ")
-
-            elif choice == "7":
-                print("\n7. [Daily - Weekly] Least completed habits")
-                # [Daily] Least completed habit
-                daily_name, daily_count = analytics.least_completed_by_periodicity("daily")
-                print(f"\n>> Daily: '{daily_name}' with {daily_count} completions <<")
-                input("Press ENTER to continue... ")
-
-                # [Weekly] Least completed habit
-                weekly_name, weekly_count = analytics.least_completed_by_periodicity("weekly")
-                print(f"\n>> Weekly: '{weekly_name}' with {weekly_count} completions <<")
-                input("Press ENTER to continue... ")
-
-            elif choice == "8":
-                # [Daily] Average streak length
-                print("\n8. [Daily - Weekly] Average streak length")
-                avg_daily = round(analytics.average_streak_by_periodicity("daily"), 2)
-                print(f"\n>> Daily: {avg_daily} <<")
-                input("Press ENTER to continue... ")
-
-                # [Weekly] Average streak length
-                avg_weekly = round(analytics.average_streak_by_periodicity("weekly"))
-                print(f"\n>> Weekly: {avg_weekly} <<")
-                input("Press ENTER to continue... ")
-
-            elif choice == "9":
-                # Return to My Habit Tracker Menu
-                return
+                submenu2_analytics_d_w_habits(ht)
 
             else:
                 # Handle invalid input
-                print("\nInvalid input! Please try again!")
+                print("\nInvalid input. Please try again!")
                 reload_menu_countdown()
+
+def submenu1_analytics_all_habits(ht):
+    """Displays the Analytics across all habits."""
+    # Get the Analytics instance from the HabitTracker
+    analytics = ht.analytics
+
+    while True:
+        # Clear the screen and display the menu header
+        reload_cli()
+        print("(Type 'quit' at any time to exit the application)")
+        print("\n        - - - [All Habits] Analytics - - -")
+        habit_name, streak = analytics.longest_streak_all_habits()
+        print(f"\n        >> Longest streak: {habit_name} with a {streak}-days streak")
+        habit_name, count = analytics.most_completed_habit()
+        print(f"        >> Most completed habit: {habit_name} with {count} completions")
+        habit_name, count = analytics.least_completed_habit()
+        print(f"        >> Least completed habit: {habit_name} with {count} completions")
+        avg_streak = round(analytics.average_streak_all_habits(), 2)
+        print(f"        >> Average streak length: {round(analytics.average_streak_length_habit(habit_name), 2)}")
+        i = input(f"\nPress ENTER to go << Back to My Habit Tracker Menu...")
+
+        # Check for exit command
+        check_exit_cmd(i)
+
+        return
+
+def submenu2_analytics_d_w_habits(ht):
+    """Displays the Analytics for all daily and weekly habits."""
+    # Get the Analytics instance from the HabitTracker
+    analytics = ht.analytics
+
+    while True:
+        # Clear the screen and display the menu header
+        reload_cli()
+        print("(Type 'quit' at any time to exit the application)")
+        print("\n        - - - [Daily - Weekly] Analytics - - -")
+
+        print("\n        >> Longest streak <<")
+        daily_name, daily_streak = analytics.longest_streak_by_periodicity("daily")
+        print(f"        Daily: '{daily_name}' with a {daily_streak}-day streak")
+        weekly_name, weekly_streak = analytics.longest_streak_by_periodicity("weekly")
+        print(f"        Weekly: '{weekly_name}' with a {weekly_streak}-day streak")
+
+        print("\n        >> Most completed habits <<")
+        daily_name, daily_count = analytics.most_completed_by_periodicity("daily")
+        print(f"        Daily: '{daily_name}' with {daily_count} completions")
+        weekly_name, weekly_count = analytics.most_completed_by_periodicity("weekly")
+        print(f"        Weekly: '{weekly_name}' with {weekly_count} completions")
+
+        print("\n        >> Least completed habits <<")
+        daily_name, daily_count = analytics.least_completed_by_periodicity("daily")
+        print(f"        Daily: '{daily_name}' with {daily_count} completions <<")
+        weekly_name, weekly_count = analytics.least_completed_by_periodicity("weekly")
+        print(f"        Weekly: '{weekly_name}' with {weekly_count} completions <<")
+
+        print("\n        >> Average streak length <<")
+        avg_daily = round(analytics.average_streak_by_periodicity("daily"), 2)
+        print(f"        Daily: {avg_daily} <<")
+        avg_weekly = round(analytics.average_streak_by_periodicity("weekly"))
+        print(f"        Weekly: {avg_weekly} <<")
+
+        i = input(f"\nPress ENTER to go << Back to My Habit Tracker Menu...")
+
+        # Check for exit command
+        check_exit_cmd(i)
+
+        return
