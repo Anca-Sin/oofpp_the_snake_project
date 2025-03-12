@@ -197,6 +197,11 @@ class Analytics:
         Returns:
             The average streak length.
         """
+        streaks = []
+        for habit_name in self.user.habits:
+            if habit_name.current_streak > 0:
+                streaks.append(habit_name.current_streak)
+
         # Get the streak length history string from the db
         # Returns a comma separated string of streak lengths
         streak_history = self.db.load_broken_streak_lengths(habit_name)
@@ -206,10 +211,10 @@ class Analytics:
             return 0.0
 
         # Convert the comma separated string into a list of integers using map
-        streak_lengths = list(map(int, streak_history.split(",")))
+        streaks.extend(list(map(int, streak_history.split(","))))
 
         # Calculate the average
-        average_streak = sum(streak_lengths) / len(streak_lengths)
+        average_streak = sum(streaks) / len(streaks)
 
         return average_streak
 
@@ -225,11 +230,16 @@ class Analytics:
 
         # Process each habit to collect streak lengths
         for habit in self.user.habits:
+            # If current streak > 0
+            if habit.streaks.current_streak > 0:
+                # Add it to all_streak_lengths
+                all_streak_lengths.append(habit.streaks.current_streak)
+
+            # Get history of broken streaks
             streak_history = self.db.load_broken_streak_lengths(habit.name)
 
-            # If streak history exists, convert and add to the collection
+            # If streak history exists, convert and add to collection
             if streak_history:
-                # Use map to convert string values to integers
                 all_streak_lengths.extend(list(map(int, streak_history.split(","))))
 
         # Calculate the average (handling the case of empty list)
@@ -254,6 +264,12 @@ class Analytics:
 
         # Process each habit to collect streak lengths
         for habit in habits:
+            # If current streak > 0
+            if habit.streaks.current_streak > 0:
+                # Add it to all_streak_lengths
+                all_streak_lengths.append(habit.streaks.current_streak)
+
+            # Get history of broken streaks
             streak_history = self.db.load_broken_streak_lengths(habit.name)
 
             # If streak history exists, convert and add to collection
