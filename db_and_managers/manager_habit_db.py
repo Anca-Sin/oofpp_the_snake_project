@@ -80,7 +80,7 @@ def load_habits(selected_user: User) -> List[Habit]:
             streak_history = streak_data[2]
             if streak_history and streak_history.strip():
                 # Convert comma separated string to list on integers
-                habit.streaks.broken_streak_length = [int(streak) for streak in streak_history.split(",")]
+                habit.streaks.broken_streak_lengths = [int(streak) for streak in streak_history.split(",")]
 
         habits.append(habit)
 
@@ -198,8 +198,8 @@ def save_habits(selected_user: User, new_habit=None) -> None:
             """, (
                 habit.streaks.current_streak,
                 habit.streaks.longest_streak,
-                # Convert broken_streak_length list to a comma separated string
-                ",".join(map(str, habit.streaks.broken_streak_length)) if habit.streaks.broken_streak_length else "",
+                # Convert broken_streak_lengths list to a comma separated string
+                ",".join(map(str, habit.streaks.broken_streak_lengths)) if habit.streaks.broken_streak_lengths else "",
                 selected_user.user_id,
                 habit.name
             ))
