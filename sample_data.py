@@ -144,10 +144,13 @@ def sample_data_generator():
 
 def instructions():
     print("""
+    -------------------------------------------------------------
     Sample data created successfully:
     - 5 habits with 4 weeks of randomly generated completion data
     - streak information has been calculated
+    - run main.py
     - login as 'SampleUser' to explore the data
+    -------------------------------------------------------------
     """)
 
 if __name__ == "__main__":

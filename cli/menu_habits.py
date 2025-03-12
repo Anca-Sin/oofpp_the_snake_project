@@ -93,9 +93,11 @@ def display_habits_and_select(ht, habits: List[Habit], display_type: str, set_fr
 
         # Offer to create a new habit with pre-set frequency/None or return
         while True:
+            reload_cli()
+            exit_msg(ht.logged_in_user)
+
             # If accessed from display daily or weekly habits
             if set_frequency:
-                exit_msg(ht.logged_in_user)
                 print(f"""
                 Would you like to create a new {set_frequency} habit?
 
@@ -123,7 +125,6 @@ def display_habits_and_select(ht, habits: List[Habit], display_type: str, set_fr
 
             # If accessed from display all habits
             else:
-                exit_msg(ht.logged_in_user)
                 print(f"""
                 Would you like to create a new habit?
 
@@ -142,7 +143,6 @@ def display_habits_and_select(ht, habits: List[Habit], display_type: str, set_fr
                     ht.db.new_habit(ht.logged_in_user)
                 elif choice == "2":
                     # Return to My Habit Menu
-                    reload_menu_countdown()
                     return
                 else:
                     # Handle invalid input
