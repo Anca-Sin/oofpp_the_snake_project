@@ -6,7 +6,7 @@ from typing import Any, Optional
 
 from config import DB_FILEPATH
 
-from helpers.colors import GRAY, RES, RED, BLUE
+from helpers.colors import GRAY, RES, RED, BLUE, GREEN
 
 
 def confirm_input(attribute_name: str, value: str) -> Optional[str]:
@@ -171,5 +171,8 @@ def check_exit_cmd(command: str) -> bool:
         sys.exit(0)
     return False
 
-def exit_msg():
+def exit_msg(logged_in_user=None):
+    """Displays exit message and selected user if any."""
     print(f"{GRAY}(Type '{RES}quit{GRAY}' at any time to exit the application){RES}")
+    if logged_in_user:
+        print(f"{GRAY}Logged in as:{RES} {GREEN}{logged_in_user.username}{RES}")
