@@ -48,7 +48,7 @@ def main_menu(ht) -> None:
             ht.db.load_habits(ht.logged_in_user)
 
             # Create an analytics instance for the newly selected user
-            ht.analytics = Analytics(ht.logged_in_user)
+            ht.analytics = Analytics(ht.logged_in_user, ht.db)
 
         elif choice == "3":
             # Delete the selected user
