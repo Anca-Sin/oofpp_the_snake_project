@@ -19,53 +19,16 @@ def menu_analytics_one_habit(ht, habit: Habit) -> None:
     # Get the Analytics instance from the HabitTracker
     analytics = ht.analytics
 
-    while True:
-        # Clear the screen and display the menu header
-        reload_cli()
+    # Clear the screen and display the menu header
+    reload_cli()
 
-        print("(Type 'quit' at any time to exit the application)")
-        print(f"""
-        - - - {habit.name}'s Analytics - - -
-
-        1. Current streak
-        2. Longest streak
-        3. Average streak length
-        4. << Return to Habit Details Menu
-        """)
-
-        # Get user input
-        choice = input("\nEnter your choice (1-4): ").strip()
-
-        # Check for exit command
-        check_exit_cmd(choice)
-
-        # Handle menu options
-        if choice == "1":
-            # Display current streak
-            current_streak = habit.streaks.current_streak
-            print(f"\n{habit.name}'s current streak: {current_streak}")
-            input("Press ENTER to continue...")
-
-        elif choice == "2":
-            # Display longest streak
-            longest_streak = analytics.longest_streak_for_habit(habit.name)
-            print(f"\n{habit.name}'s longest streak: {longest_streak}")
-            input("Press ENTER to continue...")
-
-        elif choice == "3":
-            # Display average streak length
-            average_streak = round(analytics.average_streak_length_habit(habit.name), 2)
-            print(f"\n{habit.name}'s average streak: {average_streak}")
-            input("Press ENTER to continue...")
-
-        elif choice == "4":
-            # Return to Habit Details Menu
-            return
-
-        else:
-            # Handle invalid input
-            print("\nInvalid input! Please try again!")
-            reload_menu_countdown()
+    print("(Type 'quit' at any time to exit the application)")
+    print(f"\n        - - - {habit.name}'s Analytics - - -")
+    print(f"\n        >> Current streak: {habit.streaks.current_streak}")
+    print(f"\n        >> Longest streak: {analytics.longest_streak_for_habit(habit.name)}")
+    print(f"\n        >> Average streak length: {round(analytics.average_streak_length_habit(habit.name), 2)}")
+    input(f"\n        Press ENTER to go << Back to {habit.name}'s Detail Menu...")
+    return
 
 def menu_analytics_all_habits(ht) -> None:
     """
