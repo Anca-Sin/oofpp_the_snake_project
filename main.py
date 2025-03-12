@@ -42,7 +42,7 @@ class HabitTracker:
 
         - no db connection needed, each Database method handles its own connection
         """
-        print("Welcome to your Habit Tracker!")
+        print("        Welcome to your - - -  Habit Tracker- - -")
 
         # Select an existing user or create a new one
         self.logged_in_user = self.db.select_user()

@@ -1,6 +1,7 @@
+import time
 from typing import List
 
-from helpers.helper_functions import confirm_input, reload_menu_countdown
+from helpers.helper_functions import confirm_input
 
 class User:
     """
@@ -30,22 +31,22 @@ class User:
         - checks if the username already exists in the db
         """
         # Avoid circular imports
-        from db_and_managers.manager_user_db import username_exists
+        from db_and_managers.manager_user_db import username_exists, select_user
 
         while True:
             # Ask user for username
             print("Please type in your desired username (Press ENTER to exit): ")
-            username = input().title()
+            username = input().title().strip()
 
             # Exit the loop if "ENTER"
             if not username:
-                return
+                print("Exiting user creation...")
+                select_user()
 
             # Check if the username already exists
             elif username_exists(username):
                 print(f"Username '{username}' is taken! Please try again!")
-                reload_menu_countdown()
-                continue
+                time.sleep(1)
 
             else:
                 # Confirm the choice
@@ -54,4 +55,5 @@ class User:
                 # If the choice is confirmed
                 if confirmed_username is not None:
                     self.username = confirmed_username
+                    time.sleep(1)
                     return

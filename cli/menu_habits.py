@@ -149,20 +149,20 @@ def display_habits_and_select(ht, habits: List[Habit], display_type: str, set_fr
     while True:
         reload_cli()
         print("(Type 'quit' at any time to exit the application)")
-        print(f"\n- - - {display_type.title()} Habits - - -")
+        print(f"\n        - - - {display_type.title()} Habits - - -")
 
         # Display habits with indexing
         for idx, habit in enumerate(habits, 1):
             # For daily, weekly habits
             if habit.frequency in ["daily", "weekly"]:
-                print(f"\n{idx}. {habit.name}")
+                print(f"        {idx}. {habit.name}")
             # For all habits
             else:
-                print(f"\n{idx}. {habit.name} ({habit.frequency})")
+                print(f"        {idx}. {habit.name} ({habit.frequency})")
 
         # Add option to return to the previous menu
         back_option = len(habits) + 1
-        print(f"\n{back_option}. << Back to My Habits Menu")
+        print(f"        {back_option}. << Back to My Habits Menu")
 
         # Get user selection
         choice = input(f"\nEnter your choice (1-{back_option}): ").strip()

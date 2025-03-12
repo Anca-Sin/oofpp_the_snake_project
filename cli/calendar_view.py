@@ -51,7 +51,7 @@ def display_habit_calendar(
     reload_cli()
     print("(Type 'quit' at any time to exit the application)")
     print(f"\n- - - {habit.name}'s Calendar View - - -")
-    print(f"\n  {month_name} {year}")
+    print(f"{month_name} {year}")
     print("Mon  Tue  Wed  Thu  Fri  Sat  Sun")
 
     # Print calendar with completions marked down
@@ -117,8 +117,7 @@ def view_completions_calendar(ht, habit: Habit) -> None:
         3. Delete a completion
         """)
         print("""
-        - - - Back - - -
-        4. << Back to Habit Details Menu
+        - - - 4. << Back to Habit Details Menu - - -
         """)
 
         choice = input("\nEnter your choice: ").strip().lower()
@@ -162,11 +161,11 @@ def view_completions_calendar(ht, habit: Habit) -> None:
                     year = new_year
                 else:
                     # Handle invalid integer input
-                    print("Invalid month or year. Please try again!")
+                    print("\nInvalid month or year. Please try again!")
                     input("Press ENTER to continue...")
             except ValueError:
                 # Handle invalid string input
-                print("Invalid input (only numbers). Please try again!")
+                print("\nInvalid input (only numbers). Please try again!")
                 input("Press ENTER to continue...")
 
         elif choice == "1":

@@ -19,7 +19,7 @@ def main_menu(ht) -> None:
         # Clear the screen and display the menu header
         reload_cli()
         print("(Type 'quit' at any time to exit the application)")
-        print(f"\nYou've successfully logged in with '{ht.logged_in_user.username}'...")
+        print(f"You've successfully logged in with '{ht.logged_in_user.username}'...")
         print("""
         - - - Main Menu - - -
         
@@ -52,6 +52,15 @@ def main_menu(ht) -> None:
         elif choice == "3":
             # Delete the selected user
             ht.db.delete_user(ht.logged_in_user)
+
+            # Select a different user
+            ht.logged_in_user = ht.db.select_user()
+
+            # Load the newly selected user's habits
+            ht.db.load_habits(ht.logged_in_user)
+
+            # Create an analytics instance for the newly selected user
+            ht.analytics = Analytics(ht.logged_in_user)
 
         else:
             # Handle invalid input

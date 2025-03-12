@@ -44,7 +44,7 @@ class Habit:
 
         while True:
             # Ask for habit name
-            print("What new habit do you want to register? (Press ENTER to exit): ")
+            print("\nWhat new habit do you want to register? (Press ENTER to exit): ")
             habit_name = input().title()
 
             # Exit the loop if "ENTER"
@@ -52,7 +52,7 @@ class Habit:
                 return
 
             elif user and habit_name_exists(user, habit_name):
-                print(f"A habit named '{habit_name}' already exists! Please try again!")
+                print(f"\nA habit named '{habit_name}' already exists! Please try again!")
                 reload_menu_countdown()
 
             else:
@@ -77,11 +77,11 @@ class Habit:
         # If preset frequency is provided, assign it without prompting
         if preset_frequency in ["daily", "weekly"]:
             self.frequency = preset_frequency
-            print(f"Frequency automatically set to {preset_frequency}.")
+            print(f"\nFrequency automatically set to {preset_frequency}.")
 
         # If no preset frequency, prompt the user
         while True:
-            print("Please type in 'Daily' or 'Weekly' (Press ENTER to exit): ")
+            print("\nPlease type in 'Daily' or 'Weekly' (Press ENTER to exit): ")
             habit_frequency = input().strip().lower()
 
             # Exit the loop if empty
@@ -94,7 +94,7 @@ class Habit:
                 return
             else:
                 # Handle invalid input
-                print("Invalid Input. Pleas enter 'Daily' or 'Weekly'!")
+                print("\nInvalid Input. Pleas enter 'Daily' or 'Weekly'!")
 
     def creation_date(self) -> None:
         """Sets the creation date of the habit to the current date."""
@@ -145,13 +145,13 @@ class Habit:
 
         # Check if already completed for complete today.
         if self._is_habit_completed(today):
-            print(f"'{self.name}' has already been completed today!")
+            print(f"\n'{self.name}' has already been completed today!")
             return False
 
         # Add today's date to completions if it's not already completed
         # Add by default without checking if sample_date is True
         self.completion_dates.append(today)
-        print(f"'{self.name}' completed for {today} successfully!")
+        print(f"\n'{self.name}' completed for {today} successfully!")
 
         # Update streaks after the new completion
         self.streaks.get_current_streak(self.frequency, self.completion_dates)

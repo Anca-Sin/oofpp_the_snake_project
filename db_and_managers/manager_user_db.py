@@ -41,7 +41,8 @@ def select_user() -> User:
     if not users:
         while True:
             reload_cli()
-            print("""No users found! You can:
+            print("(Type 'quit' at any time to exit the application)")
+            print("""\nNo users found! You can:
         
             1. Create a new user
             2. Quit the application
@@ -53,7 +54,7 @@ def select_user() -> User:
                 selected_user = User()
                 selected_user.create_username()
                 save_user(selected_user)
-                print(f"You've created user: {selected_user.username}")
+                print(f"\nYou've created user: {selected_user.username}!")
                 return selected_user
             elif choice == "2":
                 sys.exit() # Close the app
@@ -67,12 +68,12 @@ def select_user() -> User:
             reload_cli()
             print("(Type 'quit' at any time to exit the application)")
             # Display users with numeration
-            print("\nPlease select a user from the following list: ")
+            print("\n        Please select a user from the following list: ")
             for idx, user in enumerate(users, 1):
-                print(f"\n{idx}. {user.username}")
-            print("\nor")
+                print(f"        {idx}. {user.username}")
+            print("        or")
             # Last option: Create new user
-            print(f"\n{len(users) + 1}. Create a new user")
+            print(f"        {len(users) + 1}. Create a new user")
 
             # Ask user for a choice
             choice = input(f"\nEnter your choice (1-{len(users) + 1}): ").strip()
@@ -83,7 +84,7 @@ def select_user() -> User:
             try:
                 if choice.isdigit() and 1 <= int(choice) <= len(users):
                     # Confirm the choice
-                    selected_user = users[-1]  # Adjust index since user listing starts from 1
+                    selected_user = users[int(choice) - 1]  # Adjust index since user listing starts from 1
                     return selected_user
 
                 elif int(choice) == len(users) + 1:
@@ -91,7 +92,7 @@ def select_user() -> User:
                     selected_user = User()
                     selected_user.create_username()
                     save_user(selected_user)
-                    print(f"You've created user: {selected_user.username}")
+                    print(f"\nYou've created user: {selected_user.username}")
                     return selected_user
 
                 else:
@@ -156,14 +157,13 @@ def delete_user(selected_user) -> None:
         
     - Your username
     - All associated habits and data
-
     """)
 
     confirmation = input("Type in 'DELETE' if you are sure to proceed (or cancel by pressing ENTER): ")
 
     # Check if the user doesn't confirm
     if confirmation.lower() != "delete":
-        print("Deletion canceled.")
+        print("\nDeletion canceled.")
         reload_menu_countdown()
         return # Return to Main Menu
 
@@ -177,5 +177,5 @@ def delete_user(selected_user) -> None:
     connection.commit()
     connection.close()
 
-    print(f"User '{selected_user.username}' and all associated data have been deleted.")
-    reload_menu_countdown()
+    print(f"\nUser '{selected_user.username}' and all associated data have been deleted.")
+    input("Press ENTER to continue...")

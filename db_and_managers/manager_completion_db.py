@@ -25,14 +25,14 @@ def complete_habit_today(selected_user: User, habit: Habit) -> None:
     if choice == "yes":
         habit.check_off_habit()
         save_habits(selected_user)
-        input("\nPress ENTER to continue... ")
+        input("Press ENTER to continue... ")
     elif choice == "no":
         reload_menu_countdown()
         return
     else:
         # Handle invalid input
         print("\nSorry, invalid input. Please try again!")
-        input("\nPress ENTER to continue... ")
+        input("Press ENTER to continue... ")
 
 def complete_habit_past(selected_user: User, habit: Habit) -> None:
     """
@@ -59,7 +59,8 @@ def complete_habit_past(selected_user: User, habit: Habit) -> None:
 
         # If the user presses ENTER without any date, exit
         if not date_str:
-            print("Exiting past completion menu.")
+            print("\nExiting past completion menu.")
+            reload_menu_countdown()
             return # Return to Habit Detail Menu
 
         try:
@@ -68,14 +69,14 @@ def complete_habit_past(selected_user: User, habit: Habit) -> None:
 
             # Validate it's not a future date
             if completion_date > current_date:
-                print("Cannot complete habits for future dates!")
-                input("\nPress ENTER to continue... ")
+                print("\nCannot complete habits for future dates!")
+                input("Press ENTER to continue... ")
 
             # Check if this date already has a completion
             # Let the user exit this "menu" if he wants
             elif completion_date in habit.completion_dates:
-                print(f"'{habit.name}' is already completed for {date_str}!")
-                input("\nPress ENTER to continue... ")
+                print(f"\n'{habit.name}' is already completed for {date_str}!")
+                input("Press ENTER to continue... ")
 
             # Valid date that doesn't have a completion
             else:
@@ -88,14 +89,14 @@ def complete_habit_past(selected_user: User, habit: Habit) -> None:
                     habit.streaks.get_current_streak(habit.frequency, habit.completion_dates, completion_date)
                     # Save changes to the db
                     save_habits(selected_user)
-                    print(f"'{habit.name}' has been completed for {date_str}!")
-                    input("\nPress ENTER to continue... ")
+                    print(f"\n'{habit.name}' has been completed for {date_str}!")
+                    input("Press ENTER to continue... ")
                     return
 
         except ValueError:
             # Handle invalid date format
-            print("Invalid date format! Please use YYYY-MM-DD format!")
-            input("\nPress ENTER to continue... ")
+            print("\nInvalid date format! Please use YYYY-MM-DD format!")
+            input("Press ENTER to continue... ")
 
 def delete_completion(selected_user: User, habit: Habit) -> None:
     """
@@ -113,8 +114,8 @@ def delete_completion(selected_user: User, habit: Habit) -> None:
     """
     # Check if there are no completions to delete
     if not habit.completion_dates:
-        print(f"No completions found for '{habit.name}'")
-        input("\nPress ENTER to continue... ")
+        print(f"\nNo completions found for '{habit.name}'")
+        input("Press ENTER to continue... ")
         return
 
     # Prompt for the date of the completion to delete or ENTER to exit
@@ -149,21 +150,21 @@ def delete_completion(selected_user: User, habit: Habit) -> None:
                         input("\nPress ENTER to continue... ")
                         return # Exit after deletion
                     elif choice == "no":
-                        print(f"Let's try again!")
-                        input("\nPress ENTER to continue... ")
+                        print(f"\nLet's try again!")
+                        input("Press ENTER to continue... ")
                         break # Go back to asking for a date
                     else:
                         # Handle invalid input
                         print("\nSorry, invalid input. Please try again!")
-                        input("\nPress ENTER to continue... ")
+                        input("Press ENTER to continue... ")
                         continue
 
             # If chosen completion isn't in the completions list
             else:
-                print(f"Completion for {date_str} not found in {habit.name}'s completions list!")
-                input("\nPress ENTER to continue... ")
+                print(f"\nCompletion for {date_str} not found in {habit.name}'s completions list!")
+                input("Press ENTER to continue... ")
 
         except ValueError:
             # Handle invalid date format
-            print("Invalid date format! Please use YYYY-MM-DD format!")
-            input("\nPress ENTER to continue... ")
+            print("\nInvalid date format! Please use YYYY-MM-DD format!")
+            input("Press ENTER to continue... ")
