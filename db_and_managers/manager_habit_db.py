@@ -6,6 +6,7 @@ from config import DB_FILEPATH
 from core.habit import Habit
 from core.streaks import Streaks
 from core.user import User
+from helpers.colors import RED, RES
 from helpers.helper_functions import db_connection, reload_menu_countdown
 
 
@@ -226,7 +227,7 @@ def delete_habit(selected_user: User, habit: Habit) -> None:
 
     """)
 
-    confirmation = input("Type in 'DELETE' if you are sure to proceed (or cancel by pressing ENTER): ").strip()
+    confirmation = input(f"Type in '{RED}DELETE{RES}' if you are sure to proceed (or cancel by pressing ENTER): ").strip()
 
     # Check if the user doesn't confirm
     if confirmation.lower() != "delete":
@@ -252,5 +253,5 @@ def delete_habit(selected_user: User, habit: Habit) -> None:
     connection.commit()
     connection.close()
 
-    print(f"Habit '{habit.name}' and all associated data have been deleted.")
+    print(f"Habit '{RED}{habit.name}{RES}' and all associated data have been {RED}deleted{RES}.")
     reload_menu_countdown()

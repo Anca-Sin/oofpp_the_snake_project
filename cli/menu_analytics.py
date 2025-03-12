@@ -5,7 +5,8 @@ menu_analytics_one_habit: Submenu of Habit Details Menu
 menu_analytics_all_habits: Submenu of My Habit Tracker Menu
 """
 from core.habit import Habit
-from helpers.helper_functions import reload_cli, reload_menu_countdown, check_exit_cmd
+from helpers.helper_functions import reload_cli, reload_menu_countdown, check_exit_cmd, exit_msg
+from helpers.colors import BLUE, RES, RED, GRAY
 
 
 def menu_analytics_one_habit(ht, habit: Habit) -> None:
@@ -21,13 +22,13 @@ def menu_analytics_one_habit(ht, habit: Habit) -> None:
 
     # Clear the screen and display the menu header
     reload_cli()
+    exit_msg()
 
-    print("(Type 'quit' at any time to exit the application)")
-    print(f"\n        - - - {habit.name}'s Analytics - - -")
-    print(f"        >> Current streak: {habit.streaks.current_streak}")
-    print(f"        >> Longest streak: {analytics.longest_streak_for_habit(habit.name)}")
-    print(f"        >> Average streak length: {round(analytics.average_streak_length_habit(habit.name), 2)}")
-    input(f"\nPress ENTER to go << Back to {habit.name}'s Detail Menu...")
+    print(f"\n{BLUE}        - - - {habit.name}'s Analytics - - -{RES}")
+    print(f"\n        >> Current streak:{RED} {habit.streaks.current_streak}{RES}")
+    print(f"        >> Longest streak:{RED} {analytics.longest_streak_for_habit(habit.name)}{RES}")
+    print(f"        >> Average streak length:{RED} {round(analytics.average_streak_length_habit(habit.name), 2)}{RES}")
+    input(f"\n{GRAY}Press ENTER to go << Back to {habit.name}'s Detail Menu...{RES}")
     return
 
 def menu_analytics_all_habits(ht) -> None:
@@ -41,9 +42,9 @@ def menu_analytics_all_habits(ht) -> None:
     while True:
         # Clear the screen and display the menu header
         reload_cli()
-        print("(Type 'quit' at any time to exit the application)")
-        print("""
-        - - - My Analytics - - -
+        exit_msg()
+        print(f"""
+        {BLUE}- - - My Analytics - - -{RES}
         
         1. [All Habits]
         2. [Daily - Weekly]
@@ -85,17 +86,17 @@ def submenu1_analytics_all_habits(ht):
     while True:
         # Clear the screen and display the menu header
         reload_cli()
-        print("(Type 'quit' at any time to exit the application)")
-        print("\n        - - - [All Habits] Analytics - - -")
+        exit_msg()
+        print(f"\n{BLUE}        - - - [All Habits] Analytics - - -{RES}")
         habit_name, streak = analytics.longest_streak_all_habits()
-        print(f"\n        >> Longest streak: {habit_name} with a {streak}-days streak")
+        print(f"\n        >> Longest streak:    '{RED}{habit_name}{RES}' with a {RED}{streak}{RES}-days streak")
         habit_name, count = analytics.most_completed_habit()
-        print(f"        >> Most completed habit: {habit_name} with {count} completions")
+        print(f"        >> Most completed habit:  '{RED}{habit_name}{RES}' with {RED}{count}{RES} completions")
         habit_name, count = analytics.least_completed_habit()
-        print(f"        >> Least completed habit: {habit_name} with {count} completions")
+        print(f"        >> Least completed habit: '{RED}{habit_name}{RES}' with {RED}{count}{RES} completions")
         avg_streak = round(analytics.average_streak_all_habits(), 2)
-        print(f"        >> Average streak length: {round(analytics.average_streak_length_habit(habit_name), 2)}")
-        i = input(f"\nPress ENTER to go << Back to My Habit Tracker Menu...")
+        print(f"        >> Average streak length: {RED}{round(analytics.average_streak_all_habits(), 2)}{RES}")
+        i = input(f"\n{GRAY}Press ENTER to go << Back to My Habit Tracker Menu...{RES}")
 
         # Check for exit command
         check_exit_cmd(i)
@@ -110,34 +111,34 @@ def submenu2_analytics_d_w_habits(ht):
     while True:
         # Clear the screen and display the menu header
         reload_cli()
-        print("(Type 'quit' at any time to exit the application)")
-        print("\n        - - - [Daily - Weekly] Analytics - - -")
+        exit_msg()
+        print("\n{BLUE}        - - - [Daily - Weekly] Analytics - - -{RES}")
 
         print("\n        >> Longest streak <<")
         daily_name, daily_streak = analytics.longest_streak_by_periodicity("daily")
-        print(f"        Daily: '{daily_name}' with a {daily_streak}-day streak")
+        print(f"        Daily:  '{RED}{daily_name}{RES}' with a {RED}{daily_streak}{RES}-day streak")
         weekly_name, weekly_streak = analytics.longest_streak_by_periodicity("weekly")
-        print(f"        Weekly: '{weekly_name}' with a {weekly_streak}-day streak")
+        print(f"        Weekly: '{RED}{weekly_name}{RES}' with a {RED}{weekly_streak}{RES}-day streak")
 
         print("\n        >> Most completed habits <<")
         daily_name, daily_count = analytics.most_completed_by_periodicity("daily")
-        print(f"        Daily: '{daily_name}' with {daily_count} completions")
+        print(f"        Daily:  '{RED}{daily_name}{RES}' with {RED}{daily_count}{RES} completions")
         weekly_name, weekly_count = analytics.most_completed_by_periodicity("weekly")
-        print(f"        Weekly: '{weekly_name}' with {weekly_count} completions")
+        print(f"        Weekly: '{RED}{weekly_name}{RES}' with {RED}{weekly_count}{RES} completions")
 
         print("\n        >> Least completed habits <<")
         daily_name, daily_count = analytics.least_completed_by_periodicity("daily")
-        print(f"        Daily: '{daily_name}' with {daily_count} completions <<")
+        print(f"        Daily:  '{RED}{daily_name}' with {RED}{daily_count}{RES} completions <<")
         weekly_name, weekly_count = analytics.least_completed_by_periodicity("weekly")
-        print(f"        Weekly: '{weekly_name}' with {weekly_count} completions <<")
+        print(f"        Weekly: '{RED}{weekly_name}' with {RED}{weekly_count}{RES} completions <<")
 
         print("\n        >> Average streak length <<")
         avg_daily = round(analytics.average_streak_by_periodicity("daily"), 2)
-        print(f"        Daily: {avg_daily} <<")
+        print(f"        Daily:  {RED}{avg_daily}{RES}")
         avg_weekly = round(analytics.average_streak_by_periodicity("weekly"))
-        print(f"        Weekly: {avg_weekly} <<")
+        print(f"        Weekly: {RED}{avg_weekly}{RES}")
 
-        i = input(f"\nPress ENTER to go << Back to My Habit Tracker Menu...")
+        i = input(f"\n{GRAY}Press ENTER to go << Back to My Habit Tracker Menu...{RES}")
 
         # Check for exit command
         check_exit_cmd(i)

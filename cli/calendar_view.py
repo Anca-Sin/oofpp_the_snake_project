@@ -12,7 +12,8 @@ from datetime import datetime
 
 from core.habit import Habit
 from db_and_managers.database import Database
-from helpers.helper_functions import reload_cli, check_exit_cmd, reload_menu_countdown
+from helpers.helper_functions import reload_cli, check_exit_cmd, reload_menu_countdown, exit_msg
+from helpers.colors import BLUE, RES, RED, GRAY
 
 # Create a db instance
 db = Database()
@@ -49,9 +50,10 @@ def display_habit_calendar(
 
     # Clear screen and print header
     reload_cli()
-    print("(Type 'quit' at any time to exit the application)")
-    print(f"\n- - - {habit.name}'s Calendar View - - -")
-    print(f"{month_name} {year}")
+    exit_msg()
+    print(f"\n{BLUE}- - - '{habit.name}' Calendar View - - -{RES}")
+    print(f"\n{month_name} {year}")
+    print(f"{GRAY}---------------------------------{RES}")
     print("Mon  Tue  Wed  Thu  Fri  Sat  Sun")
 
     # Print calendar with completions marked down
@@ -65,9 +67,9 @@ def display_habit_calendar(
                 # Completion day: Mark day with [ ]
                 if day < 10:
                     # Extra space for single digits
-                    week_str += "[ " + str(day) + "]"
+                    week_str += f"{RED}[{RES} {day}{RED}]{RES}"
                 else:
-                    week_str += "[" + str(day) + "]"
+                    week_str += f"{RED}[{RES}{day}{RED}]{RES}"
             else:
                 # Non-completion day
                 if day < 10:
@@ -76,7 +78,7 @@ def display_habit_calendar(
                 else:
                     week_str += " " + str(day) + " "
         print(week_str)
-    print() # Empty line after the calendar
+    print(f"{GRAY}---------------------------------{RES}")
 
 def view_completions_calendar(ht, habit: Habit) -> None:
     """
@@ -100,8 +102,8 @@ def view_completions_calendar(ht, habit: Habit) -> None:
         display_habit_calendar(habit, year, month)
 
         # Navigation options
-        print("""
-        - - - Calendar Navigation Options - - -
+        print(f"""
+        {BLUE}- - - Calendar Navigation Options - - -{RES}
         
         P - Previous month
         N - Next month
@@ -109,15 +111,15 @@ def view_completions_calendar(ht, habit: Habit) -> None:
         """)
 
         # Completion options
-        print("""
-        - - - Completion Options - - -
+        print(f"""
+        {BLUE}- - - Completion Options - - -{RES}
         
         1. Complete for today
         2. Complete for a past date
         3. Delete a completion
         """)
-        print("""
-        - - - 4. << Back to Habit Details Menu - - -
+        print(f"""
+        {GRAY}- - - 4. << Back to Habit Details Menu - - -{RES}
         """)
 
         choice = input("\nEnter your choice: ").strip().lower()

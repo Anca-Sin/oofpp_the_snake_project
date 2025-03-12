@@ -5,7 +5,8 @@ from cli.calendar_view import view_completions_calendar
 from cli.menu_analytics import menu_analytics_one_habit
 from core.habit import Habit
 from db_and_managers.database import Database
-from helpers.helper_functions import reload_cli, reload_menu_countdown, check_exit_cmd
+from helpers.helper_functions import reload_cli, reload_menu_countdown, check_exit_cmd, exit_msg
+from helpers.colors import BLUE, RES, GRAY
 
 # Create a db instance
 db = Database()
@@ -21,16 +22,17 @@ def menu_habit_detail(ht, habit: Habit) -> None:
     while True:
         # Clear the screen and display the menu header
         reload_cli()
-        print("(Type 'quit' at any time to exit the application)")
+        exit_msg()
         print(f"""
-        - - - {habit.name}'s Details - - -
+        {BLUE}- - - {habit.name}'s Details - - -{RES}
 
         1. Complete for today
         2. View calendar and manage completions
         3. Analytics
         4. View creation date
         5. Delete habit
-        6. << Back to My Habits Menu
+        
+        {GRAY}6. << Back to My Habits Menu{RES}
         """)
 
         # Get user choice

@@ -5,7 +5,8 @@ from typing import List
 
 from .menu_habit_detail import menu_habit_detail
 from core.habit import Habit
-from helpers.helper_functions import reload_cli, reload_menu_countdown, check_exit_cmd
+from helpers.helper_functions import reload_cli, reload_menu_countdown, check_exit_cmd, exit_msg
+from helpers.colors import BLUE, RES, GRAY
 
 
 def menu_habits(ht):
@@ -18,15 +19,16 @@ def menu_habits(ht):
     while True:
         # Clear the screen and display the menu header
         reload_cli()
-        print("(Type 'quit' at any time to exit the application)")
-        print("""
-        - - - My Habits - - -
+        exit_msg()
+        print(f"""
+        {BLUE}- - - My Habits - - -{RES}
         
         1. Register a new habit
         2. List all habits
         3. Daily habits
         4. Weekly habits
-        5. << Back to My Habit Tracker
+        
+        {GRAY}5. << Back to My Habit Tracker{RES}
         """)
 
         # Get user choice
@@ -82,23 +84,24 @@ def display_habits_and_select(ht, habits: List[Habit], display_type: str, set_fr
         # If no habits, display a message based on the habit type
         # For daily, weekly habits
         if display_type in ["daily", "weekly"]:
-            print(f"You don't have any {display_type} habits yet!")
+            print(f"\nYou don't have any {display_type} habits yet!")
             reload_menu_countdown()
         # For all habits
         else:
-            print("You don't have any registered habits yet!")
+            print("\nYou don't have any registered habits yet!")
             reload_menu_countdown()
 
         # Offer to create a new habit with pre-set frequency/None or return
         while True:
             # If accessed from display daily or weekly habits
             if set_frequency:
-                print("(Type 'quit' at any time to exit the application)")
+                exit_msg()
                 print(f"""
                 Would you like to create a new {set_frequency} habit?
 
                 1. Register a {set_frequency} habit
-                2. << Back to My Habits Menu
+                
+                {GRAY}2. << Back to My Habits Menu{RES}
                 """)
 
                 choice = input("\nEnter your choice (1-2): ").strip()
@@ -120,12 +123,13 @@ def display_habits_and_select(ht, habits: List[Habit], display_type: str, set_fr
 
             # If accessed from display all habits
             else:
-                print("(Type 'quit' at any time to exit the application)")
+                exit_msg()
                 print(f"""
                 Would you like to create a new habit?
 
                 1. Register a new habit
-                2. << Back to My Habits Menu
+                
+                {GRAY}2. << Back to My Habits Menu{RES}
                 """)
 
                 choice = input("\nEnter your choice (1-2): ").strip()
@@ -148,8 +152,10 @@ def display_habits_and_select(ht, habits: List[Habit], display_type: str, set_fr
     # If there are habits to display, show them
     while True:
         reload_cli()
-        print("(Type 'quit' at any time to exit the application)")
-        print(f"\n        - - - {display_type.title()} Habits - - -")
+        exit_msg()
+        print(f"""
+        {BLUE}- - - {display_type.title()} Habits - - -{RES}
+        """)
 
         # Display habits with indexing
         for idx, habit in enumerate(habits, 1):
@@ -162,7 +168,7 @@ def display_habits_and_select(ht, habits: List[Habit], display_type: str, set_fr
 
         # Add option to return to the previous menu
         back_option = len(habits) + 1
-        print(f"        {back_option}. << Back to My Habits Menu")
+        print(f"\n{GRAY}        {back_option}. << Back to My Habits Menu{RES}")
 
         # Get user selection
         choice = input(f"\nEnter your choice (1-{back_option}): ").strip()

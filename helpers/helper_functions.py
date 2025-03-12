@@ -6,7 +6,8 @@ from typing import Any, Optional
 
 from config import DB_FILEPATH
 
-from helpers.colors import GRAY, RES
+from helpers.colors import GRAY, RES, RED, BLUE
+
 
 def confirm_input(attribute_name: str, value: str) -> Optional[str]:
     """
@@ -145,18 +146,30 @@ def check_exit_cmd(command: str) -> bool:
         True if the command is an exit command, False otherwise
     """
     if command.lower().strip() == "quit":
-        print("\nExiting the application. Goodbye!")
-        time.sleep(1)
-        print("Remember to stay on track!")
+        print("\n        Exiting the application")
         time.sleep(0.40)
-        print(".")
+        print("        .")
         time.sleep(0.40)
-        print(".")
+        print("        .")
         time.sleep(0.40)
-        print(".")
+        print("        .")
+        time.sleep(0.40)
+        print(f"\n        Goodbye! {BLUE}(^_^)/{RES}")
+        time.sleep(0.40)
+        print(f"""\n
+        {BLUE}* * * * * * * * * * * * *{RES}
+        {RED}REMEMBER TO STAY ON TRACK{RES}
+         {BLUE}* * * * * * * * * * * *{RES}
+        """)
+        time.sleep(0.40)
+        print("        .")
+        time.sleep(0.40)
+        print("        .")
+        time.sleep(0.40)
+        print("        .")
         time.sleep(0.40)
         sys.exit(0)
     return False
 
 def exit_msg():
-    print(f"{GRAY}(Type 'quit' at any time to exit the application){RES}")
+    print(f"{GRAY}(Type '{RES}quit{GRAY}' at any time to exit the application){RES}")

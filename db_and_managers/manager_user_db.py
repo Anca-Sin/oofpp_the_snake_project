@@ -5,7 +5,9 @@ from typing import List
 from config import DB_FILEPATH
 
 from core.user import User
-from helpers.helper_functions import *
+from helpers.helper_functions import db_connection, reload_cli, exit_msg, reload_menu_countdown, check_exit_cmd
+from helpers.colors import RED, RES
+
 
 def load_users() -> List[User]: # For access to all user properties
     """
@@ -41,7 +43,7 @@ def select_user() -> User:
     if not users:
         while True:
             reload_cli()
-            print("(Type 'quit' at any time to exit the application)")
+            exit_msg()
             print("""\nNo users found! You can:
         
             1. Create a new user
@@ -66,12 +68,12 @@ def select_user() -> User:
     else:
         while True:
             reload_cli()
-            print("(Type 'quit' at any time to exit the application)")
+            exit_msg()
             # Display users with numeration
             print("\n        Please select a user from the following list: ")
             for idx, user in enumerate(users, 1):
-                print(f"        {idx}. {user.username}")
-            print("        or")
+                print(f"\n        {idx}. {user.username}")
+            print("\n        or")
             # Last option: Create new user
             print(f"        {len(users) + 1}. Create a new user")
 
@@ -159,7 +161,7 @@ def delete_user(selected_user) -> None:
     - All associated habits and data
     """)
 
-    confirmation = input("Type in 'DELETE' if you are sure to proceed (or cancel by pressing ENTER): ")
+    confirmation = input(f"Type in '{RED}DELETE{RES}' if you are sure to proceed (or cancel by pressing ENTER): ")
 
     # Check if the user doesn't confirm
     if confirmation.lower() != "delete":
@@ -177,5 +179,5 @@ def delete_user(selected_user) -> None:
     connection.commit()
     connection.close()
 
-    print(f"\nUser '{selected_user.username}' and all associated data have been deleted.")
+    print(f"\nUser '{RED}{selected_user.username}{RES}' and all associated data have been {RED}deleted{RES}.")
     input("Press ENTER to continue...")

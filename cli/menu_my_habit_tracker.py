@@ -3,7 +3,8 @@ Menu: My Habit Tracker - Second after Main Menu
 """
 from cli.menu_analytics import menu_analytics_all_habits
 from cli.menu_habits import menu_habits
-from helpers.helper_functions import reload_cli, reload_menu_countdown, check_exit_cmd
+from helpers.helper_functions import reload_cli, reload_menu_countdown, check_exit_cmd, exit_msg
+from helpers.colors import BLUE, RES, GRAY
 
 
 def menu_my_habit_tracker(ht):
@@ -20,13 +21,14 @@ def menu_my_habit_tracker(ht):
     while True:
         # Clear the screen and display the menu header
         reload_cli()
-        print("(Type 'quit' at any time to exit the application)")
-        print("""
-        - - - My Habit Tracker - - -
+        exit_msg()
+        print(f"""
+        {BLUE}- - - My Habit Tracker - - -{RES}
         
         1. My Habits
         2. My Analytics
-        3. << Back to Main Menu
+        
+        {GRAY}3. << Back to Main Menu{RES}
         """)
 
         # Get user choice

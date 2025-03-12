@@ -6,7 +6,9 @@ import time
 
 from .menu_my_habit_tracker import menu_my_habit_tracker
 from core.analytics import Analytics
-from helpers.helper_functions import reload_cli, reload_menu_countdown, check_exit_cmd
+from helpers.helper_functions import reload_cli, reload_menu_countdown, check_exit_cmd, exit_msg
+from helpers.colors import GRAY, RES, BLUE
+
 
 def main_menu(ht) -> None:
     """
@@ -18,10 +20,10 @@ def main_menu(ht) -> None:
     while True:
         # Clear the screen and display the menu header
         reload_cli()
-        print("(Type 'quit' at any time to exit the application)")
-        print(f"You've successfully logged in with '{ht.logged_in_user.username}'...")
-        print("""
-        - - - Main Menu - - -
+        exit_msg()
+        print(f"{GRAY}You've successfully logged in with '{ht.logged_in_user.username}'...{RES}")
+        print(f"""
+        {BLUE}- - - Main Menu - - -{RES}
         
         1. My Habit Tracker
         2. Select a different user
