@@ -129,15 +129,20 @@ def new_habit(selected_user: User, set_frequency: str = None) -> None:
     # Create a new Habit object
     habit = Habit()
 
-    # Prompt for habit details
-    habit.habit_name(selected_user)
-    # Prompt for next set up if a name is provided
-    # Use set frequency if accessed through, daily or weekly
-    if not habit.name:
-        return
-    else:
-        habit.habit_frequency(preset_frequency=set_frequency)
-        habit.creation_date()
+    while True:
+        # Ask for habit name
+        habit.habit_name(selected_user)
+
+        # If user wants to exit
+        if not habit.name:
+            return
+
+        # If name is unique
+        break
+
+    # Set up frequency, use preset if called from weekly/daily no habits prompt
+    habit.habit_frequency(preset_frequency=set_frequency)
+    habit.creation_date()
 
     # Insert the new habit to the db
     save_habits(selected_user, habit)

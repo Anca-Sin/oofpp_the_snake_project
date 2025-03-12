@@ -55,6 +55,7 @@ class Habit:
             elif habit_name_exists(user, habit_name):
                 print(f"\nA habit named '{habit_name}' already exists! Please try again!")
                 reload_menu_countdown()
+                return
 
             else:
                 # Confirm the choice
