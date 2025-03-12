@@ -38,6 +38,8 @@ def menu_analytics_all_habits(ht) -> None:
     Parameters:
         ht: The HabitTracker instance that manages the application state.
     """
+    # Reload habits
+    ht.db.load_habits(ht.logged_in_user)
 
     while True:
         # Clear the screen and display the menu header

@@ -43,18 +43,21 @@ def menu_habits(ht):
             ht.db.new_habit(ht.logged_in_user)
 
         elif choice == "2":
-            # List all habits
+            # Reload habits
             ht.db.load_habits(ht.logged_in_user)
+            # List all habits
             all_habits = ht.analytics.list_all_habits()
             display_habits_and_select(ht, all_habits, "All", None)
 
         elif choice == "3":
+            # Reload habits
             ht.db.load_habits(ht.logged_in_user)
             # Filter and display daily habits
             daily_habits = ht.analytics.list_habits_by_periodicity("daily")
             display_habits_and_select(ht, daily_habits, "Daily", "daily")
 
         elif choice == "4":
+            # Reload habits
             ht.db.load_habits(ht.logged_in_user)
             # Filter and display weekly habits
             weekly_habits = ht.analytics.list_habits_by_periodicity("weekly")
