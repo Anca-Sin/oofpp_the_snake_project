@@ -10,6 +10,8 @@ from db_and_managers import manager_user_db as user_db
 from db_and_managers import manager_habit_db as habit_db
 from db_and_managers import manager_completion_db as completion_db
 from db_and_managers import manager_streaks_db as streaks_db
+from .manager_user_db import load_users
+
 
 # noinspection PyMethodMayBeStatic
 class Database:
@@ -116,6 +118,9 @@ class Database:
             habit: The Habit object to be deleted.
         """
         habit_db.delete_habit(selected_user, habit)
+
+        # Refresh habits list
+        self.load_habits(selected_user)
 
     # Completion related methods
     def complete_habit_today(self, selected_user: User, habit: Habit) -> None:
