@@ -149,7 +149,7 @@ class Database:
         completion_db.delete_completion(selected_user, habit)
 
     # Streak related methods
-    def load_broken_streak_length(self, habit_name: str) -> str:
+    def load_broken_streak_lengths(self, habit_name: str) -> str:
         """
         Loads broken streak length history for a given habit.
 
@@ -158,4 +158,4 @@ class Database:
         Returns:
             A comma separated string of broken streak lengths.
         """
-        return streaks_db.load_broken_streak_length(habit_name)
+        return streaks_db.load_broken_streak_lengths(habit_name)

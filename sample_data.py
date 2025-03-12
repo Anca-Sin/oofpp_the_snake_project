@@ -27,7 +27,7 @@ def _generate_completions(habit: Habit, start_date: date, end_date: date) -> Lis
     habit.streaks = Streaks()
     habit.streaks.current_streak = 0
     habit.streaks.longest_streak = 0
-    habit.streaks.broken_streak_length = []
+    habit.streaks.broken_streak_lengths = []
 
     # Reset completions
     completions = []
@@ -130,7 +130,7 @@ def sample_data_generator():
             print(f"Completions: {habit.completion_dates}")
             print(f"Current Streak: {habit.streaks.current_streak}")
             print(f"Longest Streak: {habit.streaks.longest_streak}")
-            print(f"Broken Streaks Lengths: {habit.streaks.broken_streak_length}")
+            print(f"Broken Streaks Lengths: {habit.streaks.broken_streak_lengths}")
 
             # Count completions for display
             completion_count = len(completions)

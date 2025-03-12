@@ -12,21 +12,21 @@ class Streaks:
     Attributes:
         current_streak (int): The current active streak count.
         longest_streak (int): The longest streak achieved.
-        broken_streak_length (List[int]): History of streak lengths when they were broken.
+        broken_streak_lengths (List[int]): History of streak lengths when they were broken.
     """
 
     def __init__(self):
         """Initializes a new Streak object with default values."""
         self.current_streak: int = 0               # Current streak counter
         self.longest_streak: int = 0               # Longest streak counter
-        self.broken_streak_length: List[int] = []  # History of broken streak lengths
+        self.broken_streak_lengths: List[int] = []  # History of broken streak lengths
 
     def is_streak_broken(self, frequency: str, completions: List[date]) -> bool:
         """
         Determines if a streak is broken based on the frequency and latest completion date.
 
         - checks if the streak is broken
-        - if yes, it adds the current streak length to the broken_streak_length history
+        - if yes, it adds the current streak length to the broken_streak_lengths history
         - then resets the current_streak to 1
 
         Args:
@@ -45,7 +45,7 @@ class Streaks:
         if frequency == "daily":
             if (today - last_completion).days > 1:
                 # Save broken streak length to the list
-                self.broken_streak_length.append(self.current_streak)
+                self.broken_streak_lengths.append(self.current_streak)
                 # Reset current streak
                 # Only today's completion
                 self.current_streak = 1
@@ -62,7 +62,7 @@ class Streaks:
             # Streak is broken if current week's Monday is more than 7 days apart from the latest completion's Monday
             if current_week_monday > last_completion_week_monday + timedelta(days=7):
                 # Save broken streak length to the list
-                self.broken_streak_length.append(self.current_streak)
+                self.broken_streak_lengths.append(self.current_streak)
                 # Reset current streak
                 # Only today's completion
                 self.current_streak = 1
@@ -101,7 +101,7 @@ class Streaks:
         - processes all completions at once
         - calculates: - current_streak: int
                       - longest_streak: int
-                      - broken_streak_length: List[]
+                      - broken_streak_lengths: List[]
 
         Args:
             frequency: The frequency of the habit ("daily" or "weekly").
@@ -240,7 +240,7 @@ class Streaks:
         # - all other items are previously broken streaks
         # - the max value is the longest streak
         self.current_streak = streaks[-1]
-        self.broken_streak_length = streaks[:-1]  # All except last one
+        self.broken_streak_lengths = streaks[:-1]  # All except last one
         self.longest_streak = max(streaks)
 
         return self.current_streak

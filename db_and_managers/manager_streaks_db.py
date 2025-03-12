@@ -2,7 +2,7 @@ from config import DB_FILEPATH
 
 from helpers.helper_functions import db_connection
 
-def load_broken_streak_length(habit_name: str) -> str:
+def load_broken_streak_lengths(habit_name: str) -> str:
     """
     Loads streak_length_history for a given habit from the db.
 
