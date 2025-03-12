@@ -133,7 +133,7 @@ def db_connection(instance) -> Optional[sqlite3.Connection]:
                 time.sleep(1)
                 sys.exit(0)
             else:
-                print("\Invalid input. Please try again!")
+                print("\nInvalid input. Please try again!")
                 reload_menu_countdown()
 
 def check_exit_cmd(command: str) -> bool:
