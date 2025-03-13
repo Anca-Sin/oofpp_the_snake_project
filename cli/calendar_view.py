@@ -10,6 +10,7 @@ Calendar view for habit completions.
 import calendar
 from datetime import datetime
 
+from core.analytics import Analytics
 from core.habit import Habit
 from db_and_managers.database import Database
 from helpers.helper_functions import reload_cli, check_exit_cmd, reload_menu_countdown, exit_msg
@@ -165,23 +166,32 @@ def view_completions_calendar(ht, habit: Habit) -> None:
                 else:
                     # Handle invalid integer input
                     print("\nInvalid month or year. Please try again!")
-                    input("Press ENTER to continue...")
+                    input(f"{GRAY}<< Press ENTER to continue...{RES}")
             except ValueError:
                 # Handle invalid string input
                 print("\nInvalid input (only numbers). Please try again!")
-                input("Press ENTER to continue...")
+                input(f"{GRAY}<< Press ENTER to continue...{RES}")
 
         elif choice == "1":
             # Complete for today
             db.complete_habit_today(ht.logged_in_user, habit)
 
+            # Recreating a fresh Analytics instance
+            ht.analytics = Analytics(ht.logged_in_user, ht.db)
+
         elif choice == "2":
             # Complete for a past date
             db.complete_habit_past(ht.logged_in_user, habit)
 
+            # Recreating a fresh Analytics instance
+            ht.analytics = Analytics(ht.logged_in_user, ht.db)
+
         elif choice == "3":
             # Delete a completion
             db.delete_completion(ht.logged_in_user, habit)
+
+            # Recreating a fresh Analytics instance
+            ht.analytics = Analytics(ht.logged_in_user, ht.db)
 
         elif choice == "":
             # Return to My Habit Details Menu

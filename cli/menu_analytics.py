@@ -17,7 +17,7 @@ def menu_analytics_one_habit(ht, habit: Habit) -> None:
         ht: The HabitTracker instance that manages the application state.
         habit: The selected Habit object to analyze.
     """
-    # Get the Analytics instance from the HabitTracker
+    # Access HabitTracker's Analytics instance
     analytics = ht.analytics
 
     # Clear the screen and display the menu header
@@ -82,11 +82,8 @@ def menu_analytics_all_habits(ht) -> None:
 
 def submenu1_analytics_all_habits(ht):
     """Displays the Analytics across all habits."""
-    # Get the Analytics instance from the HabitTracker
+    # Access HabitTracker's Analytics instance
     analytics = ht.analytics
-
-    # Reload habits
-    ht.db.load_habits(ht.logged_in_user)
 
     while True:
         # Clear the screen and display the menu header
@@ -110,11 +107,8 @@ def submenu1_analytics_all_habits(ht):
 
 def submenu2_analytics_d_w_habits(ht):
     """Displays the Analytics for all daily and weekly habits."""
-    # Get the Analytics instance from the HabitTracker
+    # Access HabitTracker's Analytics instance
     analytics = ht.analytics
-
-    # Reload habits
-    ht.db.load_habits(ht.logged_in_user)
 
     while True:
         # Clear the screen and display the menu header

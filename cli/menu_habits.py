@@ -3,6 +3,7 @@ Menu: Habits - Submenu of My Habit Tracker for managing habits
 """
 from typing import List
 
+from core.analytics import Analytics
 from .menu_habit_detail import menu_habit_detail
 from core.habit import Habit
 from helpers.helper_functions import reload_cli, reload_menu_countdown, check_exit_cmd, exit_msg
@@ -17,9 +18,6 @@ def menu_habits(ht):
     """
 
     while True:
-        # Reload habits
-        ht.db.load_habits(ht.logged_in_user)
-
         # Clear the screen and display the menu header
         reload_cli()
         exit_msg(ht.logged_in_user)
@@ -44,6 +42,9 @@ def menu_habits(ht):
         if choice == "1":
             # Register a new habit
             ht.db.new_habit(ht.logged_in_user)
+
+            # Recreating a fresh Analytics instance
+            ht.analytics = Analytics(ht.logged_in_user, ht.db)
 
         elif choice == "2":
             # List all habits
@@ -79,9 +80,6 @@ def display_habits_and_select(ht, habits: List[Habit], display_type: str, set_fr
         display_type: Type of habits being displayed ("All", "Daily", "Weekly").
         set_frequency: Pre-set frequency for new habits("Daily", "Weekly", or None).
     """
-    # Clear the screen
-    reload_cli()
-
     # Check if there are no habits to display
     if not habits:
         # If no habits, display a message based on the habit type
@@ -96,9 +94,9 @@ def display_habits_and_select(ht, habits: List[Habit], display_type: str, set_fr
 
         # Offer to create a new habit with pre-set frequency/None or return
         while True:
+            # Clear the screen
             reload_cli()
             exit_msg(ht.logged_in_user)
-
             # If accessed from display daily or weekly habits
             if set_frequency:
                 print(f"""
@@ -117,9 +115,12 @@ def display_habits_and_select(ht, habits: List[Habit], display_type: str, set_fr
                 if choice == "1":
                     # Create a new habit with the pre-set frequency
                     ht.db.new_habit(ht.logged_in_user, set_frequency)
+
+                    # Recreating a fresh Analytics instance
+                    ht.analytics = Analytics(ht.logged_in_user, ht.db)
+
                 elif choice == "":
                     # Return to My Habits Menu
-                    reload_menu_countdown()
                     return
                 else:
                     # Handle invalid input
@@ -144,6 +145,10 @@ def display_habits_and_select(ht, habits: List[Habit], display_type: str, set_fr
                 if choice == "1":
                     # Create a new habit without a pre-set frequency
                     ht.db.new_habit(ht.logged_in_user)
+
+                    # Recreating a fresh Analytics instance
+                    ht.analytics = Analytics(ht.logged_in_user, ht.db)
+
                 elif choice == "2":
                     # Return to My Habit Menu
                     return

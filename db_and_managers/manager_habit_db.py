@@ -151,13 +151,15 @@ def new_habit(selected_user: User, set_frequency: str = None) -> None:
     input(f"{GRAY}'{habit.name}' Saved! ENTER << to continue...{RES}")
     return
 
-def save_habits(selected_user: User, new_habit=None) -> None:
+def save_habits(selected_user: User, new_habit: Habit = None) -> None:
     """
     Saves (INSERT) / Updates (UPDATE) existing habit data.
 
     Parameters:
         selected_user: The User object whose habits to save/update.
-        new_habit: A new Habit object that needs to be registered in the db.
+        new_habit: INSERT The new Habit object to the db and initialises all its attributes
+                   UPDATE If None -> used in completion manager, where
+                                     habit: Habit is passed as parm in the completions functions
     """
     connection = db_connection(DB_FILEPATH)
     cursor = connection.cursor()

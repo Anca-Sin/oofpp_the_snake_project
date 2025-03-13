@@ -16,11 +16,11 @@ from .manager_user_db import load_users
 # noinspection PyMethodMayBeStatic
 class Database:
     """
-    Coordinator class for database operations.
-    This class is a placeholder for specialized manager modules which delegate specific functionalities.
+    Coordinator class - SINGLE app entry point - for database operations delegated through managers.
 
+    - ONLY methods needed for app functionality (managers handle other necessary functions internally)
     - initializes the db structure
-    - provides a common space for the application to interact with the database
+    - handles ALL data synchronization needed for app functionality
 
     Attributes:
         db_filepath (str): Path to the SQLite database file, defaults to "habit_tracker" through config.
@@ -39,55 +39,59 @@ class Database:
 
     # All methods delegate to their respective manager modules to handle the db operations
 
+    # --------------------
     # User related methods
+    # --------------------
     def load_users(self) -> List[User]:
         """
-        Loads all users from the database.
+        Loads all users from the db.
 
         Returns:
-             A list of User objects retrieved from the db.
+            A list of User objects.
         """
         return user_db.load_users()
 
-    def select_user(self) -> Optional[User]:
+    def select_user(self) -> User:
         """
-        Prompts user to select an existing user or create a new one.
+        - loads the users from the database
+        - delegates user selection/creation to the manager function
+        - sets the user id for further db operations
+        - loads the selected user's habits
 
         Returns:
-             The selected User object, or None if no selection is made.
+             The selected User object.
         """
-        selected_user = user_db.select_user()
+        users = self.load_users()
+        selected_user = user_db.select_user(users)
         if selected_user:
             self.user_id = selected_user.user_id
+            self.load_habits(selected_user)
+
         return selected_user
-
-    def save_user(self, user: User) -> None:
-        """
-        Saves a new user to the db.
-
-        Args:
-             The User object to be saved.
-        """
-        return user_db.save_user(user)
 
     def delete_user(self, selected_user: User) -> None:
         """
-        Deletes the selected user and all their data from the db.
-
+        - deletes the selected user and all their data from the db through manager function
+        -
         Args:
             selected_user: The User object to be deleted.
         """
-        return user_db.delete_user(selected_user)
+        user_db.delete_user(selected_user)
 
+    # ---------------------
     # Habit related methods
-    def load_habits(self, selected_user: User) -> None:
+    # ---------------------
+    def load_habits(self, selected_user: User) -> List[Habit]:
         """
         Loads all habits for the selected user from the db.
 
         Args:
             selected_user: The User object whose habits are to be loaded.
+        Returns:
+            A list of Habit objects for the selected user.
         """
         selected_user.habits = habit_db.load_habits(selected_user)
+        return selected_user.habits
 
     def new_habit(self, selected_user: User, set_frequency: str = None) -> None:
         """
@@ -98,16 +102,8 @@ class Database:
             set_frequency: Optional preset frequency for the habit ("daily" or "weekly").
         """
         habit_db.new_habit(selected_user, set_frequency)
-
-    def save_habits(self, selected_user: User, new_habit=None) -> None:
-        """
-        Saves or updates all habit modifications for the selected user in the db.
-
-        Args:
-            selected_user: The User object whose habits to save/update.
-            new_habit
-        """
-        habit_db.save_habits(selected_user, new_habit)
+        # Refresh habits list
+        self.load_habits(selected_user)
 
     def delete_habit(self, selected_user: User, habit: Habit) -> None:
         """
@@ -118,11 +114,12 @@ class Database:
             habit: The Habit object to be deleted.
         """
         habit_db.delete_habit(selected_user, habit)
-
         # Refresh habits list
         self.load_habits(selected_user)
 
+    # --------------------------
     # Completion related methods
+    # --------------------------
     def complete_habit_today(self, selected_user: User, habit: Habit) -> None:
         """
         Marks the selected habit as complete for today.

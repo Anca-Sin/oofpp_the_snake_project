@@ -3,6 +3,7 @@ Menu: Habit Detail - Submenu of My Habits Menu for managing and analyzing one in
 """
 from cli.calendar_view import view_completions_calendar
 from cli.menu_analytics import menu_analytics_one_habit
+from core.analytics import Analytics
 from core.habit import Habit
 from db_and_managers.database import Database
 from helpers.helper_functions import reload_cli, reload_menu_countdown, check_exit_cmd, exit_msg
@@ -44,7 +45,10 @@ def menu_habit_detail(ht, habit: Habit) -> None:
         # Handle menu options
         if choice == "1":
             # Mark the habit as complete for today
-            db.complete_habit_today(ht.logged_in_user, habit)
+            ht.db.complete_habit_today(ht.logged_in_user, habit)
+
+            # Recreating a fresh Analytics instance
+            ht.analytics = Analytics(ht.logged_in_user, ht.db)
 
         elif choice == "2":
             # View completions on calendar
@@ -61,7 +65,11 @@ def menu_habit_detail(ht, habit: Habit) -> None:
 
         elif choice == "5":
             # Delete selected habit entirely
-            db.delete_habit(ht.logged_in_user, habit)
+            ht.db.delete_habit(ht.logged_in_user, habit)
+
+            # Recreating a fresh Analytics instance
+            ht.analytics = Analytics(ht.logged_in_user, ht.db)
+
             # Go to Menu Habits
             from cli.menu_habits import menu_habits # Avoid circular import
             menu_habits(ht)

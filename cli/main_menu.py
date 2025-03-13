@@ -45,10 +45,7 @@ def main_menu(ht) -> None:
             # Select a different user
             ht.logged_in_user = ht.db.select_user()
 
-            # Load the newly selected user's habits
-            ht.db.load_habits(ht.logged_in_user)
-
-            # Create an analytics instance for the newly selected user
+            # Recreating a fresh Analytics instance
             ht.analytics = Analytics(ht.logged_in_user, ht.db)
 
         elif choice == "2":
@@ -58,11 +55,8 @@ def main_menu(ht) -> None:
             # Select a different user
             ht.logged_in_user = ht.db.select_user()
 
-            # Load the newly selected user's habits
-            ht.db.load_habits(ht.logged_in_user)
-
-            # Create an analytics instance for the newly selected user
-            ht.analytics = Analytics(ht.logged_in_user)
+            # Recreating a fresh Analytics instance
+            ht.analytics = Analytics(ht.logged_in_user, ht.db)
 
         else:
             # Handle invalid input

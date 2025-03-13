@@ -45,10 +45,10 @@ class HabitTracker:
         print("        Welcome to your - - -  Habit Tracker- - -")
 
         # Select an existing user or create a new one
+        # Habits are loaded internally in the database method
         self.logged_in_user = self.db.select_user()
 
-        # Load user habits and analytics instance after selection
-        self.db.load_habits(self.logged_in_user)
+        # Creating the first Analytics instance
         self.analytics = Analytics(self.logged_in_user, self.db)
 
         # Show the main menu to start user interaction

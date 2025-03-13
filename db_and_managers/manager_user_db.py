@@ -31,15 +31,15 @@ def load_users() -> List[User]: # For access to all user properties
     connection.close()
     return users
 
-def select_user() -> User:
+def select_user(users: List[User]=None) -> User:
     """
     Prompts the user to select an existing user or create a new one if none exists.
 
-    :return: The selected or newly created User object.
+    Parameters:
+        users: Optional preloaded list of users. If none, users will be loaded.
+    Returns:
+        The selected or newly created User object.
     """
-    # Load all users
-    users = load_users()
-
     # If there are no users, directly prompt to create a new user
     if not users:
         while True:

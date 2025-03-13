@@ -7,7 +7,6 @@ from core.user import User
 from core.habit import Habit
 from helpers.helper_functions import reload_menu_countdown, confirm_input, check_exit_cmd
 
-
 def complete_habit_today(selected_user: User, habit: Habit) -> None:
     """
     Marks a habit as completed for today.
