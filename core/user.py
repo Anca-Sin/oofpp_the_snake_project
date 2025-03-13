@@ -1,8 +1,9 @@
 import time
 from typing import List
 
-from helpers.colors import GRAY, RES
-from helpers.helper_functions import confirm_input
+from helpers.colors import GRAY, RES, RED
+from helpers.helper_functions import confirm_input, reload_menu_countdown
+
 
 class User:
     """
@@ -41,12 +42,18 @@ class User:
 
             # Exit the loop if "ENTER"
             if not username:
-                print("Exiting user creation...")
-                select_user()
+                self.username = None
+                print(f"\nUser creation process {RED}canceled!{RES}")
+                time.sleep(1)
+                print("\nNo saves will be made...")
+                time.sleep(1)
+                print("\nReturning...")
+                time.sleep(1)
+                return
 
             # Check if the username already exists
             elif username_exists(username):
-                print(f"Username '{username}' is taken! Please try again!")
+                print(f"\nUsername '{username}' is taken! Please try again!")
                 time.sleep(1)
 
             else:

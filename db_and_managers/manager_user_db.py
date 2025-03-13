@@ -59,6 +59,8 @@ def select_user(users: List[User]=None) -> User:
             if choice == "1":
                 selected_user = User()
                 selected_user.create_username()
+                if not selected_user.username:
+                    return None
                 print(f"\nYou've created user: {selected_user.username}!")
                 return selected_user
             elif choice == "2":
@@ -120,6 +122,8 @@ def select_user(users: List[User]=None) -> User:
                     # Create new user
                     selected_user = User()
                     selected_user.create_username()
+                    if not selected_user.username:
+                        return None
                     print(f"\nSaving entry to your database...")
                     time.sleep(1)
                     print("")

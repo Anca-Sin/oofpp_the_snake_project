@@ -49,7 +49,8 @@ class Database:
         Returns:
             A list of User objects.
         """
-        return user_db.load_users()
+        users = user_db.load_users()
+        return users
 
     def save_user(self, selected_user):
         """ok"""
