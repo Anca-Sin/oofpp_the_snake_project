@@ -86,9 +86,9 @@ class Analytics:
         """
         # Filter habits to find the one with the matching name
         # Use next() to get the first (and only matching habit)
-        habit = next(filter(lambda habit_item: habit_item.name == habit_name, self.user.habits))
+        habit = next(filter(lambda habit_item: habit_item.name == habit_name, self.user.habits), None)
 
-        return habit.streaks.get_longest_streak()
+        return habit.streaks.get_longest_streak() if habit_name else 0
 
     def longest_streak_by_periodicity(self, periodicity: str) -> Tuple[str, int]:
         """
@@ -198,9 +198,13 @@ class Analytics:
             The average streak length.
         """
         streaks = []
-        for habit_name in self.user.habits:
-            if habit_name.current_streak > 0:
-                streaks.append(habit_name.current_streak)
+
+        # Find the selected habit
+        target_habit = next(habit for habit in self.user.habits if habit.name == habit_name)
+
+        # Add current streak if positive
+        if target_habit.streaks.current_streak > 0:
+                streaks.append(target_habit.streaks.current_streak)
 
         # Get the streak length history string from the db
         # Returns a comma separated string of streak lengths
