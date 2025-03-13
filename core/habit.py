@@ -52,10 +52,6 @@ class Habit:
             # Exit the loop if "ENTER"
             if not habit_name:
                 self.name = None
-                print(f"\nHabit creation process {RED}canceled!{RES}")
-                time.sleep(1)
-                print("\nReturning...")
-                time.sleep(1)
                 return
 
             elif habit_name_exists(user, habit_name):
@@ -96,12 +92,6 @@ class Habit:
             # Exit the loop if "ENTER"
             if not habit_frequency:
                 self.frequency = None
-                print(f"\nFrequency setting process {RED}canceled!{RES}")
-                time.sleep(1)
-                print("\nNo saves will be made...")
-                time.sleep(1)
-                print("\nReturning...")
-                time.sleep(1)
                 return
 
             # Check if input is valid

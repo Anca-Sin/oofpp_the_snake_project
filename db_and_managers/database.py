@@ -1,16 +1,17 @@
+import time
 from typing import List, Optional
 
 from config import set_db_filepath
 
 from core.user import User
 from core.habit import Habit
+from helpers.colors import RED, RES
 
 from .db_structure import db_tables
 from db_and_managers import manager_user_db as user_db
 from db_and_managers import manager_habit_db as habit_db
 from db_and_managers import manager_completion_db as completion_db
 from db_and_managers import manager_streaks_db as streaks_db
-from .manager_user_db import load_users
 
 
 # noinspection PyMethodMayBeStatic
@@ -56,7 +57,7 @@ class Database:
         """ok"""
         user_db.save_user(selected_user)
 
-    def select_user(self) -> User:
+    def select_user(self) -> Optional[User]:
         """
         - loads the users from the database
         - delegates user selection/creation to the manager function
@@ -66,17 +67,26 @@ class Database:
         Returns:
              The selected User object.
         """
-        users = self.load_users()
-        selected_user = user_db.select_user(users)
-        if selected_user:
-            if selected_user.user_id is None:
-                self.save_user(selected_user)
+        while True:
+            users = self.load_users()
+            selected_user = user_db.select_user(users)
+            if selected_user is not None:
+                if selected_user:
+                    if selected_user.user_id is None:
+                        self.save_user(selected_user)
 
-            self.user_id = selected_user.user_id
+                    self.user_id = selected_user.user_id
 
-            self.load_habits(selected_user)
+                    self.load_habits(selected_user)
 
-        return selected_user
+                return selected_user
+            else:
+                print(f"\nUser creation process {RED}canceled!{RES}")
+                time.sleep(1)
+                print("\nNo changes will be saved...")
+                time.sleep(1)
+                print("\nReturning...")
+                time.sleep(1)
 
     def delete_user(self, selected_user: User) -> None:
         """
@@ -106,7 +116,7 @@ class Database:
         """ok"""
         habit_db.save_habits(selected_user, new_habit)
 
-    def new_habit(self, selected_user: User, set_frequency: str = None) -> Habit:
+    def new_habit(self, selected_user: User, set_frequency: str = None) -> Optional[Habit]:
         """
         Adds a new habit to the db for the selected user.
 
@@ -115,12 +125,21 @@ class Database:
             set_frequency: Optional preset frequency for the habit ("daily" or "weekly").
         """
         new_habit = habit_db.new_habit(selected_user, set_frequency)
-        # Save
-        self.save_habits(selected_user, new_habit=new_habit)
-        # Refresh habits list
-        self.load_habits(selected_user)
-
-        return new_habit
+        # Check if the new habit was created successfully, and process wasn't canceled
+        if new_habit is not None:
+            # Save
+            self.save_habits(selected_user, new_habit=new_habit)
+            # Refresh habits list
+            self.load_habits(selected_user)
+            return new_habit
+        else:
+            print(f"\nHabit creation process {RED}canceled!{RES}")
+            time.sleep(1)
+            print("\nNo changes will be saved...")
+            time.sleep(1)
+            print("\nReturning...")
+            time.sleep(1)
+            return None
 
     def delete_habit(self, selected_user: User, habit: Habit) -> None:
         """

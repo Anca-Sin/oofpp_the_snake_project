@@ -43,12 +43,6 @@ class User:
             # Exit the loop if "ENTER"
             if not username:
                 self.username = None
-                print(f"\nUser creation process {RED}canceled!{RES}")
-                time.sleep(1)
-                print("\nNo saves will be made...")
-                time.sleep(1)
-                print("\nReturning...")
-                time.sleep(1)
                 return
 
             # Check if the username already exists
