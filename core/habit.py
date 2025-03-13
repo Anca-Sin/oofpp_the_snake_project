@@ -46,7 +46,7 @@ class Habit:
 
         while True:
             # Ask for habit name
-            print(f"\nNew Habit name {GRAY}(Press ENTER to exit):{RES} ")
+            print(f"\nNew Habit name {GRAY}or ENTER << to exit:{RES} ")
             habit_name = input().title().strip()
 
             # Exit the loop if "ENTER"
@@ -89,7 +89,7 @@ class Habit:
 
         # If no preset frequency, prompt the user
         while True:
-            print(f"\nPlease type in 'Daily' or 'Weekly' {GRAY}(Press ENTER to exit){RES}: ")
+            print(f"\nPlease type in 'Daily' or 'Weekly' {GRAY}or ENTER << to exit{RES}: ")
             habit_frequency = input().strip().lower()
 
             # Exit the loop if "ENTER"
@@ -112,7 +112,7 @@ class Habit:
 
             else:
                 # Handle invalid input
-                print("\nInvalid Input. Pleas enter 'Daily' or 'Weekly'!")
+                print("\nInvalid Input. Please enter 'Daily' or 'Weekly'!")
 
     def creation_date(self) -> None:
         """Sets the creation date of the habit to the current date."""
@@ -163,7 +163,7 @@ class Habit:
 
         # Check if already completed for complete today.
         if self._is_habit_completed(today):
-            print(f"\n'{self.name}' has already been completed today!")
+            print(f"\n'{self.name}' has {RED}already{RES} been completed today!")
             return False
 
         # Add today's date to completions if it's not already completed

@@ -25,11 +25,11 @@ def confirm_input(attribute_name: str, value: str) -> Optional[str]:
     """
     while True:
         # Ask for confirmation
-        print(f"You entered '{value}'. Is this correct?")
-        confirmation = input(f"Type {GREEN}'yes'{RES} to confirm or {GRAY}<< ENTER to exit{RES}:").lower().strip()
+        print(f"\n{GRAY}You entered{RES} '{value}'{GRAY}. Is this correct?{RES}")
+        confirmation = input(f"Type {GREEN}'yes'{RES} to confirm or {GRAY} ENTER << to cancel{RES}: ").lower().strip()
 
         if confirmation == "yes":
-            print(f"You've successfully stored {value.title()} as your {attribute_name}!")
+            print(f"\nYou've successfully stored {value.title()} as your {attribute_name}!")
             return value
         elif confirmation == "":
             return None
@@ -42,10 +42,10 @@ def confirm_int_input(value: Any) -> Any | None:
     Identical to confirm_input, only prints are different.
     """
     while True:
-        print(f"You've chosen '{value}', is this correct?")
-        confirmation = input(f"Type {GREEN}'yes'{RES} to confirm or {GRAY}<< ENTER to exit{RES}:").lower().strip()
+        print(f"\n{GRAY}You've chosen {RES}'{value}'{GRAY}. Is this correct?{RES}")
+        confirmation = input(f"Type {GREEN}'yes'{RES} to confirm or {GRAY} ENTER << to cancel{RES}: ").lower().strip()
         if confirmation == "yes":
-            print(f"You've chosen '{value}'!")
+            print(f"\nYou've chosen '{value}'!")
             return value
         elif confirmation == "":
             return None
