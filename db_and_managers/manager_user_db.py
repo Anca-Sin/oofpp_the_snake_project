@@ -124,6 +124,7 @@ def select_user(users: List[User]=None) -> User:
                     save_user(selected_user)
                     print(f"\nSaving entry to your database...")
                     time.sleep(1)
+                    print("")
                     input(f"{GRAY}'{selected_user.username}' Saved! ENTER << to continue...{RES}")
                     return selected_user
 

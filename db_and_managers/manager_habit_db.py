@@ -148,6 +148,7 @@ def new_habit(selected_user: User, set_frequency: str = None) -> None:
     save_habits(selected_user, habit)
     print(f"\nSaving entry to your database...")
     time.sleep(1)
+    print("")
     input(f"{GRAY}'{habit.name}' Saved! ENTER << to continue...{RES}")
     return
 
