@@ -7,7 +7,7 @@ from core.analytics import Analytics
 from core.habit import Habit
 from db_and_managers.database import Database
 from helpers.helper_functions import reload_cli, reload_menu_countdown, check_exit_cmd, exit_msg
-from helpers.colors import BLUE, RES, GRAY
+from helpers.colors import BLUE, RES, GRAY, RED
 
 # Create a db instance
 db = Database()
@@ -28,10 +28,10 @@ def menu_habit_detail(ht, habit: Habit) -> None:
         {BLUE}- - - {habit.name}'s Details - - -{RES}
 
         1 - Complete for today
-        2 - View calendar and manage completions
+        2 - Calendar and manage completions
         3 - Analytics
         4 - View creation date
-        5 - Delete habit
+        5 - {RED}Delete{RES} habit
         
         {GRAY}ENTER << Back to My Habits Menu{RES}
         """)

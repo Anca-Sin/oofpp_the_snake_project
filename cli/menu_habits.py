@@ -85,7 +85,7 @@ def display_habits_and_select(ht, habits: List[Habit], display_type: str, set_fr
         # If no habits, display a message based on the habit type
         # For daily, weekly habits
         if set_frequency in ["daily", "weekly"]:
-            print(f"\nYou don't have any {display_type} habits yet!")
+            print(f"\nYou don't have any '{display_type.lower()}' habits yet!")
             reload_menu_countdown()
         # For all habits
         else:
@@ -100,9 +100,9 @@ def display_habits_and_select(ht, habits: List[Habit], display_type: str, set_fr
             # If accessed from display daily or weekly habits
             if set_frequency:
                 print(f"""
-                Would you like to create a new {set_frequency} habit?
+                Would you like to create a new '{set_frequency}' habit?
 
-                1 - Register a {set_frequency} habit
+                1 - Register a new '{set_frequency}' habit
                 
                 {GRAY}ENTER << Back to My Habits Menu{RES}
                 """)
@@ -164,7 +164,7 @@ def display_habits_and_select(ht, habits: List[Habit], display_type: str, set_fr
         reload_cli()
         exit_msg(ht.logged_in_user)
         print(f"""
-        {BLUE}- - - {display_type.title()} Habits - - -{RES}
+        {BLUE}- - - '{display_type.title()}' Habits - - -{RES}
         """)
 
         # Display habits with indexing
