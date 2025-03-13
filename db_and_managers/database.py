@@ -51,6 +51,10 @@ class Database:
         """
         return user_db.load_users()
 
+    def save_user(self, selected_user):
+        """ok"""
+        user_db.save_user(selected_user)
+
     def select_user(self) -> User:
         """
         - loads the users from the database
@@ -64,7 +68,11 @@ class Database:
         users = self.load_users()
         selected_user = user_db.select_user(users)
         if selected_user:
+            if selected_user.user_id is None:
+                self.save_user(selected_user)
+
             self.user_id = selected_user.user_id
+
             self.load_habits(selected_user)
 
         return selected_user
@@ -93,7 +101,11 @@ class Database:
         selected_user.habits = habit_db.load_habits(selected_user)
         return selected_user.habits
 
-    def new_habit(self, selected_user: User, set_frequency: str = None) -> None:
+    def save_habits(self, selected_user, new_habit=None):
+        """ok"""
+        habit_db.save_habits(selected_user, new_habit)
+
+    def new_habit(self, selected_user: User, set_frequency: str = None) -> Habit:
         """
         Adds a new habit to the db for the selected user.
 
@@ -101,9 +113,13 @@ class Database:
             selected_user: The User object to associate the new habit with.
             set_frequency: Optional preset frequency for the habit ("daily" or "weekly").
         """
-        habit_db.new_habit(selected_user, set_frequency)
+        new_habit = habit_db.new_habit(selected_user, set_frequency)
+        # Save
+        self.save_habits(selected_user, new_habit=new_habit)
         # Refresh habits list
         self.load_habits(selected_user)
+
+        return new_habit
 
     def delete_habit(self, selected_user: User, habit: Habit) -> None:
         """

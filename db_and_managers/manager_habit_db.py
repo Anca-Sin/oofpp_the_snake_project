@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Optional
 from datetime import datetime
 import time
 
@@ -113,7 +113,7 @@ def habit_name_exists(selected_user: User, habit_name: str) -> bool:
 
     return count > 0
 
-def new_habit(selected_user: User, set_frequency: str = None) -> None:
+def new_habit(selected_user: User, set_frequency: str = None) -> Optional[Habit]:
     """
     Adds a new habit to the selected user's db.
 
@@ -125,6 +125,8 @@ def new_habit(selected_user: User, set_frequency: str = None) -> None:
     Parameters:
         selected_user: The User object to associate the new habit with.
         set_frequency: Optional preset frequency ("daily" or "weekly") to skip prompting in certain scenarios.
+    Returns:
+        The new Habit object or None if user exits habit creation.
     """
     # Create a new Habit object
     habit = Habit()
@@ -144,13 +146,11 @@ def new_habit(selected_user: User, set_frequency: str = None) -> None:
     habit.habit_frequency(preset_frequency=set_frequency)
     habit.creation_date()
 
-    # Insert the new habit to the db
-    save_habits(selected_user, habit)
     print(f"\nSaving entry to your database...")
     time.sleep(1)
     print("")
     input(f"{GRAY}'{habit.name}' Saved! ENTER << to continue...{RES}")
-    return
+    return habit
 
 def save_habits(selected_user: User, new_habit: Habit = None) -> None:
     """
