@@ -38,9 +38,6 @@ def menu_analytics_all_habits(ht) -> None:
     Parameters:
         ht: The HabitTracker instance that manages the application state.
     """
-    # Reload habits
-    ht.db.load_habits(ht.logged_in_user)
-
     while True:
         # Clear the screen and display the menu header
         reload_cli()
@@ -77,8 +74,7 @@ def menu_analytics_all_habits(ht) -> None:
             elif choice == "2":
                 submenu2_analytics_d_w_habits(ht)
             elif choice == "":
-                from cli.menu_my_habit_tracker import menu_my_habit_tracker # Avoid circular import
-                menu_my_habit_tracker(ht)
+                return
             else:
                 # Handle invalid input
                 print("\nInvalid input. Please try again!")
@@ -88,6 +84,9 @@ def submenu1_analytics_all_habits(ht):
     """Displays the Analytics across all habits."""
     # Get the Analytics instance from the HabitTracker
     analytics = ht.analytics
+
+    # Reload habits
+    ht.db.load_habits(ht.logged_in_user)
 
     while True:
         # Clear the screen and display the menu header
@@ -113,6 +112,9 @@ def submenu2_analytics_d_w_habits(ht):
     """Displays the Analytics for all daily and weekly habits."""
     # Get the Analytics instance from the HabitTracker
     analytics = ht.analytics
+
+    # Reload habits
+    ht.db.load_habits(ht.logged_in_user)
 
     while True:
         # Clear the screen and display the menu header
