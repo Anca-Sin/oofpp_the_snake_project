@@ -67,6 +67,9 @@ class Habit:
                 if confirmed_habit is not None:
                     self.name = confirmed_habit
                     return
+                else:
+                    # If confirmed input is None on << ENTER
+                    return
 
     def habit_frequency(self, preset_frequency: Optional[str] = None) -> None:
         """
@@ -102,6 +105,9 @@ class Habit:
                 # If confirmed, set the name and exit the loop
                 if confirmed_frequency is not None:
                     self.frequency = confirmed_frequency
+                    return
+                else:
+                    # If confirmed input is None on << ENTER
                     return
 
             else:

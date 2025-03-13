@@ -25,17 +25,16 @@ def confirm_input(attribute_name: str, value: str) -> Optional[str]:
     """
     while True:
         # Ask for confirmation
-        print(f"You entered '{value}'. Is this correct? (yes/no): ")
-        confirmation = input().lower().strip()
+        print(f"You entered '{value}'. Is this correct?")
+        confirmation = input(f"Type {GREEN}'yes'{RES} to confirm or {GRAY}<< ENTER to exit{RES}:").lower().strip()
 
         if confirmation == "yes":
             print(f"You've successfully stored {value.title()} as your {attribute_name}!")
             return value
-        elif confirmation == "no":
-            print(f"Let's try again!")
+        elif confirmation == "":
             return None
         else:
-            print("Invalid input! Please enter 'yes' or 'no'!")
+            print("Invalid input!")
 
 def confirm_int_input(value: Any) -> Any | None:
     """
@@ -43,16 +42,15 @@ def confirm_int_input(value: Any) -> Any | None:
     Identical to confirm_input, only prints are different.
     """
     while True:
-        print(f"You've chosen '{value}', is this correct? (yes/no): ")
-        confirmation = input().lower().strip()
+        print(f"You've chosen '{value}', is this correct?")
+        confirmation = input(f"Type {GREEN}'yes'{RES} to confirm or {GRAY}<< ENTER to exit{RES}:").lower().strip()
         if confirmation == "yes":
             print(f"You've chosen '{value}'!")
             return value
-        elif confirmation == "no":
-            print(f"Let's try again!")
+        elif confirmation == "":
             return None
         else:
-            print("Invalid input! Please enter 'yes' or 'no'!")
+            print("Invalid input!")
 
 def reload_menu_countdown() -> None:
     """
@@ -154,7 +152,7 @@ def check_exit_cmd(command: str) -> bool:
         time.sleep(0.40)
         print("        .")
         time.sleep(0.40)
-        print(f"\n        Goodbye! {BLUE}(^_^)/{RES}")
+        print(f"\n        Goodbye! {GREEN}(^_^)/{RES}")
         time.sleep(0.40)
         print(f"""\n
         {BLUE}* * * * * * * * * * * * *{RES}

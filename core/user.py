@@ -2,7 +2,7 @@ import time
 from typing import List
 
 from helpers.colors import GRAY, RES, RED
-from helpers.helper_functions import confirm_input, reload_menu_countdown
+from helpers.helper_functions import confirm_input, reload_menu_countdown, check_exit_cmd
 
 
 class User:
@@ -54,7 +54,9 @@ class User:
                 # Confirm the choice
                 confirmed_username = confirm_input("username", username)
 
-                # If the choice is confirmed
                 if confirmed_username is not None:
                     self.username = confirmed_username
+                    return
+                else:
+                    # If confirmed input is None on << ENTER
                     return

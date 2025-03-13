@@ -92,6 +92,9 @@ def complete_habit_past(selected_user: User, habit: Habit) -> None:
                     print(f"\n'{habit.name}' has been completed for {date_str}!")
                     input(f"{GRAY}ENTER << to continue...{RES}")
                     return
+                else:
+                    # If confirmed input is None on << ENTER
+                    return
 
         except ValueError:
             # Handle invalid date format
