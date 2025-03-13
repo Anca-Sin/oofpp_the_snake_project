@@ -232,8 +232,11 @@ class Analytics:
         # Initialize an empty list to collect streak lengths from all habits
         all_streak_lengths = []
 
+        # Filter all habits
+        habits = self.list_all_habits()
+
         # Process each habit to collect streak lengths
-        for habit in self.user.habits:
+        for habit in habits:
             # If current streak > 0
             if habit.streaks.current_streak > 0:
                 # Add it to all_streak_lengths
@@ -260,11 +263,11 @@ class Analytics:
         Returns:
             The average streak length.
         """
-        # Filter habits by periodicity
-        habits = self.list_habits_by_periodicity(periodicity)
-
         # Initialize an empty list to collect streak lengths
         all_streak_lengths = []
+
+        # Filter habits by periodicity
+        habits = self.list_habits_by_periodicity(periodicity)
 
         # Process each habit to collect streak lengths
         for habit in habits:
