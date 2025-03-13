@@ -56,5 +56,4 @@ class User:
                 # If the choice is confirmed
                 if confirmed_username is not None:
                     self.username = confirmed_username
-                    time.sleep(1)
-                    input(f"{GRAY}ENTER << to continue...{RES}")
+                    return
