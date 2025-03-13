@@ -84,7 +84,7 @@ def display_habits_and_select(ht, habits: List[Habit], display_type: str, set_fr
     if not habits:
         # If no habits, display a message based on the habit type
         # For daily, weekly habits
-        if display_type in ["daily", "weekly"]:
+        if set_frequency in ["daily", "weekly"]:
             print(f"\nYou don't have any {display_type} habits yet!")
             reload_menu_countdown()
         # For all habits
@@ -118,6 +118,7 @@ def display_habits_and_select(ht, habits: List[Habit], display_type: str, set_fr
 
                     # Recreating a fresh Analytics instance
                     ht.analytics = Analytics(ht.logged_in_user, ht.db)
+                    return
 
                 elif choice == "":
                     # Return to My Habits Menu
@@ -148,8 +149,9 @@ def display_habits_and_select(ht, habits: List[Habit], display_type: str, set_fr
 
                     # Recreating a fresh Analytics instance
                     ht.analytics = Analytics(ht.logged_in_user, ht.db)
+                    return
 
-                elif choice == "2":
+                elif choice == "":
                     # Return to My Habit Menu
                     return
                 else:

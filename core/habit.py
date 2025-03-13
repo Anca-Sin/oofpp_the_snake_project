@@ -80,6 +80,7 @@ class Habit:
         if preset_frequency in ["daily", "weekly"]:
             self.frequency = preset_frequency
             print(f"\nFrequency automatically set to {preset_frequency}.")
+            return
 
         # If no preset frequency, prompt the user
         while True:
@@ -98,7 +99,7 @@ class Habit:
                 # If confirmed, set the name and exit the loop
                 if confirmed_frequency is not None:
                     self.frequency = confirmed_frequency
-                    return
+                    return True
 
             else:
                 # Handle invalid input
