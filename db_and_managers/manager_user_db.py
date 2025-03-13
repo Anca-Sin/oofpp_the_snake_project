@@ -122,7 +122,7 @@ def select_user() -> User:
                     selected_user = User()
                     selected_user.create_username()
                     save_user(selected_user)
-                    print(f"\nSaving to your database...")
+                    print(f"\nSaving entry to your database...")
                     time.sleep(1)
                     input(f"{GRAY}'{selected_user}' Saved! ENTER << to continue...{RES}")
                     return selected_user
