@@ -1,7 +1,8 @@
+import time
 from datetime import datetime, timedelta, date
 from typing import List, Optional
 
-from helpers.colors import GRAY, RES
+from helpers.colors import GRAY, RES, RED
 from .streaks import Streaks
 from helpers.helper_functions import confirm_input, reload_menu_countdown
 
@@ -46,10 +47,15 @@ class Habit:
         while True:
             # Ask for habit name
             print(f"\nNew Habit name {GRAY}(Press ENTER to exit):{RES} ")
-            habit_name = input().title()
+            habit_name = input().title().strip()
 
             # Exit the loop if "ENTER"
-            if habit_name == "":
+            if not habit_name:
+                self.name = None
+                print(f"\nHabit creation process {RED}canceled!{RES}")
+                time.sleep(1)
+                print("\nReturning...")
+                time.sleep(1)
                 return
 
             elif habit_name_exists(user, habit_name):
@@ -57,7 +63,7 @@ class Habit:
                 reload_menu_countdown()
                 return
 
-            else:
+            elif habit_name is not None:
                 # Confirm the choice
                 confirmed_habit = confirm_input("new habit name", habit_name)
 
@@ -89,6 +95,13 @@ class Habit:
 
             # Exit the loop if "ENTER"
             if not habit_frequency:
+                self.frequency = None
+                print(f"\nFrequency setting process {RED}canceled!{RES}")
+                time.sleep(1)
+                print("\nNo saves will be made...")
+                time.sleep(1)
+                print("\nReturning...")
+                time.sleep(1)
                 return
 
             # Check if input is valid
@@ -99,7 +112,7 @@ class Habit:
                 # If confirmed, set the name and exit the loop
                 if confirmed_frequency is not None:
                     self.frequency = confirmed_frequency
-                    return True
+                    return
 
             else:
                 # Handle invalid input

@@ -134,10 +134,18 @@ def new_habit(selected_user: User, set_frequency: str = None) -> Optional[Habit]
     # Habit naming method
     habit.habit_name(selected_user)
 
+    # Check if user wants to exit during habit naming
+    if habit.name is None:
+        return None
+
     # Habit frequency method
     # Uses preset if called from weekly/daily
     habit.habit_frequency(preset_frequency=set_frequency)
     habit.creation_date()
+
+    # Check if user wants to exit during frequency setting:
+    if habit.frequency is None:
+        return None
 
     print(f"\nSaving entry to your database...")
     time.sleep(1)
