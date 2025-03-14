@@ -1,6 +1,6 @@
 import sys
 import time
-from typing import List
+from typing import List, Optional
 
 # noinspection PyUnresolvedReferences
 from config import DB_FILEPATH
@@ -31,7 +31,7 @@ def load_users() -> List[User]: # For access to all user properties
     connection.close()
     return users
 
-def select_user(users: List[User]=None) -> User:
+def select_user(users: List[User]=None) -> Optional[User]:
     """
     Prompts the user to select an existing user or create a new one if none exists.
 
@@ -127,7 +127,7 @@ def select_user(users: List[User]=None) -> User:
                     print(f"\nSaving entry to your database...")
                     time.sleep(1)
                     print("")
-                    input(f"{GRAY}'{selected_user.username}' Saved! ENTER << to continue...{RES}")
+                    input(f"'{selected_user.username}' Saved! {GRAY}ENTER << to continue...{RES}")
                     return selected_user
 
                 else:
@@ -226,4 +226,4 @@ def delete_user(selected_user) -> None:
     connection.close()
 
     print(f"\nUser '{RED}{selected_user.username}{RES}' and all associated data have been {RED}deleted{RES}.")
-    reload_menu_countdown()
+    input(f"\n{GRAY}ENTER << to return...{RES}")

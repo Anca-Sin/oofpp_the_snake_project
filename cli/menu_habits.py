@@ -7,7 +7,8 @@ from core.analytics import Analytics
 from .menu_habit_detail import menu_habit_detail
 from core.habit import Habit
 from helpers.helper_functions import reload_cli, reload_menu_countdown, check_exit_cmd, exit_msg
-from helpers.colors import BLUE, RES, GRAY
+from helpers.colors import BLUE, RES, GRAY, GREEN
+
 
 def menu_habits(ht):
     """
@@ -40,6 +41,17 @@ def menu_habits(ht):
 
         # Handle menu options
         if choice == "1":
+            reload_cli()
+            print()
+            print(f"{GRAY}Logged in as:{RES} {GREEN}{ht.logged_in_user.username}{RES}")
+            print(f"""
+            {BLUE}- - - New Habit Setup - - -{RES}
+            
+            - select a new habit name
+            - set it's frequency
+            """)
+            input(f"ENTER << to start...")
+
             # Register a new habit
             ht.db.new_habit(ht.logged_in_user)
 
@@ -86,78 +98,54 @@ def display_habits_and_select(ht, habits: List[Habit], display_type: str, set_fr
         # For daily, weekly habits
         if set_frequency in ["daily", "weekly"]:
             print(f"\nYou don't have any '{display_type.lower()}' habits yet!")
+            print(f"\nRedirecting you to {GREEN}New {display_type} Habit Setup{RES}...")
             reload_menu_countdown()
         # For all habits
         else:
             print("\nYou don't have any registered habits yet!")
+            print(f"\nRedirecting you to {GREEN}New Habit Setup{RES}...")
             reload_menu_countdown()
 
         # Offer to create a new habit with pre-set frequency/None or return
         while True:
             # Clear the screen
             reload_cli()
-            exit_msg(ht.logged_in_user)
+            print()
+            print(f"{GRAY}Logged in as:{RES} {GREEN}{ht.logged_in_user.username}{RES}")
             # If accessed from display daily or weekly habits
             if set_frequency:
                 print(f"""
-                Would you like to create a new '{set_frequency}' habit?
+                {BLUE}- - - New {set_frequency.title()} Habit Setup - - -{RES}
 
-                1 - Register a new '{set_frequency}' habit
-                
-                {GRAY}ENTER << Back to My Habits Menu{RES}
+                - select a new habit name
+                - frequency automatically set to: {set_frequency}
                 """)
 
-                choice = input("\nEnter your choice: ").strip()
+                input(f"ENTER << to start...")
 
-                # Check for exit command
-                check_exit_cmd(choice)
+                # Create a new habit with the pre-set frequency
+                ht.db.new_habit(ht.logged_in_user, set_frequency)
 
-                if choice == "1":
-                    # Create a new habit with the pre-set frequency
-                    ht.db.new_habit(ht.logged_in_user, set_frequency)
-
-                    # Recreating a fresh Analytics instance
-                    ht.analytics = Analytics(ht.logged_in_user, ht.db)
-                    return
-
-                elif choice == "":
-                    # Return to My Habits Menu
-                    return
-                else:
-                    # Handle invalid input
-                    print("\nInvalid input. Please try again!")
-                    reload_menu_countdown()
+                # Recreating a fresh Analytics instance
+                ht.analytics = Analytics(ht.logged_in_user, ht.db)
+                return
 
             # If accessed from display all habits
             else:
                 print(f"""
-                Would you like to create a new habit?
+                {BLUE}- - - New Habit Setup - - -{RES}
 
-                1 - Register a new habit
-                
-                {GRAY}ENTER << Back to My Habits Menu{RES}
+                - select a new habit name
+                - frequency automatically set to: {set_frequency}
                 """)
 
-                choice = input("\nEnter your choice: ").strip()
+                input(f"ENTER << to start...")
 
-                # Check for exit command
-                check_exit_cmd(choice)
+                ht.db.new_habit(ht.logged_in_user)
 
-                if choice == "1":
-                    # Create a new habit without a pre-set frequency
-                    ht.db.new_habit(ht.logged_in_user)
-
-                    # Recreating a fresh Analytics instance
-                    ht.analytics = Analytics(ht.logged_in_user, ht.db)
-                    return
-
-                elif choice == "":
-                    # Return to My Habit Menu
-                    return
-                else:
-                    # Handle invalid input
-                    print("\nInvalid input. Please try again!")
-                    reload_menu_countdown()
+                # Recreating a fresh Analytics instance
+                ht.analytics = Analytics(ht.logged_in_user, ht.db)
+                return
 
     # If there are habits to display, show them
     while True:

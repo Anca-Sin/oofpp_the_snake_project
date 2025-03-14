@@ -150,7 +150,7 @@ def new_habit(selected_user: User, set_frequency: str = None) -> Optional[Habit]
     print(f"\nSaving entry to your database...")
     time.sleep(1)
     print("")
-    input(f"{GRAY}'{habit.name}' Saved! ENTER << to continue...{RES}")
+    input(f"'{habit.name}' Saved!{GRAY} ENTER << to continue...{RES}")
     return habit
 
 def save_habits(selected_user: User, new_habit: Habit = None) -> None:
@@ -238,7 +238,8 @@ def delete_habit(selected_user: User, habit: Habit) -> None:
         habit: The Habit object to delete.
     """
     # Ask for confirmation
-    print(f"""This operation will permanently DELETE:
+    print(f"""
+    This operation will permanently DELETE:
 
     - Your '{habit.name}' habit
     - All associated habit data
@@ -275,4 +276,4 @@ def delete_habit(selected_user: User, habit: Habit) -> None:
     connection.close()
 
     print(f"Habit '{RED}{habit.name}{RES}' and all associated data have been {RED}deleted{RES}.")
-    reload_menu_countdown()
+    input(f"\n{GRAY}ENTER << to return...{RES}")

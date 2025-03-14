@@ -26,9 +26,9 @@ def menu_analytics_one_habit(ht, habit: Habit) -> None:
     print(f"{GRAY}Logged in as:{RES} {GREEN}{ht.logged_in_user.username}{RES}")
 
     print(f"\n{BLUE}        - - - {habit.name}'s Analytics - - -{RES}")
-    print(f"\n        {GRAY}>> Current streak:{RES}     {RED}   {habit.streaks.current_streak}{RES}-days streak")
-    print(f"        {GRAY}>> Longest streak:{RES}       {RED} {analytics.longest_streak_for_habit(habit.name)}{RES}-days streak")
-    print(f"        {GRAY}>> Average streak length:{RES}{RED} {round(analytics.average_streak_length_habit(habit.name), 2)}{RES} days")
+    print(f"\n        {GRAY}>> {RES}Current streak:     {RED}   {habit.streaks.current_streak}{RES}-days streak")
+    print(f"        {GRAY}>> {RES}Longest streak:       {RED} {analytics.longest_streak_for_habit(habit.name)}{RES}-days streak")
+    print(f"        {GRAY}>> {RES}Average streak length:{RED} {round(analytics.average_streak_length_habit(habit.name), 2)}{RES} days")
     input(f"\n{GRAY}ENTER << Back to {habit.name}'s Detail Menu...{RES}")
     return
 

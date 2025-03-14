@@ -80,7 +80,7 @@ class Database:
 
                 return selected_user
             else:
-                print(f"\nUser creation process {RED}canceled!{RES}")
+                print(f"User creation process {RED}canceled!{RES}")
                 time.sleep(1)
                 print("\nNo changes will be saved...")
                 time.sleep(1)
@@ -132,7 +132,7 @@ class Database:
             self.load_habits(selected_user)
             return new_habit
         else:
-            print(f"\nHabit creation process {RED}canceled!{RES}")
+            print(f"Habit creation process {RED}canceled!{RES}")
             time.sleep(1)
             print("\nNo changes will be saved...")
             time.sleep(1)

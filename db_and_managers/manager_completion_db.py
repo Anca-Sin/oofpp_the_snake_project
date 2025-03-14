@@ -154,7 +154,7 @@ def delete_completion(habit: Habit) -> Optional[date]:
 
     # Prompt for the date of the completion to delete or ENTER to exit
     while True:
-        date_str = input(f"\n{GRAY}Enter the date to delete completion for {RES}'{habit.name}' {GREEN}(YYYY-MM-DD){RES}{GRAY} or ENTER << to cancel{RES}: ").strip()
+        date_str = input(f"\n{GRAY}Enter the date to {RED}delete{RES} {GRAY}completion for {RES}'{habit.name}' {GREEN}(YYYY-MM-DD){RES}{GRAY} or ENTER << to cancel{RES}: ").strip()
 
         # If the user presses ENTER without any date, exit
         if not date_str:
@@ -168,7 +168,7 @@ def delete_completion(habit: Habit) -> Optional[date]:
             if deletion_date in habit.completion_dates:
                 # Confirm deletion
                 while True:
-                    choice = input(f"\n{GRAY}You entered {RES}'{deletion_date}'{GRAY}. Type 'yes' or {GRAY}ENTER << to cancel{RES}: ").strip()
+                    choice = input(f"\n{GRAY}You entered {RES}{RED}'{deletion_date}'{RES}{GRAY}. Type {RES}{GREEN}'yes'{RES} {GRAY}or ENTER << to cancel{RES}: ").strip()
 
                     # Check for exit command
                     check_exit_cmd(choice)
