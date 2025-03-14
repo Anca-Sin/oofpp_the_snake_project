@@ -52,9 +52,6 @@ def main_menu(ht) -> None:
             # Delete the selected user
             ht.db.delete_user(ht.logged_in_user)
 
-            # Select a different user
-            ht.logged_in_user = ht.db.select_user()
-
             # Recreating a fresh Analytics instance
             ht.analytics = Analytics(ht.logged_in_user, ht.db)
 

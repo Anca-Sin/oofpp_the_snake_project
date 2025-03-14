@@ -190,7 +190,8 @@ def delete_user(selected_user) -> None:
         selected_user: The User object to delete.
     """
     # Ask for confirmation
-    print(f"""This operation will permanently DELETE:
+    print(f"""
+    This operation will permanently DELETE:
         
     - Your username
     - All associated habits and data

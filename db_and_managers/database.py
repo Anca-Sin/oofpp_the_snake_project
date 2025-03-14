@@ -87,7 +87,7 @@ class Database:
                 print("\nReturning...")
                 time.sleep(1)
 
-    def delete_user(self, selected_user: User) -> None:
+    def delete_user(self, selected_user: User) -> Optional[User]:
         """
         - deletes the selected user and all their data from the db through manager function
         -
@@ -95,6 +95,10 @@ class Database:
             selected_user: The User object to be deleted.
         """
         user_db.delete_user(selected_user)
+        # Refresh users list
+        self.load_users()
+        # Back to user selection
+        self.select_user()
 
     # ---------------------
     # Habit related methods
