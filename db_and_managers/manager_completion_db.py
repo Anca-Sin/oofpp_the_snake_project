@@ -1,4 +1,5 @@
-from datetime import datetime
+from datetime import datetime, date, timedelta
+from typing import Optional
 
 from helpers.colors import GRAY, RES, GREEN, RED
 from .manager_habit_db import save_habits
@@ -7,32 +8,71 @@ from core.user import User
 from core.habit import Habit
 from helpers.helper_functions import reload_menu_countdown, confirm_input, check_exit_cmd
 
-def complete_habit_today(selected_user: User, habit: Habit) -> None:
+
+def _is_habit_completed(habit) -> bool:
+    """
+    Check if the habit is already completed.
+
+    - for daily habits, checks if completed today
+    - for weekly habits, checks if completed this week
+
+    Returns:
+        True if already completed, False otherwise.
+    """
+    today = datetime.now().date()
+
+    if habit.frequency == "daily":
+        # Check if habit was already completed today
+        return today in habit.completion_dates
+
+    elif habit.frequency == "weekly":
+        # Calculate start of the current week (Monday)
+        week_start = today - timedelta(days=today.weekday())
+        # Check if habit was already completed this week
+        return any(
+            week_start <= completion_date <= week_start + timedelta(days=6)
+            for completion_date in habit.completion_dates
+        )
+
+    return False  # If neither condition is met
+
+def complete_habit_today(habit: Habit) -> Optional[date]:
     """
     Marks a habit as completed for today.
 
-    - uses Habit's method to check_off_habit
-    - saves changes to the db
+    - prevents duplicate completion
+
     Parameters:
-        selected_user: The User object whose habit to complete.
         habit: The Habit object to complete.
+    Returns:
+        date: Today's date for db updates and streak calculations in the Database method it serves.
     """
-    print(f"\n{GRAY}Do you wish to complete{RES} '{habit.name}' {GRAY}for{RES} today?")
-    choice = input(f"Type {GREEN}'yes'{RES} to confirm or {GRAY} ENTER << to exit{RES}: ").strip()
+    today = datetime.now().date()
 
-    # Check for exit command
-    check_exit_cmd(choice)
+    while True:
+        print(f"\n{GRAY}Do you wish to complete{RES} '{habit.name}' {GRAY}for{RES} today?")
+        choice = input(f"Type {GREEN}'yes'{RES} to confirm or {GRAY} ENTER << to exit{RES}: ").strip()
 
-    if choice == "yes":
-        habit.check_off_habit()
-        save_habits(selected_user)
-        input(f"{GRAY}ENTER << to continue...{RES}")
-    elif choice == "":
-        return
-    else:
-        # Handle invalid input
-        print("\nSorry, invalid input. Please try again!")
-        input(f"{GRAY}ENTER << to continue...{RES}")
+        # Check for exit command
+        check_exit_cmd(choice)
+
+        if choice == "yes":
+            # Check if already completed for complete today.
+            if _is_habit_completed(habit):
+                print(f"\n'{habit}' has {RED}already{RES} been completed today!")
+                input(f"{GRAY}ENTER << to continue...{RES}")
+                return None
+
+            print(f"\n'{habit.name}' completed for {today} successfully!")
+            input(f"{GRAY}ENTER << to continue...{RES}")
+            # Return today's date to the Database method
+            return today
+        elif choice == "":
+            return None
+        else:
+            # Handle invalid input
+            print("\nSorry, invalid input. Please try again!")
+            input(f"{GRAY}ENTER << to continue...{RES}")
 
 def complete_habit_past(selected_user: User, habit: Habit) -> None:
     """

@@ -20,7 +20,7 @@ class Habit:
         frequency (str): How often the habit should be completed ("daily" or "weekly").
         creation (date): The date when the habit was created.
         completion_dates (List[date]): List of dates when the habit was completed.
-        streaks (Streaks): An object to track the streak information for the habit.
+        streaks (Streaks): A Streak instance tracking streak information for the habit.
     """
 
     def __init__(self):
@@ -117,60 +117,3 @@ class Habit:
     def creation_date(self) -> None:
         """Sets the creation date of the habit to the current date."""
         self.creation = datetime.now().date()
-
-    def _is_habit_completed(self, check_date: date=None) -> bool:
-        """
-        Check if the habit is already completed.
-
-        - for daily habits, checks if completed today
-        - for weekly habits, checks if completed this week
-
-        Args:
-            check_date: Optional date to check completion for. Defaults to today if None.
-        Returns:
-            True if already completed, False otherwise.
-        """
-        if check_date is None:
-            check_date = datetime.now().date()
-
-        if self.frequency == "daily":
-            # Check if habit was already completed today
-            return check_date in self.completion_dates
-
-        elif self.frequency == "weekly":
-            # Calculate start of the current week (Monday)
-            week_start = check_date - timedelta(days=check_date.weekday())
-            # Check if habit was already completed this week
-            return any(
-                week_start <= completion_date <= week_start + timedelta(days=6)
-                for completion_date in self.completion_dates
-            )
-
-        return False # If neither condition is met
-
-    def check_off_habit(self) -> bool:
-        """
-        Marks a habit as complete for the current day.
-
-        - prevents duplicate completion
-        - updates streak information upon completion
-
-        Returns:
-            True if marked complete, False if already completed.
-        """
-        # If no sample data, default to today
-        today = datetime.now().date()
-
-        # Check if already completed for complete today.
-        if self._is_habit_completed(today):
-            print(f"\n'{self.name}' has {RED}already{RES} been completed today!")
-            return False
-
-        # Add today's date to completions if it's not already completed
-        # Add by default without checking if sample_date is True
-        self.completion_dates.append(today)
-        print(f"\n'{self.name}' completed for {today} successfully!")
-
-        # Update streaks after the new completion
-        self.streaks.get_current_streak(self.frequency, self.completion_dates)
-        return True

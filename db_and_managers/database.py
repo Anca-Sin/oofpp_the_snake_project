@@ -164,7 +164,11 @@ class Database:
             selected_user: The User object whose habit is to be completed.
             habit: The Habit object to be completed.
         """
-        completion_db.complete_habit_today(selected_user, habit)
+        completion = completion_db.complete_habit_today(habit)
+        if completion:
+            habit.completion_dates.append(completion)
+            habit.streaks.get_current_streak(habit.frequency, habit.completion_dates)
+            self.save_habits(selected_user)
 
     def complete_habit_past(self, selected_user: User, habit: Habit) -> None:
         """
