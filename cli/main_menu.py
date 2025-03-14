@@ -24,10 +24,10 @@ def main_menu(ht) -> None:
         print(f"""
         {BLUE}- - - Main Menu - - -{RES}
         
-        {GREEN}1 - My Habit Tracker{RES}
+        1 - My Habit Tracker
         2 - {RED}Delete{RES} this user
         
-        {GRAY}ENTER << Select a different user{RES} 
+        {GREEN}ENTER{RES} << Select a different user 
         """)
 
         # Get user choice

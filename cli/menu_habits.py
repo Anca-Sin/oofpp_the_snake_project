@@ -136,7 +136,7 @@ def display_habits_and_select(ht, habits: List[Habit], display_type: str, set_fr
                 {BLUE}- - - New Habit Setup - - -{RES}
 
                 - select a new habit name
-                - frequency automatically set to: {set_frequency}
+                - set it's frequency
                 """)
 
                 input(f"ENTER << to start...")

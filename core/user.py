@@ -37,7 +37,7 @@ class User:
 
         while True:
             # Ask user for username
-            print(f"Please type in your desired username {GRAY}(Press ENTER to exit){RES}: ")
+            print(f"Please type in your desired username {GRAY}or ENTER << to exit{RES} ")
             username = input().title().strip()
 
             # Exit the loop if "ENTER"

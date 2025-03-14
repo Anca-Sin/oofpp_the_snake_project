@@ -120,14 +120,24 @@ def select_user(users: List[User]=None) -> Optional[User]:
 
                 elif int(choice) == len(users) + 1:
                     # Create new user
+                    reload_cli()
+                    print()
+                    print()
+                    print(f"""
+                    {GREEN}- - - New User Setup - - -{RES}
+
+                    - select a new username
+                    
+                    """)
+                    input(f"ENTER << to start...")
                     selected_user = User()
                     selected_user.create_username()
                     if not selected_user.username:
                         return None
                     print(f"\nSaving entry to your database...")
                     time.sleep(1)
-                    print("")
-                    input(f"'{selected_user.username}' Saved! {GRAY}ENTER << to continue...{RES}")
+                    print(f"{GREEN}'{selected_user.username}'{RES} Saved!")
+                    input(f"{GRAY}ENTER << to continue...")
                     return selected_user
 
                 else:
