@@ -34,7 +34,7 @@ def db_tables() -> None:
             frequency TEXT NOT NULL,               -- Frequency (daily/weekly)
             creation_date TEXT NOT NULL,           -- When the habit was created (YYYY-MM-DD)
             completions_count INTEGER,             -- Count of completions
-            checked_off_dates TEXT,                -- Comma separated list of completion dates
+            completion_dates TEXT,                -- Comma separated list of completion dates
             FOREIGN KEY (user_id) REFERENCES users(id)
         )
     """)

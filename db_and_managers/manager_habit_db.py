@@ -30,7 +30,7 @@ def load_habits(selected_user: User) -> List[Habit]:
     # Query to get all habits for the selected user
     cursor.execute("""
         SELECT id, user_id, habit_name, frequency, creation_date,
-            completions_count, checked_off_dates
+            completions_count, completion_dates
         FROM habits 
         WHERE user_id = ?
     """, (selected_user.user_id,))
@@ -52,13 +52,13 @@ def load_habits(selected_user: User) -> List[Habit]:
         habit.creation = datetime.strptime(habit_row[4], "%Y-%m-%d").date()
 
         # Load completion dates
-        checked_off_dates = habit_row[6]
+        completion_dates = habit_row[6]
         habit.completion_dates = []
-        if checked_off_dates:
+        if completion_dates:
             # Convert comma separated string of dates to list of date objects
             habit.completion_dates = [
                 datetime.strptime(date_str.strip(), "%Y-%m-%d").date()
-                for date_str in checked_off_dates.split(",")
+                for date_str in completion_dates.split(",")
             ]
 
         # Initialize streaks
@@ -170,7 +170,7 @@ def save_habits(selected_user: User, new_habit: Habit = None) -> None:
         # Insert the new habit
         cursor.execute("""
             INSERT INTO habits (user_id, habit_name, frequency, creation_date,
-            completions_count, checked_off_dates)
+            completions_count, completion_dates)
             VALUES (?, ?, ?, ?, ?, ?)
         """, (
             selected_user.user_id,
@@ -178,7 +178,7 @@ def save_habits(selected_user: User, new_habit: Habit = None) -> None:
             new_habit.frequency,
             new_habit.creation.strftime("%Y-%m-%d"),
             0,  # Initialize completion counts as 0
-            ""  # Initialize checked_off_dates as an empty string
+            ""  # Initialize completion_dates as an empty string
         ))
 
         # Get the auto-generated habit ID
@@ -200,7 +200,7 @@ def save_habits(selected_user: User, new_habit: Habit = None) -> None:
         for habit in selected_user.habits:
             cursor.execute("""
                 UPDATE habits
-                SET completions_count = ?, checked_off_dates = ?
+                SET completions_count = ?, completion_dates = ?
                 WHERE user_id = ? AND habit_name = ?
             """, (
                 len(habit.completion_dates), # Update number of completions
