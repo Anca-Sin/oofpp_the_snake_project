@@ -59,7 +59,7 @@ def complete_habit_today(habit: Habit) -> Optional[date]:
         if choice == "yes":
             # Check if already completed for complete today.
             if _is_habit_completed(habit):
-                print(f"\n'{habit}' has {RED}already{RES} been completed today!")
+                print(f"\n'{habit.name}' has {RED}already{RES} been completed today!")
                 input(f"{GRAY}ENTER << to return...{RES}")
                 return None
 
