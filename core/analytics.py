@@ -14,14 +14,12 @@ class Analytics:
           because it is dealt with in the cli menus logic and db operations.
 
     Attributes:
-        user(User): The user whose habits will be analyzed.
-        db: Database instance.
+        user(User): The user whose habits will be analyzed (central entity).
     """
 
-    def __init__(self, user: User, db=None) -> None:
+    def __init__(self, user: User) -> None:
         """Initializes the Analytics object with a user."""
         self.user = user         # Store the user reference for analytics operations
-        self.db = db
 
     # Task requirement: "return a list of all currently tracked habits"
     def list_all_habits(self) -> List[Habit]:
@@ -195,7 +193,7 @@ class Analytics:
         Args:
             habit_name: The name of the habit to analyze.
         Returns:
-            The average streak length.
+            The average streak of a habit as a float.
         """
         streaks = []
 
@@ -206,53 +204,32 @@ class Analytics:
         if target_habit.streaks.current_streak > 0:
                 streaks.append(target_habit.streaks.current_streak)
 
-        # Get the streak length history string from the db
-        # Returns a comma separated string of streak lengths
-        streak_history = self.db.load_broken_streak_lengths(habit_name)
+        # Add all broken streak lengths directly from the habit object
+        streaks.extend(target_habit.streaks.broken_streak_lengths)
 
-        # If no history exists, return 0
-        if not streak_history:
-            return 0.0
-
-        # Convert the comma separated string into a list of integers using map
-        streaks.extend(list(map(int, streak_history.split(","))))
-
-        # Calculate the average
-        average_streak = sum(streaks) / len(streaks)
-
-        return average_streak
+        # Calculate the average (handling empty list)
+        return sum(streaks) / len(streaks) if streaks else 0
 
     def average_streak_all_habits(self) -> float:
         """
         Calculates the average streak length across all habits.
 
         Returns:
-            The average streak as a float.
+            The average streak across all habits as a float.
         """
         # Initialize an empty list to collect streak lengths from all habits
         all_streak_lengths = []
 
-        # Filter all habits
-        habits = self.list_all_habits()
-
-        # Process each habit to collect streak lengths
-        for habit in habits:
-            # If current streak > 0
+        # Add current streak if positive
+        for habit in self.user.habits:
             if habit.streaks.current_streak > 0:
-                # Add it to all_streak_lengths
                 all_streak_lengths.append(habit.streaks.current_streak)
 
-            # Get history of broken streaks
-            streak_history = self.db.load_broken_streak_lengths(habit.name)
+            # Add all broken streak lengths directly
+            all_streak_lengths.extend(habit.streaks.broken_streak_lengths)
 
-            # If streak history exists, convert and add to collection
-            if streak_history:
-                all_streak_lengths.extend(list(map(int, streak_history.split(","))))
-
-        # Calculate the average (handling the case of empty list)
-        average_streak = sum(all_streak_lengths) / len(all_streak_lengths) if all_streak_lengths else 0.0
-
-        return average_streak
+        # Calculate the average (handling empty list)
+        return sum(all_streak_lengths) / len(all_streak_lengths) if all_streak_lengths else 0
 
     def average_streak_by_periodicity(self, periodicity: str) -> float:
         """
@@ -261,7 +238,7 @@ class Analytics:
         Args:
             periodicity: The periodicity to filter by ("daily" or "weekly")
         Returns:
-            The average streak length.
+            The average streak length across daily and weekly habits as a float.
         """
         # Initialize an empty list to collect streak lengths
         all_streak_lengths = []
@@ -271,19 +248,13 @@ class Analytics:
 
         # Process each habit to collect streak lengths
         for habit in habits:
-            # If current streak > 0
+            # Add current streak if positive
             if habit.streaks.current_streak > 0:
                 # Add it to all_streak_lengths
                 all_streak_lengths.append(habit.streaks.current_streak)
 
-            # Get history of broken streaks
-            streak_history = self.db.load_broken_streak_lengths(habit.name)
-
-            # If streak history exists, convert and add to collection
-            if streak_history:
-                all_streak_lengths.extend(list(map(int, streak_history.split(","))))
+            # Add all broken streak lengths directly
+            all_streak_lengths.extend(habit.streaks.broken_streak_lengths)
 
         # Calculate the average (handling the case of empty list)
-        average_streak = sum(all_streak_lengths) / len(all_streak_lengths) if all_streak_lengths else 0.0
-
-        return average_streak
+        return sum(all_streak_lengths) / len(all_streak_lengths) if all_streak_lengths else 0

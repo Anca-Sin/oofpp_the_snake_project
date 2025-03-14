@@ -1,35 +1,34 @@
-import time
-from datetime import datetime, timedelta, date
+from datetime import datetime, date
 from typing import List, Optional
 
-from helpers.colors import GRAY, RES, RED
 from .streaks import Streaks
 from helpers.helper_functions import confirm_input, reload_menu_countdown
+from helpers.colors import GRAY, RES
 
 
 class Habit:
     """
-    Represents a habit that a user wants to track.
+    Represents a user's habit.
 
-    This class handles:
-    - creating and checking-off habits
-    - tracking completion status
+    - handles habit name creation and periodicity setting
+    - has no direct db dependency:
+            habits are directly linked to their user through foreign keys relationships in the db
 
     Attributes:
         name (str): The name of the habit.
         frequency (str): How often the habit should be completed ("daily" or "weekly").
-        creation (date): The date when the habit was created.
+        creation_date (date): The date when the habit was created.
         completion_dates (List[date]): List of dates when the habit was completed.
         streaks (Streaks): A Streak instance tracking streak information for the habit.
     """
 
     def __init__(self):
         """Initializes a new Habit object with default values."""
-        self.name: Optional[str] = None        # Habit name will be set by habit_name()
-        self.frequency: Optional[str] = None   # Stores either "daily" or "weekly"
-        self.creation: Optional[date] = None   # Set by creation_date()
-        self.completion_dates: List[date] = [] # Dates when habit was completed
-        self.streaks: Streaks = Streaks()      # Tracks streak information
+        self.name: Optional[str] = None             # Habit name will be set by habit_name()
+        self.frequency: Optional[str] = None        # Stores either "daily" or "weekly"
+        self.creation_date: Optional[date] = None   # Set by creation_date()
+        self.completion_dates: List[date] = []      # Dates when habit was completed
+        self.streaks: Streaks = Streaks()           # Tracks streak information for a given habit
 
     def habit_name(self, user=None) -> None:
         """
@@ -116,4 +115,4 @@ class Habit:
 
     def creation_date(self) -> None:
         """Sets the creation date of the habit to the current date."""
-        self.creation = datetime.now().date()
+        self.creation_date = datetime.now().date()

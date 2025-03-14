@@ -1,16 +1,18 @@
 import time
-from typing import List
+from typing import List, Optional
 
-from helpers.colors import GRAY, RES, RED
-from helpers.helper_functions import confirm_input, reload_menu_countdown, check_exit_cmd
+from .habit import Habit
+from helpers.colors import GRAY, RES
+from helpers.helper_functions import confirm_input
 
 
 class User:
     """
-    Represents a user in the habit tracking system.
+    The User class serves as central entity.
 
-    The User class serves as the central entity that owns habits and interacts with the db.
-    Each user has a unique username and user_id.
+    - handles username creation
+    - has no direct db dependency:
+            user_id = assigned in db operations
 
     Attributes:
         username (str): The username of the user.
@@ -18,11 +20,12 @@ class User:
         habits (List[Habit]): A list of habits associated with the user.
     """
 
-    def __init__(self, username: str = "", user_id: int = None) -> None:
-        """Initializes a User object with a username and an empty list of habits."""
-        from .habit import Habit      # Avoid circular imports
-        self.username: str = username
-        self.user_id: int = user_id
+    def __init__(self,
+                 username: Optional[str] = None,
+                 user_id: Optional[int] = None) -> None:
+        """Initializes a new User object with default values."""
+        self.username = username
+        self.user_id = user_id
         self.habits: List[Habit] = [] # Starts with an empty list of habits
 
     def create_username(self) -> None:

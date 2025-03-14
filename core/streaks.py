@@ -7,7 +7,9 @@ class Streaks:
     Tracks and calculates streak information for habits.
 
     - handles the logic for determining current and longest streaks, and keeping a history of broken streaks
-    - provides methods to check if a streak is broken and to calculate streak lengths based on habit completion dates
+    - helper method to check if a streak is broken
+    - has no direct db dependency:
+            streaks are directly linked to their habit through foreign keys relationships in the db
 
     Attributes:
         current_streak (int): The current active streak count.
@@ -21,7 +23,7 @@ class Streaks:
         self.longest_streak: int = 0               # Longest streak counter
         self.broken_streak_lengths: List[int] = []  # History of broken streak lengths
 
-    def is_streak_broken(self, frequency: str, completions: List[date]) -> bool:
+    def _is_streak_broken(self, frequency: str, completions: List[date]) -> bool:
         """
         Determines if a streak is broken based on the frequency and latest completion date.
 
@@ -80,8 +82,8 @@ class Streaks:
 
         CASE 1. For normal app usage with "Complete for TODAY":
         - duplicate completion check
-        - checks is_streak_broken
-            - if broken: is_streak_broken method handles streak calculations
+        - checks _is_streak_broken
+            - if broken: _is_streak_broken method handles streak calculations
             - if not broken: perform streak calculations: - current_streak += 1
                                                           - longest_streak check
 
@@ -89,7 +91,7 @@ class Streaks:
         - duplicate completions checks: - sample data has only unique dates
                                         - manager_completions_db.py handles for: - Complete habit PAST
                                                                                  - DELETE completion
-        - skips is_streak_broken
+        - skips _is_streak_broken
 
             - completion_dates.append(completion_date) performed:
                 - for sample data:       -> _generate_completions in sample_data.py <-
@@ -128,7 +130,7 @@ class Streaks:
         # => check if streak is broken
         # => calculate streak based on today
         if not completion_deletion_date and sample_data is False:
-            if self.is_streak_broken(frequency, completions):
+            if self._is_streak_broken(frequency, completions):
                 # If streak is broken:
                 #   - current_streak = 1
                 #   - the broken streak length was added to it's the list
@@ -161,7 +163,7 @@ class Streaks:
                 # If completions are 1 day apart
                 days_diff = (sorted_completions[i] - sorted_completions[i-1]).days
                 if  days_diff == 1:
-                    # Increment count by 1 for each consecutive days
+                        # Increment count by 1 for each consecutive days
                     self.current_streak += 1
                 # If completions aren't 1 day apart
                 else:
