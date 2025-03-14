@@ -178,7 +178,12 @@ class Database:
             selected_user: The User object whose habit is to be completed.
             habit: The Habit object to be completed.
         """
-        completion_db.complete_habit_past(selected_user, habit)
+        completion = completion_db.complete_habit_past(habit)
+        if completion:
+            habit.completion_dates.append(completion)
+            habit.streaks.get_current_streak(habit.frequency, habit.completion_dates, completion)
+            self.save_habits(selected_user)
+
 
     def delete_completion(self, selected_user: User, habit: Habit) -> None:
         """
@@ -188,7 +193,11 @@ class Database:
             selected_user: The User object associated with the habit.
             habit: The Habit object whose completion is to be completed.
         """
-        completion_db.delete_completion(selected_user, habit)
+        deletion = completion_db.delete_completion(habit)
+        if deletion:
+            habit.completion_dates.append(deletion)
+            habit.streaks.get_current_streak(habit.frequency, habit.completion_dates, deletion)
+            self.save_habits(selected_user)
 
     # Streak related methods
     def load_broken_streak_lengths(self, habit_name: str) -> str:

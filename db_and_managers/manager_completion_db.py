@@ -60,11 +60,11 @@ def complete_habit_today(habit: Habit) -> Optional[date]:
             # Check if already completed for complete today.
             if _is_habit_completed(habit):
                 print(f"\n'{habit}' has {RED}already{RES} been completed today!")
-                input(f"{GRAY}ENTER << to continue...{RES}")
+                input(f"{GRAY}ENTER << to return...{RES}")
                 return None
 
             print(f"\n'{habit.name}' completed for {today} successfully!")
-            input(f"{GRAY}ENTER << to continue...{RES}")
+            input(f"{GRAY}ENTER << to return...{RES}")
             # Return today's date to the Database method
             return today
         elif choice == "":
@@ -74,19 +74,18 @@ def complete_habit_today(habit: Habit) -> Optional[date]:
             print("\nSorry, invalid input. Please try again!")
             input(f"{GRAY}ENTER << to continue...{RES}")
 
-def complete_habit_past(selected_user: User, habit: Habit) -> None:
+def complete_habit_past(habit: Habit) -> Optional[date]:
     """
     Marks a habit as completed for a past date.
 
     - prompts for a past date
     - validates date input (not future, proper format)
     - checks if the date already has a completion
-    - updates streaks if valid
-    - saves changes to the db
 
     Parameters:
-        selected_user: The User object whose habit to complete.
         habit: The Habit object to complete.
+    Returns:
+        date: The past completion date for db updates and streak calculations in the Database method it serves.
     """
     current_date = datetime.now().date()
 
@@ -99,10 +98,10 @@ def complete_habit_past(selected_user: User, habit: Habit) -> None:
 
         # If the user presses ENTER without any date, exit
         if not date_str:
-            return # Return to Habit Detail Menu
+            return None # Return to Habit Detail Menu
 
         try:
-            # Attempt to parse the date string to a date object
+            # Try to change the string input to date
             completion_date = datetime.strptime(date_str, "%Y-%m-%d").date()
 
             # Validate it's not a future date
@@ -114,48 +113,44 @@ def complete_habit_past(selected_user: User, habit: Habit) -> None:
             # Let the user exit this "menu" if he wants
             elif completion_date in habit.completion_dates:
                 print(f"\n'{habit.name}' is already completed for {date_str}!")
-                input(f"{GRAY}ENTER << to continue...{RES}")
+                input(f"{GRAY}ENTER << to return...{RES}")
+                return None
 
             # Valid date that doesn't have a completion
             else:
                 # Confirm the user's choice
                 confirmed = confirm_input("completion date", date_str)
                 if confirmed:
-                    # Add the completion date
-                    habit.completion_dates.append(completion_date)
-                    # Update streak information
-                    habit.streaks.get_current_streak(habit.frequency, habit.completion_dates, completion_date)
-                    # Save changes to the db
-                    save_habits(selected_user)
-                    input(f"{GRAY}ENTER << to continue...{RES}")
-                    return
+                    input(f"{GRAY}ENTER << to return...{RES}")
+                    # Return date for the Database method
+                    return completion_date
                 else:
                     # If confirmed input is None on << ENTER
-                    return
+                    return None
 
         except ValueError:
             # Handle invalid date format
             print("\nInvalid date format! Please use YYYY-MM-DD format!")
             input(f"{GRAY}ENTER << to continue...{RES}")
 
-def delete_completion(selected_user: User, habit: Habit) -> None:
+def delete_completion(habit: Habit) -> Optional[date]:
     """
     Deletes a completion for a habit.
 
     - checks if there are any completions to delete
     - prompts for the date to delete
+    - checks the date has a completion
     - confirms the deletions
-    - updates streaks after the deletion
-    - saves changes to the db
 
     Parameters:
-        selected_user: The User object whose habit completion to delete.
         habit: The Habit object containing the completion to delete.
+    Returns:
+        date: The deleted date for db updates and streak calculations in the Database method it serves.
     """
     # Check if there are no completions to delete
     if not habit.completion_dates:
-        print(f"\nNo completions found for '{habit.name}'! {GRAY}ENTER << to continue...{RES}")
-        return
+        print(f"\nNo completions found for '{habit.name}'! {GRAY}ENTER << to return...{RES}")
+        return None
 
     # Prompt for the date of the completion to delete or ENTER to exit
     while True:
@@ -163,10 +158,10 @@ def delete_completion(selected_user: User, habit: Habit) -> None:
 
         # If the user presses ENTER without any date, exit
         if not date_str:
-            return # Return to Habit Details Menu
+            return None # Return to Habit Details Menu
 
         try:
-            # Parse the entered date
+            # Try to change the string input to date
             deletion_date = datetime.strptime(date_str, "%Y-%m-%d").date()
 
             # Check if the entered date exists in the completion_dates
@@ -180,17 +175,9 @@ def delete_completion(selected_user: User, habit: Habit) -> None:
 
                     if choice == "yes":
                         print(f"You've successfully {RED}deleted{RES} {deletion_date} from {habit.name}'s completions!")
-                        # Remove the completion
-                        habit.completion_dates.remove(deletion_date)
-                        # Update streak information
-                        habit.streaks.get_current_streak(habit.frequency, habit.completion_dates, deletion_date)
-                        # Save changes to the db
-                        save_habits(selected_user)
-                        input(f"\n{GRAY}ENTER << to continue...{RES}")
-                        return # Exit after deletion
-                    elif choice == "":
-                        print(f"\nLet's try again!")
-                        return
+                        input(f"\n{GRAY}ENTER << to return...{RES}")
+                        # Return date for the Database method
+                        return deletion_date
                     else:
                         # Handle invalid input
                         print("\nSorry, invalid input. Please try again!")
