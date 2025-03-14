@@ -6,28 +6,27 @@ from config import set_db_filepath
 from core.user import User
 from core.habit import Habit
 from helpers.colors import RED, RES
+from helpers.helper_functions import db_connection
 
 from .db_structure import db_tables
 from db_and_managers import manager_user_db as user_db
 from db_and_managers import manager_habit_db as habit_db
 from db_and_managers import manager_completion_db as completion_db
-from db_and_managers import manager_streaks_db as streaks_db
-
 
 # noinspection PyMethodMayBeStatic
 class Database:
     """
-    Coordinator class - SINGLE app entry point - for database operations delegated through managers.
+    Coordinator class - SINGLE app entry point - for database operations.
 
     - ONLY methods needed for app functionality (managers handle other necessary functions internally)
     - initializes the db structure
     - handles ALL data synchronization needed for app functionality
+    - manages exclusively all database changes through manager's functional operation
 
     Attributes:
         db_filepath (str): Path to the SQLite database file, defaults to "habit_tracker" through config.
         user_id (int): ID of the currently selected user.
     """
-
 
     def __init__(self, db_filepath: str = "habit_tracker.db") -> None:
         """Initializes the Database."""
@@ -202,11 +201,32 @@ class Database:
     # Streak related methods
     def load_broken_streak_lengths(self, habit_name: str) -> str:
         """
-        Loads broken streak length history for a given habit.
+        Loads streak_length_history for a given habit from the db.
+
+        - retrieves the history of broken streak lengths for a selected habit
+        - streak_length_history is initialized as an empty string when creating a habit,
+                                                so it will always return a valid string
 
         Args:
-            habit_name: Name of the habit
+            habit_name: The name of the habit to get the streak history for.
         Returns:
-            A comma separated string of broken streak lengths.
+            The broken streaks' lengths as a comma separated string.
+            An empty string if no history exists.
         """
-        return streaks_db.load_broken_streak_lengths(habit_name)
+        connection = db_connection(self.db_filepath)
+        cursor = connection.cursor()
+
+        # Retrieve the streak_length_history for the selected habit
+        cursor.execute("""
+            SELECT streak_length_history
+            FROM streaks
+            JOIN habits ON streaks.habit_id = habits.id
+            WHERE habits.habit_name = ?
+        """, (habit_name,))
+
+        # Get result
+        result = cursor.fetchone()
+        connection.close()
+
+        # Will return empty string if no history
+        return result[0]
