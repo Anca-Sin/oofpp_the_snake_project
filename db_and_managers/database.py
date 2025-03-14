@@ -194,11 +194,13 @@ class Database:
         """
         deletion = completion_db.delete_completion(habit)
         if deletion:
-            habit.completion_dates.append(deletion)
+            habit.completion_dates.remove(deletion)
             habit.streaks.get_current_streak(habit.frequency, habit.completion_dates, deletion)
             self.save_habits(selected_user)
 
-    # Streak related methods
+    # ----------------------
+    # Streaks related method
+    # ----------------------
     def load_broken_streak_lengths(self, habit_name: str) -> str:
         """
         Loads streak_length_history for a given habit from the db.
