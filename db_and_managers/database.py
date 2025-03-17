@@ -159,13 +159,6 @@ class Database:
     # Completion related methods
     # --------------------------
     def complete_habit_today(self, selected_user: User, habit: Habit) -> None:
-        """
-        Marks the selected habit as complete for today.
-
-        Args:
-            selected_user: The User object whose habit is to be completed.
-            habit: The Habit object to be completed.
-        """
         completion = completion_db.complete_habit_today(habit)
         if completion:
             habit.completion_dates.append(completion)

@@ -97,7 +97,7 @@ def sample_data_generator():
             new_habit = Habit()
             new_habit.name = habit_info["name"]
             new_habit.frequency = habit_info["frequency"]
-            new_habit.creation_date()
+            new_habit.create_date()
             # Add to db
             db.save_habits(sample_user, new_habit)
             print(f"Created sample habit '{habit_info['name']}'!")

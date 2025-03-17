@@ -2,11 +2,9 @@ from datetime import datetime, date, timedelta
 from typing import Optional
 
 from helpers.colors import GRAY, RES, GREEN, RED
-from .manager_habit_db import save_habits
 
-from core.user import User
 from core.habit import Habit
-from helpers.helper_functions import reload_menu_countdown, confirm_input, check_exit_cmd
+from helpers.helper_functions import confirm_input, check_exit_cmd
 
 
 def _is_habit_completed(habit) -> bool:

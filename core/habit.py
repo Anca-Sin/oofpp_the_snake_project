@@ -113,6 +113,6 @@ class Habit:
                 # Handle invalid input
                 print("\nInvalid Input. Please enter 'Daily' or 'Weekly'!")
 
-    def creation_date(self) -> None:
+    def create_date(self) -> None:
         """Sets the creation date of the habit to the current date."""
         self.creation_date = datetime.now().date()

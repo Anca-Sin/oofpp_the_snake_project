@@ -49,7 +49,7 @@ def load_habits(selected_user: User) -> List[Habit]:
         habit.frequency = habit_row[3]
 
         # Convert creation date to datetime.date object
-        habit.creation = datetime.strptime(habit_row[4], "%Y-%m-%d").date()
+        habit.create_date = datetime.strptime(habit_row[4], "%Y-%m-%d").date()
 
         # Load completion dates
         completion_dates = habit_row[6]
@@ -141,7 +141,7 @@ def new_habit(selected_user: User, set_frequency: str = None) -> Optional[Habit]
     # Habit frequency method
     # Uses preset if called from weekly/daily
     habit.habit_frequency(preset_frequency=set_frequency)
-    habit.creation_date()
+    habit.create_date()
 
     # Check if user wants to exit during frequency setting:
     if habit.frequency is None:
@@ -176,7 +176,7 @@ def save_habits(selected_user: User, new_habit: Habit = None) -> None:
             selected_user.user_id,
             new_habit.name,
             new_habit.frequency,
-            new_habit.creation.strftime("%Y-%m-%d"),
+            new_habit.creation_date.strftime("%Y-%m-%d"),
             0,  # Initialize completion counts as 0
             ""  # Initialize completion_dates as an empty string
         ))

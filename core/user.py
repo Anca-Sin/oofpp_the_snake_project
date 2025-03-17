@@ -36,7 +36,7 @@ class User:
         - checks if the username already exists in the db
         """
         # Avoid circular imports
-        from db_and_managers.manager_user_db import username_exists, select_user
+        from db_and_managers.manager_user_db import username_exists
 
         while True:
             # Ask user for username
