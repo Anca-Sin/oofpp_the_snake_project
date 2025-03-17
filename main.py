@@ -49,7 +49,7 @@ class HabitTracker:
         self.logged_in_user = self.db.select_user()
 
         # Creating the first Analytics instance
-        self.analytics = Analytics(self.logged_in_user, self.db)
+        self.analytics = Analytics(self.logged_in_user)
 
         # Show the main menu to start user interaction
         main_menu(self)

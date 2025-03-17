@@ -177,21 +177,21 @@ def view_completions_calendar(ht, habit: Habit) -> None:
             db.complete_habit_today(ht.logged_in_user, habit)
 
             # Recreating a fresh Analytics instance
-            ht.analytics = Analytics(ht.logged_in_user, ht.db)
+            ht.analytics = Analytics(ht.logged_in_user)
 
         elif choice == "2":
             # Complete for a past date
             db.complete_habit_past(ht.logged_in_user, habit)
 
             # Recreating a fresh Analytics instance
-            ht.analytics = Analytics(ht.logged_in_user, ht.db)
+            ht.analytics = Analytics(ht.logged_in_user)
 
         elif choice == "3":
             # Delete a completion
             db.delete_completion(ht.logged_in_user, habit)
 
             # Recreating a fresh Analytics instance
-            ht.analytics = Analytics(ht.logged_in_user, ht.db)
+            ht.analytics = Analytics(ht.logged_in_user)
 
         elif choice == "":
             # Return to My Habit Details Menu

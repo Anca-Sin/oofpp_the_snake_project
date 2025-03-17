@@ -48,7 +48,7 @@ def menu_habit_detail(ht, habit: Habit) -> None:
             ht.db.complete_habit_today(ht.logged_in_user, habit)
 
             # Recreating a fresh Analytics instance
-            ht.analytics = Analytics(ht.logged_in_user, ht.db)
+            ht.analytics = Analytics(ht.logged_in_user)
 
         elif choice == "2":
             # View completions on calendar
@@ -60,7 +60,7 @@ def menu_habit_detail(ht, habit: Habit) -> None:
 
         elif choice == "4":
             # View the creation date of the habit
-            print(f"\nHabit '{habit.name}' was created on: {habit.creation.strftime('%Y-%m-%d')}")
+            print(f"\nHabit '{habit.name}' was created on: {habit.creation_date.strftime('%Y-%m-%d')}")
             input(f"{GRAY}ENTER << to continue...{RES}")
 
         elif choice == "5":
@@ -68,7 +68,7 @@ def menu_habit_detail(ht, habit: Habit) -> None:
             ht.db.delete_habit(ht.logged_in_user, habit)
 
             # Recreating a fresh Analytics instance
-            ht.analytics = Analytics(ht.logged_in_user, ht.db)
+            ht.analytics = Analytics(ht.logged_in_user)
 
             # Go to Menu Habits
             from cli.menu_habits import menu_habits # Avoid circular import

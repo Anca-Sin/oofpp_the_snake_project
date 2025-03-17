@@ -46,14 +46,14 @@ def main_menu(ht) -> None:
             ht.logged_in_user = ht.db.select_user()
 
             # Recreating a fresh Analytics instance
-            ht.analytics = Analytics(ht.logged_in_user, ht.db)
+            ht.analytics = Analytics(ht.logged_in_user)
 
         elif choice == "2":
             # Delete the selected user
             ht.db.delete_user(ht.logged_in_user)
 
             # Recreating a fresh Analytics instance
-            ht.analytics = Analytics(ht.logged_in_user, ht.db)
+            ht.analytics = Analytics(ht.logged_in_user)
 
         else:
             # Handle invalid input

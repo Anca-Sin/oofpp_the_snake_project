@@ -56,7 +56,7 @@ def menu_habits(ht):
             ht.db.new_habit(ht.logged_in_user)
 
             # Recreating a fresh Analytics instance
-            ht.analytics = Analytics(ht.logged_in_user, ht.db)
+            ht.analytics = Analytics(ht.logged_in_user)
 
         elif choice == "2":
             # List all habits
@@ -127,7 +127,7 @@ def display_habits_and_select(ht, habits: List[Habit], display_type: str, set_fr
                 ht.db.new_habit(ht.logged_in_user, set_frequency)
 
                 # Recreating a fresh Analytics instance
-                ht.analytics = Analytics(ht.logged_in_user, ht.db)
+                ht.analytics = Analytics(ht.logged_in_user)
                 return
 
             # If accessed from display all habits
@@ -144,7 +144,7 @@ def display_habits_and_select(ht, habits: List[Habit], display_type: str, set_fr
                 ht.db.new_habit(ht.logged_in_user)
 
                 # Recreating a fresh Analytics instance
-                ht.analytics = Analytics(ht.logged_in_user, ht.db)
+                ht.analytics = Analytics(ht.logged_in_user)
                 return
 
     # If there are habits to display, show them
