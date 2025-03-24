@@ -44,10 +44,11 @@ def select_user(users: List[User]=None) -> Optional[User]:
     if not users:
         while True:
             reload_cli()
-            exit_msg()
-            print("""\nNo users found! You can:
+            print(f"{GRAY}(Type '{RES}quit{GRAY}' at any time to exit the application){RES}")
+            print(f"Welcome to {BLUE}- - - HabitTracker - - -{RES}")
+            print(f"""\nNo users found! You can:
         
-            1 - Create a new user
+            1 - Create a {GREEN}new{RES} user
             2 - Quit the application
             """)
 
@@ -97,7 +98,7 @@ def select_user(users: List[User]=None) -> Optional[User]:
             reload_cli()
             exit_msg()
             # Display users with numeration
-            print("")
+            print(f"Welcome to {BLUE}- - - HabitTracker - - -{RES}")
             print("\n        Login as: ")
             print("")
             for idx, user in enumerate(users, 1):
@@ -124,9 +125,9 @@ def select_user(users: List[User]=None) -> Optional[User]:
                     print()
                     print()
                     print(f"""
-                    {GREEN}- - - New User Setup - - -{RES}
+        {GREEN}- - - New User Setup - - -{RES}
 
-                    - select a new username
+        - select a new username
                     
                     """)
                     input(f"ENTER << to start...")

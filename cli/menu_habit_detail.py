@@ -25,7 +25,7 @@ def menu_habit_detail(ht, habit: Habit) -> None:
         reload_cli()
         exit_msg(ht.logged_in_user)
         print(f"""
-        {BLUE}- - - {habit.name}'s Details - - -{RES}
+        {BLUE}- - - '{habit.name}' Details Menu - - -{RES}
 
         1 - Complete for today
         2 - Calendar and manage completions

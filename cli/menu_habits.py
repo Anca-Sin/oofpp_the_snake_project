@@ -45,10 +45,10 @@ def menu_habits(ht):
             print()
             print(f"{GRAY}Logged in as:{RES} {GREEN}{ht.logged_in_user.username}{RES}")
             print(f"""
-            {BLUE}- - - New Habit Setup - - -{RES}
+        {BLUE}- - - New Habit Setup - - -{RES}
             
-            - select a new habit name
-            - set it's frequency
+        - select a new habit name
+        - set it's frequency
             """)
             input(f"ENTER << to start...")
 

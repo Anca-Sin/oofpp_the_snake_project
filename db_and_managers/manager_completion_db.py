@@ -166,14 +166,16 @@ def delete_completion(habit: Habit) -> Optional[date]:
             if deletion_date in habit.completion_dates:
                 # Confirm deletion
                 while True:
-                    choice = input(f"\n{GRAY}You entered {RES}{RED}'{deletion_date}'{RES}{GRAY}. Type {RES}{GREEN}'yes'{RES} {GRAY}or ENTER << to cancel{RES}: ").strip()
+                    print(f"\n{GRAY}You entered {RES}{RED}'{deletion_date}'{RES}{GRAY}")
+                    print(f"Type {RES}{GREEN}'yes'{RES} {GRAY}or ENTER << to cancel{RES}:")
+                    choice = input().strip()
 
                     # Check for exit command
                     check_exit_cmd(choice)
 
                     if choice == "yes":
                         print(f"You've successfully {RED}deleted{RES} {deletion_date} from {habit.name}'s completions!")
-                        input(f"\n{GRAY}ENTER << to return...{RES}")
+                        input(f"{GRAY}ENTER << to return...{RES}")
                         # Return date for the Database method
                         return deletion_date
                     else:
@@ -184,7 +186,8 @@ def delete_completion(habit: Habit) -> Optional[date]:
             # If chosen completion isn't in the completions list
             else:
                 print(f"\nCompletion for {date_str} not found in {habit.name}'s completions list!")
-                input(f"{GRAY}ENTER << to continue...{RES}")
+                input(f"{GRAY}ENTER << to return...{RES}")
+                return None
 
         except ValueError:
             # Handle invalid date format

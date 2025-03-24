@@ -26,7 +26,8 @@ def confirm_input(attribute_name: str, value: str) -> Optional[str]:
     while True:
         # Ask for confirmation
         print(f"\n{GRAY}You entered{RES} '{value}'{GRAY}. Is this correct?{RES}")
-        confirmation = input(f"Type {GREEN}'yes'{RES} to confirm or {GRAY} ENTER << to cancel{RES}: ").lower().strip()
+        print(f"Type {GREEN}'yes'{RES} to confirm or {GRAY} ENTER << to cancel{RES}:")
+        confirmation = input().lower().strip()
 
         if confirmation == "yes":
             print(f"\nYou've successfully stored {value.title()} as your {attribute_name}!")
@@ -43,7 +44,8 @@ def confirm_int_input(value: Any) -> Any | None:
     """
     while True:
         print(f"\n{GRAY}You've chosen {RES}'{value}'{GRAY}. Is this correct?{RES}")
-        confirmation = input(f"Type {GREEN}'yes'{RES} to confirm or {GRAY} ENTER << to cancel{RES}: ").lower().strip()
+        print(f"Type {GREEN}'yes'{RES} to confirm or {GRAY} ENTER << to cancel{RES}:")
+        confirmation = input().lower().strip()
         if confirmation == "yes":
             print(f"\nYou've chosen '{value}'!")
             return value
@@ -60,22 +62,22 @@ def reload_menu_countdown() -> None:
     print("Reloading Menu in...")
     time.sleep(1)
 
-    print("2")
+    print("        2")
     time.sleep(0.25)
-    print(".")
+    print("        .")
     time.sleep(0.25)
-    print(".")
+    print("        .")
     time.sleep(0.25)
-    print(".")
+    print("        .")
     time.sleep(0.25)
 
-    print("1")
+    print("        1")
     time.sleep(0.25)
-    print(".")
+    print("        .")
     time.sleep(0.25)
-    print(".")
+    print("        .")
     time.sleep(0.25)
-    print(".")
+    print("        .")
     time.sleep(0.25)
 
 def reload_cli():
@@ -146,11 +148,11 @@ def check_exit_cmd(command: str) -> bool:
     if command.lower().strip() == "quit":
         print("\n        Exiting the application")
         time.sleep(0.40)
-        print("        .")
+        print("                      .")
         time.sleep(0.40)
-        print("        .")
+        print("                      .")
         time.sleep(0.40)
-        print("        .")
+        print("                      .")
         time.sleep(0.40)
         print(f"\n        Goodbye! {GREEN}(^_^)/{RES}")
         time.sleep(0.40)
@@ -160,11 +162,11 @@ def check_exit_cmd(command: str) -> bool:
          {BLUE}* * * * * * * * * * * *{RES}
         """)
         time.sleep(0.40)
-        print("        .")
+        print("                      .")
         time.sleep(0.40)
-        print("        .")
+        print("                      .")
         time.sleep(0.40)
-        print("        .")
+        print("                      .")
         time.sleep(0.40)
         reload_cli()
         sys.exit(0)
