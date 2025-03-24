@@ -1,44 +1,53 @@
+import time
 from datetime import datetime, date
 from typing import List, Optional
 
 from .streaks import Streaks
-from helpers.helper_functions import confirm_input, reload_menu_countdown
+from helpers.helper_functions import confirm_input
 from helpers.colors import GRAY, RES
-
 
 class Habit:
     """
-    Represents a user's habit.
+    A habit registered by a selected user.
+    Represents a trackable habit with its required properties for the application.
 
-    - handles habit name creation and periodicity setting
+    - interacts with the user to:
+            - handle habit name creation
+            - set habit periodicity (if no preset is provided)
     - has no direct db dependency:
-            habits are directly linked to their user through foreign keys relationships in the db
+              habits are directly linked to their user through foreign keys relationships in the db tables
+    - stores:
+            - the creation date of a new habit
+            - a list of dates when a habit was completed by the user
+    - initializes its own Streak instance for streak calculations
 
     Attributes:
-        name (str): The name of the habit.
-        frequency (str): How often the habit should be completed ("daily" or "weekly").
-        creation_date (date): The date when the habit was created.
-        completion_dates (List[date]): List of dates when the habit was completed.
-        streaks (Streaks): A Streak instance tracking streak information for the habit.
+        name:             A string assigned by the user.
+        frequency:        A string determining how often the habit should be completed ("daily" or "weekly").
+        creation_date:    A date stored when a new habit name is registered.
+        completion_dates: A list of dates when a habit was completed by the user.
+        streaks:          A Streaks instance which calculates streak information for a habit.
     """
 
     def __init__(self):
-        """Initializes a new Habit object with default values."""
-        self.name: Optional[str] = None             # Habit name will be set by habit_name()
-        self.frequency: Optional[str] = None        # Stores either "daily" or "weekly"
-        self.creation_date: Optional[date] = None   # Set by creation_date()
-        self.completion_dates: List[date] = []      # Dates when habit was completed
-        self.streaks: Streaks = Streaks()           # Tracks streak information for a given habit
+        """Initializes the Habit instance."""
+        self.name: Optional[str] = None
+        self.frequency: Optional[str] = None
+        self.creation_date: Optional[date] = None
+        self.completion_dates: List[date] = []
+        self.streaks: Streaks = Streaks()
 
     def habit_name(self, user=None) -> None:
         """
-        Creates a new habit name.
+        Handles the creation of a new habit name.
 
-        - handles input and confirmation
-        - checks if the habit name already exists in the db
+        - prompts for user input
+        - validates against existing habit names in the database
+        - handles confirmation through helper function
+        - sets the name attribute if successful, or None if canceled
 
         Args:
-            user: The User object to check for existing habit names.
+            user: The entity which owns the habit.
         """
         # Avoid circular imports
         from db_and_managers.manager_habit_db import habit_name_exists
@@ -51,13 +60,14 @@ class Habit:
             # Exit the loop if "ENTER"
             if not habit_name:
                 self.name = None
-                return
+                return # Cancels the process
 
+            # Check if habit name already exists (using habit db manager function)
             elif habit_name_exists(user, habit_name):
                 print(f"\nA habit named '{habit_name}' already exists! Please try again!")
-                reload_menu_countdown()
-                return
+                time.sleep(1)
 
+            # If habit name is valid
             elif habit_name is not None:
                 # Confirm the choice
                 confirmed_habit = confirm_input("new habit name", habit_name)
@@ -66,19 +76,21 @@ class Habit:
                 if confirmed_habit is not None:
                     self.name = confirmed_habit
                     return
+
+                # If not confirmed (<< ENTER)
                 else:
-                    # If confirmed input is None on << ENTER
                     return
 
     def habit_frequency(self, preset_frequency: Optional[str] = None) -> None:
         """
-        Sets the habit's frequency either by:
-        - prompting the user
+        Sets the habit's frequency:
+        - by prompting the user
+        or
         - using a preset value
 
         Args:
-            preset_frequency: Optional preset frequency value ("daily" or "weekly).
-                              If provided, skips prompting the user.
+            preset_frequency: If provided, skips prompting the user.
+                              Is set when a new habit is created from listing all daily or weekly habits when none exist.
         """
         # If preset frequency is provided, assign it without prompting
         if preset_frequency in ["daily", "weekly"]:
@@ -109,8 +121,8 @@ class Habit:
                     # If confirmed input is None on << ENTER
                     return
 
+            # Handle invalid input with user feedback
             else:
-                # Handle invalid input
                 print("\nInvalid Input. Please enter 'Daily' or 'Weekly'!")
 
     def create_date(self) -> None:
