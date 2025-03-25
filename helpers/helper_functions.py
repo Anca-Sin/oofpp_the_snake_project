@@ -1,3 +1,11 @@
+"""
+This module contains utility functions used throughout the application for:
+- user input confirmation with 2 use cases: strings and integers
+- terminal ui management
+- database connection
+- app exit handling
+"""
+
 import os
 import sys
 import time
@@ -5,23 +13,17 @@ import sqlite3
 from typing import Any, Optional
 
 from config import DB_FILEPATH
-
 from helpers.colors import GRAY, RES, RED, BLUE, GREEN
-
 
 def confirm_input(attribute_name: str, value: str) -> Optional[str]:
     """
-    Helper method to confirm input with the user.
-
-    - asks the user to confirm their input (yes/no)
-    - returns the value if "yes"
-    - exits if "no"
+    Confirms input with the user.
 
     Parameters:
         attribute_name: The "type" of input being confirmed (e.g. "username", "habit_name").
-        value: The value to confirm (e.g. the username or habit name the user chooses to assign).
+        value: The value to confirm.
     Returns:
-        The confirmed value, or None if not confirmed.
+        The confirmed value if confirmed, None otherwise.
     """
     while True:
         # Ask for confirmation
@@ -30,16 +32,16 @@ def confirm_input(attribute_name: str, value: str) -> Optional[str]:
         confirmation = input().lower().strip()
 
         if confirmation == "yes":
-            print(f"\nYou've successfully stored {value.title()} as your {attribute_name}!")
+            print(f"\nYou've successfully stored '{value.title()}' as your {attribute_name}!")
             return value
         elif confirmation == "":
             return None
         else:
-            print("Invalid input!")
+            print("Invalid input! Please try again!")
 
 def confirm_int_input(value: Any) -> Any | None:
     """
-    Helper method to confirm numerical input with the user.
+    Confirms numerical input with the user.
     Identical to confirm_input, only prints are different.
     """
     while True:
@@ -57,7 +59,7 @@ def confirm_int_input(value: Any) -> Any | None:
 def reload_menu_countdown() -> None:
     """
     Displays a countdown before returning.
-    Allows visual feedback: the user has time to read the screen before it is reloaded (in most cases).
+    Allows visual feedback: the user has time to read the screen before it is reloaded.
     """
     print("Reloading Menu in...")
     time.sleep(1)
@@ -82,8 +84,7 @@ def reload_menu_countdown() -> None:
 
 def reload_cli():
     """
-    Used to refresh the cli across various operations.
-    Mostly used together with reload_menu_countdown.
+    Refreshes the cli across various operations.
     Simplifies implementation throughout the project.
     """
     os.system('cls' if os.name == 'nt' else 'clear')
