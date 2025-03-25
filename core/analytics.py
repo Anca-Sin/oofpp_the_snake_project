@@ -5,54 +5,65 @@ from .habit import Habit
 
 class Analytics:
     """
-    Analyzes the user's habits and provide statistics using functional programming
-    across different dimensions like streaks, completions, and periodicity.
+    Algorithms using functional programming techniques which analyze a user's habit data.
+    Spans across different dimensions including: streaks, completions and periodicity.
+    Doesn't modify any existing data.
 
-    This class contains all analytics functionality required for the habit tracker.
-
-    Note: Most of the methods don't need to check no habits/completions logic,
+    Note: Most of the methods don't need to check for no habits/completions logic,
           because it is dealt with in the cli menus logic and db operations.
 
     Attributes:
-        user(User): The user whose habits will be analyzed (central entity).
+        user: Reference to the User object whose habits will be analyzed.
+              It is injected through the constructor, making the Analytics instance specific to its user.
     """
 
     def __init__(self, user: User) -> None:
-        """Initializes the Analytics object with a user."""
-        self.user = user         # Store the user reference for analytics operations
+        """
+        Initializes the Analytics instance based on the provided user's data.
+
+        Args:
+            user: Central identity for all analytics operations.
+        """
+        self.user = user # Storing the user reference for analytics operations
 
     # Task requirement: "return a list of all currently tracked habits"
     def list_all_habits(self) -> List[Habit]:
         """
-        Retrieves all habits for the selected user.
+        Retrieves all the user's habits.
 
         Returns:
-            List of all habits for the user.
+            A list of all Habit objects sorted alphabetically by name.
         """
         # Using list comprehension
         # return self.user.habits
 
         # Using FPP
-        # Map extracts the identity of each habit from self.user.habits and returns the result as a list
-        all_habits_list = list(map(lambda habit: habit, self.user.habits))
+        # Map extracts the identity of each habit from self.user.habits and returns the result as a sorted list
+        all_habits_list = sorted(
+            list(map(lambda habit: habit, self.user.habits)),
+            key=lambda habit: habit.name()
+        )
         return all_habits_list
 
     # Task requirement: "return a list of all habits with the same periodicity"
     def list_habits_by_periodicity(self, periodicity: str) -> List[Habit]:
         """
-        Retrieves habits filtered by a given periodicity.
+        Retrieves the user's habits filtered by a given periodicity.
 
         Args:
             periodicity: The frequency to filter habits by ("daily" or "weekly).
         Returns:
-            List of habits matching the given periodicity.
+            A list of Habit objects matching the given periodicity, sorted alphabetically by name.
         """
         # Using list comprehension
         # return [habit.name for habit in self.user.habits if habit.frequency == periodicity]
 
         # Using FPP
         # Filter habits to include only those with the given periodicity and return the matching habits as a list
-        filtered_habits = list(filter(lambda habit: habit.frequency == periodicity, self.user.habits))
+        filtered_habits = sorted(
+            list(filter(lambda habit: habit.frequency == periodicity, self.user.habits)),
+            key=lambda habit: habit.name()
+        )
         return filtered_habits
 
     # Task requirement: "return the longest streak of all defined habits"
@@ -64,10 +75,10 @@ class Analytics:
             A tuple containing (habit_name, longest_streak).
         """
         # Map each habit to a tuple of (name, longest_streak)
-        # Then use max() to find he tuple with the highest longest_streak value
+        # Then use max() to find the tuple with the highest longest_streak value
         longest_streak_all_habits = max(
             map(lambda habit: (habit.name, habit.streaks.get_longest_streak()), self.user.habits),
-            key=lambda x: x[1]
+            key=lambda x: x[1] # Only consider the 2nd element
         )
 
         return longest_streak_all_habits[0], longest_streak_all_habits[1]
