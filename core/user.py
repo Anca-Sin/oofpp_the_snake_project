@@ -5,7 +5,6 @@ from .habit import Habit
 from helpers.colors import GRAY, RES
 from helpers.helper_functions import confirm_input
 
-
 class User:
     """
     A registered user, which serves as central entity for the application.

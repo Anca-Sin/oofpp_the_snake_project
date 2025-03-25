@@ -78,7 +78,7 @@ class Analytics:
         # Then use max() to find the tuple with the highest longest_streak value
         longest_streak_all_habits = max(
             map(lambda habit: (habit.name, habit.streaks.get_longest_streak()), self.user.habits),
-            key=lambda x: x[1] # Only consider the 2nd element
+            key=lambda x: x[1] # Max counts the 2nd element
         )
 
         return longest_streak_all_habits[0], longest_streak_all_habits[1]
@@ -117,7 +117,7 @@ class Analytics:
             return "None", 0
 
         # Find the habit with the maximum longest_streak
-        max_habit = max(habits, key=lambda h: h.streaks.longest_streak)
+        max_habit = max(habits, key=lambda h: h.streaks.longest_streak) # Max counts the longest_streak value
         return max_habit.name, max_habit.streaks.longest_streak
 
     def most_completed_habit(self) -> Tuple[str, int]:
@@ -131,7 +131,7 @@ class Analytics:
         # Then find the tuple with the highest count
         most_completed = max(
             map(lambda habit: (habit.name, len(habit.completion_dates)), self.user.habits),
-            key=lambda x: x[1] # Sort by the 2nd element (completion count)
+            key=lambda x: x[1] # Max counts the 2nd element (completion count)
         )
 
         return most_completed
@@ -154,7 +154,7 @@ class Analytics:
             return "None", 0
 
         # Find the habit with the max number of completions
-        max_habit = max(habits, key=lambda h: len(h.completion_dates))
+        max_habit = max(habits, key=lambda h: len(h.completion_dates)) # Max counts the nr. of completions
         return max_habit.name, len(max_habit.completion_dates)
 
     def least_completed_habit(self) -> tuple:
@@ -168,11 +168,10 @@ class Analytics:
         # Then find the tuple with the lowest count
         least_completed = min(
             map(lambda habit: (habit.name, len(habit.completion_dates)), self.user.habits),
-            key=lambda x: x[1] # Sort by the 2nd element (completion_count)
+            key=lambda x: x[1] # Min counts the 2nd element (completion_count)
         )
 
         return least_completed
-
 
     def least_completed_by_periodicity(self, periodicity: str) -> Tuple[str, int]:
         """
@@ -187,13 +186,12 @@ class Analytics:
         # Filter habits by periodicity
         habits = self.list_habits_by_periodicity(periodicity)
 
-
         # Check if no habit exists with chosen periodicity
         if not habits:
             return "None", 0
 
         # Find the habit with the minimum number of completions
-        min_habit = min(habits, key=lambda h: len(h.completion_dates))
+        min_habit = min(habits, key=lambda h: len(h.completion_dates)) # Min counts the nr. of completions
         return min_habit.name, len(min_habit.completion_dates)
 
     def average_streak_length_habit(self, habit_name: str) -> float:
