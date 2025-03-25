@@ -1,11 +1,9 @@
-import time
 from typing import List, Optional
 
 from config import set_db_filepath
-
 from core.user import User
 from core.habit import Habit
-from helpers.colors import RED, RES
+from helpers.helper_functions import cancel_operation
 
 from .db_structure import db_tables
 from db_and_managers import manager_user_db as user_db
@@ -15,20 +13,18 @@ from db_and_managers import manager_completion_db as completion_db
 # noinspection PyMethodMayBeStatic
 class Database:
     """
-    Coordinator class - SINGLE app entry point - for database operations.
+    Central coordinator - single entry point - for all database operations.
 
     - ONLY methods needed for app functionality (managers handle other necessary functions internally)
-    - initializes the db structure
-    - handles ALL data synchronization needed for app functionality
-    - manages exclusively all database changes through manager's functional operation
+    - exclusively manages all data synchronization needed for app functionality
 
     Attributes:
-        db_filepath (str): Path to the SQLite database file, defaults to "habit_tracker" through config.
-        user_id (int): ID of the currently selected user.
+        db_filepath: A string representing the path to the SQLite database file.
+        user_id: An integer representing the ID of the currently selected user.
     """
 
     def __init__(self, db_filepath: str = "habit_tracker.db") -> None:
-        """Initializes the Database."""
+        """Initializes the Database connection and tables."""
         self.db_filepath = db_filepath # Store the filepath as an instance attribute
         self.user_id = None            # Current user's ID (set when a user is selected)
         set_db_filepath(db_filepath)   # Set the global configuration
@@ -51,19 +47,26 @@ class Database:
         users = user_db.load_users()
         return users
 
-    def save_user(self, selected_user):
-        """ok"""
+    def save_user(self, selected_user) -> None:
+        """
+        Saves a user to the database.
+
+        Args:
+            selected_user: The User object to save.
+        """
         user_db.save_user(selected_user)
 
     def select_user(self) -> Optional[User]:
         """
+        Performs multiple steps logic:
         - loads the users from the database
         - delegates user selection/creation to the manager function
         - sets the user id for further db operations
         - loads the selected user's habits
+        - handles operation canceling
 
         Returns:
-             The selected User object.
+             The selected User object if the process isn't canceled.
         """
         while True:
             users = self.load_users()
@@ -79,17 +82,15 @@ class Database:
 
                 return selected_user
             else:
-                print(f"User creation process {RED}canceled!{RES}")
-                time.sleep(1)
-                print("\nNo changes will be saved...")
-                time.sleep(1)
-                print("\nReturning...")
-                time.sleep(1)
+                cancel_operation("User creation process")
 
-    def delete_user(self, selected_user: User) -> Optional[User]:
+    def delete_user(self, selected_user: User) -> None:
         """
+        Performs multiple steps logic:
         - deletes the selected user and all their data from the db through manager function
-        -
+        - refreshes the existing users after deletion
+        - opens up the logic in select_user
+
         Args:
             selected_user: The User object to be deleted.
         """
@@ -114,8 +115,15 @@ class Database:
         selected_user.habits = habit_db.load_habits(selected_user)
         return selected_user.habits
 
-    def save_habits(self, selected_user, new_habit=None):
-        """ok"""
+    def save_habits(self, selected_user, new_habit=None) -> None:
+        """
+        Saves habit data to the database.
+
+        Args:
+            selected_user: The User object whose habits to save.
+            new_habit:     If provided, saves only this new habit.
+                           Otherwise, updates all habits data for the user.
+        """
         habit_db.save_habits(selected_user, new_habit)
 
     def new_habit(self, selected_user: User, set_frequency: str = None) -> Optional[Habit]:
@@ -135,17 +143,12 @@ class Database:
             self.load_habits(selected_user)
             return new_habit
         else:
-            print(f"Habit creation process {RED}canceled!{RES}")
-            time.sleep(1)
-            print("\nNo changes will be saved...")
-            time.sleep(1)
-            print("\nReturning...")
-            time.sleep(1)
+            cancel_operation("Habit creation process")
             return None
 
     def delete_habit(self, selected_user: User, habit: Habit) -> None:
         """
-        Deletes a habit from the user's data.
+        Deletes a habit and all associated data from the database.
 
         Args:
             selected_user: The User object whose habit is to be deleted.
@@ -159,6 +162,13 @@ class Database:
     # Completion related methods
     # --------------------------
     def complete_habit_today(self, selected_user: User, habit: Habit) -> None:
+        """
+        Marks a habit as complete for the current day.
+
+        Args:
+            selected_user: The User object whose habit is to be completed.
+            habit: The Habit object to be completed.
+        """
         completion = completion_db.complete_habit_today(habit)
         if completion:
             habit.completion_dates.append(completion)
@@ -185,7 +195,7 @@ class Database:
         Deletes a completion for the selected habit.
 
         Args:
-            selected_user: The User object associated with the habit.
+            selected_user: The User object which owns the habit.
             habit: The Habit object whose completion is to be completed.
         """
         deletion = completion_db.delete_completion(habit)
