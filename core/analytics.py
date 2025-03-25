@@ -93,9 +93,8 @@ class Analytics:
         Returns:
             The longest streak for the selected habit.
         """
-        # Filter habits to find the one with the matching name
-        # Use next() to get the first (and only matching habit)
-        habit = next(filter(lambda habit_item: habit_item.name == habit_name, self.user.habits), None)
+        # Direct look-up with next() since habit names are unique
+        habit = next((h for h in self.user.habits if h.name == habit_name), None)
 
         return habit.streaks.get_longest_streak() if habit_name else 0
 
