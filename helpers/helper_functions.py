@@ -178,3 +178,18 @@ def exit_msg(logged_in_user=None):
     print(f"{GRAY}(Type '{RES}quit{GRAY}' at any time to exit the application){RES}")
     if logged_in_user:
         print(f"{GRAY}Logged in as:{RES} {GREEN}{logged_in_user.username}{RES}")
+
+def cancel_operation(operation_name: str = "Operation"):
+    """
+    Displays a standard message for canceled operations.
+
+    Parameters:
+        operation_name: A string representing the name of the operation canceled.
+                        Defaults to "Operation".
+    """
+    print(f"{operation_name} {RED}canceled!{RES}")
+    time.sleep(1)
+    print("\nNo changes will be saved...")
+    time.sleep(1)
+    print("\nReturning...")
+    time.sleep(1)
