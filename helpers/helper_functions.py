@@ -15,6 +15,13 @@ from typing import Any, Optional
 from config import DB_FILEPATH
 from helpers.text_formating import GRAY, RES, RED, BLUE, GREEN, ITAL
 
+def invalid_input():
+    """Standardizes the invalid input message."""
+    print(f"\nInvalid input. Please try again!")
+
+def enter():
+    """Standardizes the enter hint to return."""
+    return f"{ITAL}{GRAY}ENTER <<{RES}"
 
 def confirm_input(attribute_name: str, value: str) -> Optional[str]:
     """
@@ -28,9 +35,9 @@ def confirm_input(attribute_name: str, value: str) -> Optional[str]:
     """
     while True:
         # Ask for confirmation
-        print(f"\nYou entered '{GREEN}{value}{RES}'. Is this correct?")
-        print(f"Type {GREEN}'yes'{RES} to confirm {GRAY}or ENTER << to cancel{RES}:")
-        confirmation = input().lower().strip()
+        confirmation = input(
+            f"Type '{GREEN}yes{RES}' to confirm '{GREEN}{value}{RES}' {enter()} to exit: "
+        ).lower().strip()
 
         if confirmation == "yes":
             print(f"\nYou've successfully stored '{value.title()}' as your {attribute_name}!")
@@ -46,16 +53,17 @@ def confirm_int_input(value: Any) -> Any | None:
     Identical to confirm_input, only prints are different.
     """
     while True:
-        print(f"\nYou've chosen '{GREEN}{value}{RES}'. Is this correct?")
-        print(f"Type {GREEN}'yes'{RES} to confirm {GRAY}or ENTER << to cancel{RES}:")
-        confirmation = input().lower().strip()
+        confirmation = input(
+            f"Type '{GREEN}yes{RES}' to confirm '{GREEN}{value}{RES}' {enter()} to exit: "
+        ).lower().strip()
+
         if confirmation == "yes":
             print(f"\nYou've chosen '{value}'!")
             return value
         elif confirmation == "":
             return None
         else:
-            print("Invalid input!")
+            print("Invalid input! Please try again!")
 
 def reload_menu_countdown() -> None:
     """
@@ -223,3 +231,7 @@ def save_entry_msg(entry):
     time.sleep(1)
     print(f"\n{ITAL}Returning...{RES}")
     time.sleep(1)
+
+def good_job():
+    """Friendly motivational message after completions."""
+    print(f"\n{ITAL}You're right on track! {GREEN}(^_^)/{RES}{ITAL} Keep it up!{RES}")
