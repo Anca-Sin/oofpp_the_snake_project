@@ -1,33 +1,40 @@
+"""
+Habit management database module.
+
+Provides behind the scenes database operations for habit related functionality, including:
+- loading of habits from the db
+- saving of habits and their implicit properties (completions, streaks,etc.)
+- habit creation
+- habit deletion
+"""
+
 from typing import List, Optional
 from datetime import datetime
-import time
 
 from config import DB_FILEPATH
-
 from core.habit import Habit
 from core.streaks import Streaks
 from core.user import User
-from helpers.colors import RED, RES, GRAY
-from helpers.helper_functions import db_connection, reload_menu_countdown
+from helpers.text_formating import RED, RES, GRAY
+from helpers.helper_functions import db_connection, reload_menu_countdown, save_entry_msg, cancel_operation
 
 
 def load_habits(selected_user: User) -> List[Habit]:
     """
-    Loads all habits for the selected user.
+    Loads all habits for the selected user from the db.
 
-    - retrieves habit records from the db
+    - retrieves habit records
     - converts them to Habit objects
     - loads completion dates and streak information
 
-    Parameters:
-        selected_user: The User objects whose habits to load.
+    Args:
+        selected_user: The User object whose habits to load.
     Returns:
         List of Habit objects for the selected user.
     """
     connection = db_connection(DB_FILEPATH)
     cursor = connection.cursor()
 
-    # Query to get all habits for the selected user
     cursor.execute("""
         SELECT id, user_id, habit_name, frequency, creation_date,
             completions_count, completion_dates
@@ -36,6 +43,7 @@ def load_habits(selected_user: User) -> List[Habit]:
     """, (selected_user.user_id,))
 
     habit_data = cursor.fetchall()
+
     # List to hold Habit objects
     habits = []
 
@@ -72,8 +80,9 @@ def load_habits(selected_user: User) -> List[Habit]:
         """, (habit_id,))
 
         streak_data = cursor.fetchone()
+
         if streak_data:
-            # Streak object information
+            # Streak information
             habit.streaks = Streaks()
             habit.streaks.current_streak = streak_data[0] or 0 # Default to 0 if None
             habit.streaks.longest_streak = streak_data[1] or 0
@@ -84,6 +93,7 @@ def load_habits(selected_user: User) -> List[Habit]:
                 # Convert comma separated string to list on integers
                 habit.streaks.broken_streak_lengths = [int(streak) for streak in streak_history.split(",")]
 
+        # Add to the list
         habits.append(habit)
 
     connection.close()
@@ -94,7 +104,7 @@ def habit_name_exists(selected_user: User, habit_name: str) -> bool:
     """
     Checks if a habit name already exists for the selected user.
 
-    Parameters:
+    Args:
         selected_user: The User object to check habits for.
         habit_name: The habit name to check.
     Returns:
@@ -103,30 +113,33 @@ def habit_name_exists(selected_user: User, habit_name: str) -> bool:
     connection = db_connection(DB_FILEPATH)
     cursor = connection.cursor()
 
+    # Count how many rows exist in the 'habits' table
+    # where both user_id and habit_name match the given values
     cursor.execute("""
         SELECT COUNT(*) FROM habits
         WHERE user_id = ? AND habit_name = ?
     """, (selected_user.user_id, habit_name))
 
+    # Returns a tuple with 1 element = the count
     count = cursor.fetchone()[0]
+
     connection.close()
 
-    return count > 0
+    return count > 0 # If it exists, returns True, else False
 
 def new_habit(selected_user: User, set_frequency: str = None) -> Optional[Habit]:
     """
-    Adds a new habit to the selected user's db.
+    Creates a new habit for the selected user.
 
     - creates a new Habit object
     - prompts the user for habit details (or uses preset values)
-    - inserts the habit into the db
-    - initializes streak information
 
-    Parameters:
+    Args:
         selected_user: The User object to associate the new habit with.
-        set_frequency: Optional preset frequency ("daily" or "weekly") to skip prompting in certain scenarios.
+        set_frequency: Optional preset frequency ("daily" or "weekly") to use
+                       when accessed from list "daily" or "weekly" and no habits exist.
     Returns:
-        The new Habit object or None if user exits habit creation.
+        The new Habit object or None if creation is canceled.
     """
     # Create a new Habit object
     habit = Habit()
@@ -147,21 +160,18 @@ def new_habit(selected_user: User, set_frequency: str = None) -> Optional[Habit]
     if habit.frequency is None:
         return None
 
-    print(f"\nSaving entry to your database...")
-    time.sleep(1)
-    print(f"'{habit.name}' Saved!")
-    input(f"{GRAY}ENTER << to continue...")
+    save_entry_msg(habit.name) # Helper
     return habit
 
 def save_habits(selected_user: User, new_habit: Habit = None) -> None:
     """
-    Saves (INSERT) / Updates (UPDATE) existing habit data.
+    Saves (INSERT) / Updates (UPDATE) habit data in the db.
 
-    Parameters:
+    Args:
         selected_user: The User object whose habits to save/update.
         new_habit: INSERT The new Habit object to the db and initialises all its attributes
                    UPDATE If None -> used in completion manager, where
-                                     habit: Habit is passed as parm in the completions functions
+                                     habit: Habit is passed as parameter in the completions functions
     """
     connection = db_connection(DB_FILEPATH)
     cursor = connection.cursor()
@@ -196,7 +206,7 @@ def save_habits(selected_user: User, new_habit: Habit = None) -> None:
         ))
 
     else:
-        # For each habit in the user's habit list
+        # Update existing habits
         for habit in selected_user.habits:
             cursor.execute("""
                 UPDATE habits
@@ -231,9 +241,8 @@ def delete_habit(selected_user: User, habit: Habit) -> None:
     Deletes a habit and all associated data from the db.
 
     - asks for confirmation before deleting
-    - deletes on cascade all associated streaks
 
-    Parameters:
+    Args:
         selected_user: The User object whose habit to delete.
         habit: The Habit object to delete.
     """
@@ -246,12 +255,13 @@ def delete_habit(selected_user: User, habit: Habit) -> None:
 
     """)
 
-    confirmation = input(f"Type in '{RED}DELETE{RES}' if you are sure to proceed {GRAY}or ENTER << to cancel{RES}: ").strip()
+    confirmation = input(
+        f"Type in '{RED}delete{RES}' if you are sure to proceed {GRAY}or ENTER << to cancel{RES}: "
+    ).lower().strip()
 
     # Check if the user doesn't confirm
-    if confirmation.lower() != "delete":
-        print("Deletion canceled.")
-        reload_menu_countdown()
+    if confirmation != "delete":
+        cancel_operation() # Helper
         return  # To the Habit Detail Menu
 
     # If confirmed, continue with deletion
@@ -269,7 +279,7 @@ def delete_habit(selected_user: User, habit: Habit) -> None:
     # Delete streaks
     cursor.execute("DELETE FROM streaks WHERE habit_id = ?", (habit_id,))
 
-    # Delete the habit - cascading will delete all associated data
+    # Delete habit
     cursor.execute("DELETE FROM habits WHERE id = ?", (habit_id,))
 
     connection.commit()

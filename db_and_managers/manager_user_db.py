@@ -132,7 +132,6 @@ def select_user(users: List[User]=None) -> Optional[User]:
                 print("\nSorry, invalid input. Please enter a number!")
                 reload_menu_countdown()
 
-
 def username_exists(username: str) -> bool:
     """
     Checks if a username already exists in the db.
@@ -145,15 +144,19 @@ def username_exists(username: str) -> bool:
     connection = db_connection(DB_FILEPATH)
     cursor = connection.cursor()
 
+    # Count how many rows exist in the 'habits' table
+    # where username matches the given value
     cursor.execute("""
         SELECT COUNT(*) FROM users 
         WHERE username = ?
     """, (username,))
 
+    # Returns a tuple with 1 element = the count
     count = cursor.fetchone()[0]
 
     connection.close()
-    return count > 0
+
+    return count > 0 # If it exists, returns True, else False
 
 def save_user(user: User) -> None:
     """
@@ -193,12 +196,13 @@ def delete_user(selected_user) -> None:
     - All associated habits and data
     """)
 
-    print(f"Type in '{RED}delete{RES}' if you are sure to proceed {GRAY}or ENTER << to cancel{RES}")
-    confirmation = input().lower().strip()
+    confirmation = input(
+        f"Type in '{RED}delete{RES}' if you are sure to proceed {GRAY}or ENTER << to cancel{RES}: "
+    ).lower().strip()
 
     # Check if the user doesn't confirm
     if confirmation != "delete":
-        cancel_operation()
+        cancel_operation() # Helper
         return # Return to Main Menu
 
     # If confirmed, continue with deletion

@@ -4,7 +4,6 @@ from config import set_db_filepath
 from core.user import User
 from core.habit import Habit
 from helpers.helper_functions import cancel_operation
-
 from .db_structure import db_tables
 from db_and_managers import manager_user_db as user_db
 from db_and_managers import manager_habit_db as habit_db
