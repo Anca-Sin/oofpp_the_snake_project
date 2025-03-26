@@ -1,23 +1,19 @@
 from config import DB_FILEPATH
-
 from helpers.helper_functions import db_connection
 
 def db_tables() -> None:
     """
-    Creates the required db tables if they don't already exist.
-    The tables use SQLite's foreign key constraints with CASCADE on deletion.
+    The database's tables.
 
-    Schema for the HabitTracker db:
-    - users table:   stores user information
-    - habits table:  stores habit information with foreign keys to users
-    - streaks table: stores streak information with foreign key to habits
+    Creates three tables with appropriate relationships, which store:
+    - users: basic user info
+    - habits: habit definitions linked to their user
+    - streaks: streak info linked to each habit
     """
-    # Connect to the db
     connection = db_connection(DB_FILEPATH)
-    # Create a cursor object to execute SQL commands
     cursor = connection.cursor()
 
-    # Create the "users" table if it doesn't exist
+    # Users table
     cursor.execute("""
         CREATE TABLE IF NOT EXISTS users (     
             id INTEGER PRIMARY KEY AUTOINCREMENT,  -- Auto-incrementing ID for each user
@@ -25,7 +21,7 @@ def db_tables() -> None:
         )                                         
     """)
 
-    # Create the "habits" table if it doesn't exist
+    # Habits table
     cursor.execute("""
         CREATE TABLE IF NOT EXISTS habits (
             id INTEGER PRIMARY KEY AUTOINCREMENT,  -- Auto-incrementing ID for each habit
@@ -39,7 +35,7 @@ def db_tables() -> None:
         )
     """)
 
-    # Create the "streaks" table if it doesn't exist
+    # Streak table
     cursor.execute("""
         CREATE TABLE IF NOT EXISTS streaks (
         id INTEGER PRIMARY KEY AUTOINCREMENT,      -- Auto-incrementing ID for each streak record
@@ -51,7 +47,5 @@ def db_tables() -> None:
         )
     """)
 
-    # Save the changes to the db
     connection.commit()
-    # Close the connection
     connection.close()
