@@ -13,7 +13,8 @@ import sqlite3
 from typing import Any, Optional
 
 from config import DB_FILEPATH
-from helpers.colors import GRAY, RES, RED, BLUE, GREEN
+from helpers.text_formating import GRAY, RES, RED, BLUE, GREEN, ITAL
+
 
 def confirm_input(attribute_name: str, value: str) -> Optional[str]:
     """
@@ -27,8 +28,8 @@ def confirm_input(attribute_name: str, value: str) -> Optional[str]:
     """
     while True:
         # Ask for confirmation
-        print(f"\n{GRAY}You entered{RES} '{value}'{GRAY}. Is this correct?{RES}")
-        print(f"Type {GREEN}'yes'{RES} to confirm or {GRAY} ENTER << to cancel{RES}:")
+        print(f"\nYou entered '{GREEN}{value}{RES}'. Is this correct?")
+        print(f"Type {GREEN}'yes'{RES} to confirm {GRAY}or ENTER << to cancel{RES}:")
         confirmation = input().lower().strip()
 
         if confirmation == "yes":
@@ -45,8 +46,8 @@ def confirm_int_input(value: Any) -> Any | None:
     Identical to confirm_input, only prints are different.
     """
     while True:
-        print(f"\n{GRAY}You've chosen {RES}'{value}'{GRAY}. Is this correct?{RES}")
-        print(f"Type {GREEN}'yes'{RES} to confirm or {GRAY} ENTER << to cancel{RES}:")
+        print(f"\nYou've chosen '{GREEN}{value}{RES}'. Is this correct?")
+        print(f"Type {GREEN}'yes'{RES} to confirm {GRAY}or ENTER << to cancel{RES}:")
         confirmation = input().lower().strip()
         if confirmation == "yes":
             print(f"\nYou've chosen '{value}'!")
@@ -61,7 +62,7 @@ def reload_menu_countdown() -> None:
     Displays a countdown before returning.
     Allows visual feedback: the user has time to read the screen before it is reloaded.
     """
-    print("Reloading Menu in...")
+    print("\nReloading Menu in...")
     time.sleep(1)
 
     print("        2")
@@ -187,9 +188,38 @@ def cancel_operation(operation_name: str = "Operation"):
         operation_name: A string representing the name of the operation canceled.
                         Defaults to "Operation".
     """
-    print(f"{operation_name} {RED}canceled!{RES}")
+    print(f"{ITAL}{operation_name} {RED}canceled!{RES}")
     time.sleep(1)
     print("\nNo changes will be saved...")
     time.sleep(1)
     print("\nReturning...")
+    time.sleep(1)
+
+def setup_header(setup):
+    """
+    Displays setup header for new user and new habit.
+
+    Args:
+        setup: A string describing the setup - either "User" or "Habit"
+    """
+    print()
+    print()
+    print(f"""
+    {GREEN}        - - - New {setup} Setup - - -{RES}
+
+
+                """)
+
+def save_entry_msg(entry):
+    """
+    Displays confirmation after successful operation with a small countdown.
+
+    Args:
+        entry: A string describing what was saved - names, completions past
+    """
+    print(f"\n{ITAL}Saving entry to your database...")
+    time.sleep(1)
+    print(f"'{entry}' {ITAL}{GREEN}saved!{RES}")
+    time.sleep(1)
+    print(f"\n{ITAL}Returning...{RES}")
     time.sleep(1)
