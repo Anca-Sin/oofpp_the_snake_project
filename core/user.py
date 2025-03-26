@@ -2,7 +2,7 @@ import time
 from typing import List, Optional
 
 from .habit import Habit
-from helpers.colors import GRAY, RES
+from helpers.text_formating import GRAY, RES
 from helpers.helper_functions import confirm_input
 
 class User:
@@ -48,8 +48,7 @@ class User:
 
         while True:
             # Ask user for username
-            print(f"Please type in your desired username {GRAY}or ENTER << to exit{RES} ")
-            username = input().title().strip()
+            username = input(f"Please type in your desired username {GRAY}or ENTER << to cancel{RES}: ").title().strip()
 
             # Exit the loop if << ENTER
             if not username:
@@ -70,6 +69,6 @@ class User:
                 if confirmed_username is not None:
                     self.username = confirmed_username
                     return
-                # If not confirmed (<< ENTER)
+                # If not confirmed << ENTER
                 else:
                     return

@@ -4,7 +4,7 @@ from typing import List, Optional
 
 from .streaks import Streaks
 from helpers.helper_functions import confirm_input
-from helpers.colors import GRAY, RES
+from helpers.text_formating import GRAY, RES
 
 class Habit:
     """
@@ -54,10 +54,9 @@ class Habit:
 
         while True:
             # Ask for habit name
-            print(f"\nNew Habit name {GRAY}or ENTER << to exit:{RES} ")
-            habit_name = input().title().strip()
+            habit_name = input(f"\nNew Habit name {GRAY}or ENTER << to cancel{RES}: ").title().strip()
 
-            # Exit the loop if "ENTER"
+            # Exit the loop if << ENTER
             if not habit_name:
                 self.name = None
                 return # Cancels the process
@@ -77,7 +76,7 @@ class Habit:
                     self.name = confirmed_habit
                     return
 
-                # If not confirmed (<< ENTER)
+                # If not confirmed << ENTER
                 else:
                     return
 

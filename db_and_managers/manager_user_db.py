@@ -1,25 +1,31 @@
-import sys
-import time
+"""
+User management database module.
+
+Provides behind the scenes database operations for user related functionality, including:
+- loading of users from the db
+- user selection
+- user creation
+- user deletion
+"""
+
 from typing import List, Optional
 
-# noinspection PyUnresolvedReferences
 from config import DB_FILEPATH
-
 from core.user import User
-from helpers.helper_functions import db_connection, reload_cli, exit_msg, reload_menu_countdown, check_exit_cmd
-from helpers.colors import RED, RES, BLUE, GREEN, GRAY
+from helpers.helper_functions import (db_connection, reload_cli, exit_msg, reload_menu_countdown, check_exit_cmd,
+                                      setup_header, save_entry_msg, cancel_operation)
+from helpers.text_formating import RED, RES, BLUE, GREEN, GRAY
 
-
-def load_users() -> List[User]: # For access to all user properties
+def load_users() -> List[User]:
     """
     Loads all users from the db.
 
-    :return: A list of User objects.
+    Returns:
+         A list of User objects.
     """
     connection = db_connection(DB_FILEPATH)
     cursor = connection.cursor()
 
-    # Query to select all users
     cursor.execute("SELECT id, username FROM users")
     user_data = cursor.fetchall()
 
@@ -35,8 +41,8 @@ def select_user(users: List[User]=None) -> Optional[User]:
     """
     Prompts the user to select an existing user or create a new one if none exists.
 
-    Parameters:
-        users: Optional preloaded list of users. If none, users will be loaded.
+    Args:
+        users: User objects to be loaded and displayed for choice.
     Returns:
         The selected or newly created User object.
     """
@@ -44,7 +50,8 @@ def select_user(users: List[User]=None) -> Optional[User]:
     if not users:
         while True:
             reload_cli()
-            print(f"{GRAY}(Type '{RES}quit{GRAY}' at any time to exit the application){RES}")
+            exit_msg()
+
             print(f"Welcome to {BLUE}- - - HabitTracker - - -{RES}")
             print(f"""\nNo users found! You can:
         
@@ -54,40 +61,24 @@ def select_user(users: List[User]=None) -> Optional[User]:
 
             choice = input("\nEnter your choice (1-2): ").strip()
 
-            # Check for exit command
             check_exit_cmd(choice)
 
             if choice == "1":
+                reload_cli()
+                setup_header("User")
+
                 selected_user = User()
                 selected_user.create_username()
+
                 if not selected_user.username:
-                    return None
-                print(f"\nYou've created user: {selected_user.username}!")
+                    return None # If user cancels inside create_username()
+
+                save_entry_msg(selected_user.username)
                 return selected_user
+
             elif choice == "2":
-                print("\n        Exiting the application")
-                time.sleep(0.40)
-                print("        .")
-                time.sleep(0.40)
-                print("        .")
-                time.sleep(0.40)
-                print("        .")
-                time.sleep(0.40)
-                print(f"\n        Goodbye! {BLUE}(^_^)/{RES}")
-                time.sleep(0.40)
-                print(f"""
-        {BLUE}* * * * * * * * * * * * *{RES}
-        {RED}REMEMBER TO STAY ON TRACK{RES}
-        {BLUE}* * * * * * * * * * * *{RES}
-                """)
-                time.sleep(0.40)
-                print("        .")
-                time.sleep(0.40)
-                print("        .")
-                time.sleep(0.40)
-                print("        .")
-                time.sleep(0.40)
-                sys.exit(0)
+                check_exit_cmd("quit")
+
             else:
                 print("\nSorry, invalid input. Please try again!")
                 reload_menu_countdown()
@@ -97,55 +88,48 @@ def select_user(users: List[User]=None) -> Optional[User]:
         while True:
             reload_cli()
             exit_msg()
-            # Display users with numeration
+
             print(f"Welcome to {BLUE}- - - HabitTracker - - -{RES}")
             print("\n        Login as: ")
             print("")
+
+            # Display users with numeration
             for idx, user in enumerate(users, 1):
                 print(f"        {idx} - {GREEN}{user.username}{RES}")
-            print("        or")
+
             # Last option: Create new user
+            print("        or")
             print(f"        {len(users) + 1} - Create a {GREEN}new{RES} user")
 
             # Ask user for a choice
             choice = input(f"\nEnter your choice (1-{len(users) + 1}): ").strip()
 
-            # Check for exit command
             check_exit_cmd(choice)
 
             try:
                 if choice.isdigit() and 1 <= int(choice) <= len(users):
-                    # Confirm the choice
                     selected_user = users[int(choice) - 1]  # Adjust index since user listing starts from 1
                     return selected_user
 
                 elif int(choice) == len(users) + 1:
                     # Create new user
                     reload_cli()
-                    print()
-                    print()
-                    print(f"""
-        {GREEN}- - - New User Setup - - -{RES}
+                    setup_header("User")
 
-        - select a new username
-                    
-                    """)
-                    input(f"ENTER << to start...")
                     selected_user = User()
                     selected_user.create_username()
+
                     if not selected_user.username:
-                        return None
-                    print(f"\nSaving entry to your database...")
-                    time.sleep(1)
-                    print(f"{GREEN}'{selected_user.username}'{RES} Saved!")
-                    input(f"{GRAY}ENTER << to continue...")
+                        return None # If user cancels inside create_username()
+
+                    save_entry_msg(selected_user.username) # Helper
                     return selected_user
 
                 else:
                     print("\nSorry, invalid input. Please try again!")
                     reload_menu_countdown()
             except ValueError:
-                print("\nSorry, invalid input. Please try again!")
+                print("\nSorry, invalid input. Please enter a number!")
                 reload_menu_countdown()
 
 
@@ -153,8 +137,8 @@ def username_exists(username: str) -> bool:
     """
     Checks if a username already exists in the db.
 
-    Parameters:
-        username: The username to check.
+    Args:
+        username: The username to check for.
     Returns:
         True if the username exists, False otherwise.
     """
@@ -174,9 +158,11 @@ def username_exists(username: str) -> bool:
 def save_user(user: User) -> None:
     """
     Saves a new user to the db.
-    Doesn't need to check if the user exists because it is called only if there are no users after load_users().
 
-    Parameters:
+    - is only called when creating a new user
+    - user_id is updated with the auto-generated ID
+
+    Args:
         user: The User object to save to the db.
     """
     connection = db_connection(DB_FILEPATH)
@@ -195,9 +181,8 @@ def delete_user(selected_user) -> None:
     Deletes a user and all associated data from the db.
 
     - asks for confirmation before deleting
-    - deletes on cascade all associated habits and streaks
 
-    Parameters:
+    Args:
         selected_user: The User object to delete.
     """
     # Ask for confirmation
@@ -208,12 +193,12 @@ def delete_user(selected_user) -> None:
     - All associated habits and data
     """)
 
-    confirmation = input(f"Type in '{RED}DELETE{RES}' if you are sure to proceed {GRAY}(or cancel by pressing ENTER){RES}: ")
+    print(f"Type in '{RED}delete{RES}' if you are sure to proceed {GRAY}or ENTER << to cancel{RES}")
+    confirmation = input().lower().strip()
 
     # Check if the user doesn't confirm
-    if confirmation.lower() != "delete":
-        print("\nDeletion canceled.")
-        reload_menu_countdown()
+    if confirmation != "delete":
+        cancel_operation()
         return # Return to Main Menu
 
     # If confirmed, continue with deletion
@@ -237,5 +222,5 @@ def delete_user(selected_user) -> None:
     connection.commit()
     connection.close()
 
-    print(f"\nUser '{RED}{selected_user.username}{RES}' and all associated data have been {RED}deleted{RES}.")
+    print(f"\nUser '{RED}{selected_user.username}{RES}' has been permanently {RED}deleted{RES}.")
     input(f"\n{GRAY}ENTER << to return...{RES}")

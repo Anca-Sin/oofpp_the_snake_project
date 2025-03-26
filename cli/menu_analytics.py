@@ -6,7 +6,7 @@ menu_analytics_all_habits: Submenu of My Habit Tracker Menu
 """
 from core.habit import Habit
 from helpers.helper_functions import reload_cli, reload_menu_countdown, check_exit_cmd, exit_msg
-from helpers.colors import BLUE, RES, RED, GRAY, GREEN
+from helpers.text_formating import BLUE, RES, RED, GRAY, GREEN
 
 
 def menu_analytics_one_habit(ht, habit: Habit) -> None:

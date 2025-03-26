@@ -1,3 +1,11 @@
+"""
+Database structure module for the habit tracker app.
+
+Defines and creates the SQLite database schema used by the app.
+Propagating the core model separation between classes,it handles tables creation with appropriate relationships
+between users, habits, and streaks tables, using foreign key constraints for data integrity.
+"""
+
 from config import DB_FILEPATH
 from helpers.helper_functions import db_connection
 

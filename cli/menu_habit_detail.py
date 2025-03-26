@@ -7,7 +7,7 @@ from core.analytics import Analytics
 from core.habit import Habit
 from db_and_managers.database import Database
 from helpers.helper_functions import reload_cli, reload_menu_countdown, check_exit_cmd, exit_msg
-from helpers.colors import BLUE, RES, GRAY, RED
+from helpers.text_formating import BLUE, RES, GRAY, RED
 
 # Create a db instance
 db = Database()

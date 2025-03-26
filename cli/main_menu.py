@@ -7,7 +7,7 @@ import time
 from .menu_my_habit_tracker import menu_my_habit_tracker
 from core.analytics import Analytics
 from helpers.helper_functions import reload_cli, reload_menu_countdown, check_exit_cmd, exit_msg
-from helpers.colors import GRAY, RES, BLUE, RED, GREEN
+from helpers.text_formating import GRAY, RES, BLUE, RED, GREEN
 
 
 def main_menu(ht) -> None:

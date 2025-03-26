@@ -7,7 +7,7 @@ from core.analytics import Analytics
 from .menu_habit_detail import menu_habit_detail
 from core.habit import Habit
 from helpers.helper_functions import reload_cli, reload_menu_countdown, check_exit_cmd, exit_msg
-from helpers.colors import BLUE, RES, GRAY, GREEN
+from helpers.text_formating import BLUE, RES, GRAY, GREEN
 
 
 def menu_habits(ht):

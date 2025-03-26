@@ -1,7 +1,7 @@
 from datetime import datetime, date, timedelta
 from typing import Optional
 
-from helpers.colors import GRAY, RES, GREEN, RED
+from helpers.text_formating import GRAY, RES, GREEN, RED
 
 from core.habit import Habit
 from helpers.helper_functions import confirm_input, check_exit_cmd

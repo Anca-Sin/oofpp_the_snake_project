@@ -4,7 +4,7 @@ Menu: My Habit Tracker - Second after Main Menu
 from cli.menu_analytics import menu_analytics_all_habits
 from cli.menu_habits import menu_habits
 from helpers.helper_functions import reload_cli, reload_menu_countdown, check_exit_cmd, exit_msg
-from helpers.colors import BLUE, RES, GRAY
+from helpers.text_formating import BLUE, RES, GRAY
 
 
 def menu_my_habit_tracker(ht):
