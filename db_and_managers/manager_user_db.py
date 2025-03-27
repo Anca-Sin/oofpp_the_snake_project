@@ -218,6 +218,9 @@ def delete_user(selected_user) -> None:
     connection = db_connection(DB_FILEPATH)
     cursor = connection.cursor()
 
+    # Enable foreign keys
+    cursor.execute("PRAGMA foreign_keys = ON")
+
     # Delete streaks
     cursor.execute("""
         DELETE FROM streaks
@@ -237,6 +240,6 @@ def delete_user(selected_user) -> None:
 
     print(f"\nFarewell, {GREEN}{selected_user.username}{RES}!")
     time.sleep(1)
-    print(f"\n{GREEN}(^_^)/{RES} May your tracking continue elsewhere!")
+    print(f"\n{GREEN}(^_^)/ {GRAY}May your tracking continue elsewhere!{RES}")
     time.sleep(1)
     input(f"\n{enter()} to return...")
