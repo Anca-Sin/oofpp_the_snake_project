@@ -57,7 +57,7 @@ def load_habits(selected_user: User) -> List[Habit]:
         habit.frequency = habit_row[3]
 
         # Convert creation date to datetime.date object
-        habit.create_date = datetime.strptime(habit_row[4], "%Y-%m-%d").date()
+        habit.creation_date = datetime.strptime(habit_row[4], "%Y-%m-%d").date()
 
         # Load completion dates
         completion_dates = habit_row[6]
