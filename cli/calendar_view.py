@@ -1,23 +1,24 @@
 """
-Calendar view for habit completions.
+Calendar View Menu module.
 
-- provides calendar visualization for habit completions in the terminal
-- displays a monthly calendar with completion days marked
-- allows users to track habit completions patterns visually
-- can add a past date completion
-- can delete a completion
+Allows users to track habit completions patterns visually.
+It includes:
+- displaying a monthly calendar with marked completions
+- calendar navigation options
+- managing completions:
+        - adding today's completion
+        - adding past date completion
+        - completion deletion
 """
+
 import calendar
 from datetime import datetime
 
 from core.analytics import Analytics
 from core.habit import Habit
 from db_and_managers.database import Database
-from helpers.helper_functions import reload_cli, check_exit_cmd, reload_menu_countdown, exit_msg
+from helpers.helper_functions import reload_cli, check_exit_cmd, reload_menu_countdown, exit_msg, enter, invalid_input
 from helpers.text_formating import BLUE, RES, RED, GRAY
-
-# Create a db instance
-db = Database()
 
 def display_habit_calendar(
         habit: Habit,
@@ -25,12 +26,9 @@ def display_habit_calendar(
         month=datetime.now().date().month
 ) -> None:
     """
-    Displays a monthly calendar view of a habit's completions.
+    Builds monthly calendar with marked completions.
 
-    - outputs a text based calendar to the terminal with weekdays as columns
-    - days marked when habit was completed
-
-    Parameters:
+    Args:
         habit: The Habit object whose completions to display.
         year: Year to display (defaults to current year).
         month: Month to display (defaults to current month).
@@ -80,15 +78,10 @@ def display_habit_calendar(
 
 def view_completions_calendar(ht, habit: Habit) -> None:
     """
-    Calendar view for habit completions.
+    The monthly calendar with navigation and completion options.
 
-    Allows:
-    - navigating between months (backward, forward, jump to a specific month)
-    - registering a past completion
-    - deleting a completion
-
-    Parameters:
-        ht: The HabitTracker instance that manages the application state.
+    Args:
+        ht: The HabitTracker instance managing app state.
         habit: The Habit object whose completions to display and interact with.
     """
     # Set initial year and month to current date
@@ -121,7 +114,7 @@ def view_completions_calendar(ht, habit: Habit) -> None:
         3 - Delete a completion
         """)
         print(f"""
-        {GRAY}ENTER << Back to Habit Details Menu - - -{RES}
+        {enter()} Back to Habit Details Menu - - -
         """)
 
         choice = input("\nEnter your choice: ").strip().lower()
@@ -165,32 +158,31 @@ def view_completions_calendar(ht, habit: Habit) -> None:
                     year = new_year
                 else:
                     # Handle invalid integer input
-                    print("\nInvalid month or year. Please try again!")
-                    input(f"{GRAY}<< Press ENTER to continue...{RES}")
+                    input(f"{invalid_input()} {enter()} to continue...")
+
             except ValueError:
                 # Handle invalid string input
-                print("\nInvalid input (only numbers). Please try again!")
-                input(f"{GRAY}<< Press ENTER to continue...{RES}")
+                input(f"{invalid_input()} {enter()} to continue...")
 
         elif choice == "1":
             # Complete for today
-            db.complete_habit_today(ht.logged_in_user, habit)
+            ht.db.complete_habit_today(ht.logged_in_user, habit)
 
-            # Recreating a fresh Analytics instance
+            # Refreshing Analytics instance
             ht.analytics = Analytics(ht.logged_in_user)
 
         elif choice == "2":
             # Complete for a past date
-            db.complete_habit_past(ht.logged_in_user, habit)
+            ht.db.complete_habit_past(ht.logged_in_user, habit)
 
-            # Recreating a fresh Analytics instance
+            # Refreshing Analytics instance
             ht.analytics = Analytics(ht.logged_in_user)
 
         elif choice == "3":
             # Delete a completion
-            db.delete_completion(ht.logged_in_user, habit)
+            ht.db.delete_completion(ht.logged_in_user, habit)
 
-            # Recreating a fresh Analytics instance
+            # Refreshing Analytics instance
             ht.analytics = Analytics(ht.logged_in_user)
 
         elif choice == "":
@@ -199,5 +191,5 @@ def view_completions_calendar(ht, habit: Habit) -> None:
 
         else:
             # Handle invalid input
-            print("\nInvalid input! Please try again!")
+            invalid_input()
             reload_menu_countdown()
