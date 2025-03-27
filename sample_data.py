@@ -1,13 +1,13 @@
 """
-Sample Data Generator for Habit Tracker
+Sample data generation module.
 
 Creates a sample user and 5 predefined habits (3 daily, 2 weekly) with 4 weeks of training data.
+Can be run multiple times:
+- if user or habit/s exist, creation is skipped
+- always generates a fresh batch of completion data
+- never creates duplicate completions
 
-- checks for existing sample user
-    - if it exists, skips the creation process
-- checks for existing sample habits
-    - if they exist, skips the creation process
-- uses existing project functions for habit completion generation and streak calculation
+Uses existing project functions for habit completion generation and streak calculation
 """
 
 import random
@@ -19,9 +19,15 @@ from core.user import User
 from core.habit import Habit
 from db_and_managers.database import Database
 
-
 def _generate_completions(habit: Habit, start_date: date, end_date: date) -> List[date]:
-    """Generates random completions for sample data with proper streak calculation"""
+    """
+    Generates random completions for a habit within a date range.
+
+    Args:
+        habit:      The Habit object to generate completions for.
+        start_date: Beginning of date range for completions.
+        end_date:   End of date range for completions.
+    """
     # Reset habit data
     habit.completion_dates = []
     habit.streaks = Streaks()
@@ -69,7 +75,7 @@ def sample_data_generator():
     if sample_user:
         print("Skipping User creation... 'SampleUser' already exists...")
     else:
-        # If not, start creating one
+        # If no sample user
         sample_user = User(username="SampleUser")
         # Add to db
         db.save_user(sample_user)
@@ -149,7 +155,7 @@ def instructions():
     - 5 habits with 4 weeks of randomly generated completion data
     - streak information has been calculated
     - run main.py
-    - login as 'SampleUser' to explore the data
+    - login as 'SampleUser' to explore the HabitTracker
     -------------------------------------------------------------
     """)
 
