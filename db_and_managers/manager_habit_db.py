@@ -7,7 +7,7 @@ Provides behind the scenes database operations for habit related functionality, 
 - habit creation
 - habit deletion
 """
-
+import time
 from typing import List, Optional
 from datetime import datetime
 
@@ -17,7 +17,6 @@ from core.streaks import Streaks
 from core.user import User
 from helpers.text_formating import RED, RES, GRAY
 from helpers.helper_functions import db_connection, reload_menu_countdown, save_entry_msg, cancel_operation, enter
-
 
 def load_habits(selected_user: User) -> List[Habit]:
     """
@@ -98,7 +97,6 @@ def load_habits(selected_user: User) -> List[Habit]:
 
     connection.close()
     return habits
-
 
 def habit_name_exists(selected_user: User, habit_name: str) -> bool:
     """
@@ -248,16 +246,16 @@ def delete_habit(selected_user: User, habit: Habit) -> None:
     """
     # Ask for confirmation
     print(f"""
-        {GRAY}---------------------------------------
-        This operation will permanently DELETE:
+    {GRAY}---------------------------------------
+    This operation will permanently DELETE:
 
-        - Your '{habit.name}' habit
-        - All associated habit data
-        ---------------------------------------{RES}
+    - Your '{habit.name}' habit
+    - All associated habit data
+    ---------------------------------------{RES}
     """)
 
     confirmation = input(
-        f"        Type in '{RED}delete{RES}' or {enter()} to cancel: "
+        f"Type in '{RED}delete{RES}' or {enter()} to cancel: "
     ).lower().strip()
 
     # Check if the user doesn't confirm
@@ -286,4 +284,6 @@ def delete_habit(selected_user: User, habit: Habit) -> None:
     connection.commit()
     connection.close()
 
-    input(f"\n'{RED}{habit.name}' has been thrown {RED}off your track{RES}! {enter()} to return...")
+    print(f"\n'{habit.name}' has been thrown {RED}off your track{RES}!")
+    time.sleep(1)
+    input(f"\n{enter()} to return...")

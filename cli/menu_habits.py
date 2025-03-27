@@ -55,9 +55,6 @@ def menu_habits(ht):
             print(f"{GRAY}Logged in as:{RES} {GREEN}{ht.logged_in_user.username}{RES}")
             print(f"""
         {BLUE}- - - New Habit Setup - - -{RES}
-            
-        - select a new habit name
-        - set it's frequency
             """)
             # Register a new habit
             ht.db.new_habit(ht.logged_in_user)

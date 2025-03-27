@@ -36,11 +36,11 @@ def confirm_input(attribute_name: str, value: str) -> Optional[str]:
     while True:
         # Ask for confirmation
         confirmation = input(
-            f"\nType '{GREEN}yes{RES}' to confirm '{GREEN}{value}{RES}' {enter()} to exit: "
+            f"\nType '{GREEN}yes{RES}' to confirm '{GREEN}{value}{RES}' or {enter()} to exit: "
         ).lower().strip()
 
         if confirmation == "yes":
-            print(f"\n{GREEN}Stored{RES} {GRAY}'{value.title()}' as your {attribute_name}!{RES}")
+            print(f"\n{GREEN}Stored{RES} {GRAY}'{value.title()}' as your {attribute_name}! {GREEN}(^_^)/{RES}")
             return value
         elif confirmation == "":
             return None
@@ -52,10 +52,9 @@ def reload_menu_countdown() -> None:
     Displays a countdown before returning.
     Allows visual feedback: the user has time to read the screen before it is reloaded.
     """
-    print("\nReloading Menu in...")
+    print(f"\n{GRAY}Reloading Menu in...")
     time.sleep(1)
-
-    print("        2")
+    print("\n        2")
     time.sleep(0.25)
     print("        .")
     time.sleep(0.25)
@@ -70,7 +69,7 @@ def reload_menu_countdown() -> None:
     time.sleep(0.25)
     print("        .")
     time.sleep(0.25)
-    print("        .")
+    print(f"        .{RES}")
     time.sleep(0.25)
 
 def reload_cli():
@@ -138,25 +137,25 @@ def check_exit_cmd(command: str) -> bool:
         True if the command is an exit command, False otherwise
     """
     if command.lower().strip() == "quit":
-        print(f"\n        Goodbye! {GREEN}(^_^)/{RES}")
+        print(f"\nGoodbye! {GREEN}(^_^)/{RES}")
         time.sleep(0.40)
-        print("                   .")
+        print("           .")
         time.sleep(0.40)
-        print("                   .")
+        print("           .")
         time.sleep(0.40)
-        print("                   .")
+        print("           .")
         time.sleep(0.40)
         print(f"""
-        {BLUE}-------------------------{RES}
-        {RED}REMEMBER TO STAY ON TRACK{RES}
-        {BLUE}-------------------------{RES}
+{BLUE}-------------------------{RES}
+{RED}REMEMBER TO STAY ON TRACK{RES}
+{BLUE}-------------------------{RES}
         """)
         time.sleep(0.40)
-        print("                   .")
+        print("           .")
         time.sleep(0.40)
-        print("                   .")
+        print("           .")
         time.sleep(0.40)
-        print("                   .")
+        print("           .")
         time.sleep(0.40)
         reload_cli()
         sys.exit(0)
@@ -211,6 +210,6 @@ def save_entry_msg(entry):
     print(f"\n{GRAY}Returning...{RES}")
     time.sleep(1)
 
-def good_job():
+def good_job(msg: str = "right"):
     """Friendly motivational message after completions."""
-    print(f"\n{GRAY}You're right on track! {GREEN}(^_^)/{RES} {GRAY}Keep it up!{RES}")
+    print(f"\n{GRAY}You're {msg} on track! {GREEN}(^_^)/{RES} {GRAY}Keep it up!{RES}")

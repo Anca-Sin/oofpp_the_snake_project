@@ -56,10 +56,11 @@ def menu_analytics_all_habits(ht) -> None:
         # Check if the user has any habits to analyze
         if not ht.logged_in_user.habits:
             # If no habits exist, inform the user and prompt for return
-            input(f"""
-            You don't have any habits yet!
+            input(f"""        {GRAY}I can't show you any Analytics {RED}(v_v)*{RES}
+        
+        You haven't put any habits on track!
             
-            Navigate to 'My Habit Tracker' -> 'My Habits' to register a new habit! {enter()} to return...""")
+        {GRAY}Go to{RES} 'My Habits' {GRAY}to register a new habit!{RES}""")
             # Return to My Habit Tracker Menu
             return
 

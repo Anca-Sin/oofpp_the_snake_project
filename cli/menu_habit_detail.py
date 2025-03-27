@@ -69,7 +69,7 @@ def menu_habit_detail(ht, habit: Habit) -> None:
         elif choice == "4":
             # View the creation date of the habit
             input(
-f"\nHabit '{habit.name}' was put on track on {habit.creation_date}! {enter()} to continue..."
+f"\nHabit '{habit.name}' was put on track on {habit.creation_date}! {enter()} to return..."
             )
 
         elif choice == "5":
