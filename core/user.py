@@ -49,7 +49,7 @@ class User:
         while True:
             # Ask user for username
             username = input(
-                f"\nNew user name or {enter()} to exit: "
+                f"\nEnter new username or {enter()} to exit: "
             ).title().strip()
 
             # Exit the loop if << ENTER

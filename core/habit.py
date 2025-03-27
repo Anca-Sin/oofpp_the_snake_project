@@ -56,7 +56,7 @@ class Habit:
         while True:
             # Ask for habit name
             habit_name = input(
-                f"\nNew habit name or {enter()} to exit: "
+                f"\nEnter new habit name or {enter()} to exit: "
             ).title().strip()
 
             # Exit the loop if << ENTER
@@ -103,7 +103,7 @@ class Habit:
         # If no preset frequency, prompt the user
         while True:
             habit_frequency = input(
-                f"\nType 'Daily' or 'Weekly' or {enter()} to exit: "
+                f"\nEnter 'Daily' or 'Weekly' or {enter()} to exit: "
             ).strip().lower()
 
             # Exit the loop if "ENTER"
