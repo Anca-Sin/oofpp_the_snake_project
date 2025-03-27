@@ -11,7 +11,7 @@ It manages:
 
 from .menu_my_habit_tracker import menu_my_habit_tracker
 from core.analytics import Analytics
-from helpers.helper_functions import reload_cli, reload_menu_countdown, check_exit_cmd, exit_msg, invalid_input, enter
+from helpers.helper_functions import reload_cli, check_exit_cmd, exit_msg, invalid_input, enter
 from helpers.text_formating import RES, BLUE, RED
 
 def main_menu(ht) -> None:
@@ -62,4 +62,3 @@ def main_menu(ht) -> None:
         else:
             # Handle invalid input
             invalid_input()
-            reload_menu_countdown()

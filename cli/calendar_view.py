@@ -16,7 +16,7 @@ from datetime import datetime
 
 from core.analytics import Analytics
 from core.habit import Habit
-from helpers.helper_functions import reload_cli, check_exit_cmd, reload_menu_countdown, exit_msg, enter, invalid_input
+from helpers.helper_functions import reload_cli, check_exit_cmd, exit_msg, enter, invalid_input
 from helpers.text_formating import BLUE, RES, RED, GRAY, ITAL, GREEN
 
 
@@ -189,4 +189,3 @@ def view_completions_calendar(ht, habit: Habit) -> None:
         else:
             # Handle invalid input
             invalid_input()
-            reload_menu_countdown()

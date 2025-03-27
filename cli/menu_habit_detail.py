@@ -16,7 +16,7 @@ from cli.calendar_view import view_completions_calendar
 from cli.menu_analytics import menu_analytics_one_habit
 from core.analytics import Analytics
 from core.habit import Habit
-from helpers.helper_functions import reload_cli, reload_menu_countdown, check_exit_cmd, exit_msg, enter, invalid_input
+from helpers.helper_functions import reload_cli, check_exit_cmd, exit_msg, enter, invalid_input
 from helpers.text_formating import BLUE, RES, RED, GREEN
 
 
@@ -90,4 +90,3 @@ f"\nHabit '{habit.name}' was put on track on {habit.creation_date}! {enter()} to
         else:
             # Handle invalid input
             invalid_input()
-            reload_menu_countdown()

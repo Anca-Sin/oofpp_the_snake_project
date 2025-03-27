@@ -97,7 +97,7 @@ class Habit:
         # If preset frequency is provided, assign it without prompting
         if preset_frequency in ["daily", "weekly"]:
             self.frequency = preset_frequency
-            print(f"\nFrequency automatically set to {preset_frequency}.")
+            print(f"\n{GRAY}Frequency automatically set to{RES} {preset_frequency}.")
             return
 
         # If no preset frequency, prompt the user

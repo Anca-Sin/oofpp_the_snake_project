@@ -10,13 +10,13 @@ It manages:
 - going back to My Habit Tracker Menu
 - app exiting
 """
-
+import time
 from typing import List
 
 from core.analytics import Analytics
 from .menu_habit_detail import menu_habit_detail
 from core.habit import Habit
-from helpers.helper_functions import reload_cli, reload_menu_countdown, check_exit_cmd, exit_msg, enter, invalid_input
+from helpers.helper_functions import reload_cli, check_exit_cmd, exit_msg, enter, invalid_input
 from helpers.text_formating import BLUE, RES, GRAY, GREEN
 
 def menu_habits(ht):
@@ -81,10 +81,9 @@ def menu_habits(ht):
             # Return to My Habit Tracker Menu
             return
 
-    else:
+        else:
             # Handle invalid input
             invalid_input()
-            reload_menu_countdown()
 
 def display_habits_and_select(ht, habits: List[Habit], display_type: str, set_frequency: str = None) -> None:
     """
@@ -101,14 +100,16 @@ def display_habits_and_select(ht, habits: List[Habit], display_type: str, set_fr
         # If no habits, display a message based on the habit type
         # For daily, weekly habits
         if set_frequency in ["daily", "weekly"]:
-            print(f"\nYou don't have any '{display_type.lower()}' habits yet!")
-            print(f"\nRedirecting you to {GREEN}New {display_type} Habit Setup{RES}...")
-            reload_menu_countdown()
+            print(f"\n{GRAY}You don't have any {RES}{display_type.lower()} {GRAY}habits yet!")
+            time.sleep(1)
+            print(f"\nRedirecting{RES}...")
+            time.sleep(1)
         # For all habits
         else:
-            print("\nYou don't have any registered habits yet!")
-            print(f"\nRedirecting you to {GREEN}New Habit Setup{RES}...")
-            reload_menu_countdown()
+            print(f"\n{GRAY}You don't have any registered habits yet!")
+            time.sleep(1)
+            print(f"\nRedirecting{RES}...")
+            time.sleep(1)
 
         # Offer to create a new habit with pre-set frequency/None or return
         while True:
@@ -119,9 +120,9 @@ def display_habits_and_select(ht, habits: List[Habit], display_type: str, set_fr
             # If accessed from display daily or weekly habits
             if set_frequency:
                 print(f"""
-                {BLUE}- - - New {set_frequency.title()} Habit Setup - - -{RES}
+        {BLUE}- - - New Habit Setup - - -{RES}
 
-                - frequency {GREEN}automatically{RES} set to: {set_frequency}
+        {GRAY}- frequency automatically set to: {RES}{set_frequency}
                 """)
                 # Create a new habit with the pre-set frequency
                 ht.db.new_habit(ht.logged_in_user, set_frequency)
@@ -134,7 +135,6 @@ def display_habits_and_select(ht, habits: List[Habit], display_type: str, set_fr
             else:
                 print(f"""
                 {BLUE}- - - New Habit Setup - - -{RES}
-
                 """)
                 # Create a new habit
                 ht.db.new_habit(ht.logged_in_user)
@@ -182,9 +182,7 @@ def display_habits_and_select(ht, habits: List[Habit], display_type: str, set_fr
             else:
                 # Handle invalid int input
                 invalid_input()
-                reload_menu_countdown()
 
         except ValueError:
             # Handle invalid str input
             invalid_input()
-            reload_menu_countdown()

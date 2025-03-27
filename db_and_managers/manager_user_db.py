@@ -12,7 +12,7 @@ from typing import List, Optional
 
 from config import DB_FILEPATH
 from core.user import User
-from helpers.helper_functions import (db_connection, reload_cli, exit_msg, reload_menu_countdown, check_exit_cmd,
+from helpers.helper_functions import (db_connection, reload_cli, exit_msg, check_exit_cmd,
                                       setup_header, save_entry_msg, cancel_operation, enter, invalid_input)
 from helpers.text_formating import RED, RES, BLUE, GREEN, GRAY
 
@@ -83,7 +83,6 @@ def select_user(users: List[User]=None) -> Optional[User]:
 
             else:
                 invalid_input()
-                reload_menu_countdown()
 
     # Display the users to choose from
     else:
@@ -133,11 +132,9 @@ def select_user(users: List[User]=None) -> Optional[User]:
 
                 else:
                     invalid_input()
-                    reload_menu_countdown()
 
             except ValueError:
                 invalid_input()
-                reload_menu_countdown()
 
 def username_exists(username: str) -> bool:
     """

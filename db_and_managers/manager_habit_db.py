@@ -284,6 +284,6 @@ def delete_habit(selected_user: User, habit: Habit) -> None:
     connection.commit()
     connection.close()
 
-    print(f"\n'{habit.name}' has been thrown {RED}off your track{RES}!")
+    print(f"\n{GRAY}Threw{RES} {habit.name} {GRAY}off your track!{RES} {RED}(x_x)/{RES}")
     time.sleep(1)
     input(f"\n{enter()} to return...")

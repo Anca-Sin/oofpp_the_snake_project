@@ -13,11 +13,12 @@ import sqlite3
 from typing import Optional
 
 from config import DB_FILEPATH
-from helpers.text_formating import GRAY, RES, RED, BLUE, GREEN, ITAL
+from helpers.text_formating import GRAY, RES, RED, BLUE, GREEN, ITAL, YELLOW
+
 
 def invalid_input():
     """Standardizes the invalid input message."""
-    print(f"\n{GRAY}Invalid input. Please try again!{RES}")
+    input(f"\n{YELLOW}Invalid input!{RES} {enter()} to try again...")
 
 def enter():
     """Standardizes the enter hint to return."""
@@ -45,31 +46,6 @@ def confirm_input(attribute_name: str, value: str) -> Optional[str]:
             return None
         else:
             invalid_input()
-
-def reload_menu_countdown() -> None:
-    """
-    Displays a countdown before returning.
-    Allows visual feedback: the user has time to read the screen before it is reloaded.
-    """
-    print(f"\n{GRAY}Reloading Menu in...")
-    time.sleep(1)
-    print("\n        2")
-    time.sleep(0.25)
-    print("        .")
-    time.sleep(0.25)
-    print("        .")
-    time.sleep(0.25)
-    print("        .")
-    time.sleep(0.25)
-
-    print("        1")
-    time.sleep(0.25)
-    print("        .")
-    time.sleep(0.25)
-    print("        .")
-    time.sleep(0.25)
-    print(f"        .{RES}")
-    time.sleep(0.25)
 
 def reload_cli():
     """
@@ -123,8 +99,7 @@ def db_connection(instance) -> Optional[sqlite3.Connection]:
                 time.sleep(1)
                 sys.exit(0)
             else:
-                print("\nInvalid input. Please try again!")
-                reload_menu_countdown()
+                invalid_input()
 
 def check_exit_cmd(command: str) -> bool:
     """

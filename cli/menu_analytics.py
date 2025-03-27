@@ -6,7 +6,7 @@ Analytics module containing 2 menus for:
 """
 
 from core.habit import Habit
-from helpers.helper_functions import reload_cli, reload_menu_countdown, check_exit_cmd, exit_msg, enter, invalid_input
+from helpers.helper_functions import reload_cli, check_exit_cmd, exit_msg, enter, invalid_input
 from helpers.text_formating import BLUE, RES, RED, GRAY, GREEN
 
 def menu_analytics_one_habit(ht, habit: Habit) -> None:
@@ -25,7 +25,7 @@ def menu_analytics_one_habit(ht, habit: Habit) -> None:
     print("")
     print(f"{GRAY}Logged in as:{RES} {GREEN}{ht.logged_in_user.username}{RES}")
 
-    print(f"\n{BLUE}        - - - '{habit.name}' Analytics - - -{RES}")
+    print(f"\n{BLUE}        - - - {RES}{habit.name} {BLUE}Analytics - - -{RES}")
     print(f"\n        {GRAY}>> {RES}Current streak:     {RED}   {habit.streaks.current_streak}{RES}-days streak")
     print(f"        {GRAY}>> {RES}Longest streak:       {RED} {analytics.longest_streak_for_habit(habit.name)}{RES}-days streak")
     print(f"        {GRAY}>> {RES}Average streak length:{RED} {round(analytics.average_streak_length_habit(habit.name), 2)}{RES} days")
@@ -81,7 +81,6 @@ def menu_analytics_all_habits(ht) -> None:
             else:
                 # Handle invalid input
                 invalid_input()
-                reload_menu_countdown()
 
 def _analytics_all_habits(ht):
     """Analytics display across all habits."""
