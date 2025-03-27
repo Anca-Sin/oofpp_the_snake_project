@@ -10,6 +10,7 @@ It manages:
 - going back to My Habit Tracker Menu
 - app exiting
 """
+
 import time
 from typing import List
 
@@ -102,13 +103,13 @@ def display_habits_and_select(ht, habits: List[Habit], display_type: str, set_fr
         if set_frequency in ["daily", "weekly"]:
             print(f"\n{GRAY}You don't have any {RES}{display_type.lower()} {GRAY}habits yet!")
             time.sleep(1)
-            print(f"\nRedirecting{RES}...")
+            print(f"\nRedirecting...{RES}")
             time.sleep(1)
         # For all habits
         else:
             print(f"\n{GRAY}You don't have any registered habits yet!")
             time.sleep(1)
-            print(f"\nRedirecting{RES}...")
+            print(f"\nRedirecting...{RES}")
             time.sleep(1)
 
         # Offer to create a new habit with pre-set frequency/None or return
