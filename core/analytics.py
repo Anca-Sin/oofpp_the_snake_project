@@ -96,7 +96,7 @@ class Analytics:
         # Direct look-up with next() since habit names are unique
         habit = next((h for h in self.user.habits if h.name == habit_name), None)
 
-        return habit.streaks.get_longest_streak() if habit_name else 0
+        return habit.streaks.get_longest_streak() if habit else 0
 
     def longest_streak_by_periodicity(self, periodicity: str) -> Tuple[str, int]:
         """
