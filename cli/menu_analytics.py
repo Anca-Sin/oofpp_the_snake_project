@@ -1,20 +1,20 @@
 """
-Menu: Analytics - For viewing statistics on one habit or across all habits
-
-menu_analytics_one_habit: Submenu of Habit Details Menu
-menu_analytics_all_habits: Submenu of My Habit Tracker Menu
+Analytics module containing 2 menus for:
+- One habit analytics:         submenu of Habit Details Menu
+- Analytics across all habits: submenu of My Habit Tracker Menu
+- deploys all Analytics class methods except listings
 """
-from core.habit import Habit
-from helpers.helper_functions import reload_cli, reload_menu_countdown, check_exit_cmd, exit_msg
-from helpers.text_formating import BLUE, RES, RED, GRAY, GREEN
 
+from core.habit import Habit
+from helpers.helper_functions import reload_cli, reload_menu_countdown, check_exit_cmd, exit_msg, enter, invalid_input
+from helpers.text_formating import BLUE, RES, RED, GRAY, GREEN
 
 def menu_analytics_one_habit(ht, habit: Habit) -> None:
     """
-    Displays the Analytics Menu for a selected habit.
+    The Analytics Menu for a selected habit.
 
-    Parameters:
-        ht: The HabitTracker instance that manages the application state.
+    Args:
+        ht: The HabitTracker instance managing app state.
         habit: The selected Habit object to analyze.
     """
     # Access HabitTracker's Analytics instance
@@ -29,15 +29,16 @@ def menu_analytics_one_habit(ht, habit: Habit) -> None:
     print(f"\n        {GRAY}>> {RES}Current streak:     {RED}   {habit.streaks.current_streak}{RES}-days streak")
     print(f"        {GRAY}>> {RES}Longest streak:       {RED} {analytics.longest_streak_for_habit(habit.name)}{RES}-days streak")
     print(f"        {GRAY}>> {RES}Average streak length:{RED} {round(analytics.average_streak_length_habit(habit.name), 2)}{RES} days")
-    input(f"\n{GRAY}ENTER << Back to '{habit.name}' Details Menu...{RES}")
+
+    input(f"\n{enter()} Back to '{habit.name}' Details Menu...")
     return
 
 def menu_analytics_all_habits(ht) -> None:
     """
-    Displays the general Analytics Menu.
+    The Analytics menu across all habits.
 
-    Parameters:
-        ht: The HabitTracker instance that manages the application state.
+    Args:
+        ht: The HabitTracker instance managing app state.
     """
     while True:
         # Clear the screen and display the menu header
@@ -49,16 +50,16 @@ def menu_analytics_all_habits(ht) -> None:
         1 - [All Habits]
         2 - [Daily - Weekly]
         
-        {GRAY}ENTER << Back to My Habit Tracker Menu{RES}
+        {enter()} to My Habit Tracker Menu
         """)
 
         # Check if the user has any habits to analyze
         if not ht.logged_in_user.habits:
             # If no habits exist, inform the user and prompt for return
-            print("""\nYou don't have any habits yet!
+            input(f"""
+            You don't have any habits yet!
             
-            Navigate to 'My Habit Tracker' -> 'My Habits' to register a new habit!""")
-            input(f"{GRAY}ENTER << to return...{RES} ")
+            Navigate to 'My Habit Tracker' -> 'My Habits' to register a new habit! {enter()} to return...""")
             # Return to My Habit Tracker Menu
             return
 
@@ -71,18 +72,18 @@ def menu_analytics_all_habits(ht) -> None:
             check_exit_cmd(choice)
 
             if choice == "1":
-                submenu1_analytics_all_habits(ht)
+                _analytics_all_habits(ht)
             elif choice == "2":
-                submenu2_analytics_d_w_habits(ht)
+                _analytics_d_w_habits(ht)
             elif choice == "":
                 return
             else:
                 # Handle invalid input
-                print("\nInvalid input. Please try again!")
+                invalid_input()
                 reload_menu_countdown()
 
-def submenu1_analytics_all_habits(ht):
-    """Displays the Analytics across all habits."""
+def _analytics_all_habits(ht):
+    """Analytics display across all habits."""
     # Access HabitTracker's Analytics instance
     analytics = ht.analytics
 
@@ -98,17 +99,13 @@ def submenu1_analytics_all_habits(ht):
         print(f"{GRAY}        >>{RES} Most completed habit:  '{RED}{habit_name}{RES}' with {RED}{count}{RES} completions")
         habit_name, count = analytics.least_completed_habit()
         print(f"{GRAY}        >>{RES} Least completed habit: '{RED}{habit_name}{RES}' with {RED}{count}{RES} completions")
-        avg_streak = round(analytics.average_streak_all_habits(), 2)
         print(f"{GRAY}        >>{RES} Average streak length:  {RED}{round(analytics.average_streak_all_habits(), 2)}{RES} days")
-        i = input(f"\n{GRAY}ENTER << Back to My Analytics Menu...{RES}")
 
-        # Check for exit command
-        check_exit_cmd(i)
-
+        input(f"\n{enter()} Back to My Analytics Menu...")
         return
 
-def submenu2_analytics_d_w_habits(ht):
-    """Displays the Analytics for all daily and weekly habits."""
+def _analytics_d_w_habits(ht):
+    """Analytics display sorted by daily and weekly habits."""
     # Access HabitTracker's Analytics instance
     analytics = ht.analytics
 
@@ -143,9 +140,5 @@ def submenu2_analytics_d_w_habits(ht):
         avg_weekly = round(analytics.average_streak_by_periodicity("weekly"))
         print(f"        {GRAY}Weekly:{RES}  {RED}{avg_weekly}{RES} days")
 
-        i = input(f"\n{GRAY}ENTER << Back to My Analytics Menu...{RES}")
-
-        # Check for exit command
-        check_exit_cmd(i)
-
+        input(f"\n{enter()} Back to My Analytics Menu...")
         return

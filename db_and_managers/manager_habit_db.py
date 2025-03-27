@@ -256,7 +256,7 @@ def delete_habit(selected_user: User, habit: Habit) -> None:
     """)
 
     confirmation = input(
-        f"Type in '{RED}delete{RES}' if you are sure to proceed or {enter()} to cancel: "
+        f"Type in '{RED}delete{RES}' or {enter()} to cancel: "
     ).lower().strip()
 
     # Check if the user doesn't confirm

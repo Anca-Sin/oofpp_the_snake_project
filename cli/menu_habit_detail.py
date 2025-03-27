@@ -1,23 +1,30 @@
 """
-Menu: Habit Detail - Submenu of My Habits Menu for managing and analyzing one individual habit
+Habit Details Menu module
+
+Detailed interface for managing one individual habit.
+It manages:
+- direct completing today
+- viewing calendar and managing completions
+- viewing individual analytics for the habit
+- viewing its creation date
+- habit deletion
+- going back to My Habits Menu
+- app exiting
 """
+
 from cli.calendar_view import view_completions_calendar
 from cli.menu_analytics import menu_analytics_one_habit
 from core.analytics import Analytics
 from core.habit import Habit
-from db_and_managers.database import Database
-from helpers.helper_functions import reload_cli, reload_menu_countdown, check_exit_cmd, exit_msg
-from helpers.text_formating import BLUE, RES, GRAY, RED
-
-# Create a db instance
-db = Database()
+from helpers.helper_functions import reload_cli, reload_menu_countdown, check_exit_cmd, exit_msg, enter, invalid_input
+from helpers.text_formating import BLUE, RES, RED
 
 def menu_habit_detail(ht, habit: Habit) -> None:
     """
-    Shows a detailed menu for the selected habit.
+    The detailed menu of a selected habit.
 
     Parameters:
-        ht: The HabitTracker instance that manages the application state.
+        ht: The HabitTracker instance managing app state.
         habit: The selected Habit object to manage.
     """
     while True:
@@ -33,7 +40,7 @@ def menu_habit_detail(ht, habit: Habit) -> None:
         4 - View creation date
         5 - {RED}Delete{RES} habit
         
-        {GRAY}ENTER << Back to My Habits Menu{RES}
+        {enter()} Back to My Habits Menu
         """)
 
         # Get user choice
@@ -47,7 +54,7 @@ def menu_habit_detail(ht, habit: Habit) -> None:
             # Mark the habit as complete for today
             ht.db.complete_habit_today(ht.logged_in_user, habit)
 
-            # Recreating a fresh Analytics instance
+            # Refreshing Analytics instance
             ht.analytics = Analytics(ht.logged_in_user)
 
         elif choice == "2":
@@ -60,14 +67,15 @@ def menu_habit_detail(ht, habit: Habit) -> None:
 
         elif choice == "4":
             # View the creation date of the habit
-            print(f"\nHabit '{habit.name}' was created on: {habit.creation_date.strftime('%Y-%m-%d')}")
-            input(f"{GRAY}ENTER << to continue...{RES}")
+            input(
+f"\nHabit '{habit.name}' was put on track on {habit.creation_date.strftime('%Y-%m-%d')}! {enter()} to continue..."
+            )
 
         elif choice == "5":
-            # Delete selected habit entirely
+            # Delete selected habit
             ht.db.delete_habit(ht.logged_in_user, habit)
 
-            # Recreating a fresh Analytics instance
+            # Refreshing Analytics instance
             ht.analytics = Analytics(ht.logged_in_user)
 
             # Go to Menu Habits
@@ -80,5 +88,5 @@ def menu_habit_detail(ht, habit: Habit) -> None:
 
         else:
             # Handle invalid input
-            print("\nInvalid input! Please try again!")
+            invalid_input()
             reload_menu_countdown()

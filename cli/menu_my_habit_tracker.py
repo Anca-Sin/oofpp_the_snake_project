@@ -1,22 +1,25 @@
 """
-Menu: My Habit Tracker - Second after Main Menu
+My Habit Tracker Menu module.
+
+Central menu interface after user selection.
+It manages:
+- access to habit management
+- access to analytics across all habits
+- going back to Main Menu
+- app exiting
 """
+
 from cli.menu_analytics import menu_analytics_all_habits
 from cli.menu_habits import menu_habits
-from helpers.helper_functions import reload_cli, reload_menu_countdown, check_exit_cmd, exit_msg
-from helpers.text_formating import BLUE, RES, GRAY
-
+from helpers.helper_functions import reload_cli, reload_menu_countdown, check_exit_cmd, exit_msg, enter, invalid_input
+from helpers.text_formating import BLUE, RES
 
 def menu_my_habit_tracker(ht):
     """
-    Displays the habit tracker menu and handles user navigation.
+    The habit tracker menu.
 
-    - redirects to habits manager (create, view, complete, delete)
-    - redirects to viewing analytics across all habits
-    - can go back to main menu
-
-    Parameters:
-        ht: The HabitTracker instance that manages the application state.
+    Args:
+        ht: The HabitTracker instance managing app state.
     """
     while True:
         # Clear the screen and display the menu header
@@ -28,7 +31,7 @@ def menu_my_habit_tracker(ht):
         1 - My Habits
         2 - My Analytics
         
-        {GRAY}ENTER << Back to Main Menu{RES}
+        {enter()} Back to Main Menu
         """)
 
         # Get user choice
@@ -52,5 +55,5 @@ def menu_my_habit_tracker(ht):
 
         else:
             # Handle invalid input
-            print("\nInvalid input. Please try again!")
+            invalid_input()
             reload_menu_countdown()

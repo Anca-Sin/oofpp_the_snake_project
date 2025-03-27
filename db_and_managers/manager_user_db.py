@@ -7,14 +7,15 @@ Provides behind the scenes database operations for user related functionality, i
 - user creation
 - user deletion
 """
-
+import time
 from typing import List, Optional
 
 from config import DB_FILEPATH
 from core.user import User
 from helpers.helper_functions import (db_connection, reload_cli, exit_msg, reload_menu_countdown, check_exit_cmd,
                                       setup_header, save_entry_msg, cancel_operation, enter, invalid_input)
-from helpers.text_formating import RED, RES, BLUE, GREEN
+from helpers.text_formating import RED, RES, BLUE, GREEN, GRAY
+
 
 def load_users() -> List[User]:
     """
@@ -195,14 +196,16 @@ def delete_user(selected_user) -> None:
     """
     # Ask for confirmation
     print(f"""
-    This operation will permanently DELETE:
+{GRAY}---------------------------------------{RES}    
+This operation will permanently DELETE:
         
-    - Your username '{selected_user.username}'
-    - All associated habits and data
+- Your username '{selected_user.username}'
+- All associated habits and data
+{GRAY}---------------------------------------{RES}
     """)
 
     confirmation = input(
-        f"Type in '{RED}delete{RES}' if you are sure to proceed or {enter()} to cancel: "
+        f"Type in '{RED}delete{RES}' or {enter()} to cancel: "
     ).lower().strip()
 
     # Check if the user doesn't confirm
@@ -231,5 +234,8 @@ def delete_user(selected_user) -> None:
     connection.commit()
     connection.close()
 
+    print(f"\nFarewell {GREEN}{selected_user.username}{RES}!")
+    time.sleep(1)
     print(f"\n{GREEN}(^_^)/{RES} May your tracking continue elsewhere!")
-    input(f"\nFarewell {RED}{selected_user.username}{RES}! {enter()} to return...")
+    time.sleep(1)
+    input(f"\n{enter()} to return...")

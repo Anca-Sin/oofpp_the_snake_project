@@ -1,21 +1,25 @@
 """
-Menu: Main Menu - First menu after application start
+Main Menu module.
+
+Provides the first menu interface for the app = entry point after app start.
+It manages:
+- navigation to habit tracker functionality
+- user deletion
+- user switching
+- app exiting
 """
-import sys
-import time
 
 from .menu_my_habit_tracker import menu_my_habit_tracker
 from core.analytics import Analytics
-from helpers.helper_functions import reload_cli, reload_menu_countdown, check_exit_cmd, exit_msg
-from helpers.text_formating import GRAY, RES, BLUE, RED, GREEN
-
+from helpers.helper_functions import reload_cli, reload_menu_countdown, check_exit_cmd, exit_msg, invalid_input
+from helpers.text_formating import RES, BLUE, RED, GREEN, ITAL
 
 def main_menu(ht) -> None:
     """
-    Displays the main menu and handles user navigation.
+    The main menu of the habit tracker.
 
-    Parameters:
-        ht: The HabitTracker instance that manages the application state.
+    Args:
+        ht: The HabitTracker instance managing app state.
     """
     while True:
         # Clear the screen and display the menu header
@@ -27,7 +31,7 @@ def main_menu(ht) -> None:
         1 - My Habit Tracker
         2 - {RED}Delete{RES} this user
         
-        {GREEN}ENTER{RES} << Select a different user 
+        {GREEN}{ITAL}ENTER <<{RES} Select a different user 
         """)
 
         # Get user choice
@@ -45,17 +49,17 @@ def main_menu(ht) -> None:
             # Select a different user
             ht.logged_in_user = ht.db.select_user()
 
-            # Recreating a fresh Analytics instance
+            # Refreshing Analytics instance
             ht.analytics = Analytics(ht.logged_in_user)
 
         elif choice == "2":
             # Delete the selected user
             ht.db.delete_user(ht.logged_in_user)
 
-            # Recreating a fresh Analytics instance
+            # Refreshing Analytics instance
             ht.analytics = Analytics(ht.logged_in_user)
 
         else:
             # Handle invalid input
-            print("\nInvalid input. Please try again!")
+            invalid_input()
             reload_menu_countdown()

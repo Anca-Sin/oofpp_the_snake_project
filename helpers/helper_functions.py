@@ -156,27 +156,25 @@ def check_exit_cmd(command: str) -> bool:
         True if the command is an exit command, False otherwise
     """
     if command.lower().strip() == "quit":
-        print("\n        Exiting the application")
+        print(f"\nGoodbye! {GREEN}(^_^)/{RES}")
         time.sleep(0.40)
-        print("                      .")
+        print("           .")
         time.sleep(0.40)
-        print("                      .")
+        print("           .")
         time.sleep(0.40)
-        print("                      .")
+        print("           .")
         time.sleep(0.40)
-        print(f"\n        Goodbye! {GREEN}(^_^)/{RES}")
-        time.sleep(0.40)
-        print(f"""\n
-        {BLUE}* * * * * * * * * * * * *{RES}
-        {RED}REMEMBER TO STAY ON TRACK{RES}
-         {BLUE}* * * * * * * * * * * *{RES}
+        print(f"""
+{BLUE}-------------------------{RES}
+{RED}REMEMBER TO STAY ON TRACK{RES}
+{BLUE}-------------------------{RES}
         """)
         time.sleep(0.40)
-        print("                      .")
+        print("           .")
         time.sleep(0.40)
-        print("                      .")
+        print("           .")
         time.sleep(0.40)
-        print("                      .")
+        print("           .")
         time.sleep(0.40)
         reload_cli()
         sys.exit(0)
@@ -196,7 +194,7 @@ def cancel_operation(operation_name: str = "Operation"):
         operation_name: A string representing the name of the operation canceled.
                         Defaults to "Operation".
     """
-    print(f"{ITAL}{operation_name} {RED}canceled!{RES}")
+    print(f"\n{operation_name} {RED}canceled!{RES}")
     time.sleep(1)
     print("\nNo changes will be saved...")
     time.sleep(1)
@@ -225,13 +223,13 @@ def save_entry_msg(entry):
     Args:
         entry: A string describing what was saved - names, completions past
     """
-    print(f"\n{ITAL}Saving entry to your database...")
+    print("\nSaving...")
     time.sleep(1)
-    print(f"'{entry}' {ITAL}{GREEN}saved!{RES}")
+    print(f"\n'{entry}' {GREEN}saved!{RES}")
     time.sleep(1)
-    print(f"\n{ITAL}Returning...{RES}")
+    print("\nReturning...")
     time.sleep(1)
 
 def good_job():
     """Friendly motivational message after completions."""
-    print(f"\n{ITAL}You're right on track! {GREEN}(^_^)/{RES}{ITAL} Keep it up!{RES}")
+    print(f"\nYou're right on track! {GREEN}(^_^)/{RES} Keep it up!")

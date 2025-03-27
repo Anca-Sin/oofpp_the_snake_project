@@ -10,17 +10,15 @@ from db_and_managers.database import Database
 
 class HabitTracker:
     """
-    Main class to manage users, habit creation, streaks, and analytics.
+    My baby <3
 
     - serves at the central coordinator for the entire application
-    - it initializes the db
-    - manages user selection
-    - provides access to habit analytics functionality
+    - interacts with the user through the CLI package modules (menus)
 
     Attributes:
-        db (Database): Instance of the Database for managing user and habit data
-        logged_in_user (User): The currently selected user (no real "log in" implemented, only selection)
-        analytics (Analytics): Analytics functionality for the user.
+        db (Database):         Initializes the Database instance.
+        logged_in_user (User): The currently selected user (no real "log in" implemented, only selection).
+        analytics (Analytics): Initializes the Analytics instance.
     """
 
     def __init__(self):
@@ -33,14 +31,12 @@ class HabitTracker:
         """
         Starts the Habit Tracker app.
 
-        - display a welcome message
-        - loads existing users from the db
-        - prompts to select from existing users or create a new user
-        - loads the selected user's habits from the db
+        - display a welcome header
+        - loads existing users from the db, which:
+                - prompts to select from existing users or create a new user
+                - loads the selected user's habits from the db
         - initializes the analytics for the selected users
         - opens the main menu
-
-        - no db connection needed, each Database method handles its own connection
         """
         print("        Welcome to your - - -  Habit Tracker- - -")
 
