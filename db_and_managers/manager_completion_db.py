@@ -11,10 +11,9 @@ Provides behind the scenes database operations for completions related functiona
 from datetime import datetime, date, timedelta
 from typing import Optional
 
-from helpers.text_formating import RES, GREEN, RED
+from helpers.text_formating import RES, GREEN, RED, GRAY
 from core.habit import Habit
 from helpers.helper_functions import confirm_input, check_exit_cmd, good_job, enter, invalid_input
-
 
 def _is_habit_completed(habit) -> bool:
     """
@@ -59,29 +58,15 @@ def complete_habit_today(habit: Habit) -> Optional[date]:
     """
     today = datetime.now().date()
 
-    while True:
-        choice = input(
-            f"\nType '{GREEN}yes{RES}' to complete for today or {enter()} to exit: "
-        ).strip()
+    # Check if already completed for complete today.
+    if _is_habit_completed(habit):
+        input(f"\n'{habit.name}' is {RED}already{RES} completed today! {enter()} to return...")
+        return None
 
-        # Check for exit command
-        check_exit_cmd(choice)
-
-        if choice == "yes":
-            # Check if already completed for complete today.
-            if _is_habit_completed(habit):
-                input(f"\n'{habit.name}' is {RED}already{RES} completed today! {enter()} to return...")
-                return None
-
-            good_job() # Helper
-            input(f"\n'{habit.name}' {GREEN}completed{RES}! {enter()} to return...")
-            # Return today's date to the Database method
-            return today
-        elif choice == "":
-            return None
-        else:
-            # Handle invalid input
-            invalid_input()
+    good_job() # Helper
+    input(f"\n{enter()} to return...")
+    # Return today's date to the Database method
+    return today
 
 def complete_habit_past(habit: Habit) -> Optional[date]:
     """
@@ -127,21 +112,19 @@ def complete_habit_past(habit: Habit) -> Optional[date]:
                 return None
 
             # Valid date that doesn't have a completion
+            elif completion_date:
+                good_job("back") # Helper
+                input(f"\n{enter()} to return...")
+                # Return date for the Database method
+                return completion_date
+
             else:
-                # Confirm the user's choice
-                confirmed = confirm_input("completion date", date_str)
-                if confirmed:
-                    good_job() # Helper
-                    input(f"{enter()} to return...")
-                    # Return date for the Database method
-                    return completion_date
-                else:
-                    # If user cancels the confirmation
-                    return None
+                # Handle invalid input
+                print(f"{invalid_input()}")
 
         except ValueError:
             # Handle invalid date format
-            input(f"\nInvalid date! {enter()} to continue...")
+            print(f"{invalid_input()}")
 
 def delete_completion(habit: Habit) -> Optional[date]:
     """
@@ -179,26 +162,11 @@ def delete_completion(habit: Habit) -> Optional[date]:
 
             # Check if the entered date exists in the completion_dates
             if deletion_date in habit.completion_dates:
-                # Confirm deletion
-                while True:
-                    choice = input(
-                        f"\nType '{GREEN}yes{RES}' to {RED}delete{RES} {deletion_date} or {enter()} to exit: "
-                    ).strip()
+                print(f"\n{GRAY}Derailed{RES} {deletion_date} {GRAY}from your track! {RED}(x_x)/{RES}")
+                input(f"\n{enter()} to return...")
+                # Return date for the Database method
+                return deletion_date
 
-                    # Check for exit command
-                    check_exit_cmd(choice)
-
-                    if choice == "yes":
-                        input(
-                            f"{RED}Deleted{RES} {deletion_date} from your track! {enter()} to return..."
-                        )
-                        # Return date for the Database method
-                        return deletion_date
-                    else:
-                        # Handle invalid input
-                        input(f"{invalid_input()} {enter()} to continue...")
-
-            # If chosen completion isn't in the completions list
             else:
                 input(f"\n'{habit.name}' has no completion on {date_str}! {enter()} to return...")
                 return None

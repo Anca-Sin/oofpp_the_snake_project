@@ -17,7 +17,8 @@ from datetime import datetime
 from core.analytics import Analytics
 from core.habit import Habit
 from helpers.helper_functions import reload_cli, check_exit_cmd, reload_menu_countdown, exit_msg, enter, invalid_input
-from helpers.text_formating import BLUE, RES, RED, GRAY
+from helpers.text_formating import BLUE, RES, RED, GRAY, ITAL, GREEN
+
 
 def display_habit_calendar(
         habit: Habit,
@@ -46,14 +47,14 @@ def display_habit_calendar(
     # Get full month name
     month_name = calendar.month_name[month]
 
-    print(f"\n{BLUE}- - - '{habit.name}' Calendar View - - -{RES}")
-    print(f"\n{month_name} {year}")
-    print(f"{GRAY}---------------------------------{RES}")
-    print("Mon  Tue  Wed  Thu  Fri  Sat  Sun")
+    print(f"\n        {BLUE}- - -{RES} {ITAL}{habit.name}{RES} {BLUE}Calendar View - - -{RES}")
+    print(f"\n        {month_name} {year}")
+    print(f"        {GRAY}---------------------------------{RES}")
+    print("        Mon  Tue  Wed  Thu  Fri  Sat  Sun")
 
     # Print calendar with completions marked down
     for week in cal:
-        week_str = ""
+        week_str = "        "
         for day in week:
             if day == 0:
                 # Day "outside" the month
@@ -73,7 +74,7 @@ def display_habit_calendar(
                 else:
                     week_str += " " + str(day) + " "
         print(week_str)
-    print(f"{GRAY}---------------------------------{RES}")
+    print(f"{GRAY}        ---------------------------------{RES}")
 
 def view_completions_calendar(ht, habit: Habit) -> None:
     """
@@ -101,20 +102,17 @@ def view_completions_calendar(ht, habit: Habit) -> None:
         
         P - Previous month
         N - Next month
-        G - Go to specific month
-        """)
+        G - Go to specific month""")
 
         # Completion options
         print(f"""
         {BLUE}- - - Completion Options - - -{RES}
         
-        1 - Complete for today
+        1 - Complete for today {GREEN}(^_^)/{RES}
         2 - Complete for a past date
-        3 - Delete a completion
-        """)
-        print(f"""
-        {enter()} Back to Habit Details Menu - - -
-        """)
+        3 - {RED}Delete{RES} a completion
+        
+        {enter()} Back to Habit Details Menu - - -""")
 
         choice = input("\n        Enter your choice: ").strip().lower()
 

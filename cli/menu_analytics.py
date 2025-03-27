@@ -56,7 +56,7 @@ def menu_analytics_all_habits(ht) -> None:
         # Check if the user has any habits to analyze
         if not ht.logged_in_user.habits:
             # If no habits exist, inform the user and prompt for return
-            input(f"""        {GRAY}I can't show you any Analytics {RED}(v_v)*{RES}
+            input(f"""        {GRAY}I can't show you any Analytics {RED}(o_o)/{RES}
         
         You haven't put any habits on track!
             
@@ -67,7 +67,7 @@ def menu_analytics_all_habits(ht) -> None:
         # If user has registered habits continue to prompt for choice
         else:
             # Get user choice
-            choice = input("\n        Enter your choice (1-2): ").strip()
+            choice = input("        Enter your choice (1-2): ").strip()
 
             # Check for exit command
             check_exit_cmd(choice)

@@ -16,7 +16,7 @@ from core.habit import Habit
 from core.streaks import Streaks
 from core.user import User
 from helpers.text_formating import RED, RES, GRAY
-from helpers.helper_functions import db_connection, reload_menu_countdown, save_entry_msg, cancel_operation, enter
+from helpers.helper_functions import db_connection, save_entry_msg, cancel_operation, enter
 
 def load_habits(selected_user: User) -> List[Habit]:
     """
@@ -255,7 +255,7 @@ def delete_habit(selected_user: User, habit: Habit) -> None:
     """)
 
     confirmation = input(
-        f"Type in '{RED}delete{RES}' or {enter()} to cancel: "
+        f"Type '{RED}delete{RES}' or {enter()} to cancel: "
     ).lower().strip()
 
     # Check if the user doesn't confirm

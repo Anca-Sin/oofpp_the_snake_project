@@ -7,6 +7,8 @@ Habit Tracker Application - Main Entry Point
 from cli.main_menu import main_menu
 from core.analytics import Analytics
 from db_and_managers.database import Database
+from helpers.helper_functions import reload_cli, wavey_mctrackface
+
 
 class HabitTracker:
     """
@@ -38,7 +40,9 @@ class HabitTracker:
         - initializes the analytics for the selected users
         - opens the main menu
         """
-        print("        Welcome to your - - -  Habit Tracker- - -")
+        # Wavey greets the user
+        reload_cli()
+        wavey_mctrackface()
 
         # Select an existing user or create a new one
         # Habits are loaded internally in the database method

@@ -40,7 +40,6 @@ def confirm_input(attribute_name: str, value: str) -> Optional[str]:
         ).lower().strip()
 
         if confirmation == "yes":
-            print(f"\n{GREEN}Stored{RES} {GRAY}'{value.title()}' as your {attribute_name}! {GREEN}(^_^)/{RES}")
             return value
         elif confirmation == "":
             return None
@@ -203,7 +202,7 @@ def save_entry_msg(entry):
     Args:
         entry: A string describing what was saved - names, completions past
     """
-    print(f"\n{GRAY}Saving...")
+    print(f"\n{GRAY}Saving... {GREEN}(^_^)/{RES}")
     time.sleep(1)
     print(f"\n'{entry}' {GREEN}saved!{RES}")
     time.sleep(1)
@@ -213,3 +212,13 @@ def save_entry_msg(entry):
 def good_job(msg: str = "right"):
     """Friendly motivational message after completions."""
     print(f"\n{GRAY}You're {msg} on track! {GREEN}(^_^)/{RES} {GRAY}Keep it up!{RES}")
+
+def wavey_mctrackface():
+    """Friendly funny message to greet the user."""
+    input(f"""
+        Hey there! 
+            
+        {GRAY}I'm Wavey McTrackface {GREEN}(^_^)/{RES} {GRAY}- your personal habit-tracking sidekick!{RES}
+            
+        Press {enter()} to get started!
+        """)

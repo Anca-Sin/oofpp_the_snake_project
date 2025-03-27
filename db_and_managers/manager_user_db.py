@@ -52,9 +52,10 @@ def select_user(users: List[User]=None) -> Optional[User]:
         while True:
             reload_cli()
             exit_msg()
-
-            print(f"Welcome to {BLUE}- - - HabitTracker - - - {GREEN}(^_^)/{RES}")
-            print(f"""\nNo users found! You can:
+            print(f"""
+            Welcome to {BLUE}- - - HabitTracker - - -{RES}
+            
+            No users found! You can:
         
             1 - Create a {GREEN}new{RES} user
             2 - Quit the application
@@ -205,7 +206,7 @@ def delete_user(selected_user) -> None:
     """)
 
     confirmation = input(
-        f"Type in '{RED}delete{RES}' or {enter()} to cancel: "
+        f"Type '{RED}delete{RES}' or {enter()} to cancel: "
     ).lower().strip()
 
     # Check if the user doesn't confirm
@@ -234,7 +235,7 @@ def delete_user(selected_user) -> None:
     connection.commit()
     connection.close()
 
-    print(f"\nFarewell {GREEN}{selected_user.username}{RES}!")
+    print(f"\nFarewell, {GREEN}{selected_user.username}{RES}!")
     time.sleep(1)
     print(f"\n{GREEN}(^_^)/{RES} May your tracking continue elsewhere!")
     time.sleep(1)

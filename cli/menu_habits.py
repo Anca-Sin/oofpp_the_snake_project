@@ -34,10 +34,10 @@ def menu_habits(ht):
         print(f"""
         {BLUE}- - - My Habits - - -{RES}
         
-        1 - New habit
-        2 - All my habits
-        3 - My daily habits
-        4 - My weekly habits
+        1 - All my habits
+        2 - My daily habits
+        3 - My weekly habits
+        4 - {GREEN}New{RES} habit
         
         {enter()} Back to My Habit Tracker
         """)
@@ -50,6 +50,21 @@ def menu_habits(ht):
 
         # Handle menu options
         if choice == "1":
+            # List all habits
+            all_habits = ht.analytics.list_all_habits()
+            display_habits_and_select(ht, all_habits, "All", None)
+
+        elif choice == "2":
+            # Filter and display daily habits
+            daily_habits = ht.analytics.list_habits_by_periodicity("daily")
+            display_habits_and_select(ht, daily_habits, "Daily", "daily")
+
+        elif choice == "3":
+            # Filter and display weekly habits
+            weekly_habits = ht.analytics.list_habits_by_periodicity("weekly")
+            display_habits_and_select(ht, weekly_habits, "Weekly", "weekly")
+
+        elif choice == "4":
             reload_cli()
             print()
             print(f"{GRAY}Logged in as:{RES} {GREEN}{ht.logged_in_user.username}{RES}")
@@ -62,26 +77,11 @@ def menu_habits(ht):
             # Refreshing Analytics instance
             ht.analytics = Analytics(ht.logged_in_user)
 
-        elif choice == "2":
-            # List all habits
-            all_habits = ht.analytics.list_all_habits()
-            display_habits_and_select(ht, all_habits, "All", None)
-
-        elif choice == "3":
-            # Filter and display daily habits
-            daily_habits = ht.analytics.list_habits_by_periodicity("daily")
-            display_habits_and_select(ht, daily_habits, "Daily", "daily")
-
-        elif choice == "4":
-            # Filter and display weekly habits
-            weekly_habits = ht.analytics.list_habits_by_periodicity("weekly")
-            display_habits_and_select(ht, weekly_habits, "Weekly", "weekly")
-
         elif choice == "":
             # Return to My Habit Tracker Menu
             return
 
-        else:
+    else:
             # Handle invalid input
             invalid_input()
             reload_menu_countdown()
