@@ -35,7 +35,7 @@ def menu_my_habit_tracker(ht):
         """)
 
         # Get user choice
-        choice = input("\nEnter your choice (1-2): ").strip()
+        choice = input("        Enter your choice (1-2): ").strip()
 
         # Check for exit command
         check_exit_cmd(choice)

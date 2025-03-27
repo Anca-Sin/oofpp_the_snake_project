@@ -17,7 +17,8 @@ from cli.menu_analytics import menu_analytics_one_habit
 from core.analytics import Analytics
 from core.habit import Habit
 from helpers.helper_functions import reload_cli, reload_menu_countdown, check_exit_cmd, exit_msg, enter, invalid_input
-from helpers.text_formating import BLUE, RES, RED
+from helpers.text_formating import BLUE, RES, RED, GREEN
+
 
 def menu_habit_detail(ht, habit: Habit) -> None:
     """
@@ -32,10 +33,10 @@ def menu_habit_detail(ht, habit: Habit) -> None:
         reload_cli()
         exit_msg(ht.logged_in_user)
         print(f"""
-        {BLUE}- - - '{habit.name}' Details Menu - - -{RES}
+        {BLUE}- - -{RES} {habit.name} {BLUE}Details Menu - - -{RES}
 
-        1 - Complete for today
-        2 - Calendar and manage completions
+        1 - Complete for today {GREEN}(^_^)/{RES}
+        2 - Calendar View & Completion Manager
         3 - Analytics
         4 - View creation date
         5 - {RED}Delete{RES} habit
@@ -44,7 +45,7 @@ def menu_habit_detail(ht, habit: Habit) -> None:
         """)
 
         # Get user choice
-        choice = input("\nEnter your choice (1-5): ").strip()
+        choice = input("        Enter your choice (1-5): ").strip()
 
         # Check for exit command
         check_exit_cmd(choice)
@@ -68,7 +69,7 @@ def menu_habit_detail(ht, habit: Habit) -> None:
         elif choice == "4":
             # View the creation date of the habit
             input(
-f"\nHabit '{habit.name}' was put on track on {habit.creation_date.strftime('%Y-%m-%d')}! {enter()} to continue..."
+f"\nHabit '{habit.name}' was put on track on {habit.creation_date}! {enter()} to continue..."
             )
 
         elif choice == "5":

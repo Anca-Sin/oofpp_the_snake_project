@@ -49,7 +49,7 @@ class User:
         while True:
             # Ask user for username
             username = input(
-                f"\nEnter new username or {enter()} to exit: "
+                f"Enter new username or {enter()} to exit: "
             ).title().strip()
 
             # Exit the loop if << ENTER
@@ -59,7 +59,7 @@ class User:
 
             # Check if the username already exists (using user db manager function)
             elif username_exists(username):
-                print(f"Username '{username}' {RED}already{RES} exists!")
+                print(f"\nUsername '{username}' {RED}already{RES} exists!")
                 time.sleep(1)
 
             # If username is valid

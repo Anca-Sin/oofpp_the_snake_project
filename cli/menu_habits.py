@@ -34,16 +34,16 @@ def menu_habits(ht):
         print(f"""
         {BLUE}- - - My Habits - - -{RES}
         
-        1 - Register a new habit
-        2 - List all habits
-        3 - Daily habits
-        4 - Weekly habits
+        1 - New habit
+        2 - All my habits
+        3 - My daily habits
+        4 - My weekly habits
         
         {enter()} Back to My Habit Tracker
         """)
 
         # Get user choice
-        choice = input("\nEnter your choice (1-4): ").strip()
+        choice = input("        Enter your choice (1-4): ").strip()
 
         # Check for exit command
         check_exit_cmd(choice)
@@ -166,7 +166,7 @@ def display_habits_and_select(ht, habits: List[Habit], display_type: str, set_fr
         print(f"\n        {enter()} Back to My Habits Menu")
 
         # Get user selection
-        choice = input(f"\nEnter your choice (1-{len(habits)}): ").strip()
+        choice = input(f"\n        Enter your choice (1-{len(habits)}): ").strip()
 
         # Check for exit command
         check_exit_cmd(choice)

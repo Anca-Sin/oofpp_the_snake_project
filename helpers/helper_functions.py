@@ -10,14 +10,14 @@ import os
 import sys
 import time
 import sqlite3
-from typing import Any, Optional
+from typing import Optional
 
 from config import DB_FILEPATH
 from helpers.text_formating import GRAY, RES, RED, BLUE, GREEN, ITAL
 
 def invalid_input():
     """Standardizes the invalid input message."""
-    print(f"\n{ITAL}Invalid input. Please try again!{RES}")
+    print(f"\n{GRAY}Invalid input. Please try again!{RES}")
 
 def enter():
     """Standardizes the enter hint to return."""
@@ -36,29 +36,11 @@ def confirm_input(attribute_name: str, value: str) -> Optional[str]:
     while True:
         # Ask for confirmation
         confirmation = input(
-            f"Type '{GREEN}yes{RES}' to confirm '{GREEN}{value}{RES}' {enter()} to exit: "
+            f"\nType '{GREEN}yes{RES}' to confirm '{GREEN}{value}{RES}' {enter()} to exit: "
         ).lower().strip()
 
         if confirmation == "yes":
-            print(f"\nStored '{value.title()}' as your {attribute_name}!")
-            return value
-        elif confirmation == "":
-            return None
-        else:
-            invalid_input()
-
-def confirm_int_input(value: Any) -> Any | None:
-    """
-    Confirms numerical input with the user.
-    Identical to confirm_input, only prints are different.
-    """
-    while True:
-        confirmation = input(
-            f"Type '{GREEN}yes{RES}' to confirm '{GREEN}{value}{RES}' {enter()} to exit: "
-        ).lower().strip()
-
-        if confirmation == "yes":
-            print(f"\nStored '{value}'!")
+            print(f"\n{GREEN}Stored{RES} {GRAY}'{value.title()}' as your {attribute_name}!{RES}")
             return value
         elif confirmation == "":
             return None
@@ -156,25 +138,25 @@ def check_exit_cmd(command: str) -> bool:
         True if the command is an exit command, False otherwise
     """
     if command.lower().strip() == "quit":
-        print(f"\nGoodbye! {GREEN}(^_^)/{RES}")
+        print(f"\n        Goodbye! {GREEN}(^_^)/{RES}")
         time.sleep(0.40)
-        print("           .")
+        print("                   .")
         time.sleep(0.40)
-        print("           .")
+        print("                   .")
         time.sleep(0.40)
-        print("           .")
+        print("                   .")
         time.sleep(0.40)
         print(f"""
-{BLUE}-------------------------{RES}
-{RED}REMEMBER TO STAY ON TRACK{RES}
-{BLUE}-------------------------{RES}
+        {BLUE}-------------------------{RES}
+        {RED}REMEMBER TO STAY ON TRACK{RES}
+        {BLUE}-------------------------{RES}
         """)
         time.sleep(0.40)
-        print("           .")
+        print("                   .")
         time.sleep(0.40)
-        print("           .")
+        print("                   .")
         time.sleep(0.40)
-        print("           .")
+        print("                   .")
         time.sleep(0.40)
         reload_cli()
         sys.exit(0)
@@ -194,11 +176,11 @@ def cancel_operation(operation_name: str = "Operation"):
         operation_name: A string representing the name of the operation canceled.
                         Defaults to "Operation".
     """
-    print(f"\n{operation_name} {RED}canceled!{RES}")
+    print(f"\n{GRAY}{operation_name} {RED}canceled!{RES}")
     time.sleep(1)
-    print("\nNo changes will be saved...")
+    print(f"\n{GRAY}No changes will be saved...")
     time.sleep(1)
-    print("\nReturning...")
+    print(f"\nReturning...{RES}")
     time.sleep(1)
 
 def setup_header(setup):
@@ -213,7 +195,6 @@ def setup_header(setup):
     print(f"""
     {GREEN}        - - - New {setup} Setup - - -{RES}
 
-
                 """)
 
 def save_entry_msg(entry):
@@ -223,13 +204,13 @@ def save_entry_msg(entry):
     Args:
         entry: A string describing what was saved - names, completions past
     """
-    print("\nSaving...")
+    print(f"\n{GRAY}Saving...")
     time.sleep(1)
     print(f"\n'{entry}' {GREEN}saved!{RES}")
     time.sleep(1)
-    print("\nReturning...")
+    print(f"\n{GRAY}Returning...{RES}")
     time.sleep(1)
 
 def good_job():
     """Friendly motivational message after completions."""
-    print(f"\nYou're right on track! {GREEN}(^_^)/{RES} Keep it up!")
+    print(f"\n{GRAY}You're right on track! {GREEN}(^_^)/{RES} {GRAY}Keep it up!{RES}")

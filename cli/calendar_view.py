@@ -16,7 +16,6 @@ from datetime import datetime
 
 from core.analytics import Analytics
 from core.habit import Habit
-from db_and_managers.database import Database
 from helpers.helper_functions import reload_cli, check_exit_cmd, reload_menu_countdown, exit_msg, enter, invalid_input
 from helpers.text_formating import BLUE, RES, RED, GRAY
 
@@ -117,7 +116,7 @@ def view_completions_calendar(ht, habit: Habit) -> None:
         {enter()} Back to Habit Details Menu - - -
         """)
 
-        choice = input("\nEnter your choice: ").strip().lower()
+        choice = input("\n        Enter your choice: ").strip().lower()
 
         # Check for exit command
         check_exit_cmd(choice)

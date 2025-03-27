@@ -18,6 +18,8 @@ from core.streaks import Streaks
 from core.user import User
 from core.habit import Habit
 from db_and_managers.database import Database
+from helpers.text_formating import GREEN, RES, BLUE
+
 
 def _generate_completions(habit: Habit, start_date: date, end_date: date) -> List[date]:
     """
@@ -141,22 +143,22 @@ def sample_data_generator():
             # Count completions for display
             completion_count = len(completions)
             if habit.frequency == "daily":
-                print(f">> ... for 'daily': added {completion_count} new random completions!")
+                print(f"Completions count:  added {completion_count}!")
             elif habit.frequency == "weekly":
-                print(f">> ... for 'weekly': added {completion_count} new random completions!")
+                print(f"Completions count: added {completion_count}!")
 
             # Save the newly generated completions to the db
             db.save_habits(sample_user)
 
 def instructions():
-    print("""
-    -------------------------------------------------------------
+    print(f"""
+    {BLUE}-------------------------------------------------------------{RES}
     Sample data created successfully:
     - 5 habits with 4 weeks of randomly generated completion data
     - streak information has been calculated
-    - run main.py
-    - login as 'SampleUser' to explore the HabitTracker
-    -------------------------------------------------------------
+    - {GREEN}run main.py{RES}
+    - login as '{GREEN}SampleUser{RES}' to explore the HabitTracker
+    {BLUE}-------------------------------------------------------------{RES}
     """)
 
 if __name__ == "__main__":

@@ -30,7 +30,7 @@ def menu_analytics_one_habit(ht, habit: Habit) -> None:
     print(f"        {GRAY}>> {RES}Longest streak:       {RED} {analytics.longest_streak_for_habit(habit.name)}{RES}-days streak")
     print(f"        {GRAY}>> {RES}Average streak length:{RED} {round(analytics.average_streak_length_habit(habit.name), 2)}{RES} days")
 
-    input(f"\n{enter()} Back to '{habit.name}' Details Menu...")
+    input(f"\n        {enter()} Back to '{habit.name}' Details Menu...")
     return
 
 def menu_analytics_all_habits(ht) -> None:
@@ -66,7 +66,7 @@ def menu_analytics_all_habits(ht) -> None:
         # If user has registered habits continue to prompt for choice
         else:
             # Get user choice
-            choice = input("\nEnter your choice (1-2): ").strip()
+            choice = input("\n        Enter your choice (1-2): ").strip()
 
             # Check for exit command
             check_exit_cmd(choice)
@@ -101,7 +101,7 @@ def _analytics_all_habits(ht):
         print(f"{GRAY}        >>{RES} Least completed habit: '{RED}{habit_name}{RES}' with {RED}{count}{RES} completions")
         print(f"{GRAY}        >>{RES} Average streak length:  {RED}{round(analytics.average_streak_all_habits(), 2)}{RES} days")
 
-        input(f"\n{enter()} Back to My Analytics Menu...")
+        input(f"\n        {enter()} Back to My Analytics Menu...")
         return
 
 def _analytics_d_w_habits(ht):
@@ -140,5 +140,5 @@ def _analytics_d_w_habits(ht):
         avg_weekly = round(analytics.average_streak_by_periodicity("weekly"))
         print(f"        {GRAY}Weekly:{RES}  {RED}{avg_weekly}{RES} days")
 
-        input(f"\n{enter()} Back to My Analytics Menu...")
+        input(f"\n        {enter()} Back to My Analytics Menu...")
         return

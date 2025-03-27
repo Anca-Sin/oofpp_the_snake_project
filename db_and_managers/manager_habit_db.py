@@ -248,15 +248,16 @@ def delete_habit(selected_user: User, habit: Habit) -> None:
     """
     # Ask for confirmation
     print(f"""
-    This operation will permanently DELETE:
+        {GRAY}---------------------------------------
+        This operation will permanently DELETE:
 
-    - Your '{habit.name}' habit
-    - All associated habit data
-
+        - Your '{habit.name}' habit
+        - All associated habit data
+        ---------------------------------------{RES}
     """)
 
     confirmation = input(
-        f"Type in '{RED}delete{RES}' or {enter()} to cancel: "
+        f"        Type in '{RED}delete{RES}' or {enter()} to cancel: "
     ).lower().strip()
 
     # Check if the user doesn't confirm
@@ -285,4 +286,4 @@ def delete_habit(selected_user: User, habit: Habit) -> None:
     connection.commit()
     connection.close()
 
-    input(f"\n'{RED}{habit.name}{RES}' has been thrown {RED}off your track{RES}! {enter()} to return...")
+    input(f"\n'{RED}{habit.name}' has been thrown {RED}off your track{RES}! {enter()} to return...")

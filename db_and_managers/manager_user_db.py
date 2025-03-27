@@ -53,14 +53,14 @@ def select_user(users: List[User]=None) -> Optional[User]:
             reload_cli()
             exit_msg()
 
-            print(f"Welcome to {BLUE}- - - HabitTracker - - -{RES}")
+            print(f"Welcome to {BLUE}- - - HabitTracker - - - {GREEN}(^_^)/{RES}")
             print(f"""\nNo users found! You can:
         
             1 - Create a {GREEN}new{RES} user
             2 - Quit the application
             """)
 
-            choice = input("\nEnter your choice (1-2): ").strip()
+            choice = input("\n        Enter your choice (1-2): ").strip()
 
             check_exit_cmd(choice)
 
@@ -90,7 +90,7 @@ def select_user(users: List[User]=None) -> Optional[User]:
             reload_cli()
             exit_msg()
 
-            print(f"Welcome to {BLUE}- - - HabitTracker - - -{RES}")
+            print(f"Welcome to {BLUE}- - - HabitTracker - - - {GREEN}(^_^)/{RES}")
             print("\n        Login as: ")
             print("")
 
@@ -104,7 +104,7 @@ def select_user(users: List[User]=None) -> Optional[User]:
             print(f"        {len(users) + 2} - Quit the application")
 
             # Ask user for a choice
-            choice = input(f"\nEnter your choice (1-{len(users) + 1}): ").strip()
+            choice = input(f"\n        Enter your choice (1-{len(users) + 1}): ").strip()
 
             check_exit_cmd(choice)
 
@@ -196,12 +196,12 @@ def delete_user(selected_user) -> None:
     """
     # Ask for confirmation
     print(f"""
-{GRAY}---------------------------------------{RES}    
-This operation will permanently DELETE:
+    {GRAY}---------------------------------------    
+    This operation will permanently DELETE:
         
-- Your username '{selected_user.username}'
-- All associated habits and data
-{GRAY}---------------------------------------{RES}
+    - Your username '{selected_user.username}'
+    - All associated habits and data
+    ---------------------------------------{RES}
     """)
 
     confirmation = input(

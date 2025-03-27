@@ -56,7 +56,7 @@ class Habit:
         while True:
             # Ask for habit name
             habit_name = input(
-                f"\nEnter new habit name or {enter()} to exit: "
+                f"Enter new habit name or {enter()} to exit: "
             ).title().strip()
 
             # Exit the loop if << ENTER

@@ -11,8 +11,8 @@ It manages:
 
 from .menu_my_habit_tracker import menu_my_habit_tracker
 from core.analytics import Analytics
-from helpers.helper_functions import reload_cli, reload_menu_countdown, check_exit_cmd, exit_msg, invalid_input
-from helpers.text_formating import RES, BLUE, RED, GREEN, ITAL
+from helpers.helper_functions import reload_cli, reload_menu_countdown, check_exit_cmd, exit_msg, invalid_input, enter
+from helpers.text_formating import RES, BLUE, RED
 
 def main_menu(ht) -> None:
     """
@@ -31,11 +31,11 @@ def main_menu(ht) -> None:
         1 - My Habit Tracker
         2 - {RED}Delete{RES} this user
         
-        {GREEN}{ITAL}ENTER <<{RES} Select a different user 
+        {enter()} Select a different user 
         """)
 
         # Get user choice
-        choice = input("\nEnter your choice (1-2): ").strip()
+        choice = input("        Enter your choice (1-2): ").strip()
 
         # Check for exit command
         check_exit_cmd(choice)
