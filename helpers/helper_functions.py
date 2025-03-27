@@ -17,7 +17,7 @@ from helpers.text_formating import GRAY, RES, RED, BLUE, GREEN, ITAL
 
 def invalid_input():
     """Standardizes the invalid input message."""
-    print(f"\nInvalid input. Please try again!")
+    print(f"\n{ITAL}Invalid input. Please try again!{RES}")
 
 def enter():
     """Standardizes the enter hint to return."""
@@ -40,12 +40,12 @@ def confirm_input(attribute_name: str, value: str) -> Optional[str]:
         ).lower().strip()
 
         if confirmation == "yes":
-            print(f"\nYou've successfully stored '{value.title()}' as your {attribute_name}!")
+            print(f"\nStored '{value.title()}' as your {attribute_name}!")
             return value
         elif confirmation == "":
             return None
         else:
-            print("Invalid input! Please try again!")
+            invalid_input()
 
 def confirm_int_input(value: Any) -> Any | None:
     """
@@ -58,12 +58,12 @@ def confirm_int_input(value: Any) -> Any | None:
         ).lower().strip()
 
         if confirmation == "yes":
-            print(f"\nYou've chosen '{value}'!")
+            print(f"\nStored '{value}'!")
             return value
         elif confirmation == "":
             return None
         else:
-            print("Invalid input! Please try again!")
+            invalid_input()
 
 def reload_menu_countdown() -> None:
     """

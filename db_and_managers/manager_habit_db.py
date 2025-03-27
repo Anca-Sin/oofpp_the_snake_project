@@ -16,7 +16,7 @@ from core.habit import Habit
 from core.streaks import Streaks
 from core.user import User
 from helpers.text_formating import RED, RES, GRAY
-from helpers.helper_functions import db_connection, reload_menu_countdown, save_entry_msg, cancel_operation
+from helpers.helper_functions import db_connection, reload_menu_countdown, save_entry_msg, cancel_operation, enter
 
 
 def load_habits(selected_user: User) -> List[Habit]:
@@ -256,7 +256,7 @@ def delete_habit(selected_user: User, habit: Habit) -> None:
     """)
 
     confirmation = input(
-        f"Type in '{RED}delete{RES}' if you are sure to proceed {GRAY}or ENTER << to cancel{RES}: "
+        f"Type in '{RED}delete{RES}' if you are sure to proceed or {enter()} to cancel: "
     ).lower().strip()
 
     # Check if the user doesn't confirm
@@ -285,5 +285,4 @@ def delete_habit(selected_user: User, habit: Habit) -> None:
     connection.commit()
     connection.close()
 
-    print(f"Habit '{RED}{habit.name}{RES}' and all associated data have been {RED}deleted{RES}.")
-    input(f"\n{GRAY}ENTER << to return...{RES}")
+    input(f"\n'{RED}{habit.name}{RES}' has been thrown {RED}off your track{RES}! {enter()} to return...")

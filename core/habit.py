@@ -3,8 +3,9 @@ from datetime import datetime, date
 from typing import List, Optional
 
 from .streaks import Streaks
-from helpers.helper_functions import confirm_input
-from helpers.text_formating import GRAY, RES
+from helpers.helper_functions import confirm_input, enter, invalid_input
+from helpers.text_formating import GRAY, RES, RED
+
 
 class Habit:
     """
@@ -54,7 +55,9 @@ class Habit:
 
         while True:
             # Ask for habit name
-            habit_name = input(f"\nNew Habit name {GRAY}or ENTER << to cancel{RES}: ").title().strip()
+            habit_name = input(
+                f"\nNew habit name or {enter()} to exit: "
+            ).title().strip()
 
             # Exit the loop if << ENTER
             if not habit_name:
@@ -63,7 +66,7 @@ class Habit:
 
             # Check if habit name already exists (using habit db manager function)
             elif habit_name_exists(user, habit_name):
-                print(f"\nA habit named '{habit_name}' already exists! Please try again!")
+                print(f"\nHabit '{habit_name}' {RED}already{RES} exists!")
                 time.sleep(1)
 
             # If habit name is valid
@@ -99,8 +102,9 @@ class Habit:
 
         # If no preset frequency, prompt the user
         while True:
-            print(f"\nPlease type in 'Daily' or 'Weekly' {GRAY}or ENTER << to exit{RES}: ")
-            habit_frequency = input().strip().lower()
+            habit_frequency = input(
+                f"\nType 'Daily' or 'Weekly' or {enter()} to exit: "
+            ).strip().lower()
 
             # Exit the loop if "ENTER"
             if not habit_frequency:
@@ -109,20 +113,12 @@ class Habit:
 
             # Check if input is valid
             if habit_frequency in ["daily", "weekly"]:
-                # Confirm the choice
-                confirmed_frequency = confirm_input("frequency", habit_frequency)
-
-                # If confirmed, set the name and exit the loop
-                if confirmed_frequency is not None:
-                    self.frequency = confirmed_frequency
-                    return
-                else:
-                    # If confirmed input is None on << ENTER
-                    return
+                self.frequency = habit_frequency
+                return
 
             # Handle invalid input with user feedback
             else:
-                print("\nInvalid Input. Please enter 'Daily' or 'Weekly'!")
+                invalid_input()
 
     def create_date(self) -> None:
         """Sets the creation date of the habit to the current date."""

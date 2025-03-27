@@ -2,8 +2,8 @@ import time
 from typing import List, Optional
 
 from .habit import Habit
-from helpers.text_formating import GRAY, RES
-from helpers.helper_functions import confirm_input
+from helpers.text_formating import RED, RES
+from helpers.helper_functions import confirm_input, enter
 
 class User:
     """
@@ -48,7 +48,9 @@ class User:
 
         while True:
             # Ask user for username
-            username = input(f"Please type in your desired username {GRAY}or ENTER << to cancel{RES}: ").title().strip()
+            username = input(
+                f"\nNew user name or {enter()} to exit: "
+            ).title().strip()
 
             # Exit the loop if << ENTER
             if not username:
@@ -57,7 +59,7 @@ class User:
 
             # Check if the username already exists (using user db manager function)
             elif username_exists(username):
-                print(f"\nUsername '{username}' is taken! Please try again!")
+                print(f"Username '{username}' {RED}already{RES} exists!")
                 time.sleep(1)
 
             # If username is valid

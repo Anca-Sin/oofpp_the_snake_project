@@ -13,8 +13,8 @@ from typing import List, Optional
 from config import DB_FILEPATH
 from core.user import User
 from helpers.helper_functions import (db_connection, reload_cli, exit_msg, reload_menu_countdown, check_exit_cmd,
-                                      setup_header, save_entry_msg, cancel_operation)
-from helpers.text_formating import RED, RES, BLUE, GREEN, GRAY
+                                      setup_header, save_entry_msg, cancel_operation, enter, invalid_input)
+from helpers.text_formating import RED, RES, BLUE, GREEN
 
 def load_users() -> List[User]:
     """
@@ -80,7 +80,7 @@ def select_user(users: List[User]=None) -> Optional[User]:
                 check_exit_cmd("quit")
 
             else:
-                print("\nSorry, invalid input. Please try again!")
+                invalid_input()
                 reload_menu_countdown()
 
     # Display the users to choose from
@@ -100,6 +100,7 @@ def select_user(users: List[User]=None) -> Optional[User]:
             # Last option: Create new user
             print("        or")
             print(f"        {len(users) + 1} - Create a {GREEN}new{RES} user")
+            print(f"        {len(users) + 2} - Quit the application")
 
             # Ask user for a choice
             choice = input(f"\nEnter your choice (1-{len(users) + 1}): ").strip()
@@ -125,11 +126,15 @@ def select_user(users: List[User]=None) -> Optional[User]:
                     save_entry_msg(selected_user.username) # Helper
                     return selected_user
 
+                elif choice == len(users) + 2:
+                    check_exit_cmd("quit")
+
                 else:
-                    print("\nSorry, invalid input. Please try again!")
+                    invalid_input()
                     reload_menu_countdown()
+
             except ValueError:
-                print("\nSorry, invalid input. Please enter a number!")
+                invalid_input()
                 reload_menu_countdown()
 
 def username_exists(username: str) -> bool:
@@ -192,12 +197,12 @@ def delete_user(selected_user) -> None:
     print(f"""
     This operation will permanently DELETE:
         
-    - Your username
+    - Your username '{selected_user.username}'
     - All associated habits and data
     """)
 
     confirmation = input(
-        f"Type in '{RED}delete{RES}' if you are sure to proceed {GRAY}or ENTER << to cancel{RES}: "
+        f"Type in '{RED}delete{RES}' if you are sure to proceed or {enter()} to cancel: "
     ).lower().strip()
 
     # Check if the user doesn't confirm
@@ -226,5 +231,5 @@ def delete_user(selected_user) -> None:
     connection.commit()
     connection.close()
 
-    print(f"\nUser '{RED}{selected_user.username}{RES}' has been permanently {RED}deleted{RES}.")
-    input(f"\n{GRAY}ENTER << to return...{RES}")
+    print(f"\n{GREEN}(^_^)/{RES} May your tracking continue elsewhere!")
+    input(f"\nFarewell {RED}{selected_user.username}{RES}! {enter()} to return...")

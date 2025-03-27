@@ -1,7 +1,6 @@
 from datetime import datetime, timedelta, date
 from typing import List
 
-
 class Streaks:
     """
     Tracks streak information for each habit.
