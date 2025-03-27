@@ -41,7 +41,7 @@ class Analytics:
         # Map extracts the identity of each habit from self.user.habits and returns the result as a sorted list
         all_habits_list = sorted(
             list(map(lambda habit: habit, self.user.habits)),
-            key=lambda habit: habit.name()
+            key=lambda habit: habit.name
         )
         return all_habits_list
 
@@ -62,7 +62,7 @@ class Analytics:
         # Filter habits to include only those with the given periodicity and return the matching habits as a list
         filtered_habits = sorted(
             list(filter(lambda habit: habit.frequency == periodicity, self.user.habits)),
-            key=lambda habit: habit.name()
+            key=lambda habit: habit.name
         )
         return filtered_habits
 
