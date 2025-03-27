@@ -220,8 +220,8 @@ class Streaks:
             self.current_streak = 0
             return self.current_streak
 
-        # Start with at least 1 since we passed 0 completion dates check
-        self.current_streak = 1
+        # Start record at 0
+        self.current_streak = 0
 
         # CASE 1: complete today
         if sample_data is False and not completion_deletion_date: # disable CASE 2 parameters
