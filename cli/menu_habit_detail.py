@@ -17,7 +17,7 @@ from cli.menu_analytics import menu_analytics_one_habit
 from core.analytics import Analytics
 from core.habit import Habit
 from helpers.helper_functions import reload_cli, check_exit_cmd, exit_msg, enter, invalid_input
-from helpers.text_formating import BLUE, RES, RED, GREEN
+from helpers.text_formating import BLUE, RES, RED, GREEN, GRAY
 
 
 def menu_habit_detail(ht, habit: Habit) -> None:
@@ -69,7 +69,7 @@ def menu_habit_detail(ht, habit: Habit) -> None:
         elif choice == "4":
             # View the creation date of the habit
             input(
-f"\nHabit '{habit.name}' was put on track on {habit.creation_date}! {enter()} to return..."
+f"\n{habit.name} {GRAY}was put on track on{RES} {habit.creation_date}! {enter()} to return..."
             )
 
         elif choice == "5":

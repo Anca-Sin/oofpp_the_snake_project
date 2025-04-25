@@ -156,7 +156,7 @@ def instructions():
     Sample data created successfully:
     - 5 habits with 4 weeks of randomly generated completion data
     - streak information has been calculated
-    - {GREEN}run main.py{RES}
+    - run {GREEN}python main.py{RES}
     - login as '{GREEN}SampleUser{RES}' to explore the HabitTracker
     {BLUE}-------------------------------------------------------------{RES}
     """)
