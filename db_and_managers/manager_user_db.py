@@ -47,19 +47,20 @@ def select_user(users: List[User]=None) -> Optional[User]:
     Returns:
         The selected or newly created User object.
     """
-    print(f"""
-            Welcome to {BLUE}- - - HabitTracker - - -{RES}
-            
-            No users found! You can:
-        
-            1 - Create a {GREEN}new{RES} user
-            2 - Quit the application
-            """)
     # If there are no users, directly prompt to create a new user
     if not users:
         while True:
             reload_cli()
             exit_msg()
+
+            print(f"""
+                    Welcome to {BLUE}- - - HabitTracker - - -{RES}
+
+                    No users found! You can:
+
+                    1 - Create a {GREEN}new{RES} user
+                    2 - Quit the application
+                    """)
 
             choice = input("\n        Enter your choice (1-2): ").strip()
 
