@@ -49,8 +49,6 @@ def menu_analytics_all_habits(ht) -> None:
         
         1 - [All Habits]
         2 - [Daily - Weekly]
-        
-        {enter()} to My Habit Tracker Menu
         """)
 
         # Check if the user has any habits to analyze
@@ -60,8 +58,11 @@ def menu_analytics_all_habits(ht) -> None:
         
         You haven't put any habits on track!
             
-        {GRAY}Go to{RES} 'My Habits' {GRAY}to register a new habit!{RES}""")
+        {GRAY}Go to{RES} 'My Habits' {GRAY}to register a new habit!{RES}
+
+        {enter()} Back to My Habit Tracker Menu""")
             # Return to My Habit Tracker Menu
+
             return
 
         # If user has registered habits continue to prompt for choice
