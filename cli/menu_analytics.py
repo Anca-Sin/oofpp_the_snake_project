@@ -26,9 +26,9 @@ def menu_analytics_one_habit(ht, habit: Habit) -> None:
     print(f"{GRAY}Logged in as:{RES} {GREEN}{ht.logged_in_user.username}{RES}")
 
     print(f"\n{BLUE}        - - - {RES}{habit.name} {BLUE}Analytics - - -{RES}")
-    print(f"\n        {GRAY}>> {RES}Current streak:     {RED}   {habit.streaks.current_streak}{RES}-days streak")
-    print(f"        {GRAY}>> {RES}Longest streak:       {RED} {analytics.longest_streak_for_habit(habit.name)}{RES}-days streak")
-    print(f"        {GRAY}>> {RES}Average streak length:{RED} {round(analytics.average_streak_length_habit(habit.name), 2)}{RES} days")
+    print(f"\n        {GRAY}>> {RES}Current streak:     {RED}   {habit.streaks.current_streak}{RES}-completions streak")
+    print(f"        {GRAY}>> {RES}Longest streak:       {RED} {analytics.longest_streak_for_habit(habit.name)}{RES}-completions streak")
+    print(f"        {GRAY}>> {RES}Average streak length:{RED} {round(analytics.average_streak_length_habit(habit.name), 2)}{RES} completions")
 
     input(f"\n        {enter()} Back to '{habit.name}' Details Menu...")
     return
@@ -94,12 +94,12 @@ def _analytics_all_habits(ht):
         print(f"{GRAY}Logged in as:{RES} {GREEN}{ht.logged_in_user.username}{RES}")
         print(f"\n{BLUE}        - - - [All Habits] Analytics - - -{RES}")
         habit_name, streak = analytics.longest_streak_all_habits()
-        print(f"\n{GRAY}        >>{RES} Longest streak:        '{RED}{habit_name}{RES}' with a {RED}{streak}{RES}-days streak")
+        print(f"\n{GRAY}        >>{RES} Longest streak:        '{RED}{habit_name}{RES}' with a {RED}{streak}{RES}-completions streak")
         habit_name, count = analytics.most_completed_habit()
         print(f"{GRAY}        >>{RES} Most completed habit:  '{RED}{habit_name}{RES}' with {RED}{count}{RES} completions")
         habit_name, count = analytics.least_completed_habit()
         print(f"{GRAY}        >>{RES} Least completed habit: '{RED}{habit_name}{RES}' with {RED}{count}{RES} completions")
-        print(f"{GRAY}        >>{RES} Average streak length:  {RED}{round(analytics.average_streak_all_habits(), 2)}{RES} days")
+        print(f"{GRAY}        >>{RES} Average streak length:  {RED}{round(analytics.average_streak_all_habits(), 2)}{RES} completions")
 
         input(f"\n        {enter()} Back to My Analytics Menu...")
         return
@@ -118,9 +118,9 @@ def _analytics_d_w_habits(ht):
 
         print(f"{GRAY}\n        >>{RES} Longest streak")
         daily_name, daily_streak = analytics.longest_streak_by_periodicity("daily")
-        print(f"        {GRAY}Daily:{RES}  '{RED}{daily_name}{RES}' with a {RED}{daily_streak}{RES}-day streak")
+        print(f"        {GRAY}Daily:{RES}  '{RED}{daily_name}{RES}' with a {RED}{daily_streak}{RES}-completions streak")
         weekly_name, weekly_streak = analytics.longest_streak_by_periodicity("weekly")
-        print(f"        {GRAY}Weekly:{RES} '{RED}{weekly_name}{RES}' with a {RED}{weekly_streak}{RES}-day streak")
+        print(f"        {GRAY}Weekly:{RES} '{RED}{weekly_name}{RES}' with a {RED}{weekly_streak}{RES}-completions streak")
 
         print(f"\n{GRAY}        >>{RES} Most completed habits")
         daily_name, daily_count = analytics.most_completed_by_periodicity("daily")
@@ -136,9 +136,9 @@ def _analytics_d_w_habits(ht):
 
         print(f"\n{GRAY}        >>{RES} Average streak length")
         avg_daily = round(analytics.average_streak_by_periodicity("daily"), 2)
-        print(f"        {GRAY}Daily:{RES}   {RED}{avg_daily}{RES} days")
+        print(f"        {GRAY}Daily:{RES}   {RED}{avg_daily}{RES} completions")
         avg_weekly = round(analytics.average_streak_by_periodicity("weekly"))
-        print(f"        {GRAY}Weekly:{RES}  {RED}{avg_weekly}{RES} days")
+        print(f"        {GRAY}Weekly:{RES}  {RED}{avg_weekly}{RES} completions")
 
         input(f"\n        {enter()} Back to My Analytics Menu...")
         return
