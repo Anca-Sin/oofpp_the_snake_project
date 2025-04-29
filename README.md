@@ -76,9 +76,14 @@ python sample_data.py
 ```
 python main.py
 ```
-5. Testing: 
+5. Testing:
+- Core Classes
 ```
-python unit_tests.py
+python unit_tests_core_classes.py
+```
+- Submission Sample Data
+```
+python unit_tests_sample_data.py
 ```
 
 ---
