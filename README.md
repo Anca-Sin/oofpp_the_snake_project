@@ -27,8 +27,8 @@ My first coding project! A habit tracker app created for the Object Oriented and
 - intuitive menu progression from general to specific
 - consistent screen reloading between menus, back and quit options
 - consistent input confirmation and error handling
-- unittesting for core classes
-
+- unit testing for core classes
+- unit testing for submission sample data
 ---
 
 # Future Development Perspectives Supported by the Current Architecture
@@ -89,7 +89,8 @@ oofpp_the_snake_project/
 ├── main.py                      # App entry point, initializes database and user selection/creation
 ├── sample_data.py               # Sample data generator
 ├── config.py                    # Config settings for db connection
-├── unit_tests.py                # Unit testing with unittest module
+├── unit_tests_core_classes.py   # Unittest for core classes
+├── unit_tests_sample_data.py    # Unittest for submission sample data
 ├── habit_tracker.db             # SQLite db file
 │
 ├── cli/                         # Command-line interface menus
