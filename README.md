@@ -68,15 +68,11 @@ git clone https://github.com/Anca-Sin/oofpp_the_snake_project.git
 ```
 cd oofpp_the_snake_project
 ```
-3. [Optional] Generate sample data: 
-```
-python sample_data.py
-```
-4. Run the app: 
+3. Run the app: 
 ```
 python main.py
 ```
-5. Testing:
+4. Testing:
 - Core Classes
 ```
 python unit_tests_core_classes.py
@@ -85,7 +81,11 @@ python unit_tests_core_classes.py
 ```
 python unit_tests_sample_data.py
 ```
-
+5. [Optional] Generate more sample data
+!!! Running this will overwrite submission sample data completions and affect submission sample testing module !!!
+```
+python sample_data.py
+```
 ---
 
 # Project Structure:
